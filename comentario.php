@@ -25,5 +25,5 @@ public function setDescripcion_comentario (){
 public function setEstado_comentario (){
     $this-> estado_comentario= $estado_comentario;
 }
-
+//blalblalllcx
 }
