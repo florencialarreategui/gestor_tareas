@@ -38,10 +38,30 @@ class tarea{
         return $this -> $fecha_fin;
     }
     public function getId_proyecto (){
-        return $this -> $id_proyecto
+        return $this -> $id_proyecto;
     }
     public function getId_estado (){
         return $this -> $id_estado;
+    }
+
+
+    public function setNombre_tarea ($nombre_tarea){
+        $this -> nombre_tarea =  $nombre_tarea;
+    }
+    public function setDescripcion_tarea ($descripcion_tarea){
+        $this -> descripcion_tarea = $descripcion_tarea;
+    }
+    public function setFecha_inicio ($fecha_inicio){
+        $this -> fecha_inicio = $fecha_inicio;
+    }
+    public function setFecha_fin ($fecha_fin){
+        $this -> fecha_fin = $fecha_fin;
+    }
+    public function setId_proyecto ($id_proyecto){
+       $this -> id_proyecto = $id_proyecto;
+    }
+    public function setId_estado ($id_estado){
+         $this -> id_estado = $id_estado;
     }
     public static function agregar_tarea($tareas, $tarea){
         $tareas[] = $tarea;
@@ -52,12 +72,26 @@ class tarea{
        foreach($tareas as index => $tarea){
             if($tarea -> getId_tarea == $id_tarea){
                 unset($tareas[index]);
-                echo "La tarea". $this->nombre." ha sido eliminada". "/n"
+                echo "La tarea". $this->nombre." ha sido eliminada". "/n";
+                return
                 
             }
        }
 
     }
+
+    public static function editar_tarea($id_tarea, $tarea, $nueva_tarea){
+        foreach($tareas as index => $tarea){
+            if($tarea -> getId_tarea == $id_tarea){
+                $tareas[index] = $nueva_tarea;
+                echo "La tarea con ID". $this->id_tarea." ha sido editada". "/n";
+                return
+                
+            }
+       }
+
+    }
+
 
     
 }
