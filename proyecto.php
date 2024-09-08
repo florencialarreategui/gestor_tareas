@@ -7,11 +7,11 @@ class proyecto{
     private $descripcion_proyecto;
     private $fecha_inicio_proyecto;
     private $fecha_fin_proyecto;
-    private $id_tarea;
-    private $id_usuario;
-    private $id_estado;
+   // private $id_tarea;
+   // private $id_usuario;
+    //private $id_estado;
 
-    public function __construct($id_proyecyo, $nombre_proyecto, $descripcion_proyecto, $fecha_inicio_proyecto, $fecha_fin_proyecto, $id_tarea, $id_usuario, $id_estado){
+    public function __construct($id_proyecyo, $nombre_proyecto, $descripcion_proyecto, $fecha_inicio_proyecto, $fecha_fin_proyecto){
         $this-> id_proyecto = $id_proyecto;
         $this-> nombre_proyecto = $nombre_proyecto;
         $this-> descrpcion_proyecto = $descrpcion_proyecto;
@@ -37,12 +37,12 @@ class proyecto{
     public function getFecha_fin_proyecto (){
         return $this -> $fecha_fin;
     }
-    // public function getId_proyecto (){
-    //     return $this -> $id_proyecto;
-    // }
-    // public function getId_estado (){
-    //     return $this -> $id_estado;
-    // }
+     public function getId_proyecto (){
+        return $this -> $id_proyecto;
+     }
+     public function getId_estado (){
+        return $this -> $id_estado;
+     }
 
     public function setNombre_proyecto ($nombre_proyecto){
         $this -> nombre_proyecto =  $nombre_proyecto;
@@ -61,30 +61,30 @@ class proyecto{
     }
 
 
-    public static function agregar_proyecto($proyectos, $proyecto){
+    public  function agregar_proyecto($proyectos, $proyecto){
         $proyectos[] = $proyecto;
         echo "Proyecto:".$this->nombre_proyecto." se agrega al proyecto". "/n";
 
     }
 
-    public static function eliminar_proyecto($id_proyecto, $proyecto){
-       foreach($proyectos as index => $proyecto){
+    public function eliminar_proyecto(& $proyectos, $id_proyecto){
+       foreach($proyectos as index -> $proyecto){
             if($proyecto -> getId_proyecto == $id_proyecto){
                 unset($proyectos[index]);
                 echo "El proyecto". $this->nombre_proyecto." ha sido eliminado". "/n";
-                return
+                return;
                 
             }
        }
 
     }
 
-    public static function editar_proyecto($id_proyecto, $proyecto, $nuevo_proyecto){
-        foreach($proyectos as index => $proyecto){
+    public  function editar_proyecto($id_proyecto, $proyecto, $nuevo_proyecto){
+        foreach($proyectos as index -> $proyecto){
             if($proyecto -> getId_proyecto == $id_proyecto){
                 $proyectos[index] = $nuevo_proyecto;
                 echo "El proyecto con ID". $this->id_proyecto." ha sido editado". "/n";
-                return
+                return;
                 
             }
        }
