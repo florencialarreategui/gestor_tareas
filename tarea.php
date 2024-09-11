@@ -64,29 +64,29 @@ class tarea{
     public function setId_estado ($id_estado){
          $this -> id_estado = $id_estado;
     }
-    public static function agregar_tarea($tareas, $tarea){
+    public  function agregar_tarea($tareas, $tarea){
         $tareas[] = $tarea;
         echo "Tarea:".$this->nombre_tarea." se agrega al proyecto". "/n";
 
     }
-    public static function eliminar_tarea($id_tarea, $tarea){
-       foreach($tareas as index => $tarea){
+    public  function eliminar_tarea(&$tareas, $tarea){
+       foreach($tareas as index -> $tarea){
             if($tarea -> getId_tarea == $id_tarea){
                 unset($tareas[index]);
                 echo "La tarea". $this->nombre." ha sido eliminada". "/n";
-                return
+                return;
                 
             }
        }
 
     }
 
-    public static function editar_tarea($id_tarea, $tarea, $nueva_tarea){
-        foreach($tareas as index => $tarea){
+    public function editar_tarea($id_tarea, $tarea, $nueva_tarea){
+        foreach($tareas as index -> $tarea){
             if($tarea -> getId_tarea == $id_tarea){
                 $tareas[index] = $nueva_tarea;
                 echo "La tarea con ID". $this->id_tarea." ha sido editada". "/n";
-                return
+                return;
                 
             }
        }
