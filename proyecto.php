@@ -1,5 +1,5 @@
 <?php
-require_once('proyecto.php');
+require_once('tarea.php');
 require_once('usuario.php');
 class proyecto{
     private $id_proyecto;
@@ -72,7 +72,7 @@ class proyecto{
             if($proyecto -> getId_proyecto == $id_proyecto){
                 unset($proyectos[index]);
                 echo "El proyecto". $this->nombre_proyecto." ha sido eliminado". "/n";
-                return
+        
                 
             }
        }

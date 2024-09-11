@@ -20,9 +20,9 @@ $proyectos = [];
 $proyecto1 = new proyecto(1,"Proyecto1", "Descripción", "2024-07-31","2024-08-30");
 
 $proyecto_editado = new proyecto (1,"Edito proyecto 1", " edito descripcion", "2024-07-31","2024-08-30");
-proyecto:: agregar_proyecto($proyectos, $proyecto1)
-proyecto:: editar_proyecto($proyectos, 1, $proyecto_editado);
-proyecto:: eliminar_proyecto($proyecto, 1);
+// proyecto:: agregar_proyecto($proyectos, $proyecto1)
+// proyecto:: editar_proyecto($proyectos, 1, $proyecto_editado);
+// proyecto:: eliminar_proyecto($proyecto, 1);
 
 
 
