@@ -8,9 +8,9 @@ require_once 'estado.php';
 class GestorDeProyecto {
     public $usuarios = [];
     public $proyectos = [];
-    private $tareas = [];
-    private $comentarios = [];
-    private $estados = [];
+    public $tareas = [];
+    public $comentarios = [];
+    public $estados = [];
 
 
     public function agregarUsuario($usuario) {
