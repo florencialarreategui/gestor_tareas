@@ -4,7 +4,7 @@ require_once 'proyecto.php';
 require_once 'tarea.php';
 require_once 'comentario.php';
 require_once 'estado.php';
-require_once 'GestorDeProyecto.php';
+require_once 'GestorProyecto.php';
 
 
 $gestor = new GestorDeProyecto();
