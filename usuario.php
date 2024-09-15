@@ -11,7 +11,7 @@ public function __construct ($id_usuario, $nombre, $email){
     $this-> nombre = $nombre;
 }
 public function getId_usuario (){
-    return $this-> Id_usuario;
+    return $this-> id_usuario;
 }
 public function getNombre (){
     return $this-> nombre;
