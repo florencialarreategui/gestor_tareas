@@ -19,13 +19,13 @@ public function getNombre (){
 public function getEmail (){
     return $this-> email;
 }
-public function setId_usuario (){
+public function setId_usuario ($id_usuario){
     $this-> Id_usuario = $id_usuario;
 }
-public function setNombre (){
+public function setNombre ($nombre){
     $this-> nombre= $nombre;
 }
-public function setEmail (){
+public function setEmail ($email){
      $this-> email =$email;
 }
 
