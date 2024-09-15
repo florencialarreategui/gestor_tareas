@@ -19,7 +19,7 @@ class GestorDeProyecto {
 
     public function obtenerUsuario($id_usuario) {
         foreach ($this->usuarios as $usuario) {
-            if ($usuario->getIdUsuario() == $id_usuario) {
+            if ($usuario->getId_usuario() == $id_usuario) {
                 return $usuario;
             }
         }
@@ -36,7 +36,7 @@ class GestorDeProyecto {
 
     public function eliminarUsuario($id_usuario) {
         foreach ($this->usuarios as $index => $usuario) {
-            if ($usuario->getIdUsuario () == $id_usuario) {
+            if ($usuario->getId_usuario () == $id_usuario) {
                 unset($this->usuarios[$index]);
             }
         }
