@@ -58,6 +58,26 @@ echo "\nComentarios:\n";
 foreach ($gestor->comentarios as $comentario) {
     echo "ID: " . $comentario->getIdComentario() . ", ID Tarea: " . $comentario->getIdTarea() . ", ID Usuario: " . $comentario->getIdUsuario() . ", Contenido: " . $comentario->getContenido() . ", Fecha: " . $comentario->getFecha() . "\n";
 }
+echo "------------------------- .\n";
+
+//Muestro usuario antes de eliminar y actualizar
+echo "Usuarios antes de eliminar "."\n";
+foreach ($gestor->usuarios as $usuario) {
+    echo "ID: " . $usuario->getId_usuario() . ", Nombre: " . $usuario->getNombre() . ", Email: " . $usuario->getEmail() . "\n";
+}
+echo "---------------------.\n";
+
+//Elimino Usuario con ID=1
+$gestor ->eliminarUsuario(1);
+"/n";
+//Actualizo Usuario con ID=2
+$gestor -> actualizarUsuario(2, "Maria Gonzales", "Mariagonzalez@gmail.com");
+
+//vuelvo a mostrar la lista para control.
+echo"lista actualizada"."\n";
+foreach ($gestor->usuarios as $usuario) {
+    echo "ID: " . $usuario->getId_usuario() . ", Nombre: " . $usuario->getNombre() . ", Email: " . $usuario->getEmail() . "\n";
+}
 ?>
 
 
