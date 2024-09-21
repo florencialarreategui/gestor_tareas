@@ -17,7 +17,9 @@ $gestor->agregarUsuario($usuario2);
 
 // proyectos
 $proyecto1 = new Proyecto(1, 'Proyecto A', 'Descripción del Proyecto A');
+$proyecto2= new Proyecto(2,'Proyecto B','Descripción del proyecto B');
 $gestor->agregarProyecto($proyecto1);
+$gestor->agregarProyecto($proyecto2);
 
 // estados
 $estado1 = new Estado(1, 'Pendiente');
@@ -70,6 +72,7 @@ echo "---------------------.\n";
 //Elimino Usuario con ID=1
 $gestor ->eliminarUsuario(1);
 "/n";
+echo "Elimino usuario 1"."\n";
 //Actualizo Usuario con ID=2
 $gestor -> actualizarUsuario(2, "Maria Gonzales", "Mariagonzalez@gmail.com");
 
@@ -78,6 +81,37 @@ echo"lista actualizada"."\n";
 foreach ($gestor->usuarios as $usuario) {
     echo "ID: " . $usuario->getId_usuario() . ", Nombre: " . $usuario->getNombre() . ", Email: " . $usuario->getEmail() . "\n";
 }
+echo "-------------------"."\n";
+
+//muestro proyectos antes de eliminar y actualizar.
+echo"Lista de Proyectos antes de eliminar"."\n";
+foreach ($gestor->proyectos as $proyecto) {
+    echo "ID: " . $proyecto->getIdProyecto() . ", Nombre: " . $proyecto->getNombre() . ", Descripción: " . $proyecto->getDescripcion() . "\n";
+}
+echo "---------------------"."\n";
+
+//Elimino Proyecto co ID=1
+
+$gestor->eliminarProyecto(1);
+echo"elimine Proyecto A"."\n";
+
+//Actualizo Proyecto con ID=2
+
+$gestor->actualizarProyecto(2, 'Nuevo Proyecto 2', 'Nueva descripcion del proyecto 2');
+
+
+//vuelvo a mostrar la lista para control.
+echo"Lista actualizada"."\n";
+foreach ($gestor->proyectos as $proyecto) {
+    echo "ID: " . $proyecto->getIdProyecto() . ", Nombre: " . $proyecto->getNombre() . ", Descripción: " . $proyecto->getDescripcion() . "\n";
+}
+echo "---------------------"."\n";
+
+
+
+
+
+
 ?>
 
 
