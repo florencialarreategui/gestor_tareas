@@ -109,7 +109,15 @@ echo "---------------------"."\n";
 
 
 
+/*practica de json
+$usuario1 = new Usuario(1, 'Juan Perez', 'juan@gmail.com');
+$json=json_encode($usuario);// convierto al objeto json
+echo $json;
 
+
+//convertir json a un objeto
+$usuario_decodificado= json_decode($json);
+echo $usuario_decodificado->nombre; */
 
 
 ?>
