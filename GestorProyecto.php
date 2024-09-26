@@ -13,6 +13,11 @@ class GestorDeProyecto {
     public $comentarios = [];
     public $estados = [];
 
+    public function __construct()
+    {
+        $this->cargarDesdeJSON();
+    }
+
 
     public function agregarUsuario($usuario) {
         $this->usuarios[] = $usuario;
@@ -76,6 +81,7 @@ class GestorDeProyecto {
     
     public function agregarTarea($tarea) {
         $this->tareas[] = $tarea;
+        $this->guardarEnJSON();
     }
 
     public function obtenerTarea($id_tarea) {
@@ -98,6 +104,7 @@ class GestorDeProyecto {
             $tarea->setId_usuario($id_usuario);
             $tarea->setIdEstado($id_estado);
         }
+        $this->guardarEnJSON();
     }
 
     public function eliminarTarea($id_tarea) {
@@ -105,6 +112,7 @@ class GestorDeProyecto {
             if ($tarea->getIdTarea() == $id_tarea) {
                 unset($this->tareas[$index]);
             }
+            $this->guardarEnJSON();
         }
     }
     public function guardarEnJSON() {
