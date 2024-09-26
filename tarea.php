@@ -88,6 +88,9 @@ class Tarea {
     public function setIdEstado($id_estado) {
         $this->id_estado = $id_estado;
     }
+    public function getjson(){
+
+    }
 
 }
 

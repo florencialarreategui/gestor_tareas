@@ -9,6 +9,7 @@ class GestorDeProyecto {
     public $usuarios = [];
     public $proyectos = [];
     public $tareas = [];
+    private $archivoJson = 'tareas.json';
     public $comentarios = [];
     public $estados = [];
 
@@ -106,6 +107,54 @@ class GestorDeProyecto {
             }
         }
     }
+    public function guardarEnJSON() {
+        $tareas = [];
+
+        foreach ($this->tareas as $tarea) {
+            $tareas[] = $this->tareaToArray($tarea);
+        }
+
+        $jsontarea = json_encode(['tarea' => $tareas], JSON_PRETTY_PRINT);
+        file_put_contents($this->archivoJson, $jsontarea);
+    }
+
+    public function cargarDesdeJSON() {
+        if (file_exists($this->archivoJson)) {
+            $jsontarea = file_get_contents($this->archivoJson);
+            $tareas = json_decode($jsontarea, true)['tarea'];
+            $this->tareas = [];
+
+            foreach ($tareas as $tareaData) {
+                $tarea = new Tarea();
+                $tarea->setIdTarea($tareaData['id_tarea']);
+                $tarea->setNombre($tareaData['nombre']);
+                $tarea->setDescripcion($tareaData['descripcion']);
+                $tarea->setFechaInicio($tareaData['fecha_inicio']);
+                $tarea->setFechaFin($tareaData['fecha_fin']);
+                $tarea->setIdProyecto($tareaData['id_proyecto']);
+                $tarea->setId_usuario($tareaData['id_usuario']);
+                $tarea->setIdEstado($tareaData['id_estado']);
+                $this->tareas[] = $tarea;
+            }
+            
+                $this->tareas[] = $tarea;
+            }
+        }
+    
+
+    private function tareaToArray($tarea) {
+        return [
+            'id_tarea' => $tarea->getIdTarea(),
+            'nombre' => $tarea->getNombre(),
+            'descripcion' => $tarea->getDescripcion(),
+            'fecha_inicio' => $tarea->getFechaInicio(),
+            'fecha_fin' => $tarea->getFechaFin(),
+            'id_proyecto' => $tarea->getIdProyecto(),
+            'id_usuario' => $tarea->getId_usuario(),
+            'id_estado' => $tarea->getIdEstado()
+        ];
+    }
+
 
     
     public function agregarComentario($comentario) {
