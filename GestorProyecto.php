@@ -158,7 +158,7 @@ class GestorDeProyecto {
             'fecha_inicio' => $tarea->getFechaInicio(),
             'fecha_fin' => $tarea->getFechaFin(),
             'id_proyecto' => $tarea->getIdProyecto(),
-            'id_usuario' => $tarea->getId_usuario(),
+            'id_usuario' => $tarea->getIdUsuario(),
             'id_estado' => $tarea->getIdEstado()
         ];
     }
