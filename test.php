@@ -112,6 +112,8 @@ echo "---------------------"."\n";
 
 
 
+
+
 /*practica de json
 $usuario1 = new Usuario(1, 'Juan Perez', 'juan@gmail.com');
 $json=json_encode($usuario);// convierto al objeto json
