@@ -5,6 +5,7 @@ require_once 'tarea.php';
 require_once 'comentario.php';
 require_once 'estado.php';
 require_once 'GestorProyecto.php';
+require_once 'tarea.json';
 
 
 $gestor = new GestorDeProyecto();
@@ -108,22 +109,23 @@ foreach ($gestor->proyectos as $proyecto) {
 echo "---------------------"."\n";
 
 
+//PRUEBAS CON JSON
+$gestor=new Tarea('tarea.json');
 
+// agregamos tareas
+$tarea1 = new Tarea(1, 'Tarea 1', 'Descripción de la Tarea 1', '2024-09-01', '2024-09-10', 1, 1, 1);
+$tarea2 = new Tarea(2, 'Tarea 2', 'Descripción de la Tarea 2', '2024-09-05', '2024-09-15', 1, 2, 2);
+$tarea3 = new Tarea(3, 'Tarea 3', 'Descripción de la Tarea 3', '2024-09-06', '2024-09-10', 3, 3, 3);
+$tarea4 = new Tarea(4, 'Tarea 4', 'Descripción de la Tarea 4', '2024-09-09', '2024-09-15', 4, 4, 4);
+$gestor->agregarTarea($tarea1);
+$gestor->agregarTarea($tarea2);
+$gestor->agregarTarea($tarea3);
+$gestor->agregarTarea($tarea4);
 
-
-
-
-
-/*practica de json
-$usuario1 = new Usuario(1, 'Juan Perez', 'juan@gmail.com');
-$json=json_encode($usuario);// convierto al objeto json
-echo $json;
-
-
-//convertir json a un objeto
-$usuario_decodificado= json_decode($json);
-echo $usuario_decodificado->nombre; */
-
+echo "lista de tareas";
+foreach ($gestor->tareas as $tarea) {
+    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Descripción: " . $tarea->getDescripcion() . ", Fecha Inicio: " . $tarea->getFechaInicio() . ", Fecha Fin: " . $tarea->getFechaFin() . ", ID Proyecto: " . $tarea->getIdProyecto() . ", ID Usuario: " . $tarea->getIdUsuario() . ", ID Estado: " . $tarea->getIdEstado() . "\n";
+}
 
 ?>
 

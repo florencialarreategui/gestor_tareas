@@ -32,6 +32,17 @@
                  "id_usuario":"3",
                  "id_estado":"3"
                 
+            },
+            {
+                "id_tarea":"4",
+                 "nombre":"Tarea4",
+                 "descripción":"descripción de tarea 4",
+                 "fecha_inicio":"2024-09-01",
+                 "fecha_fin":"2024-09-30",
+                 "id_proyecto":"4",
+                 "id_usuario":"1",
+                 "id_estado":"1"
+                
             }
         ]
 
