@@ -6,7 +6,7 @@ require_once 'comentario.php';
 require_once 'estado.php';
 require_once 'GestorProyecto.php';
 require_once 'tarea.json';
-
+require_once 'GestorTarea.php';
 
 $gestor = new GestorDeProyecto();
 
