@@ -88,6 +88,31 @@ class Tarea {
         public function setIdEstado($id_estado) {
             $this->id_estado = $id_estado;
         }
+
+        public function toArray() {
+            return [
+                'id_tarea' => $this->id_tarea,
+                'nombre' => $this->nombre,
+                'descripcion' => $this->descripcion,
+                'fecha_inicio' => $this->fecha_inicio,
+                'fecha_fin' => $this->fecha_fin,
+                'id_proyecto' => $this->id_proyecto,
+                'id_usuario' => $this->id_usuario,
+                'id_estado' => $this->id_estado
+            ];
+        }
+        public static function fromArray($array) {
+            return new self(
+                $array['id_tarea'],
+                $array['nombre'],
+                $array['descripcion'],
+                $array['fecha_inicio'],
+                $array['fecha_fin'],
+                $array['id_proyecto'],
+                $array['id_usuario'],
+                $array['id_estado']
+            );
+        }
     
 
     }

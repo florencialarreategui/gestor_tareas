@@ -4,6 +4,7 @@ require_once 'proyecto.php';
 require_once 'tarea.php';
 require_once 'comentario.php';
 require_once 'estado.php';
+require_once 'tarea.json';
 
 class GestorTarea{
         public $tareas = [];
@@ -46,6 +47,9 @@ class GestorTarea{
             foreach ($this->tareas as $index => $tarea) {
                 if ($tarea->getIdTarea() == $id_tarea) {
                     unset($this->tareas[$index]);
+                    $this->tareas = array_values($this->tareas); // Reindexamos
+                    $this->guardarEnJSON();
+                    break;
                 }
                 $this->guardarEnJSON();
             }
@@ -54,7 +58,7 @@ class GestorTarea{
             $tareas = [];
 
             foreach ($this->tareas as $tarea) {
-                $tareas[] = $this->tareaToArray($tarea);
+                $tareas[] = $tarea->ToArray();
             }
 
             $jsontarea = json_encode(['tarea' => $tareas], JSON_PRETTY_PRINT);
@@ -86,16 +90,5 @@ class GestorTarea{
         }
 
 
-        private function tareaToArray($tarea) {
-            return [
-                'id_tarea' => $tarea->getIdTarea(),
-                'nombre' => $tarea->getNombre(),
-                'descripcion' => $tarea->getDescripcion(),
-                'fecha_inicio' => $tarea->getFechaInicio(),
-                'fecha_fin' => $tarea->getFechaFin(),
-                'id_proyecto' => $tarea->getIdProyecto(),
-                'id_usuario' => $tarea->getIdUsuario(),
-                'id_estado' => $tarea->getIdEstado()
-            ];
-        }
+       
         }
