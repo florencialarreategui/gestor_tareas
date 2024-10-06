@@ -38,7 +38,8 @@ class GestorTarea{
                 $tarea->setFechaFin($fecha_fin);
                 $tarea->setIdProyecto($id_proyecto);
                 $tarea->setIdEstado($id_estado);
-                $tarea->setIdUsuario($usuario);
+                $tarea->setIdUsuario($usuario);// ver error 
+                
             }
             $this->guardarEnJSON();
         }
