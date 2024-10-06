@@ -113,30 +113,30 @@ echo "---------------------"."\n";
 
 $gestorTarea = new GestorTarea();
 
-// Agregar una tarea
+// Agrego una tarea
 $tarea = new Tarea(1, 'Tarea de prueba', 'Descripción de prueba', '2024-10-06', '2024-10-07', 1, 1, 1);
 $gestorTarea->agregarTarea($tarea);
-echo "Tarea agregada y guardada en JSON.<br>";
+echo "Tarea agregada y guardada en JSON./n";
 
-// Obtener una tarea
+// Obtengo una tarea
 $tareaObtenida = $gestorTarea->obtenerTarea(1);
 if ($tareaObtenida) {
-    echo "Tarea obtenida: " . $tareaObtenida->getNombre() . "<br>";
+    echo "Tarea obtenida: " . $tareaObtenida->getNombre() . "/n";
 } else {
-    echo "Tarea no encontrada.<br>";
+    echo "Tarea no encontrada./n";
 }
 
-// Actualizar una tarea
+// Actualizo una tarea
 $gestorTarea->actualizarTarea(1, 'Tarea actualizada', 'Descripción actualizada', '2024-10-08', '2024-10-09', 2, 2, 2);
-echo "Tarea actualizada y guardada en JSON.<br>";
+echo "Tarea actualizada y guardada en JSON./n";
 
-// Eliminar una tarea
+// Elimino una tarea
 $gestorTarea->eliminarTarea(1);
-echo "Tarea eliminada y JSON actualizado.<br>";
+echo "Tarea eliminada y JSON actualizado./n";
 
-// Verificar el contenido del archivo JSON
+// Verifico JSON
 $contenidoJson = file_get_contents('tareas.json');
-echo "Contenido del archivo JSON:<br>";
+echo "Contenido del archivo JSON:/n";
 echo "<pre>" . $contenidoJson . "</pre>";
 ?>
 
