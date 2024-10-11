@@ -38,7 +38,7 @@ class GestorTarea{
                 $tarea->setFechaFin($fecha_fin);
                 $tarea->setIdProyecto($id_proyecto);
                 $tarea->setIdEstado($id_estado);
-                $tarea->setIdUsuario($usuario);// ver error 
+                $tarea->setIdUsuario($id_usuario);// ver error 
                 
             }
             $this->guardarEnJSON();
@@ -49,12 +49,14 @@ class GestorTarea{
                 if ($tarea->getIdTarea() == $id_tarea) {
                     unset($this->tareas[$index]);
                     $this->tareas = array_values($this->tareas); // Reindexamos
-                    $this->guardarEnJSON();
+                
                     break;
                 }
-                $this->guardarEnJSON();
+               // $this->guardarEnJSON();
             }
+            $this->guardarEnJSON();
         }
+        
         public function guardarEnJSON() {
             $tareas = [];
 
