@@ -5,6 +5,7 @@ require_once 'tarea.php';
 require_once 'comentario.php';
 require_once 'estado.php';
 require_once 'GestorProyecto.php';
+require_once 'funcionesAuxiliares.php';
 
 
 class Menu {
@@ -70,9 +71,17 @@ class Menu {
             }
         }
 
+        //-----------------------------crear proyectos----------------------------
+
         public function crearProyecto() {
+
+            $id_proyecto = generarIdNumerico();
+            
             echo "Ingrese el nombre del proyecto: ";
             $nombre = trim(fgets(STDIN));
+
+            echo "Ingrese el descripción del proyecto: ";
+            $descripcion = trim(fgets(STDIN));
 
             echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
             $fechaInicio = trim(fgets(STDIN));
@@ -80,12 +89,12 @@ class Menu {
             echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
             $fechaFin = trim(fgets(STDIN));
 
-            $nuevoProyecto = new Proyecto($nombre, $fechaInicio, $fechaFin);
+            $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin);
             $this->proyectos[] = $nuevoProyecto;
 
-            echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . "\n";
+            echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . "\n". $id_proyecto;
         }
-
+//-----------------------------listar proyectos----------------------------
         public function listarProyectos() {
             if (empty($this->proyectos)) {
                 echo "No hay proyectos registrados.\n";
@@ -94,14 +103,13 @@ class Menu {
 
             echo "=== Proyectos Registrados ===\n";
             foreach ($this->proyectos as $proyecto) {
-                echo "Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+                echo "Id: " . $proyecto->getIdProyecto() . "Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
             }
         }
 
-
+//-----------------------------crear usurario ---------------------------
         public function crearUsuario() {
-            echo "Ingrese ID de usuario: ";
-            $id_usuario = trim(fgets(STDIN));
+            $id_usuario = generarIdNumerico();
 
             echo "Ingrese nombre: ";
             $nombre = trim(fgets(STDIN));
@@ -109,13 +117,30 @@ class Menu {
             echo "Ingrese email: ";
             $email = trim(fgets(STDIN));
 
+            echo "Ingrese clave: ";
+            $clave = trim(fgets(STDIN));
+
+          
             // Crear un nuevo usuario
-            $nuevoUsuario = new Usuario($id_usuario, $nombre, $email);
+            $nuevoUsuario = new Usuario($id_usuario, $nombre, $email, $clave);
 
             // Almacenar el nuevo usuario en el array
             $this->usuarios[] = $nuevoUsuario;
 
-            echo "Usuario creado exitosamente: " . $nuevoUsuario->getNombre() . "\n";
+            echo "Usuario creado exitosamente: " . $nuevoUsuario->getNombre() . " con ID" .  $nuevoUsuario->getId_usuario() . "\n";
+        }
+
+        //-----------------------------listar usuarios----------------------------
+        public function listarUsuarios() {
+            if (empty($this->usuarios)) {
+                echo "No hay usuarios registrados.\n";
+                return;
+            }
+
+            echo "=== Proyectos Registrados ===\n";
+            foreach ($this->usuarios as $usuario) {
+                echo "Id: " . $nuevoUsuario->getId_usuario() . "Nombre: " . $nuevoUsuario->getNombre(). "\n";
+            }
         }
     }
 
