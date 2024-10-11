@@ -7,6 +7,7 @@ require_once 'estado.php';
 require_once 'GestorProyecto.php';
 require_once 'tarea.json';
 require_once 'GestorTarea.php';
+require_once 'GestorComentario.php';
 
 $gestor = new GestorDeProyecto();
 
@@ -137,11 +138,39 @@ echo "Tarea eliminada y JSON actualizado./n";
 // Verifico JSON
 $contenidoJson = file_get_contents('tareas.json');
 echo "Contenido del archivo JSON:/n";
-echo "<pre>" . $contenidoJson . "</pre>";
-?>
+echo "<pre>" . $contenidoJson . "</pre>";"\n";
+echo "------------------------------------------------------------------------------"."\n";
+
+//pruebas con json de comentario
+
+echo ".\n prueba con json de comentario\n";
+$gestorComentario = new GestorComentario();
+
+// Agrego un comentario
+$comentario1 = new Comentario(1, 1, 1, 'Este es un comentario sobre la Tarea 1', '2024-09-01');
+$gestorComentario->agregarComentario($comentario1);
+
+// Muestro comentario
+echo "Muestro comentario. \n";
+foreach ($gestorComentario->comentarios as $comentario) {
+    echo "ID: " . $comentario->getIdComentario() . ", ID Tarea: " . $comentario->getIdTarea() . ", ID Usuario: " . $comentario->getIdUsuario() . ", Contenido: " . $comentario->getContenido() . ", Fecha: " . $comentario->getFecha() . "\n";
+}
+//falta probar actualizar y eliminar
+ 
+
+// Verifico JSON
+
+$contenidoJson = file_get_contents('comentario.json');
+echo "Contenido del archivo JSON:\n";
+echo "<pre>" . $contenidoJson . "</pre>"
+
+
 
 
 ?>
+
+
+
 
 
 
