@@ -117,51 +117,93 @@ class Menu {
 
         }
 
-//-----------------------------editar proyectos----------------------------
+// //-----------------------------editar proyectos----------------------------
+// public function editarProyecto() {
+//     echo "Ingrese el ID del proyecto que desea editar: ";
+//     $id_proyecto = trim(fgets(STDIN));
+
+//     // Buscar el proyecto por ID
+//     $proyecto = null;
+//     foreach ($this->proyectos as $proyecto) {
+//         if ($proyecto->getIdProyecto() === $id_proyecto) {
+//             $proyecto = $p;
+//             break;
+//         } else if ($proyecto === null){
+//             echo "Proyecto no encontrado.\n";
+//         }
+//     }
+
+//     // if ($proyecto === null) {
+//     //     echo "Proyecto no encontrado.\n";
+//     //     return;
+//     // }
+
+//     echo "Ingrese el nuevo nombre del proyecto: ";
+//     $nombre = trim(fgets(STDIN));
+//     if ($nombre !== '') {
+//         $proyecto->setNombre($nombre);
+//     }
+
+//     echo "Ingrese la nueva descripción del proyecto: ";
+//     $descripcion = trim(fgets(STDIN));
+//     if ($descripcion !== '') {
+//         $proyecto->setDescripcion($descripcion);
+//     }
+
+//     echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+//     $fechaInicio = trim(fgets(STDIN));
+//     if ($fechaInicio !== '') {
+//         $proyecto->setFechaInicio($fechaInicio);
+//     }
+
+//     echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+//     $fechaFin = trim(fgets(STDIN));
+//     if ($fechaFin !== '') {
+//         $proyecto->setFechaFin($fechaFin);
+//     }
+
+//     echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+// }
+
+//-----------------------------editar proyectos 2----------------------------
 public function editarProyecto() {
     echo "Ingrese el ID del proyecto que desea editar: ";
     $id_proyecto = trim(fgets(STDIN));
 
     // Buscar el proyecto por ID
-    $proyecto = null;
-    foreach ($this->proyectos as $p) {
-        if ($p->getIdProyecto() === $id_proyecto) {
-            $proyecto = $p;
-            break;
+
+    foreach ($this->proyectos as $proyecto) {
+        if ($proyecto->getIdProyecto() == $id_proyecto) {
+           
+            echo "Ingrese el nuevo nombre del proyecto: ";
+                $nombre = trim(fgets(STDIN));
+                $proyecto->setNombre($nombre);
+    
+
+            echo "Ingrese la nueva descripción del proyecto: ";
+                $descripcion = trim(fgets(STDIN));
+                 $proyecto->setDescripcion($descripcion);
+            
+
+             echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+                 $fechaInicio = trim(fgets(STDIN));
+                 $proyecto->setFechaInicio($fechaInicio);
+
+
+              echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                 $fechaFin = trim(fgets(STDIN));
+                 $proyecto->setFechaFin($fechaFin);
+ 
+
+              echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+
+        }       
+            else {
+             echo "Proyecto no encontrado.\n";
+                 }
         }
-    }
-
-    if ($proyecto === null) {
-        echo "Proyecto no encontrado.\n";
-        return;
-    }
-
-    echo "Ingrese el nuevo nombre del proyecto (presione Enter para mantener '{$proyecto->getNombre()}'): ";
-    $nombre = trim(fgets(STDIN));
-    if ($nombre !== '') {
-        $proyecto->setNombre($nombre);
-    }
-
-    echo "Ingrese la nueva descripción del proyecto (presione Enter para mantener '{$proyecto->getDescripcion()}'): ";
-    $descripcion = trim(fgets(STDIN));
-    if ($descripcion !== '') {
-        $proyecto->setDescripcion($descripcion);
-    }
-
-    echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD) (presione Enter para mantener '{$proyecto->getFechaInicio()}'): ";
-    $fechaInicio = trim(fgets(STDIN));
-    if ($fechaInicio !== '') {
-        $proyecto->setFechaInicio($fechaInicio);
-    }
-
-    echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD) (presione Enter para mantener '{$proyecto->getFechaFin()}'): ";
-    $fechaFin = trim(fgets(STDIN));
-    if ($fechaFin !== '') {
-        $proyecto->setFechaFin($fechaFin);
-    }
-
-    echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
 }
+
 //-----------------------------eliminar proyectos----------------------------
 public function eliminarProyecto() {
     echo "Ingrese el ID del proyecto que desea eliminar: ";
@@ -223,6 +265,61 @@ public function eliminarProyecto() {
                 echo "Id: " . $nuevoUsuario->getId_usuario() . "Nombre: " . $nuevoUsuario->getNombre(). "\n";
             }
         }
+
+        //-----------------------------editar usurario ---------------------------
+        public function editarUsuario() {
+            echo "Ingrese el nombre del usuario que desea editar: ";
+            $nombre = trim(fgets(STDIN));
+        
+            echo "Ingrese la clave del usuario que desea editar: ";
+            $clave = trim(fgets(STDIN));
+            // Buscar el proyecto por ID
+            $usuario = null;
+            foreach ($this->usuarios as $u) {
+                if ($u->getNombre() === $nombre && $u->getClave()=== $clave) {
+                    $usuario = $u;
+                    break;
+                }
+            }
+        
+            if ($usuario === null) {
+                echo "Proyecto no encontrado.\n";
+                return;
+            }
+        
+            echo "Ingrese el nuevo nombre del proyecto (presione Enter para mantener '{$proyecto->getNombre()}'): ";
+            $nombre = trim(fgets(STDIN));
+            if ($nombre !== '') {
+                $proyecto->setNombre($nombre);
+            }
+        
+            echo "Ingrese la nueva descripción del proyecto (presione Enter para mantener '{$proyecto->getDescripcion()}'): ";
+            $descripcion = trim(fgets(STDIN));
+            if ($descripcion !== '') {
+                $proyecto->setDescripcion($descripcion);
+            }
+        
+            echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD) (presione Enter para mantener '{$proyecto->getFechaInicio()}'): ";
+            $fechaInicio = trim(fgets(STDIN));
+            if ($fechaInicio !== '') {
+                $proyecto->setFechaInicio($fechaInicio);
+            }
+        
+            echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD) (presione Enter para mantener '{$proyecto->getFechaFin()}'): ";
+            $fechaFin = trim(fgets(STDIN));
+            if ($fechaFin !== '') {
+                $proyecto->setFechaFin($fechaFin);
+            }
+        
+            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+        }
+
+
+        //-----------------------------eliminar usurario ---------------------------
+
+
+
+
     }
 
     $menu = new Menu();
