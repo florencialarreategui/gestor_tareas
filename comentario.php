@@ -56,4 +56,27 @@ class Comentario {
         public function setFecha($fecha) {
             $this->fecha = $fecha;
         }
-    }
+        
+        
+         public function toArray() {
+                return [
+                    'id_comentario' => $this->id_comentario,
+                    'id_tarea' => $this->id_tarea,
+                    'id_usuario' => $this->id_usuario,
+                    'contenido' => $this->contenido,
+                    'fecha' => $this->fecha,
+                ];
+            }
+        
+         public static function fromArray($array) {
+                return new self(
+                    $array['id_comentario'],
+                    $array['id_tarea'],
+                    $array['id_usuario'],
+                    $array['contenido'],
+                    $array['fecha']
+                );
+         }
+ }
+        
+    

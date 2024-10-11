@@ -52,11 +52,11 @@ class GestorTarea{
                 
                     break;
                 }
-               // $this->guardarEnJSON();
+               
             }
             $this->guardarEnJSON();
         }
-        
+
         public function guardarEnJSON() {
             $tareas = [];
 
