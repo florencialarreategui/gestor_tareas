@@ -8,7 +8,6 @@ require_once 'estado.php';
 class GestorDeProyecto {
         public $usuarios = [];
         public $proyectos = [];
-        public $comentarios = [];
         public $estados = [];
 
        
@@ -68,38 +67,6 @@ class GestorDeProyecto {
             foreach ($this->proyectos as $index => $proyecto) {
                 if ($proyecto->getIdProyecto() == $id_proyecto) {
                     unset($this->proyectos[$index]);
-                }
-            }
-        }
-
-        
-       
-        
-        public function agregarComentario($comentario) {
-            $this->comentarios[] = $comentario;
-        }
-
-        public function obtenerComentario($id_comentario) {
-            foreach ($this->comentarios as $comentario) {
-                if ($comentario->getIdComentario() == $id_comentario) {
-                    return $comentario;
-                }
-            }
-            return null;
-        }
-
-        public function actualizarComentario($id_comentario, $contenido, $fecha) {
-            $comentario = $this->obtenerComentario($id_comentario);
-            if ($comentario) {
-                $comentario->setContenido($contenido);
-                $comentario->setFecha($fecha);
-            }
-        }
-
-        public function eliminarComentario($id_comentario) {
-            foreach ($this->comentarios as $index => $comentario) {
-                if ($comentario->getIdComentario() == $id_comentario) {
-                    unset($this->comentarios[$index]);
                 }
             }
         }
