@@ -23,13 +23,7 @@ class Menu {
         
                 switch ($eleccion) {
                     case '1':  
-                        echo "Ingrese la clave: ";
-                        $claveUsuario = trim(fgets(STDIN));
-                        if ($clave == $claveUsuario) {
-                            $this->menuUsuario(); 
-                        } else {
-                            echo "Clave Errónea.\n";
-                        }
+                        $this->validarIngresoUsuario();
                         break;
         
                     case '2':
@@ -46,6 +40,19 @@ class Menu {
             }
         }
 
+        //----------------------------------------Validacion Usuario-----------------------------------------
+
+    public function validarIngresoUsuario ()= {
+        echo "Si ya se encuentra registrado ingrese su nombre: ";
+                        $nombreUsuarioIngresado = trim(fgets(STDIN));
+                        echo "Si ya se encuentra registrado ingrese su clave: ";
+                        $claveUsuarioIngresada = trim(fgets(STDIN));
+                        if ($claveUsuario == $claveUsuarioIngresada && $nombreUsuario == $nombreUsuarioIngresado) {
+                            $this->menuUsuario(); 
+                        } else {
+                            echo "Nombre o clave Errónea.\n";
+                        }
+    }
         public function menuUsuario() {
             echo "=== Menú de Usuario ===\n";
             while (true) {
@@ -117,55 +124,8 @@ class Menu {
 
         }
 
-// //-----------------------------editar proyectos----------------------------
-// public function editarProyecto() {
-//     echo "Ingrese el ID del proyecto que desea editar: ";
-//     $id_proyecto = trim(fgets(STDIN));
 
-//     // Buscar el proyecto por ID
-//     $proyecto = null;
-//     foreach ($this->proyectos as $proyecto) {
-//         if ($proyecto->getIdProyecto() === $id_proyecto) {
-//             $proyecto = $p;
-//             break;
-//         } else if ($proyecto === null){
-//             echo "Proyecto no encontrado.\n";
-//         }
-//     }
-
-//     // if ($proyecto === null) {
-//     //     echo "Proyecto no encontrado.\n";
-//     //     return;
-//     // }
-
-//     echo "Ingrese el nuevo nombre del proyecto: ";
-//     $nombre = trim(fgets(STDIN));
-//     if ($nombre !== '') {
-//         $proyecto->setNombre($nombre);
-//     }
-
-//     echo "Ingrese la nueva descripción del proyecto: ";
-//     $descripcion = trim(fgets(STDIN));
-//     if ($descripcion !== '') {
-//         $proyecto->setDescripcion($descripcion);
-//     }
-
-//     echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
-//     $fechaInicio = trim(fgets(STDIN));
-//     if ($fechaInicio !== '') {
-//         $proyecto->setFechaInicio($fechaInicio);
-//     }
-
-//     echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-//     $fechaFin = trim(fgets(STDIN));
-//     if ($fechaFin !== '') {
-//         $proyecto->setFechaFin($fechaFin);
-//     }
-
-//     echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
-// }
-
-//-----------------------------editar proyectos 2----------------------------
+//-----------------------------editar proyectos ----------------------------
 public function editarProyecto() {
     echo "Ingrese el ID del proyecto que desea editar: ";
     $id_proyecto = trim(fgets(STDIN));
@@ -193,15 +153,13 @@ public function editarProyecto() {
               echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
                  $fechaFin = trim(fgets(STDIN));
                  $proyecto->setFechaFin($fechaFin);
- 
-
-              echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
-
+            break;
         }       
             else {
              echo "Proyecto no encontrado.\n";
-                 }
-        }
+                 };
+        };
+        echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
 }
 
 //-----------------------------eliminar proyectos----------------------------
@@ -276,39 +234,19 @@ public function eliminarProyecto() {
             // Buscar el proyecto por ID
             $usuario = null;
             foreach ($this->usuarios as $u) {
-                if ($u->getNombre() === $nombre && $u->getClave()=== $clave) {
-                    $usuario = $u;
-                    break;
+                if ($u->getNombre() == $nombre && $u->getClave()==$clave) {
+                    echo "Ingrese el nuevo nombre del usuario";
+                     $nombre = trim(fgets(STDIN));
+                     $usuario->setNombre($nombre);
+
+                     echo "Ingrese el nuevo email: ";
+                     $email = trim(fgets(STDIN));
+                    $proyecto->setEmail($email);
+
+                    echo "Ingrese una nueva clave: ";
+                     $clave = trim(fgets(STDIN));
+                    $clave->setClave($clave);
                 }
-            }
-        
-            if ($usuario === null) {
-                echo "Proyecto no encontrado.\n";
-                return;
-            }
-        
-            echo "Ingrese el nuevo nombre del proyecto (presione Enter para mantener '{$proyecto->getNombre()}'): ";
-            $nombre = trim(fgets(STDIN));
-            if ($nombre !== '') {
-                $proyecto->setNombre($nombre);
-            }
-        
-            echo "Ingrese la nueva descripción del proyecto (presione Enter para mantener '{$proyecto->getDescripcion()}'): ";
-            $descripcion = trim(fgets(STDIN));
-            if ($descripcion !== '') {
-                $proyecto->setDescripcion($descripcion);
-            }
-        
-            echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD) (presione Enter para mantener '{$proyecto->getFechaInicio()}'): ";
-            $fechaInicio = trim(fgets(STDIN));
-            if ($fechaInicio !== '') {
-                $proyecto->setFechaInicio($fechaInicio);
-            }
-        
-            echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD) (presione Enter para mantener '{$proyecto->getFechaFin()}'): ";
-            $fechaFin = trim(fgets(STDIN));
-            if ($fechaFin !== '') {
-                $proyecto->setFechaFin($fechaFin);
             }
         
             echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
