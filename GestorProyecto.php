@@ -8,16 +8,9 @@ require_once 'estado.php';
 class GestorDeProyecto {
         public $usuarios = [];
         public $proyectos = [];
-        public $tareas = [];
-        private $archivoJson = 'tareas.json';
-        public $comentarios = [];
         public $estados = [];
 
-        public function __construct()
-        {
-            $this->cargarDesdeJSON();
-        }
-
+       
 
         public function agregarUsuario($usuario) {
             $this->usuarios[] = $usuario;
@@ -74,123 +67,6 @@ class GestorDeProyecto {
             foreach ($this->proyectos as $index => $proyecto) {
                 if ($proyecto->getIdProyecto() == $id_proyecto) {
                     unset($this->proyectos[$index]);
-                }
-            }
-        }
-
-        
-        public function agregarTarea($tarea) {
-            $this->tareas[] = $tarea;
-            $this->guardarEnJSON();
-        }
-
-        public function obtenerTarea($id_tarea) {
-            foreach ($this->tareas as $tarea) {
-                if ($tarea->getIdTarea() == $id_tarea) {
-                    return $tarea;
-                }
-            }
-            return null;
-        }
-
-        public function actualizarTarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado) {
-            $tarea = $this->obtenerTarea($id_tarea);
-            if ($tarea) {
-                $tarea->setNombre($nombre);
-                $tarea->setDescripcion($descripcion);
-                $tarea->setFechaInicio($fecha_inicio);
-                $tarea->setFechaFin($fecha_fin);
-                $tarea->setIdProyecto($id_proyecto);
-                $tarea->setId_usuario($id_usuario);
-                $tarea->setIdEstado($id_estado);
-            }
-            $this->guardarEnJSON();
-        }
-
-        public function eliminarTarea($id_tarea) {
-            foreach ($this->tareas as $index => $tarea) {
-                if ($tarea->getIdTarea() == $id_tarea) {
-                    unset($this->tareas[$index]);
-                }
-                $this->guardarEnJSON();
-            }
-        }
-        public function guardarEnJSON() {
-            $tareas = [];
-
-            foreach ($this->tareas as $tarea) {
-                $tareas[] = $this->tareaToArray($tarea);
-            }
-
-            $jsontarea = json_encode(['tarea' => $tareas], JSON_PRETTY_PRINT);
-            file_put_contents($this->archivoJson, $jsontarea);
-        }
-
-        public function cargarDesdeJSON() {
-            if (file_exists($this->archivoJson)) {
-                $jsontarea = file_get_contents($this->archivoJson);
-                $tareas = json_decode($jsontarea, true)['tarea'];
-                $this->tareas = [];
-
-            
-                foreach ($tareas as $tareaData) {
-                    $tarea = new Tarea(
-                        $tareaData['id_tarea'],
-                        $tareaData['nombre'],
-                        $tareaData['descripcion'],
-                        $tareaData['fecha_inicio'],
-                        $tareaData['fecha_fin'],
-                        $tareaData['id_proyecto'],
-                        $tareaData['id_usuario'],
-                        $tareaData['id_estado']
-                    );
-                    $this->tareas[] = $tarea;
-                }
-            }   
-
-        }
-        
-
-        private function tareaToArray($tarea) {
-            return [
-                'id_tarea' => $tarea->getIdTarea(),
-                'nombre' => $tarea->getNombre(),
-                'descripcion' => $tarea->getDescripcion(),
-                'fecha_inicio' => $tarea->getFechaInicio(),
-                'fecha_fin' => $tarea->getFechaFin(),
-                'id_proyecto' => $tarea->getIdProyecto(),
-                'id_usuario' => $tarea->getIdUsuario(),
-                'id_estado' => $tarea->getIdEstado()
-            ];
-        }
-
-
-        
-        public function agregarComentario($comentario) {
-            $this->comentarios[] = $comentario;
-        }
-
-        public function obtenerComentario($id_comentario) {
-            foreach ($this->comentarios as $comentario) {
-                if ($comentario->getIdComentario() == $id_comentario) {
-                    return $comentario;
-                }
-            }
-            return null;
-        }
-
-        public function actualizarComentario($id_comentario, $contenido, $fecha) {
-            $comentario = $this->obtenerComentario($id_comentario);
-            if ($comentario) {
-                $comentario->setContenido($contenido);
-                $comentario->setFecha($fecha);
-            }
-        }
-
-        public function eliminarComentario($id_comentario) {
-            foreach ($this->comentarios as $index => $comentario) {
-                if ($comentario->getIdComentario() == $id_comentario) {
-                    unset($this->comentarios[$index]);
                 }
             }
         }

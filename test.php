@@ -6,7 +6,8 @@ require_once 'comentario.php';
 require_once 'estado.php';
 require_once 'GestorProyecto.php';
 require_once 'tarea.json';
-
+require_once 'GestorTarea.php';
+require_once 'GestorComentario.php';
 
 $gestor = new GestorDeProyecto();
 
@@ -31,10 +32,10 @@ $gestor->agregarEstado($estado2);
 $gestor->agregarEstado($estado3);
 
 // agregamos tareas
-$tarea1 = new Tarea(1, 'Tarea 1', 'Descripción de la Tarea 1', '2024-09-01', '2024-09-10', 1, 1, 1);
+/*$tarea1 = new Tarea(1, 'Tarea 1', 'Descripción de la Tarea 1', '2024-09-01', '2024-09-10', 1, 1, 1);
 $tarea2 = new Tarea(2, 'Tarea 2', 'Descripción de la Tarea 2', '2024-09-05', '2024-09-15', 1, 2, 2);
 $gestor->agregarTarea($tarea1);
-$gestor->agregarTarea($tarea2);
+$gestor->agregarTarea($tarea2);*/
 
 // agregamos comentarios
 $comentario1 = new Comentario(1, 1, 1, 'Este es un comentario sobre la Tarea 1', '2024-09-01');
@@ -52,10 +53,10 @@ foreach ($gestor->proyectos as $proyecto) {
 }
 
 // TAREAS
-echo "\nTareas:\n";
+/*echo "\nTareas:\n";
 foreach ($gestor->tareas as $tarea) {
     echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Descripción: " . $tarea->getDescripcion() . ", Fecha Inicio: " . $tarea->getFechaInicio() . ", Fecha Fin: " . $tarea->getFechaFin() . ", ID Proyecto: " . $tarea->getIdProyecto() . ", ID Usuario: " . $tarea->getIdUsuario() . ", ID Estado: " . $tarea->getIdEstado() . "\n";
-}
+}*/
 // COMENTARIOS
 echo "\nComentarios:\n";
 foreach ($gestor->comentarios as $comentario) {
@@ -110,24 +111,66 @@ echo "---------------------"."\n";
 
 
 //PRUEBAS CON JSON
-//$gestor=new GestorProyecto('tarea.json');
 
-// agregamos tareas
-$tarea1 = new Tarea(1, 'Tarea 1', 'Descripción de la Tarea 1', '2024-09-01', '2024-09-10', 1, 1, 1);
-$tarea2 = new Tarea(2, 'Tarea 2', 'Descripción de la Tarea 2', '2024-09-05', '2024-09-15', 1, 2, 2);
-$tarea3 = new Tarea(3, 'Tarea 3', 'Descripción de la Tarea 3', '2024-09-06', '2024-09-10', 1, 2, 3);
-$tarea4 = new Tarea(4, 'Tarea 4', 'Descripción de la Tarea 4', '2024-09-09', '2024-09-15', 2, 1, 1);
-$gestor->agregarTarea($tarea1);
-$gestor->agregarTarea($tarea2);
-$gestor->agregarTarea($tarea3);
-$gestor->agregarTarea($tarea4);
+$gestorTarea = new GestorTarea();
 
-echo "lista de tareas"."\n";
-foreach ($gestor->tareas as $tarea) {
-    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Descripción: " . $tarea->getDescripcion() . ", Fecha Inicio: " . $tarea->getFechaInicio() . ", Fecha Fin: " . $tarea->getFechaFin() . ", ID Proyecto: " . $tarea->getIdProyecto() . ", ID Usuario: " . $tarea->getIdUsuario() . ", ID Estado: " . $tarea->getIdEstado() . "\n";
+// Agrego una tarea
+$tarea = new Tarea(1, 'Tarea de prueba', 'Descripción de prueba', '2024-10-06', '2024-10-07', 1, 1, 1);
+$gestorTarea->agregarTarea($tarea);
+echo "Tarea agregada y guardada en JSON./n";
+
+// Obtengo una tarea
+$tareaObtenida = $gestorTarea->obtenerTarea(1);
+if ($tareaObtenida) {
+    echo "Tarea obtenida: " . $tareaObtenida->getNombre() . "/n";
+} else {
+    echo "Tarea no encontrada./n";
 }
 
+// Actualizo una tarea
+$gestorTarea->actualizarTarea(1, 'Tarea actualizada', 'Descripción actualizada', '2024-10-08', '2024-10-09', 2, 2, 2);
+echo "Tarea actualizada y guardada en JSON./n";
+
+// Elimino una tarea
+$gestorTarea->eliminarTarea(1);
+echo "Tarea eliminada y JSON actualizado./n";
+
+// Verifico JSON
+$contenidoJson = file_get_contents('tareas.json');
+echo "Contenido del archivo JSON:/n";
+echo "<pre>" . $contenidoJson . "</pre>";"\n";
+echo "------------------------------------------------------------------------------"."\n";
+
+//pruebas con json de comentario
+
+echo ".\n prueba con json de comentario\n";
+$gestorComentario = new GestorComentario();
+
+// Agrego un comentario
+$comentario1 = new Comentario(1, 1, 1, 'Este es un comentario sobre la Tarea 1', '2024-09-01');
+$gestorComentario->agregarComentario($comentario1);
+
+// Muestro comentario
+echo "Muestro comentario. \n";
+foreach ($gestorComentario->comentarios as $comentario) {
+    echo "ID: " . $comentario->getIdComentario() . ", ID Tarea: " . $comentario->getIdTarea() . ", ID Usuario: " . $comentario->getIdUsuario() . ", Contenido: " . $comentario->getContenido() . ", Fecha: " . $comentario->getFecha() . "\n";
+}
+//falta probar actualizar y eliminar
+ 
+
+// Verifico JSON
+
+$contenidoJson = file_get_contents('comentario.json');
+echo "Contenido del archivo JSON:\n";
+echo "<pre>" . $contenidoJson . "</pre>"
+
+
+
+
 ?>
+
+
+
 
 
 
