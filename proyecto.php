@@ -3,6 +3,8 @@ class Proyecto {
         private $id_proyecto;
         private $nombre;
         private $descripcion;
+        private $fechaInicio;
+        private $fechaFin;
 
         public function __construct($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin) {
             $this->id_proyecto = $id_proyecto;
@@ -51,4 +53,15 @@ class Proyecto {
         public function setFechaFin($fechaFin) {
             $this->fechaFin = $fechaFin;
         }
+
+        public function guardarProyectoEnJson($proyecto) {
+            $proyectoArray = [
+                'id' => $this->id_proyecto, // Asegúrate de tener un método getId() en la clase Proyecto
+                'nombre' => $this->nombre,
+                'descripcion' => $this->descripcion,// Asegúrate de tener este método
+                'fechaInicio' => $this->getFechaInicio, // Asegúrate de tener este método
+                'fechaFin' => $this->setFechaFin, // Asegúrate de tener este método
+            ];
     }
+    
+}

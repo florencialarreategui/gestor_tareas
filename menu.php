@@ -39,20 +39,23 @@ class Menu {
                 }
             }
         }
+    }
 
         //----------------------------------------Validacion Usuario-----------------------------------------
 
     public function validarIngresoUsuario ()= {
         echo "Si ya se encuentra registrado ingrese su nombre: ";
-                        $nombreUsuarioIngresado = trim(fgets(STDIN));
-                        echo "Si ya se encuentra registrado ingrese su clave: ";
-                        $claveUsuarioIngresada = trim(fgets(STDIN));
+             $nombreUsuarioIngresado = trim(fgets(STDIN));
+             echo "Si ya se encuentra registrado ingrese su clave: ";
+             $claveUsuarioIngresada = trim(fgets(STDIN));
                         if ($claveUsuario == $claveUsuarioIngresada && $nombreUsuario == $nombreUsuarioIngresado) {
                             $this->menuUsuario(); 
                         } else {
                             echo "Nombre o clave Errónea.\n";
                         }
     }
+
+      //----------------------------------------Menu  Usuario-----------------------------------------
         public function menuUsuario() {
             echo "=== Menú de Usuario ===\n";
             while (true) {
@@ -253,8 +256,34 @@ public function eliminarProyecto() {
         }
 
 
-        //-----------------------------eliminar usurario ---------------------------
+        //-----------------------------eliminar usurario---------------------------
+        public function eliminarUsuario() {
+            echo "Ingrese el nombre del usuario que desea eliminar: ";
+            $nombreUsuarioIngresado = trim(fgets(STDIN));
 
+            echo "Ingrese el nombre del usuario que desea eliminar: ";
+            $claveUsuarioIngreso = trim(fgets(STDIN));
+        
+            // Buscar el índice del proyecto por ID
+            $indiceUsuarios = null;
+            foreach ($this->usuarios as $usuario => $p) {
+                if ($usuario->getClaveUsuario() === $id_proyecto) {
+                    $indiceProyecto = $indice;
+                    break;
+                }
+            }
+        
+            if ($indiceProyecto === null) {
+                echo "Proyecto no encontrado.\n";
+                return;
+            }
+        
+            // Eliminar el proyecto del array
+            unset($this->proyectos[$indiceProyecto]);
+            $this->proyectos = array_values($this->proyectos); // Reindexar el array
+        
+            echo "Proyecto eliminado exitosamente.\n";
+        }
 
 
 
