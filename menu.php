@@ -1,20 +1,17 @@
 <?php
-require_once 'usuario.php';
-require_once 'proyecto.php';
-require_once 'tarea.php';
-require_once 'comentario.php';
-require_once 'estado.php';
+require_once 'GestorUsuario.php';
+require_once 'GestorTarea.php';
+require_once 'GestorComentario.php';
 require_once 'GestorProyecto.php';
+require_once 'GestorEstado.php';
+
 
 
 class Menu {
-        private $usuarios = [];
-        
         public function iniciar() {
-            $clave = 9876; 
             while (true) {
                 echo "===Bienvenido===\n";
-                echo "1. Ingresar\n";
+                echo "1. Ingresar \n";
                 echo "2. Registrarse\n";
                 echo "3. Salir\n";
         
@@ -22,21 +19,20 @@ class Menu {
         
                 switch ($eleccion) {
                     case '1':  
-                        echo "Ingrese la clave: ";
-                        $claveUsuario = trim(fgets(STDIN));
-                        if ($clave == $claveUsuario) {
-                            $this->menuUsuario(); 
+                        if ($this->validarIngresoUsuario()) {
+                            $this->menuPrincipal(); // Llama al menú de usuario si la validación es correcta
                         } else {
-                            echo "Clave Errónea.\n";
+                            echo "Validación fallida. Intente nuevamente.\n";
                         }
                         break;
         
                     case '2':
-                        $this->crearUsuario(); 
+                        $this->crearUsuario(); //validarIngresoUsuario();
                         break;
-                    case '3':
-                        echo "Saliendo del sistema...\n";
-                        exit;
+        
+                        case '3':
+                            echo "Saliendo del sistema...\n";
+                            exit;
         
                     default:
                         echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -44,13 +40,74 @@ class Menu {
                 }
             }
         }
+    //-----------------------------------------Menu principal-----------------------------------------
+    public function menuPrincipal() {
+        echo "=== Menú principal ===\n";
+        while (true) {
+            echo "1. Menu Usuario\n";
+            echo "2. Menu proyecto\n";
+            echo "3. Salir al Menú inicial\n";
 
-        public function menuUsuario() {
-            echo "=== Menú de Usuario ===\n";
+            $eleccion = trim(fgets(STDIN));
+
+            switch ($eleccion) {
+                case '1':
+                    $this->menuUsuario();
+                    break;
+                 case '2':
+                      $this->menuProyecto();
+                    break;
+                 case '3':
+                    return; 
+                default:
+                    echo "Opción no válida. Inténtelo de nuevo.\n";
+                    break;
+            }
+        }
+    }
+
+    
+
+      //----------------------------------------Menu  Usuario-----------------------------------------
+
+      public function menuUsuario() {
+        echo "=== Menú de Usuario ===\n";
+        while (true) {
+            echo "1. Listar Usuarios\n";
+            echo "2. Editar Usuario\n";
+            echo "3. Eliminar Usuario\n";
+            echo "4. Salir al Menú Principal\n";
+
+            $eleccion = trim(fgets(STDIN));
+
+            switch ($eleccion) {
+                case '1':
+                    $this->listarUsuarios();
+                    break;
+                 case '2':
+                      $this->editarUsuario();
+                    break;
+                 case '3':
+                     $this->eliminarUsuario();
+                    break;
+                case '4':
+                    return; 
+                default:
+                    echo "Opción no válida. Inténtelo de nuevo.\n";
+                    break;
+            }
+        }
+    }
+
+    //------------------------------------Menu Proyecto-------------------------------------------
+        public function menuProyecto() {
+            echo "=== Menú de Proyecto ===\n";
             while (true) {
                 echo "1. Crear Proyecto\n";
                 echo "2. Listar Proyectos\n";
-                echo "3. Salir al Menú Principal\n";
+                echo "3. Editar Proyecto\n";
+                echo "4. Eliminar proyecto\n";
+                echo "5. Salir al Menú Principal\n";
 
                 $eleccion = trim(fgets(STDIN));
 
@@ -61,7 +118,13 @@ class Menu {
                     case '2':
                         $this->listarProyectos();
                         break;
-                    case '3':
+                     case '3':
+                          $this->editarProyecto();
+                        break;
+                     case '4':
+                         $this->eliminarProyecto();
+                        break;
+                    case '5':
                         return; 
                     default:
                         echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -70,55 +133,9 @@ class Menu {
             }
         }
 
-        public function crearProyecto() {
-            echo "Ingrese el nombre del proyecto: ";
-            $nombre = trim(fgets(STDIN));
+        
 
-            echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
-            $fechaInicio = trim(fgets(STDIN));
-
-            echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
-            $fechaFin = trim(fgets(STDIN));
-
-            $nuevoProyecto = new Proyecto($nombre, $fechaInicio, $fechaFin);
-            $this->proyectos[] = $nuevoProyecto;
-
-            echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . "\n";
-        }
-
-        public function listarProyectos() {
-            if (empty($this->proyectos)) {
-                echo "No hay proyectos registrados.\n";
-                return;
-            }
-
-            echo "=== Proyectos Registrados ===\n";
-            foreach ($this->proyectos as $proyecto) {
-                echo "Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-            }
-        }
-
-
-        public function crearUsuario() {
-            echo "Ingrese ID de usuario: ";
-            $id_usuario = trim(fgets(STDIN));
-
-            echo "Ingrese nombre: ";
-            $nombre = trim(fgets(STDIN));
-
-            echo "Ingrese email: ";
-            $email = trim(fgets(STDIN));
-
-            // Crear un nuevo usuario
-            $nuevoUsuario = new Usuario($id_usuario, $nombre, $email);
-
-            // Almacenar el nuevo usuario en el array
-            $this->usuarios[] = $nuevoUsuario;
-
-            echo "Usuario creado exitosamente: " . $nuevoUsuario->getNombre() . "\n";
-        }
     }
-
 
     $menu = new Menu();
     $menu->iniciar();

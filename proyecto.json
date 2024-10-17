@@ -1,0 +1,61 @@
+{
+    "proyectos": [
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+        },
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+        },
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+        },
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+        },
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+        },
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+        },
+        {
+            "id_proyecto": 1,
+            "nombre": "",
+            "descripcion": "",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": true
+            }
+        ]
+
+    }

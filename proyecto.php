@@ -3,11 +3,15 @@ class Proyecto {
         private $id_proyecto;
         private $nombre;
         private $descripcion;
+        private $fechaInicio;
+        private $fechaFin;
 
-        public function __construct($id_proyecto, $nombre, $descripcion) {
+        public function __construct($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin) {
             $this->id_proyecto = $id_proyecto;
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
+            $this->fechaInicio = $fechaInicio;
+            $this->fechaFin= $fechaFin;
         }
 
         public function getIdProyecto() {
@@ -22,6 +26,14 @@ class Proyecto {
             return $this->descripcion;
         }
 
+        public function getFechaInicio() {
+            return $this->fechaInicio;
+        }
+
+        public function getFechaFin() {
+            return $this->fechaFin;
+        }
+
         public function setIdProyecto($id_proyecto) {
             $this->id_proyecto = $id_proyecto;
         }
@@ -33,4 +45,24 @@ class Proyecto {
         public function setDescripcion($descripcion) {
             $this->descripcion = $descripcion;
         }
+
+        public function setFechaInicio($fechaInicio) {
+            $this->fechaInicio = $fechaInicio;
+        }
+
+        public function setFechaFin($fechaFin) {
+            $this->fechaFin = $fechaFin;
+        }
+
+        public function guardarProyectoEnJson($proyecto) {
+            $proyectoArray = [
+                'id' => $this->id_proyecto, 
+                'nombre' => $this->nombre,
+                'descripcion' => $this->descripcion,
+                'fechaInicio' => $this->getFechaInicio, 
+                'fechaFin' => $this->setFechaFin, 
+                'fechaFin' => $this->setFechaFin, 
+            ];
     }
+    
+}
