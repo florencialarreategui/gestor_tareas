@@ -10,93 +10,107 @@ class GestorDeProyecto {
         public $proyectos = [];
         public $estados = [];
 
-       
 
-        public function agregarUsuario($usuario) {
-            $this->usuarios[] = $usuario;
+        //-----------------------------crear proyectos----------------------------
+
+        public function crearProyecto() {
+
+            $id_proyecto = generarIdNumerico();
+            
+            echo "Ingrese el nombre del proyecto: ";
+            $nombre = trim(fgets(STDIN));
+
+            echo "Ingrese el descripción del proyecto: ";
+            $descripcion = trim(fgets(STDIN));
+
+            echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
+            $fechaInicio = trim(fgets(STDIN));
+
+            echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+            $fechaFin = trim(fgets(STDIN));
+
+            $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin);
+            $this->proyectos[] = $nuevoProyecto;
+
+            echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() ." ". $id_proyecto . "\n";
         }
-
-        public function obtenerUsuario($id_usuario) {
-            foreach ($this->usuarios as $usuario) {
-                if ($usuario->getId_usuario() == $id_usuario) {
-                    return $usuario;
-                }
+//-----------------------------listar proyectos----------------------------
+        public function listarProyectos() {
+            if (empty($this->proyectos)) {
+                echo "No hay proyectos registrados.\n";
+                return;
             }
-            return null;
-        }
 
-        public function actualizarUsuario($id_usuario, $nombre, $email) {
-            $usuario = $this->obtenerUsuario($id_usuario);
-            if ($usuario) {
-                $usuario->setNombre($nombre);
-                $usuario->setEmail($email);
-            }
-        }
-
-        public function eliminarUsuario($id_usuario) {
-            foreach ($this->usuarios as $index => $usuario) {
-                if ($usuario->getId_usuario () == $id_usuario) {
-                    unset($this->usuarios[$index]);
-                }
-            }
-        }
-
-
-        public function agregarProyecto($proyecto) {
-            $this->proyectos[] = $proyecto;
-        }
-
-        public function obtenerProyecto($id_proyecto) {
+            echo "=== Proyectos Registrados ===\n";
             foreach ($this->proyectos as $proyecto) {
-                if ($proyecto->getIdProyecto() == $id_proyecto) {
-                    return $proyecto;
-                }
+                echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
             }
-            return null;
+
+
         }
 
-        public function actualizarProyecto($id_proyecto, $nombre, $descripcion) {
-            $proyecto = $this->obtenerProyecto($id_proyecto);
-            if ($proyecto) {
+
+//-----------------------------editar proyectos ----------------------------
+public function editarProyecto() {
+    echo "Ingrese el ID del proyecto que desea editar: ";
+    $id_proyecto = trim(fgets(STDIN));
+
+    // Buscar el proyecto por ID
+
+    foreach ($this->proyectos as $proyecto) {
+        if ($proyecto->getIdProyecto() == $id_proyecto) {
+           
+            echo "Ingrese el nuevo nombre del proyecto: ";
+                $nombre = trim(fgets(STDIN));
                 $proyecto->setNombre($nombre);
-                $proyecto->setDescripcion($descripcion);
-            }
-        }
+    
 
-        public function eliminarProyecto($id_proyecto) {
-            foreach ($this->proyectos as $index => $proyecto) {
-                if ($proyecto->getIdProyecto() == $id_proyecto) {
-                    unset($this->proyectos[$index]);
-                }
-            }
-        }
+            echo "Ingrese la nueva descripción del proyecto: ";
+                $descripcion = trim(fgets(STDIN));
+                 $proyecto->setDescripcion($descripcion);
+            
 
-        
-        public function agregarEstado($estado) {
-            $this->estados[] = $estado;
-        }
+             echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+                 $fechaInicio = trim(fgets(STDIN));
+                 $proyecto->setFechaInicio($fechaInicio);
 
-        public function obtenerEstado($id_estado) {
-            foreach ($this->estados as $estado) {
-                if ($estado->getIdEstado() == $id_estado) {
-                    return $estado;
-                }
-            }
-            return null;
-        }
 
-        public function actualizarEstado($id_estado, $nombre) {
-            $estado = $this->obtenerEstado($id_estado);
-            if ($estado) {
-                $estado->setNombre($nombre);
-            }
-        }
+              echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                 $fechaFin = trim(fgets(STDIN));
+                 $proyecto->setFechaFin($fechaFin);
+            break;
+        }       
+            else {
+             echo "Proyecto no encontrado.\n";
+                 };
+        };
+        echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+}
 
-        public function eliminarEstado($id_estado) {
-            foreach ($this->estados as $index => $estado) {
-                if ($estado->getIdEstado() == $id_estado) {
-                    unset($this->estados[$index]);
-                }
-            }
+//-----------------------------eliminar proyectos----------------------------
+public function eliminarProyecto() {
+    echo "Ingrese el ID del proyecto que desea eliminar: ";
+    $id_proyecto = trim(fgets(STDIN));
+
+    // Buscar el índice del proyecto por ID
+    $indiceProyecto = null;
+    foreach ($this->proyectos as $indice => $p) {
+        if ($p->getIdProyecto() === $id_proyecto) {
+            $indiceProyecto = $indice;
+            break;
         }
+    }
+
+    if ($indiceProyecto === null) {
+        echo "Proyecto no encontrado.\n";
+        return;
+    }
+
+    // Eliminar el proyecto del array
+    unset($this->proyectos[$indiceProyecto]);
+    $this->proyectos = array_values($this->proyectos); // Reindexar el array
+
+    echo "Proyecto eliminado exitosamente.\n";
+}
+
     }

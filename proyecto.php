@@ -56,11 +56,12 @@ class Proyecto {
 
         public function guardarProyectoEnJson($proyecto) {
             $proyectoArray = [
-                'id' => $this->id_proyecto, // Asegúrate de tener un método getId() en la clase Proyecto
+                'id' => $this->id_proyecto, 
                 'nombre' => $this->nombre,
-                'descripcion' => $this->descripcion,// Asegúrate de tener este método
-                'fechaInicio' => $this->getFechaInicio, // Asegúrate de tener este método
-                'fechaFin' => $this->setFechaFin, // Asegúrate de tener este método
+                'descripcion' => $this->descripcion,
+                'fechaInicio' => $this->getFechaInicio, 
+                'fechaFin' => $this->setFechaFin, 
+                'fechaFin' => $this->setFechaFin, 
             ];
     }
     
