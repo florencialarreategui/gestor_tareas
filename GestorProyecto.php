@@ -92,7 +92,7 @@ public function eliminarProyecto() {
     // Buscar el índice del proyecto por ID
     $indiceProyecto = null;
     foreach ($this->proyectos as $indice => $p) {
-        if ($p->getIdProyecto() === $id_proyecto) {
+        if ($p->getIdProyecto() == $id_proyecto) {
             $indiceProyecto = $indice;
             break;
         }
@@ -117,7 +117,6 @@ $nuevoProyecto->crearProyecto();
 $nuevoProyecto->crearProyecto();
 $nuevoProyecto->crearProyecto();
 $nuevoProyecto->crearProyecto();
-// $gestor->validarIngresoUsuario ("florencia", 1234);
 $nuevoProyecto->listarProyectos();
 $nuevoProyecto->editarProyecto();
 $nuevoProyecto->listarProyectos();
