@@ -1,22 +1,25 @@
 <?php
 require_once 'usuario.php';
-class GestorUsuario{
+require_once 'funcionesAuxiliares.php';
+// require_once 'menu.php';
 
+class GestorUsuario{
+    private $usuarios = [];
     //----------------------------------------Validacion Usuario-----------------------------------------
 
-    public function validarIngresoUsuario ()= {
+    public function validarIngresoUsuario ($nombreUsuario,$claveUsuario) {
         echo "Si ya se encuentra registrado ingrese su nombre: ";
              $nombreUsuarioIngresado = trim(fgets(STDIN));
              echo "Si ya se encuentra registrado ingrese su clave: ";
              $claveUsuarioIngresada = trim(fgets(STDIN));
                         if ($claveUsuario == $claveUsuarioIngresada && $nombreUsuario == $nombreUsuarioIngresado) {
-                            $this->menuUsuario(); 
+                            echo "ingresaste"; // $this->menuUsuario(); 
                         } else {
-                            echo "Nombre o clave Errónea.\n";
+                            echo "Nombre o clave incorrecta.\n";
                         }
     }
-    
-    //-----------------------------crear usurario ---------------------------
+ 
+    // //-----------------------------crear usurario ---------------------------
     public function crearUsuario() {
         $id_usuario = generarIdNumerico();
 
@@ -31,7 +34,7 @@ class GestorUsuario{
 
       
         // Crear un nuevo usuario
-        $nuevoUsuario = new Usuario($id_usuario, $nombre, $email, $clave);
+        $nuevoUsuario = new usuario($id_usuario, $nombre, $email, $clave);
 
         // Almacenar el nuevo usuario en el array
         $this->usuarios[] = $nuevoUsuario;
@@ -39,7 +42,7 @@ class GestorUsuario{
         echo "Usuario creado exitosamente: " . $nuevoUsuario->getNombre() . " con ID" .  $nuevoUsuario->getId_usuario() . "\n";
     }
 
-    //-----------------------------listar usuarios----------------------------
+    // //-----------------------------listar usuarios----------------------------
     public function listarUsuarios() {
         if (empty($this->usuarios)) {
             echo "No hay usuarios registrados.\n";
@@ -48,11 +51,11 @@ class GestorUsuario{
 
         echo "=== Usuarios Registrados ===\n";
         foreach ($this->usuarios as $usuario) {
-            echo "Id: " . $nuevoUsuario->getId_usuario() . "Nombre: " . $nuevoUsuario->getNombre(). "\n";
+            echo "Id: " . $usuario->getId_usuario() . "\n". " Nombre: " . $usuario->getNombre(). "\n". " Email: " . $usuario->getEmail(). "\n";
         }
     }
 
-    //-----------------------------editar usurario ---------------------------
+    // //-----------------------------editar usurario ---------------------------
     public function editarUsuario() {
         echo "Ingrese el nombre del usuario que desea editar: ";
         $nombre = trim(fgets(STDIN));
@@ -60,54 +63,66 @@ class GestorUsuario{
         echo "Ingrese la clave del usuario que desea editar: ";
         $clave = trim(fgets(STDIN));
         // Buscar el proyecto por ID
-        $usuario = null;
-        foreach ($this->usuarios as $u) {
-            if ($u->getNombre() == $nombre && $u->getClave()==$clave) {
-                echo "Ingrese el nuevo nombre del usuario";
+        
+        foreach ($this->usuarios as $usuario) {
+            if ($usuario->getNombre() == $nombre && $usuario->getClave()==$clave) {
+                echo "Ingrese el nuevo nombre del usuario: ";
                  $nombre = trim(fgets(STDIN));
                  $usuario->setNombre($nombre);
 
                  echo "Ingrese el nuevo email: ";
                  $email = trim(fgets(STDIN));
-                $proyecto->setEmail($email);
+                $usuario->setEmail($email);
 
                 echo "Ingrese una nueva clave: ";
                  $clave = trim(fgets(STDIN));
-                $clave->setClave($clave);
+                $usuario->setClave($clave);
             }
         }
     
-        echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+        echo "Usuario editado exitosamente: " . $usuario->getNombre() . "\n";
     }
 
 
-    //-----------------------------eliminar usurario---------------------------
+    // //-----------------------------eliminar usurario---------------------------
     public function eliminarUsuario() {
         echo "Ingrese el nombre del usuario que desea eliminar: ";
-        $nombreUsuarioIngresado = trim(fgets(STDIN));
-
-        echo "Ingrese el nombre del usuario que desea eliminar: ";
-        $claveUsuarioIngreso = trim(fgets(STDIN));
+        $nombreIngresado = trim(fgets(STDIN));
     
-        // Buscar el índice del proyecto por ID
+        echo "Ingrese la clave del usuario que desea eliminar: ";
+        $claveIngresada = trim(fgets(STDIN));
+    
+        // Buscar el índice del usuario por nombre y clave
         $indiceUsuarios = null;
-        foreach ($this->usuarios as $usuario => $p) {
-            if ($usuario->getClaveUsuario() === $id_proyecto) {
-                $indiceProyecto = $indice;
+        foreach ($this->usuarios as $key => $usuario) {
+            if ($usuario->getNombre() === $nombreIngresado && $usuario->getClave() === $claveIngresada) {
+                $indiceUsuarios = $key;
                 break;
             }
         }
     
-        if ($indiceProyecto === null) {
-            echo "Proyecto no encontrado.\n";
+        if ($indiceUsuarios === null) {
+            echo "Usuario no encontrado.\n";
             return;
         }
     
-        // Eliminar el proyecto del array
-        unset($this->proyectos[$indiceProyecto]);
-        $this->proyectos = array_values($this->proyectos); // Reindexar el array
+        // Eliminar el usuario del array
+        unset($this->usuarios[$indiceUsuarios]);
+        $this->usuarios = array_values($this->usuarios); // Reindexar el array
     
-        echo "Proyecto eliminado exitosamente.\n";
+        echo "Usuario eliminado exitosamente.\n";
     }
+    
+
 
 }
+$gestor = new GestorUsuario ();
+$gestor->crearUsuario();
+$gestor->crearUsuario();
+$gestor->crearUsuario();
+$gestor->crearUsuario();
+// $gestor->validarIngresoUsuario ("florencia", 1234);
+$gestor->listarUsuarios();
+$gestor->editarUsuario();
+$gestor->eliminarUsuario();
+$gestor->listarUsuarios();

@@ -1,8 +1,7 @@
 <?php
-require_once 'usuario.php';
-require_once 'proyecto.php';
-require_once 'tarea.php';
-require_once 'comentario.php';
+require_once 'GestorUsuario.php';
+require_once 'GestorTarea.php';
+require_once 'GestorComentario.php';
 require_once 'estado.php';
 require_once 'GestorProyecto.php';
 require_once 'funcionesAuxiliares.php';
@@ -23,7 +22,7 @@ class Menu {
         
                 switch ($eleccion) {
                     case '1':  
-                        $this->validarIngresoUsuario();
+                         $this->menuUsuario(); //validarIngresoUsuario();
                         break;
         
                     case '2':
@@ -39,7 +38,7 @@ class Menu {
                 }
             }
         }
-    }
+    
 
     
 
