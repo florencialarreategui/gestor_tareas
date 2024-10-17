@@ -1,16 +1,13 @@
 <?php
-require_once 'usuario.php';
+require_once 'funcionesAuxiliares.php';
 require_once 'proyecto.php';
 require_once 'tarea.php';
 require_once 'comentario.php';
 require_once 'estado.php';
 
-class GestorDeProyecto {
-        public $usuarios = [];
-        public $proyectos = [];
-        public $estados = [];
-
-
+class GestorProyecto {
+      public $proyectos = [];
+       
         //-----------------------------crear proyectos----------------------------
 
         public function crearProyecto() {
@@ -111,6 +108,18 @@ public function eliminarProyecto() {
     $this->proyectos = array_values($this->proyectos); // Reindexar el array
 
     echo "Proyecto eliminado exitosamente.\n";
+    }
+
 }
 
-    }
+$nuevoProyecto = new GestorProyecto ();
+$nuevoProyecto->crearProyecto();
+$nuevoProyecto->crearProyecto();
+$nuevoProyecto->crearProyecto();
+$nuevoProyecto->crearProyecto();
+// $gestor->validarIngresoUsuario ("florencia", 1234);
+$nuevoProyecto->listarProyectos();
+$nuevoProyecto->editarProyecto();
+$nuevoProyecto->listarProyectos();
+$nuevoProyecto->eliminarProyecto();
+$nuevoProyecto->listarProyectos();
