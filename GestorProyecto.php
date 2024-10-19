@@ -110,6 +110,14 @@ public function eliminarProyecto() {
     echo "Proyecto eliminado exitosamente.\n";
     }
 
+
+
+
+
+
+
+    
+
 }
 
 $nuevoProyecto = new GestorProyecto ();
