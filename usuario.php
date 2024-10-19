@@ -3,6 +3,7 @@ class Usuario{
         private $id_usuario;
         private $nombre;
         private $email;
+        private $clave;
 
 
         public function __construct ($id_usuario, $nombre, $email, $clave){
@@ -36,5 +37,25 @@ class Usuario{
         public function setClave ($clave){
             $this-> clave =$clave;
         }
+        public function toArray() {
+            return [
+                'id_usuario' => $this->id_usuario,
+                'nombre' => $this->nombre,
+                'email' => $this->email,
+                'clave' => $this->clave,
+                
+            ];
+        }
+        public static function fromArray($array) {
+            return new self(
+                $array['id_usuario'],
+                $array['nombre'],
+                $array['email'],
+                $array['clave'],
+                
+            );
+        }
+    
+
 
         }   
