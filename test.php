@@ -159,7 +159,8 @@ foreach ($gestorComentario->comentarios as $comentario) {
  
 
 // Verifico JSON
-
+// tomo el json del proyecto que adentro tiene la tarea y decodifico el json y lo pongo en la estructura en memoria 
+//
 $contenidoJson = file_get_contents('comentario.json');
 echo "Contenido del archivo JSON:\n";
 echo "<pre>" . $contenidoJson . "</pre>"

@@ -9,6 +9,8 @@ require_once 'GestorEstado.php';
 
 class Menu {
         public function iniciar() {
+//llamo a un metodo que cargo todos los datos de usuarios
+
             while (true) {
                 echo "===Bienvenido===\n";
                 echo "1. Ingresar \n";
@@ -42,6 +44,7 @@ class Menu {
         }
     //-----------------------------------------Menu principal-----------------------------------------
     public function menuPrincipal() {
+        //
         echo "=== Menú principal ===\n";
         while (true) {
             echo "1. Menu Usuario\n";
@@ -98,15 +101,20 @@ class Menu {
             }
         }
     }
-
+// previo a ingresar al menu proyectos deberiamos cargar los datos 
     //------------------------------------Menu Proyecto-------------------------------------------
         public function menuProyecto() {
             echo "=== Menú de Proyecto ===\n";
             while (true) {
                 echo "1. Crear Proyecto\n";
                 echo "2. Listar Proyectos\n";
+                // una vez que listo pregunto que proyecto quiero abrir y lo abro por id y ahi ejecuto las funciones de tareas 
                 echo "3. Editar Proyecto\n";
                 echo "4. Eliminar proyecto\n";
+                //opcion abrir proyecto, cuando se abre ese proyecto queda en un estado activo con una variable global, puede ser una especie de singleton 
+                //creo una opcion para agregar una tarea a un proyecto podemos hacer un menu tarea y me pregunta en que proyecto quiero agregar esa tarea 
+                // arreglo de proyecto que almacena tarea 
+                //un arreglo ue se compone de objetos tareas
                 echo "5. Salir al Menú Principal\n";
 
                 $eleccion = trim(fgets(STDIN));
@@ -136,6 +144,8 @@ class Menu {
         
 
     }
+    // funcion cargar datos de usuarios primero 
 
     $menu = new Menu();
     $menu->iniciar();
+    

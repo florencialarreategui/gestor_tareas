@@ -5,6 +5,7 @@ require_once 'tarea.php';
 require_once 'comentario.php';
 require_once 'estado.php';
 require_once 'tarea.json';
+require_once 'funcionesAuxiliares.php';
 
 class GestorTarea{
         public $tareas = [];
@@ -15,9 +16,32 @@ class GestorTarea{
             $this->cargarDesdeJSON();
         }
 
-        public function agregarTarea($tarea) {
-            $this->tareas[] = $tarea;
-            $this->guardarEnJSON();
+        public function agregarTarea() {
+            $id_tarea = generarIdNumerico();
+            echo "Ingrese el nombre de la tarea: ";
+            $nombre = trim(fgets(STDIN));
+        
+            echo "Ingrese la descripción de la tarea: ";
+            $descripcion = trim(fgets(STDIN));
+
+            echo "Ingrese fecha de inicio de la tarea: ";
+            $fecha_inicio = trim(fgets(STDIN));
+
+            echo "Ingrese fecha de fin de la tarea: ";
+            $fecha_fin = trim(fgets(STDIN));
+
+            $id_proyecto= 1; //getIdProyecto()
+            $id_usuario= 1; //getIdUsuario()
+            $id_estado =1; //getIdProyecto()
+        
+            // Crear un nuevo objeto de tarea
+            $nuevaTarea = new tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado);
+         
+            // Agregar la tarea al array
+            $this->tareas[] = $nuevaTarea;
+            $this->guardarEnJSON(); // Guardar en JSON
+        
+            echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() ." ". $id_tarea . "\n";
         }
 
         public function obtenerTarea($id_tarea) {
@@ -95,3 +119,7 @@ class GestorTarea{
 
        
         }
+
+        $tareaAgregada = new GestorTarea();
+        $tareaAgregada->agregarTarea();
+

@@ -6,7 +6,7 @@ require_once 'comentario.php';
 require_once 'estado.php';
 require_once 'GestorProyecto.php';
 require_once 'funcionesAuxiliares.php';
-
+// id consecutivo 
 function generarIdNumerico() {
     // Generar un número aleatorio entre 10000 y 99999
     return rand(10000, 99999);

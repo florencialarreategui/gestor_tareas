@@ -1,0 +1,34 @@
+{
+    "tarea": [
+        {
+            "id_tarea": 23273,
+            "nombre": "lalalalala",
+            "descripcion": "hacer cosas",
+            "fecha_inicio": "1234",
+            "fecha_fin": "4321",
+            "id_proyecto": 1,
+            "id_usuario": 1,
+            "id_estado": 1
+        },
+        {
+            "id_tarea": 46480,
+            "nombre": "lalalaalal",
+            "descripcion": "lallala",
+            "fecha_inicio": "1234",
+            "fecha_fin": "4321",
+            "id_proyecto": 1,
+            "id_usuario": 1,
+            "id_estado": 1
+        },
+        {
+            "id_tarea": 60447,
+            "nombre": "dsdad",
+            "descripcion": "dsadad",
+            "fecha_inicio": "dsad",
+            "fecha_fin": "dasd",
+            "id_proyecto": 1,
+            "id_usuario": 1,
+            "id_estado": 1
+        }
+    ]
+}

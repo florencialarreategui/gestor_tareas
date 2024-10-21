@@ -25,7 +25,11 @@ class GestorProyecto {
 
             echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
             $fechaFin = trim(fgets(STDIN));
-
+            
+            // echo "Agregue una tarea a su proyecto: ";
+            // this->agregarTarea();
+            //tengo que hacer alguna funcion que me permita poder crear una tarea 
+            //y me adjudique automaticamente el id del proyecto y del usuario que la creo
             $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin);
             $this->proyectos[] = $nuevoProyecto;
 
@@ -46,7 +50,7 @@ class GestorProyecto {
 
         }
 
-
+//preguntar que campo quiero editar
 //-----------------------------editar proyectos ----------------------------
 public function editarProyecto() {
     echo "Ingrese el ID del proyecto que desea editar: ";

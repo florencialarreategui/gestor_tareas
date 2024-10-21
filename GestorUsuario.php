@@ -40,6 +40,8 @@ class GestorUsuario{
         $this->usuarios[] = $nuevoUsuario;
 
         echo "Usuario creado exitosamente: " . $nuevoUsuario->getNombre() . " con ID" .  $nuevoUsuario->getId_usuario() . "\n";
+    // aca tengo que tener alguna rutina que lo que haga es volcar los datos en el json 
+    // appen si solo quieo agregar al final del json y no reemplazar todo cuando cargo un usuario nuevo 
     }
 
     // //-----------------------------listar usuarios----------------------------
@@ -111,6 +113,9 @@ class GestorUsuario{
         $this->usuarios = array_values($this->usuarios); // Reindexar el array
     
         echo "Usuario eliminado exitosamente.\n";
+
+        // busco por id y vuelvo a guardar en eljsn 
+        // el json mantiene la  estructura
     }
     
 
