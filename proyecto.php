@@ -54,15 +54,28 @@ class Proyecto {
             $this->fechaFin = $fechaFin;
         }
 
-        public function guardarProyectoEnJson($proyecto) {
-            $proyectoArray = [
+        public function toArray() {
+            return [
                 'id' => $this->id_proyecto, 
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
                 'fechaInicio' => $this->getFechaInicio, 
                 'fechaFin' => $this->setFechaFin, 
-                'fechaFin' => $this->setFechaFin, 
+                
             ];
-    }
+        }
+
+        public static function fromArray($array) {
+            return new self(
+                $array['id_proyecto'],
+                $array['nombre'],
+                $array['descripcion'],
+                $array['fecha_inicio'],
+                $array['fecha_fin'],
+            );
+        }
+    
+
+    
     
 }
