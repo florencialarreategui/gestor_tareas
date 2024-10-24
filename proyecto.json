@@ -2,60 +2,37 @@
     "proyectos": [
         {
             "id_proyecto": 1,
-            "nombre": "",
+            "nombre": "proyex",
+            "descripcion": "este es un proyecto de prueba",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado": "activo"
+        },
+        {
+            "id_proyecto": 2,
+            "nombre": "proyecto b",
+            "descripcion": "este es el proyectob",
+            "fecha_inicio": "2024-09-01",
+            "fecha_fin": "2024-09-10",
+            "estado":"terminado"
+        },
+        {
+            "id_proyecto": 3,
+            "nombre": "pepe",
             "descripcion": "",
             "fecha_inicio": "2024-09-01",
             "fecha_fin": "2024-09-10",
             "estado": true
         },
         {
-            "id_proyecto": 1,
-            "nombre": "",
-            "descripcion": "",
+            "id_proyecto": 4,
+            "nombre": "proyecto indefinido",
+            "descripcion": "pppppp",
             "fecha_inicio": "2024-09-01",
             "fecha_fin": "2024-09-10",
-            "estado": true
-        },
-        {
-            "id_proyecto": 1,
-            "nombre": "",
-            "descripcion": "",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": true
-        },
-        {
-            "id_proyecto": 1,
-            "nombre": "",
-            "descripcion": "",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": true
-        },
-        {
-            "id_proyecto": 1,
-            "nombre": "",
-            "descripcion": "",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": true
-        },
-        {
-            "id_proyecto": 1,
-            "nombre": "",
-            "descripcion": "",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": true
-        },
-        {
-            "id_proyecto": 1,
-            "nombre": "",
-            "descripcion": "",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": true
-            }
+            "estado": "en proceso"
+        }
+       
         ]
 
     }

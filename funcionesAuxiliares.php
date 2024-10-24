@@ -81,7 +81,7 @@ function generarIdNumerico() {
 //` para acceder a esos valores.
 
 
-require_once 'GestorUsuario.php';
+/*require_once 'GestorUsuario.php';
 require_once 'Usuario.php';
 
 // Asegúrate de que la clase `GestorUsuario` y `Usuario` estén definidas correctamente.
@@ -111,6 +111,39 @@ $gestor->listarUsuarios();
 // Carga los usuarios desde JSON y verifica que se guardaron
 echo "=== Prueba de Carga desde JSON ===\n";
 $gestor->cargarDesdeJSON();
-$gestor->listarUsuarios();
+$gestor->listarUsuarios(); */
+
+
+require_once 'GestorProyecto.php';
+require_once 'Proyecto.php';
+
+function generarIdNumerico() {
+    return rand(1, 1000);
+}
+
+$gestor = new GestorProyecto();
+
+// Prueba la creación de proyecto
+echo "=== Prueba de Creación de Proyecto ===\n";
+$gestor->crearProyecto();
+$gestor->listarProyectos();
+
+// Prueba la edición de proyecto
+echo "=== Prueba de Edición de Proyecto ===\n";
+$gestor->editarProyecto();
+$gestor->listarProyectos();
+
+// Prueba la eliminación de proyecto
+echo "=== Prueba de Eliminación de Proyecto ===\n";
+$gestor->eliminarProyecto();
+$gestor->listarProyectos();
+
+// Carga los proyectos desde JSON y verifica que se guardaron
+echo "=== Prueba de Carga desde JSON ===\n";
+$gestor->cargarDesdeJSON();
+$gestor->listarProyectos();
 
 ?>
+
+
+
