@@ -15,7 +15,9 @@ class GestorUsuario{
 
 
     //----------------------------------------Validacion Usuario-----------------------------------------
-
+//necesita un foreach para recorrer usuarios y comparar nombre y contraseña 
+//sacar parametros 
+//hacer un foreach que compare dentro del array de usuarios getnombre con nombre ingresado y get clave con clave ingresada
     public function validarIngresoUsuario ($nombreUsuario,$claveUsuario) {
         echo "Si ya se encuentra registrado ingrese su nombre: ";
              $nombreUsuarioIngresado = trim(fgets(STDIN));

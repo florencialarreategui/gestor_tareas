@@ -8,7 +8,14 @@ require_once 'GestorEstado.php';
 
 
 class Menu {
+protected $gestorUsuario;
+ public function __construct(){
+    $this->gestorUsuario=new GestorUsuario();
+    $this->gestorUsuario->listarUsuarios();
+ }
+
         public function iniciar() {
+
             while (true) {
                 echo "===Bienvenido===\n";
                 echo "1. Ingresar \n";
