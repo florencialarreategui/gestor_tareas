@@ -1,0 +1,24 @@
+{
+    "estado": [
+        {
+            "estado": null,
+            "nombre": "Estado 1"
+        },
+        {
+            "estado": true,
+            "nombre": "Terminado"
+        },
+        {
+            "estado": true,
+            "nombre": "Activo"
+        },
+        {
+            "estado": true,
+            "nombre": "Activo"
+        },
+        {
+            "estado": true,
+            "nombre": "Activo"
+        }
+    ]
+}

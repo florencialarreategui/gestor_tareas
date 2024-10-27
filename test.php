@@ -165,7 +165,7 @@ echo "Contenido del archivo JSON:\n";
 echo "<pre>" . $contenidoJson . "</pre>" */
 
 
-function generarIdNumerico1() {
+/*function generarIdNumerico1() {
     return rand(1, 1000);
 }
 
@@ -207,16 +207,44 @@ echo "=== Prueba de Carga desde JSON ===\n";
 $gestor->cargarDesdeJSON();
 print_r($gestor->comentarios);
 
+?>*/
+
+
+
+
+require_once 'GestorEstado.php';
+require_once 'Estado.php';
+
+function generarIdCadena() {
+    return (rand(0, 1) == 1) ? "true" : "false";
+}
+
+// Inicializa el gestor
+$gestor = new GestorEstado();
+
+// Prueba la creación de estado
+echo "=== Prueba de Creación de Estado ===\n";
+$id_estado1 = generarIdCadena();
+$estado1 = new Estado($id_estado1, "Estado 1");
+$gestor->agregarEstado($estado1);
+print_r($gestor->obtenerEstado($id_estado1));
+
+// Prueba la actualización de estado
+echo "=== Prueba de Actualización de Estado ===\n";
+$gestor->actualizarEstado($id_estado1, "Estado 1 Actualizado");
+print_r($gestor->obtenerEstado($id_estado1));
+
+// Prueba la eliminación de estado
+echo "=== Prueba de Eliminación de Estado ===\n";
+$gestor->eliminarEstado($id_estado1);
+print_r($gestor->obtenerEstado($id_estado1));
+
+// Prueba la carga desde JSON
+echo "=== Prueba de Carga desde JSON ===\n";
+$gestor->cargarDesdeJSON();
+print_r($gestor->estados);
+
 ?>
-
-
-
-
-
-
-
-
-
 
 
 
