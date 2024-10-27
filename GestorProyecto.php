@@ -36,6 +36,8 @@ class GestorProyecto {
                 $this->proyectos[] = $nuevoProyecto;
 
                 echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() ." ". $id_proyecto . "\n";
+
+                $this->guardarEnJSON();
             }
     //-----------------------------listar proyectos----------------------------
             public function listarProyectos() {
@@ -48,6 +50,7 @@ class GestorProyecto {
                 foreach ($this->proyectos as $proyecto) {
                     echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
                 }
+                $this->guardarEnJSON();
 
 
             }
@@ -88,6 +91,7 @@ class GestorProyecto {
                 };
         }
             echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+            $this->guardarEnJSON();
     }
 
     //-----------------------------eliminar proyectos----------------------------
@@ -114,6 +118,7 @@ class GestorProyecto {
         $this->proyectos = array_values($this->proyectos); // Reindexar el array
 
         echo "Proyecto eliminado exitosamente.\n";
+        $this->guardarEnJSON();
     }    
         
 
