@@ -1,15 +1,15 @@
 <?php
-require_once 'usuario.php';
-require_once 'proyecto.php';
-require_once 'tarea.php';
+//require_once 'usuario.php';
+//require_once 'proyecto.php';
+//require_once 'tarea.php';
 require_once 'comentario.php';
-require_once 'estado.php';
-require_once 'GestorProyecto.php';
-require_once 'tarea.json';
-require_once 'GestorTarea.php';
+//require_once 'estado.php';
+//require_once 'GestorProyecto.php';
+//require_once 'tarea.json';
+//require_once 'GestorTarea.php';
 require_once 'GestorComentario.php';
 
-$gestor = new GestorDeProyecto();
+/*$gestor = new GestorDeProyecto();
 
 // usuarios
 $usuario1 = new Usuario(1, 'Juan Perez', 'juan@gmail.com');
@@ -38,7 +38,7 @@ $gestor->agregarTarea($tarea1);
 $gestor->agregarTarea($tarea2);*/
 
 // agregamos comentarios
-$comentario1 = new Comentario(1, 1, 1, 'Este es un comentario sobre la Tarea 1', '2024-09-01');
+/*$comentario1 = new Comentario(1, 1, 1, 'Este es un comentario sobre la Tarea 1', '2024-09-01');
 $gestor->agregarComentario($comentario1);
 
 //Usuarios
@@ -58,7 +58,7 @@ foreach ($gestor->tareas as $tarea) {
     echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Descripción: " . $tarea->getDescripcion() . ", Fecha Inicio: " . $tarea->getFechaInicio() . ", Fecha Fin: " . $tarea->getFechaFin() . ", ID Proyecto: " . $tarea->getIdProyecto() . ", ID Usuario: " . $tarea->getIdUsuario() . ", ID Estado: " . $tarea->getIdEstado() . "\n";
 }*/
 // COMENTARIOS
-echo "\nComentarios:\n";
+/*echo "\nComentarios:\n";
 foreach ($gestor->comentarios as $comentario) {
     echo "ID: " . $comentario->getIdComentario() . ", ID Tarea: " . $comentario->getIdTarea() . ", ID Usuario: " . $comentario->getIdUsuario() . ", Contenido: " . $comentario->getContenido() . ", Fecha: " . $comentario->getFecha() . "\n";
 }
@@ -163,12 +163,57 @@ foreach ($gestorComentario->comentarios as $comentario) {
 //
 $contenidoJson = file_get_contents('comentario.json');
 echo "Contenido del archivo JSON:\n";
-echo "<pre>" . $contenidoJson . "</pre>"
+echo "<pre>" . $contenidoJson . "</pre>" */
+
+
+function generarIdNumerico1() {
+    return rand(1, 1000);
+}
+
+// Inicializa el gestor
+$gestor = new GestorComentario();
+
+// Prueba la creación de comentario
+echo "=== Prueba de Creación de Comentario ===\n";
+$id_comentario = generarIdNumerico1();
+$comentario = new Comentario($id_comentario, 1, 1, "Este es un comentario de prueba", "2023-10-19");
+$comentario1 = new Comentario($id_comentario, 2, 1, "Este es un texto", "2023-10-19");
+$comentario2 = new Comentario($id_comentario, 3, 1, "probando", "2023-10-19");
+$gestor->agregarComentario($comentario);
+$gestor->agregarComentario($comentario1);
+$gestor->agregarComentario($comentario2);
+
+
+// Listar comentarios después de la creación
+echo "=== Comentarios después de Creación ===\n";
+print_r($gestor->comentarios);
 
 
 
+
+print_r($gestor->obtenerComentario($id_comentario));
+
+// Prueba la actualización de comentario
+echo "=== Prueba de Actualización de Comentario ===\n";
+$gestor->actualizarComentario($id_comentario, "Comentario actualizado", "2023-10-20");
+print_r($gestor->obtenerComentario($id_comentario));
+
+// Prueba la eliminación de comentario
+echo "=== Prueba de Eliminación de Comentario ===\n";
+$gestor->eliminarComentario($id_comentario);
+print_r($gestor->obtenerComentario($id_comentario));
+
+// Carga los comentarios desde JSON y verifica que se guardaron
+echo "=== Prueba de Carga desde JSON ===\n";
+$gestor->cargarDesdeJSON();
+print_r($gestor->comentarios);
 
 ?>
+
+
+
+
+
 
 
 

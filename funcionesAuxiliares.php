@@ -1,5 +1,5 @@
 <?php
-require_once 'usuario.php';
+/*require_once 'usuario.php';
 require_once 'proyecto.php';
 require_once 'tarea.php';
 require_once 'comentario.php';
@@ -9,8 +9,8 @@ require_once 'funcionesAuxiliares.php';
 // id consecutivo 
 function generarIdNumerico() {
     // Generar un número aleatorio entre 10000 y 99999
-    return rand(10000, 99999);
-}
+    return rand(10000, 99999); 
+}*/
 
 // Uso de la función
 // $id = generarIdNumerico();
@@ -77,4 +77,40 @@ function generarIdNumerico() {
 // // 3. **Agregar el nuevo proyecto**: Se añade el nuevo proyecto al arreglo de proyectos existentes.
 // // 4. **Guardar en el archivo**: Se convierte el arreglo completo a JSON y se guarda en el archivo.
 
-// // Asegúrate de tener los métodos `getId()`, `getDescripcion()`, `getFechaInicio()`, y `getFechaFin()` en tu clase `Proyecto` para acceder a esos valores.
+// // Asegúrate de tener los métodos `getId()`, `getDescripcion()`, `getFechaInicio()`, y `getFechaFin()` en tu clase `Proyecto
+//` para acceder a esos valores.
+
+
+require_once 'GestorUsuario.php';
+require_once 'Usuario.php';
+
+// Asegúrate de que la clase `GestorUsuario` y `Usuario` estén definidas correctamente.
+
+function generarIdNumerico() {
+    return rand(1, 1000);
+}
+
+// Inicializa el gestor
+$gestor = new GestorUsuario();
+
+// Prueba la creación de usuario
+echo "=== Prueba de Creación de Usuario ===\n";
+$gestor->crearUsuario();
+$gestor->listarUsuarios();
+
+// Prueba la edición de usuario
+echo "=== Prueba de Edición de Usuario ===\n";
+$gestor->editarUsuario();
+$gestor->listarUsuarios();
+
+// Prueba la eliminación de usuario
+echo "=== Prueba de Eliminación de Usuario ===\n";
+$gestor->eliminarUsuario();
+$gestor->listarUsuarios();
+
+// Carga los usuarios desde JSON y verifica que se guardaron
+echo "=== Prueba de Carga desde JSON ===\n";
+$gestor->cargarDesdeJSON();
+$gestor->listarUsuarios();
+
+?>

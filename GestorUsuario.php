@@ -5,6 +5,15 @@ require_once 'funcionesAuxiliares.php';
 
 class GestorUsuario{
     private $usuarios = [];
+    
+        private $archivoJson = 'usuario.json';
+
+        public function __construct()
+        {
+            $this->cargarDesdeJSON();
+        }
+
+
     //----------------------------------------Validacion Usuario-----------------------------------------
 
     public function validarIngresoUsuario ($nombreUsuario,$claveUsuario) {
@@ -40,8 +49,12 @@ class GestorUsuario{
         $this->usuarios[] = $nuevoUsuario;
 
         echo "Usuario creado exitosamente: " . $nuevoUsuario->getNombre() . " con ID" .  $nuevoUsuario->getId_usuario() . "\n";
+
     // aca tengo que tener alguna rutina que lo que haga es volcar los datos en el json 
     // appen si solo quieo agregar al final del json y no reemplazar todo cuando cargo un usuario nuevo 
+        
+        $this->guardarEnJSON();
+
     }
 
     // //-----------------------------listar usuarios----------------------------
@@ -83,6 +96,7 @@ class GestorUsuario{
         }
     
         echo "Usuario editado exitosamente: " . $usuario->getNombre() . "\n";
+        $this->guardarEnJSON();
     }
 
 
@@ -114,19 +128,56 @@ class GestorUsuario{
     
         echo "Usuario eliminado exitosamente.\n";
 
+
         // busco por id y vuelvo a guardar en eljsn 
         // el json mantiene la  estructura
+
+        $this->guardarEnJSON();
+
     }
+    public function guardarEnJSON() {
+        $usuarios = [];
+
+        foreach ($this->usuarios as $usuario) {
+            $usuarios[] = $usuario->ToArray();
+        }
+
+        $jsonusuario = json_encode(['usuario' => $usuarios], JSON_PRETTY_PRINT);
+        file_put_contents($this->archivoJson, $jsonusuario);
+    }
+
+    public function cargarDesdeJSON() {
+        if (file_exists($this->archivoJson)) {
+            $jsonusuario = file_get_contents($this->archivoJson);
+            $usuarios = json_decode($jsonusuario, true)['usuario'];
+            $this->usuarios = [];
+
+        
+            foreach ($usuarios as $usuarioData) {
+                $usuario = new usuario(
+                    $usuarioData['id_usuario'],
+                    $usuarioData['nombre'],
+                    $usuarioData['email'],
+                    $usuarioData['clave'],
+                    
+                );
+                $this->usuarios[] = $usuario;
+            }
+        }   
+
+    }
+
     
 
 
 }
+
+
 $gestor = new GestorUsuario ();
 $gestor->crearUsuario();
 $gestor->crearUsuario();
 $gestor->crearUsuario();
 $gestor->crearUsuario();
-// $gestor->validarIngresoUsuario ("florencia", 1234);
 $gestor->listarUsuarios();
 $gestor->editarUsuario();
 $gestor->eliminarUsuario();
