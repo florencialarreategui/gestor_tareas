@@ -9,12 +9,13 @@ require_once 'GestorEstado.php';
 
 class Menu {
 protected $gestorUsuario;
- public function __construct($gestorUsuario,$gestorProyecto){
-    //, $gestorTarea, $gestorComentario, $gestorEstado
+ public function __construct($gestorUsuario,$gestorProyecto,$gestorTarea){
+    //,, $gestorComentario, $gestorEstado
     // $this->gestorUsuario=new GestorUsuario();
     // $this->gestorUsuario->listarUsuarios();
     $this->gestorUsuario= $gestorUsuario;
     $this->gestorProyecto=$gestorProyecto;
+    $this->gestorTarea = $gestorTarea;
 
  }
 
@@ -24,7 +25,7 @@ protected $gestorUsuario;
                 echo "===Bienvenido===\n";
                 echo "1. Ingresar \n";
                 echo "2. Registrarse\n";
-                echo "3. Salir\n";
+                echo "0. Salir\n";
         
                 $eleccion = trim(fgets(STDIN));
         
@@ -41,7 +42,7 @@ protected $gestorUsuario;
                         $this->crearUsuario(); //validarIngresoUsuario();
                         break;
         
-                        case '3':
+                        case '0':
                             echo "Saliendo del sistema...\n";
                             exit;
         
@@ -57,7 +58,8 @@ protected $gestorUsuario;
         while (true) {
             echo "1. Menu Usuario\n";
             echo "2. Menu proyecto\n";
-            echo "3. Salir al Menú inicial\n";
+            echo "3. Menu Tarea\n";
+            echo "0. Salir al Menú inicial\n";
 
             $eleccion = trim(fgets(STDIN));
 
@@ -68,7 +70,10 @@ protected $gestorUsuario;
                  case '2':
                       $this->menuProyecto();
                     break;
-                 case '3':
+                    case '3':
+                        $this->menuTarea();
+                      break;
+                 case '0':
                     return; 
                 default:
                     echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -87,7 +92,7 @@ protected $gestorUsuario;
             echo "1. Listar Usuarios\n";
             echo "2. Editar Usuario\n";
             echo "3. Eliminar Usuario\n";
-            echo "4. Salir al Menú Principal\n";
+            echo "0. Salir al Menú Principal\n";
 
             $eleccion = trim(fgets(STDIN));
 
@@ -101,7 +106,7 @@ protected $gestorUsuario;
                  case '3':
                     $this->gestorUsuario->eliminarUsuario();
                     break;
-                case '4':
+                case '0':
                     return; 
                 default:
                     echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -118,7 +123,7 @@ protected $gestorUsuario;
                 echo "2. Listar Proyectos\n";
                 echo "3. Editar Proyecto\n";
                 echo "4. Eliminar proyecto\n";
-                echo "5. Salir al Menú Principal\n";
+                echo "0. Salir al Menú Principal\n";
 
                 $eleccion = trim(fgets(STDIN));
 
@@ -135,7 +140,7 @@ protected $gestorUsuario;
                      case '4':
                         $this->gestorProyecto->eliminarProyecto();
                         break;
-                    case '5':
+                    case '0':
                         return; 
                     default:
                         echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -144,10 +149,44 @@ protected $gestorUsuario;
             }
         }
 
-        
+         //------------------------------------Menu Tarea-------------------------------------------
+         public function menuTarea() {
+            echo "=== Menú de Tareas ===\n";
+            while (true) {
+                echo "1. Agregar tarea a un Proyecto\n";
+                echo "2. Listar Tareas\n";
+                echo "3. Editar Tarea\n";
+                echo "4. Eliminar Tarea\n";
+                echo "0. Salir al Menú Principal\n";
+
+                $eleccion = trim(fgets(STDIN));
+
+                switch ($eleccion) {
+                    case '1':
+                        $this->gestorTarea->agregarTarea();
+                        break;
+                    case '2':
+                        $this->gestorTarea->listarTareas();
+                        break;
+                     case '3':
+                        $this->gestorTareas->editarTarea();
+                        break;
+                     case '4':
+                        $this->gestorTarea->eliminarTarea();
+                        break;
+                    case '0':
+                        return; 
+                    default:
+                        echo "Opción no válida. Inténtelo de nuevo.\n";
+                        break;
+                }
+            }
+        }
+
 
     }
     $gestorUsuario = new GestorUsuario();
     $gestorProyecto = new GestorProyecto();
-    $menu = new Menu($gestorUsuario, $gestorProyecto);
+    $gestorTarea = new GestorTarea();
+    $menu = new Menu($gestorUsuario, $gestorProyecto, $gestorTarea);
     $menu->iniciar();
