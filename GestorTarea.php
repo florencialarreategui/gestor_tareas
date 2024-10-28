@@ -9,6 +9,7 @@ require_once 'tarea.json';
 class GestorTarea{
         public $tareas = [];
         private $archivoJson = 'tareas.json';
+        private $id_tarea = 0;
 
         public function __construct()
         {
@@ -17,7 +18,7 @@ class GestorTarea{
         //----------------- Agregar tarea--------------------------------
         public function agregarTarea() {
 
-            $id_tarea = 1;
+            $this->id_tarea++;
                 
             echo "Ingrese el nombre de al tarea: ";
             $nombre = trim(fgets(STDIN));
@@ -34,7 +35,7 @@ class GestorTarea{
             $id_usuario = 1;
             $id_estado = 1;
 
-            $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado);
+            $nuevaTarea = new Tarea( $this->id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado);
             $this->tareas[] = $nuevaTarea;
 
 
@@ -164,9 +165,13 @@ class GestorTarea{
 
          //----------------- Pruebas--------------------------------
 $nuevaTarea = new GestorTarea ();
-// $nuevaTarea->agregarTarea();
-// $nuevaTarea->listarTareas();
-// $nuevaTarea->editarTarea();
+$nuevaTarea->agregarTarea();
+$nuevaTarea->listarTareas();
+$nuevaTarea->agregarTarea();
+$nuevaTarea->listarTareas();
+$nuevaTarea->agregarTarea();
+$nuevaTarea->listarTareas();
+$nuevaTarea->editarTarea();
 $nuevaTarea->listarTareas();
 $nuevaTarea->eliminarTarea();
 $nuevaTarea->listarTareas();
