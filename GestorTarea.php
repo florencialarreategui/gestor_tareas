@@ -67,20 +67,6 @@ class GestorTarea{
         }
 
         //----------------- Editar tarea--------------------------------
-        // public function editarTarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado) {
-        //     $tarea = $this->obtenerTarea($id_tarea);
-        //     if ($tarea) {
-        //         $tarea->setNombre($nombre);
-        //         $tarea->setDescripcion($descripcion);
-        //         $tarea->setFechaInicio($fecha_inicio);
-        //         $tarea->setFechaFin($fecha_fin);
-        //         $tarea->setIdProyecto($id_proyecto);
-        //         $tarea->setIdEstado($id_estado);
-        //         $tarea->setIdUsuario($id_usuario);
-                
-        //     }
-        //     // $this->guardarEnJSON();
-        // }
 
         public function editarTarea() {
             echo "Ingrese el ID de la tarea que desea editar: ";
@@ -106,21 +92,36 @@ class GestorTarea{
                     return;
                 }
             }
-            echo "Tarea no encontrado.\n";
+            echo "Tarea no encontrada.\n";
         }
 
-        // public function eliminarTarea($id_tarea) {
-        //     foreach ($this->tareas as $index => $tarea) {
-        //         if ($tarea->getIdTarea() == $id_tarea) {
-        //             unset($this->tareas[$index]);
-        //             $this->tareas = array_values($this->tareas); // Reindexamos
-                
-        //             break;
-        //         }
-               
-        //     }
-        //     // $this->guardarEnJSON();
-        // }
+         //----------------- Eliminar tarea--------------------------------
+
+         public function eliminarTarea() {
+            echo "Ingrese el ID de la tarea que desea eliminar: ";
+            $id_tarea = trim(fgets(STDIN));
+        
+            $indiceTarea = null;
+        
+            foreach ($this->tareas as $indice => $tarea) {
+                if ($tarea->getIdTarea() == $id_tarea) {
+                    $indiceTarea = $indice;
+                    break;
+                }
+            }
+            if ($indiceTarea === null) {
+                echo "Tarea no encontrada.\n";
+                return;
+            }
+            
+            unset($this->tareas[$indiceTarea]);
+            $this->tareas = array_values($this->tareas); 
+            echo "Tarea eliminada exitosamente.\n";
+            $this->guardarEnJSON();
+        }
+
+
+  //----------------- Guardar en Json--------------------------------
 
         public function guardarEnJSON() {
             $tareas = [];
@@ -132,7 +133,7 @@ class GestorTarea{
             $jsontarea = json_encode(['tarea' => $tareas], JSON_PRETTY_PRINT);
             file_put_contents($this->archivoJson, $jsontarea);
         }
-
+ //----------------- Cargar desde JSON --------------------------------
         public function cargarDesdeJSON() {
             if (file_exists($this->archivoJson)) {
                 $jsontarea = file_get_contents($this->archivoJson);
@@ -160,8 +161,12 @@ class GestorTarea{
 
        
         }
+
+         //----------------- Pruebas--------------------------------
 $nuevaTarea = new GestorTarea ();
-$nuevaTarea->agregarTarea();
+// $nuevaTarea->agregarTarea();
+// $nuevaTarea->listarTareas();
+// $nuevaTarea->editarTarea();
 $nuevaTarea->listarTareas();
-$nuevaTarea->editarTarea();
+$nuevaTarea->eliminarTarea();
 $nuevaTarea->listarTareas();
