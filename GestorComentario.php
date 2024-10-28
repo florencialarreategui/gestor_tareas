@@ -1,83 +1,109 @@
 <?php
+
 require_once 'usuario.php';
-require_once 'proyecto.php';
 require_once 'tarea.php';
 require_once 'comentario.php';
-require_once 'estado.php';
 
-class GestorComentario{
+class GestorComentario {
+    public $comentarios = [];
+    private $archivoJson = 'comentario.json';
 
-        public $comentarios = [];
-        private $archivoJson = 'comentario.json';
+    public function __construct() {
+        $this->cargarDesdeJSON();
+    }
 
-        public function __construct()
-        {
-            $this->cargarDesdeJSON();
-        }
+    public function agregarComentario() {
+        $id_comentario = generarIdNumerico();
+        echo "Ingrese el ID de la tarea: ";
+        $id_tarea = trim(fgets(STDIN));
+        echo "Ingrese el ID del usuario: ";
+        $id_usuario = trim(fgets(STDIN));
+        echo "Ingrese la descripción del comentario: ";
+        $contenido = trim(fgets(STDIN));
+        echo "Ingrese la fecha (YYYY-MM-DD): ";
+        $fecha = trim(fgets(STDIN));
 
+        $nuevocomentario = new Comentario($id_comentario, $id_tarea, $id_usuario, $contenido, $fecha);
+        $this->comentarios[] = $nuevocomentario;
+        echo "Comentario creado exitosamente: " . $nuevocomentario->getIdComentario() . " " . $id_comentario . "\n";
+        $this->guardarEnJSON();
+    }
 
-
-        public function agregarComentario($comentario) {
-            $this->comentarios[] = $comentario;
-            $this->guardarEnJSON();
-        }
-
-        public function obtenerComentario($id_comentario) {
-            foreach ($this->comentarios as $comentario) {
-                if ($comentario->getIdComentario() == $id_comentario) {
-                    return $comentario;
-                }
+    public function obtenerComentario($id_comentario) {
+        foreach ($this->comentarios as $comentario) {
+            if ($comentario->getIdComentario() == $id_comentario) {
+                return $comentario;
             }
-            return null;
         }
+        return null;
+    }
 
-        public function actualizarComentario($id_comentario, $contenido, $fecha) {
-            $comentario = $this->obtenerComentario($id_comentario);
-            if ($comentario) {
+    public function editarComentario() {
+        echo "Ingrese el ID del comentario que desea editar: ";
+        $id_comentario = trim(fgets(STDIN));
+        // Busca el comentario por ID
+        foreach ($this->comentarios as $comentario) {
+            if ($comentario->getIdComentario() == $id_comentario) {
+                echo "Ingrese la nueva descripción del comentario: ";
+                $contenido = trim(fgets(STDIN));
                 $comentario->setContenido($contenido);
+                echo "Ingrese la nueva fecha (YYYY-MM-DD): ";
+                $fecha = trim(fgets(STDIN));
                 $comentario->setFecha($fecha);
+                echo "Comentario editado exitosamente: " . $comentario->getIdComentario() . "\n";
+                $this->guardarEnJSON();
+                return;
             }
-            $this->guardarEnJSON();
         }
+        echo "Comentario no encontrado.\n";
+    }
 
-        public function eliminarComentario($id_comentario) {
-            foreach ($this->comentarios as $index => $comentario) {
-                if ($comentario->getIdComentario() == $id_comentario) {
-                    unset($this->comentarios[$index]);
-                }
+    public function eliminarComentario() {
+        echo "Ingrese el ID del comentario que desea eliminar: ";
+        $id_comentario = trim(fgets(STDIN));
+        // Busca el índice del comentario por ID
+        $indiceComentario = null;
+        foreach ($this->comentarios as $indice => $comentario) {
+            if ($comentario->getIdComentario() == $id_comentario) { 
+                $indiceComentario = $indice;
+                break;
             }
-            $this->guardarEnJSON();
         }
-        public function guardarEnJSON() {
-            $comentarios = [];
+        if ($indiceComentario === null) {
+            echo "Comentario no encontrado.\n";
+            return;
+        }
+        unset($this->comentarios[$indiceComentario]);
+        $this->comentarios = array_values($this->comentarios); 
+        echo "Comentario eliminado exitosamente.\n";
+        $this->guardarEnJSON();
+    }
+    
 
-            foreach ($this->comentarios as $comentario) {
-                $comentarios[] = $comentario->ToArray();
+    public function guardarEnJSON() {
+        $comentarios = [];
+        foreach ($this->comentarios as $comentario) {
+            $comentarios[] = $comentario->toArray();
+        }
+        $jsoncomentario = json_encode(['comentario' => $comentarios], JSON_PRETTY_PRINT);
+        file_put_contents($this->archivoJson, $jsoncomentario);
+    }
+
+    public function cargarDesdeJSON() {
+        if (file_exists($this->archivoJson)) {
+            $jsoncomentario = file_get_contents($this->archivoJson);
+            $comentarios = json_decode($jsoncomentario, true)['comentario'];
+            $this->comentarios = [];
+            foreach ($comentarios as $comentarioData) {
+                $comentario = new Comentario(
+                    $comentarioData['id_comentario'],
+                    $comentarioData['id_tarea'],
+                    $comentarioData['id_usuario'],
+                    $comentarioData['contenido'],
+                    $comentarioData['fecha']
+                );
+                $this->comentarios[] = $comentario;
             }
-
-            $jsoncomentario = json_encode(['comentario' => $comentarios], JSON_PRETTY_PRINT);
-            file_put_contents($this->archivoJson, $jsoncomentario);
         }
-        
-        public function cargarDesdeJSON() {
-            if (file_exists($this->archivoJson)) {
-                $jsoncomentario = file_get_contents($this->archivoJson);
-                $comentarios = json_decode($jsoncomentario, true)['comentario'];
-                $this->comentarios = [];
-
-            
-                foreach ($comentarios as $comentarioData) {
-                    $comentario = new comentario(
-                        $comentarioData['id_comentario'],
-                        $comentarioData['id_tarea'],
-                        $comentarioData['id_usuario'],
-                        $comentarioData['contenido'],
-                        $comentarioData['fecha'],
-                        
-                    );
-                    $this->comentarios[] = $comentario;
-                }
-            }   
-
-        }
-        }
+    }
+}

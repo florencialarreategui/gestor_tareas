@@ -1,38 +1,25 @@
 {
-    "proyectos": [
+    "proyecto": [
         {
-            "id_proyecto": 1,
-            "nombre": "proyex",
-            "descripcion": "este es un proyecto de prueba",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": "activo"
+            "id_proyecto": 645,
+            "nombre": "proyectonuevoAAAA",
+            "descripcion": "esta es una nueva version del proyectoA",
+            "fechaInicio": "2024-11-05",
+            "fechaFin": "2024-11-15"
         },
         {
-            "id_proyecto": 2,
-            "nombre": "proyecto b",
-            "descripcion": "este es el proyectob",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado":"terminado"
-        },
-        {
-            "id_proyecto": 3,
-            "nombre": "pepe",
+            "id_proyecto": 314,
+            "nombre": "",
             "descripcion": "",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": true
+            "fechaInicio": "",
+            "fechaFin": ""
         },
         {
-            "id_proyecto": 4,
-            "nombre": "proyecto indefinido",
-            "descripcion": "pppppp",
-            "fecha_inicio": "2024-09-01",
-            "fecha_fin": "2024-09-10",
-            "estado": "en proceso"
+            "id_proyecto": 13,
+            "nombre": "proyectoB",
+            "descripcion": "Descripcion proyectoB",
+            "fechaInicio": "2024-12-01",
+            "fechaFin": "2024-12-28"
         }
-       
-        ]
-
-    }
+    ]
+}

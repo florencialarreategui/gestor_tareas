@@ -1,33 +1,58 @@
 <?php
 require_once 'estado.php';
 
+
 class GestorEstado {
+    public $estados = [];
+    private $archivoJson = 'estados.json';
 
-public function agregarEstado($estado) {
-            $this->estados[] = $estado;
-        }
+    public function __construct() {
+        $this->cargarDesdeJSON();
+    }
 
-        public function obtenerEstado($id_estado) {
-            foreach ($this->estados as $estado) {
-                if ($estado->getIdEstado() == $id_estado) {
-                    return $estado;
-                }
-            }
-            return null;
-        }
+    public function agregarEstado($estado) {
+        $this->estados[] = $estado;
+        $this->guardarEnJSON();
+    }
 
-        public function actualizarEstado($id_estado, $nombre) {
-            $estado = $this->obtenerEstado($id_estado);
-            if ($estado) {
-                $estado->setNombre($nombre);
+    public function obtenerEstado($estado) {
+        foreach ($this->estados as $estadoObj) {
+            if ($estadoObj->getEstado() == $estado) {
+                return $estadoObj;
             }
         }
+        return null;
+    }
 
-        public function eliminarEstado($id_estado) {
-            foreach ($this->estados as $index => $estado) {
-                if ($estado->getIdEstado() == $id_estado) {
-                    unset($this->estados[$index]);
-                }
+    public function actualizarEstado($estado, $nombre) {
+        $estadoObj = $this->obtenerEstado($estado);
+        if ($estadoObj) {
+            $estadoObj->setNombre($nombre);
+            $this->guardarEnJSON();
+        }
+    }
+
+    public function guardarEnJSON() {
+        $estados = [];
+        foreach ($this->estados as $estado) {
+            $estados[] = $estado->toArray();
+        }
+        $jsonestado = json_encode(['estado' => $estados], JSON_PRETTY_PRINT);
+        file_put_contents($this->archivoJson, $jsonestado);
+    }
+
+    public function cargarDesdeJSON() {
+        if (file_exists($this->archivoJson)) {
+            $jsonestado = file_get_contents($this->archivoJson);
+            $estados = json_decode($jsonestado, true)['estado'];
+            $this->estados = [];
+            foreach ($estados as $estadoData) {
+                $estado = new Estado(
+                    $estadoData['estado'],
+                    $estadoData['nombre']
+                );
+                $this->estados[] = $estado;
             }
         }
     }
+}
