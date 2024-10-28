@@ -9,9 +9,13 @@ require_once 'GestorEstado.php';
 
 class Menu {
 protected $gestorUsuario;
- public function __construct(){
-    $this->gestorUsuario=new GestorUsuario();
-    $this->gestorUsuario->listarUsuarios();
+ public function __construct($gestorUsuario,$gestorProyecto){
+    //, $gestorTarea, $gestorComentario, $gestorEstado
+    // $this->gestorUsuario=new GestorUsuario();
+    // $this->gestorUsuario->listarUsuarios();
+    $this->gestorUsuario= $gestorUsuario;
+    $this->gestorProyecto=$gestorProyecto;
+
  }
 
         public function iniciar() {
@@ -26,12 +30,12 @@ protected $gestorUsuario;
         
                 switch ($eleccion) {
                     case '1':  
-                        if ($this->validarIngresoUsuario()) {
+                        // if ($this->validarIngresoUsuario()) {
                             $this->menuPrincipal(); // Llama al menú de usuario si la validación es correcta
-                        } else {
-                            echo "Validación fallida. Intente nuevamente.\n";
-                        }
-                        break;
+                        // } else {
+                        //     echo "Validación fallida. Intente nuevamente.\n";
+                        // }
+                        // break;
         
                     case '2':
                         $this->crearUsuario(); //validarIngresoUsuario();
@@ -89,13 +93,13 @@ protected $gestorUsuario;
 
             switch ($eleccion) {
                 case '1':
-                    $this->listarUsuarios();
+                    $this->gestorUsuario->listarUsuarios();
                     break;
                  case '2':
-                      $this->editarUsuario();
+                    $this->gestorUsuario->editarUsuario();
                     break;
                  case '3':
-                     $this->eliminarUsuario();
+                    $this->gestorUsuario->eliminarUsuario();
                     break;
                 case '4':
                     return; 
@@ -120,16 +124,16 @@ protected $gestorUsuario;
 
                 switch ($eleccion) {
                     case '1':
-                        $this->crearProyecto();
+                        $this->gestorProyecto->agregarProyecto();
                         break;
                     case '2':
-                        $this->listarProyectos();
+                        $this->gestorProyecto->listarProyectos();
                         break;
                      case '3':
-                          $this->editarProyecto();
+                        $this->gestorProyecto->editarProyecto();
                         break;
                      case '4':
-                         $this->eliminarProyecto();
+                        $this->gestorProyecto->eliminarProyecto();
                         break;
                     case '5':
                         return; 
@@ -143,6 +147,7 @@ protected $gestorUsuario;
         
 
     }
-
-    $menu = new Menu();
+    $gestorUsuario = new GestorUsuario();
+    $gestorProyecto = new GestorProyecto();
+    $menu = new Menu($gestorUsuario, $gestorProyecto);
     $menu->iniciar();
