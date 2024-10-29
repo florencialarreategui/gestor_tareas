@@ -36,7 +36,7 @@ protected $gestorUsuario;
                         // break;
         
                     case '2':
-                        $this->crearUsuario(); //validarIngresoUsuario();
+                        $this->crearUsuario(); 
                         break;
         
                         case '0':

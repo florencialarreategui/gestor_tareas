@@ -7,11 +7,11 @@ require_once './gestor/GestorTarea.php';
 class GestorProyecto {
     public $proyectos = [];
     private $archivoJson = './Json/proyecto.json';
-    private $gestorTarea; // Declarar la propiedad
+    private $gestorTarea; 
 
     public function __construct(GestorTarea $gestorTarea) {
         $this->cargarDesdeJSON();
-        $this->gestorTarea = $gestorTarea; // Inicializar la propiedad en el constructor
+        $this->gestorTarea = $gestorTarea; 
     }
 
     
@@ -30,12 +30,12 @@ class GestorProyecto {
         $this->proyectos[] = $nuevoProyecto;
         echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
 
-        // Bucle para agregar tareas al proyecto
+        
     while (true) {
         echo "¿Desea agregar una tarea al proyecto? (s/n): ";
         $respuesta = trim(fgets(STDIN));
         if (strtolower($respuesta) !== 's') {
-            break; // Salir del bucle si la respuesta no es 's'
+            break; 
         }
         $this->gestorTarea->agregarTarea($nuevoProyecto);
     }
@@ -159,11 +159,10 @@ class GestorProyecto {
                 echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
                 echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
                 echo "Tareas: " . $proyecto->getTareas() . "\n";
-                return; // Salir de la función después de mostrar el proyecto
+                return; 
             }
         }
     
-        // Si no se encuentra el proyecto
         echo "Proyecto no encontrado.\n";
     }
     
@@ -194,7 +193,6 @@ class GestorProyecto {
                         $proyectoData['fechaFin']
                     );
     
-                    // Cargar las tareas del proyecto
                     if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
                         foreach ($proyectoData['tareas'] as $tareaData) {
                             $tarea = new Tarea(
