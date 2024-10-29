@@ -1,5 +1,4 @@
 <?php
-require_once './clases/funcionesAuxiliares.php';
 require_once './clases/proyecto.php';
 require_once './clases/tarea.php';
 require_once './clases/estado.php';
@@ -123,6 +122,12 @@ class GestorProyecto {
         $this->proyectos = array_values($this->proyectos); 
         echo "Proyecto eliminado exitosamente.\n";
         $this->guardarEnJSON();
+    }
+
+    public function obtenerProyectoPorId() {
+        echo "Ingrese el id del proyecto: ";
+        $id_proyecto = trim(fgets(STDIN));
+        return $this->proyectos[$id_proyectos] ?? null;
     }
 
 

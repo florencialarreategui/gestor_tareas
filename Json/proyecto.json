@@ -41,6 +41,13 @@
             "descripcion": "a",
             "fechaInicio": "a",
             "fechaFin": "a"
+        },
+        {
+            "id_proyecto": 7,
+            "nombre": "prueba",
+            "descripcion": "aa",
+            "fechaInicio": "a",
+            "fechaFin": "a"
         }
     ]
 }

@@ -11,12 +11,13 @@ class Tarea {
         private $fecha_inicio;
         private $fecha_fin;
 
-        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin) {
+        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto) {
             $this->id_tarea = $id_tarea;
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->fecha_inicio = $fecha_inicio;
             $this->fecha_fin = $fecha_fin;
+            $this->id_proyecto = $id_proyecto;
 
         }
 
@@ -40,6 +41,10 @@ class Tarea {
             return $this->fecha_fin;
         }
 
+        public function getIdProyecto() {
+            return $this->id_proyecto;
+        }
+
         public function setIdTarea($id_tarea) {
             $this->id_tarea = $id_tarea;
         }
@@ -60,6 +65,9 @@ class Tarea {
             $this->fecha_fin = $fecha_fin;
         }
 
+        public function setIdProyecto($id_proyecto) {
+            $this->fecha_fin = $fecha_fin;
+        }
 
 
         public function toArray() {
@@ -69,6 +77,7 @@ class Tarea {
                 'descripcion' => $this->descripcion,
                 'fecha_inicio' => $this->fecha_inicio,
                 'fecha_fin' => $this->fecha_fin,
+                'id_proyecto' => $this->id_proyecto,
             ];
         }
         public static function fromArray($array) {
@@ -78,6 +87,7 @@ class Tarea {
                 $array['descripcion'],
                 $array['fecha_inicio'],
                 $array['fecha_fin'],
+                $array['id_proyecto'],
             );
         }
     

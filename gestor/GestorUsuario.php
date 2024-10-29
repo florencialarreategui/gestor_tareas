@@ -1,6 +1,5 @@
 <?php
 require_once './clases/usuario.php';
-require_once './clases/funcionesAuxiliares.php';
 
 class GestorUsuario{
     private $usuarios = [];
@@ -31,7 +30,7 @@ class GestorUsuario{
  
     // //-----------------------------crear usurario ---------------------------
     public function crearUsuario() {
-        $id_usuario = generarIdNumerico();
+        $id_usuario = count($this->tareas) + 1;
 
         echo "Ingrese nombre: ";
         $nombre = trim(fgets(STDIN));
