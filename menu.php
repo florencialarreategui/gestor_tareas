@@ -10,9 +10,6 @@ require_once 'GestorEstado.php';
 class Menu {
 protected $gestorUsuario;
  public function __construct($gestorUsuario,$gestorProyecto,$gestorTarea){
-    //,, $gestorComentario, $gestorEstado
-    // $this->gestorUsuario=new GestorUsuario();
-    // $this->gestorUsuario->listarUsuarios();
     $this->gestorUsuario= $gestorUsuario;
     $this->gestorProyecto=$gestorProyecto;
     $this->gestorTarea = $gestorTarea;
@@ -123,6 +120,7 @@ protected $gestorUsuario;
                 echo "2. Listar Proyectos\n";
                 echo "3. Editar Proyecto\n";
                 echo "4. Eliminar proyecto\n";
+                echo "5. Cambiar estado del proyecto\n";
                 echo "0. Salir al Menú Principal\n";
 
                 $eleccion = trim(fgets(STDIN));
@@ -140,6 +138,9 @@ protected $gestorUsuario;
                      case '4':
                         $this->gestorProyecto->eliminarProyecto();
                         break;
+                        case '5':
+                            $this->gestorProyecto->cambiarEstadoProyecto();
+                            break;
                     case '0':
                         return; 
                     default:

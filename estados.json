@@ -1,11 +1,7 @@
 {
     "estado": [
         {
-            "estado": null,
-            "nombre": "Estado 1"
-        },
-        {
-            "estado": true,
+            "estado": false,
             "nombre": "Terminado"
         },
         {

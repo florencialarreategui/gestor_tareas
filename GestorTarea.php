@@ -1,24 +1,22 @@
 <?php
-// require_once 'usuario.php';
-// require_once 'proyecto.php';
 require_once 'tarea.php';
-// require_once 'comentario.php';
-// require_once 'estado.php';
 require_once 'tarea.json';
 
 class GestorTarea{
         public $tareas = [];
         private $archivoJson = 'tareas.json';
-        private $id_tarea = 0;
+        private $ultimoId;
 
         public function __construct()
         {
+            
+            $this->calcularUltimoId();
             $this->cargarDesdeJSON();
         }
         //----------------- Agregar tarea--------------------------------
         public function agregarTarea() {
 
-            $this->id_tarea++;
+            $this->ultimoId++;
                 
             echo "Ingrese el nombre de al tarea: ";
             $nombre = trim(fgets(STDIN));
@@ -31,17 +29,30 @@ class GestorTarea{
 
             echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
             $fecha_fin = trim(fgets(STDIN));
-            $id_proyecto =1;
-            $id_usuario = 1;
-            $id_estado = 1;
+           
 
-            $nuevaTarea = new Tarea( $this->id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado);
+            $nuevaTarea = new Tarea( $this->ultimoId, $nombre, $descripcion, $fecha_inicio, $fecha_fin);
             $this->tareas[] = $nuevaTarea;
 
 
-            echo "tarea creado exitosamente: " . $nuevaTarea->getNombre() ." ". $id_tarea . "\n";
+            echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() ." ". $this->ultimoId . "\n";
             $this->guardarEnJSON();
         }
+
+
+        //----------------- calcularUltimoId --------------------------------
+        private function calcularUltimoId() {
+            if (!empty($this->tareas)) {
+                $this->ultimoId = max(array_map(function($tarea) {
+                    return $tarea->getIdTarea();
+                }, $this->tareas));
+            } else {
+                $this->ultimoId = 0; // Comienza desde 0 si no hay tareas
+            }
+            echo gettype($this->ultimoId);
+        }
+        
+
 //----------------- Obtener tarea--------------------------------
         public function obtenerTarea($id_tarea) {
             foreach ($this->tareas as $tarea) {
@@ -149,9 +160,6 @@ class GestorTarea{
                         $tareaData['descripcion'],
                         $tareaData['fecha_inicio'],
                         $tareaData['fecha_fin'],
-                        $tareaData['id_proyecto'],
-                        $tareaData['id_usuario'],
-                        $tareaData['id_estado']
                     );
                     $this->tareas[] = $tarea;
                 }
@@ -163,12 +171,9 @@ class GestorTarea{
        
         }
 
-         //----------------- Pruebas--------------------------------
-$nuevaTarea = new GestorTarea ();
-$nuevaTarea->agregarTarea();
-$nuevaTarea->listarTareas();
-$nuevaTarea->listarTareas();
-$nuevaTarea->editarTarea();
-$nuevaTarea->listarTareas();
-$nuevaTarea->eliminarTarea();
-$nuevaTarea->listarTareas();
+        //  $nuevaTarea = new GestorTarea();
+        //  $nuevaTarea->agregarTarea();
+        //  $nuevaTarea->listarTareas();
+        //  $nuevaTarea->agregarTarea();
+        //  $nuevaTarea->listarTareas();
+

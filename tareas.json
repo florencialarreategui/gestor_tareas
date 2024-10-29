@@ -1,0 +1,151 @@
+{
+    "tarea": [
+        {
+            "id_tarea": 1,
+            "nombre": "comer caramelos",
+            "descripcion": "comprar caramelos",
+            "fecha_inicio": "8765",
+            "fecha_fin": "0986"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "comprar aceitunas",
+            "descripcion": "ir al mercado",
+            "fecha_inicio": "1276767",
+            "fecha_fin": "989898"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "lavar los platos",
+            "descripcion": "lavar los platos",
+            "fecha_inicio": "4567",
+            "fecha_fin": "6789"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "comer sanguchitos",
+            "descripcion": "comprar fiambre",
+            "fecha_inicio": "5678",
+            "fecha_fin": "4321"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "Tomar agua",
+            "descripcion": "agua",
+            "fecha_inicio": "1234",
+            "fecha_fin": "5432"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "hacer pure de papas",
+            "descripcion": "comprar papas",
+            "fecha_inicio": "6543",
+            "fecha_fin": "8765"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "comprar zapatos",
+            "descripcion": "zapatos",
+            "fecha_inicio": "2222",
+            "fecha_fin": "1111"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "cambiar id",
+            "descripcion": "identificacion",
+            "fecha_inicio": "1234",
+            "fecha_fin": "4321"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "probar id",
+            "descripcion": "id",
+            "fecha_inicio": "33",
+            "fecha_fin": "33"
+        },
+        {
+            "id_tarea": 2,
+            "nombre": "sdsadsad",
+            "descripcion": "asdada",
+            "fecha_inicio": "asd",
+            "fecha_fin": "ads"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "aaaaaaa",
+            "descripcion": "aaaaa",
+            "fecha_inicio": "a",
+            "fecha_fin": "a"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "florencia",
+            "descripcion": "alalal",
+            "fecha_inicio": "12",
+            "fecha_fin": "21"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "lililili",
+            "descripcion": "lololo",
+            "fecha_inicio": "1",
+            "fecha_fin": "2"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "lululul",
+            "descripcion": "lelelel",
+            "fecha_inicio": "3",
+            "fecha_fin": "4"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "aaaa",
+            "descripcion": "eeee",
+            "fecha_inicio": "1",
+            "fecha_fin": "2"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "re",
+            "descripcion": "ra",
+            "fecha_inicio": "3",
+            "fecha_fin": "4"
+        },
+        {
+            "id_tarea": 6,
+            "nombre": "rere",
+            "descripcion": "y",
+            "fecha_inicio": "9",
+            "fecha_fin": "8"
+        },
+        {
+            "id_tarea": 7,
+            "nombre": "45",
+            "descripcion": "45",
+            "fecha_inicio": "45",
+            "fecha_fin": "45"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "",
+            "descripcion": "jkadjkasdjaskld",
+            "fecha_inicio": "fff",
+            "fecha_fin": "q"
+        },
+        {
+            "id_tarea": 2,
+            "nombre": "lldldldldlld",
+            "descripcion": "d",
+            "fecha_inicio": "dd",
+            "fecha_fin": "d"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "re",
+            "descripcion": "rf",
+            "fecha_inicio": "d",
+            "fecha_fin": "d"
+        }
+    ]
+}

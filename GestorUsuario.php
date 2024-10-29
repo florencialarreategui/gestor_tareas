@@ -1,7 +1,6 @@
 <?php
 require_once 'usuario.php';
 require_once 'funcionesAuxiliares.php';
-// require_once 'menu.php';
 
 class GestorUsuario{
     private $usuarios = [];
@@ -165,13 +164,12 @@ class GestorUsuario{
 }
 
 
-$gestor = new GestorUsuario ();
-$gestor->crearUsuario();
-$gestor->crearUsuario();
-$gestor->crearUsuario();
-$gestor->crearUsuario();
-// $gestor->validarIngresoUsuario ("florencia", 1234);
-$gestor->listarUsuarios();
-$gestor->editarUsuario();
-$gestor->eliminarUsuario();
-$gestor->listarUsuarios();
+// $gestor = new GestorUsuario ();
+// $gestor->crearUsuario();
+// $gestor->crearUsuario();
+// $gestor->crearUsuario();
+// $gestor->crearUsuario();
+// $gestor->listarUsuarios();
+// $gestor->editarUsuario();
+// $gestor->eliminarUsuario();
+// $gestor->listarUsuarios();

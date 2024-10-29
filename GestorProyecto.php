@@ -16,6 +16,7 @@ class GestorProyecto {
     
     public function agregarProyecto() {
         $id_proyecto = generarIdNumerico();
+        $estado = "Activo";
         echo "Ingrese el nombre del proyecto: ";
         $nombre = trim(fgets(STDIN));
         echo "Ingrese la descripción del proyecto: ";
@@ -25,9 +26,9 @@ class GestorProyecto {
         echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
         $fechaFin = trim(fgets(STDIN));
         
-        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin);
+        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin,$estado);
         $this->proyectos[] = $nuevoProyecto;
-        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
+        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . " Estado: " . $estado ."\n";
 
         $this->guardarEnJSON();
     }
@@ -39,36 +40,78 @@ class GestorProyecto {
         }
         echo "=== Proyectos Registrados ===\n";
         foreach ($this->proyectos as $proyecto) {
-            echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+            echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin(). ", Estado: " . $proyecto->getEstado() . "\n";
         }
     }
 
-    
+
     public function editarProyecto() {
         echo "Ingrese el ID del proyecto que desea editar: ";
         $id_proyecto = trim(fgets(STDIN));
+        
+        // Variable para indicar si se encontró el proyecto
+        $proyectoEncontrado = false;
+    
         // Busca el proyecto por ID
         foreach ($this->proyectos as $proyecto) {
             if ($proyecto->getIdProyecto() == $id_proyecto) {
-                echo "Ingrese el nuevo nombre del proyecto: ";
-                $nombre = trim(fgets(STDIN));
-                $proyecto->setNombre($nombre);
-                echo "Ingrese la nueva descripción del proyecto: ";
-                $descripcion = trim(fgets(STDIN));
-                $proyecto->setDescripcion($descripcion);
-                echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
-                $fechaInicio = trim(fgets(STDIN));
-                $proyecto->setFechaInicio($fechaInicio);
-                echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-                $fechaFin = trim(fgets(STDIN));
-                $proyecto->setFechaFin($fechaFin);
-                echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
-
-                $this->guardarEnJSON();
-                return;
+                $proyectoEncontrado = true; // Se encontró el proyecto
+                echo "=== Elija que campo desea editar ===\n";
+                while (true) {
+                    echo "1. Nombre\n";
+                    echo "2. Descripción\n";
+                    echo "3. Fecha de inicio (YYYY-MM-DD): \n";
+                    echo "4. Fecha de finalización (YYYY-MM-DD): \n";
+                    echo "5. Estado\n";
+                    echo "0. Salir al Menú Principal\n";
+    
+                    $eleccion = trim(fgets(STDIN));
+                    switch ($eleccion) {
+                        case '1':
+                            echo "Ingrese el nuevo nombre del proyecto: ";
+                            $nombre = trim(fgets(STDIN));
+                            $proyecto->setNombre($nombre);
+                            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                            break;
+                        case '2':
+                            echo "Ingrese la nueva descripción del proyecto: ";
+                            $descripcion = trim(fgets(STDIN));
+                            $proyecto->setDescripcion($descripcion);
+                            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                            break;
+                        case '3':
+                            echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+                            $fechaInicio = trim(fgets(STDIN));
+                            $proyecto->setFechaInicio($fechaInicio);
+                            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                            break;
+                        case '4':
+                            echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                            $fechaFin = trim(fgets(STDIN));
+                            $proyecto->setFechaFin($fechaFin);
+                            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                            break;
+                        case '5':
+                            echo "Ingrese activo o terminado según corresponda: ";
+                            $estado = trim(fgets(STDIN));
+                            $proyecto->setEstado($estado);
+                            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                            break;
+                        case '0':
+                            return; 
+                        default:
+                            echo "Opción no válida. Inténtelo de nuevo.\n";
+                            break;
+                    }
+                    $this->guardarEnJSON();
+                }
             }
         }
-        echo "Proyecto no encontrado.\n";
+    
+        // Si se sale del bucle y no se encontró el proyecto
+        if (!$proyectoEncontrado) {
+            echo "Proyecto no encontrado.\n";
+        }
     }
 
     
@@ -78,7 +121,7 @@ class GestorProyecto {
         // Busca el índice del proyecto por ID
         $indiceProyecto = null;
         foreach ($this->proyectos as $indice => $p) {
-            if ($p->getIdProyecto() === $id_proyecto) {
+            if ($p->getIdProyecto() == $id_proyecto) {
                 $indiceProyecto = $indice;
                 break;
             }
@@ -120,7 +163,8 @@ class GestorProyecto {
                         $proyectoData['nombre'],
                         $proyectoData['descripcion'],
                         $proyectoData['fechaInicio'],
-                        $proyectoData['fechaFin']
+                        $proyectoData['fechaFin'],
+                        $proyectoData['estado'],
                     );
                     $this->proyectos[] = $proyecto;
                 }
@@ -133,3 +177,9 @@ class GestorProyecto {
     }
     
 }
+
+// $nuevoProyecto = new GestorProyecto ();
+// // $nuevoProyecto->agregarProyecto();
+// $nuevoProyecto->listarProyectos();
+// $nuevoProyecto->editarProyecto();
+// $nuevoProyecto->listarProyectos();
