@@ -2,13 +2,16 @@
 require_once './clases/proyecto.php';
 require_once './clases/tarea.php';
 require_once './clases/estado.php';
+require_once './gestor/GestorTarea.php';
 
 class GestorProyecto {
     public $proyectos = [];
     private $archivoJson = './Json/proyecto.json';
+    private $gestorTarea; // Declarar la propiedad
 
-    public function __construct() {
+    public function __construct(GestorTarea $gestorTarea) {
         $this->cargarDesdeJSON();
+        $this->gestorTarea = $gestorTarea; // Inicializar la propiedad en el constructor
     }
 
     
@@ -27,8 +30,18 @@ class GestorProyecto {
         $this->proyectos[] = $nuevoProyecto;
         echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
 
-        $this->guardarEnJSON();
+        // Bucle para agregar tareas al proyecto
+    while (true) {
+        echo "¿Desea agregar una tarea al proyecto? (s/n): ";
+        $respuesta = trim(fgets(STDIN));
+        if (strtolower($respuesta) !== 's') {
+            break; // Salir del bucle si la respuesta no es 's'
+        }
+        $this->gestorTarea->agregarTarea($nuevoProyecto);
     }
+
+        $this->guardarEnJSON();
+ }
 
     public function listarProyectos() {
         if (empty($this->proyectos)) {
@@ -57,6 +70,7 @@ class GestorProyecto {
                     echo "2. Descripción\n";
                     echo "3. Fecha de inicio (YYYY-MM-DD): \n";
                     echo "4. Fecha de finalización (YYYY-MM-DD): \n";
+                    echo "5. Agregar Tarea: \n";
                     echo "0. Salir al Menú Principal\n";
     
                     $eleccion = trim(fgets(STDIN));
@@ -85,6 +99,9 @@ class GestorProyecto {
                             $proyecto->setFechaFin($fechaFin);
                             echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
                             break;
+                            case '5':
+                                $this->gestorTarea->agregarTarea($proyecto);
+                                break;
                         case '0':
                             return; 
                         default:
@@ -165,7 +182,8 @@ class GestorProyecto {
                                 $tareaData['nombre'],
                                 $tareaData['descripcion'],
                                 $tareaData['fecha_inicio'],
-                                $tareaData['fecha_fin']
+                                $tareaData['fecha_fin'],
+                                $tareaData['id_proyecto']
                             );
                             $proyecto->agregarTarea($tarea);
                         }

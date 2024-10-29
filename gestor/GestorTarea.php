@@ -12,29 +12,24 @@ class GestorTarea {
     }
 
     //----------------- Agregar tarea--------------------------------
-    public function agregarTarea() {
-        $id_tarea = count($this->tareas) + 1;
-
-        echo "Ingrese el id del proyecto al que quiere agregarle la tarea: ";
-        $id_proyecto = trim(fgets(STDIN));
-
+    public function agregarTarea($proyecto) {
+        $id_tarea = count($proyecto->getTareas()) + 1; // Método para obtener las tareas del proyecto
+        $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el nombre de la tarea: ";
         $nombre = trim(fgets(STDIN));
-
+    
         echo "Ingrese la descripción de la tarea: ";
         $descripcion = trim(fgets(STDIN));
-
-        echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
+    
+        echo "Ingrese la fecha de inicio de la tarea (YYYY-MM-DD): ";
         $fecha_inicio = trim(fgets(STDIN));
-
-        echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+    
+        echo "Ingrese la fecha de finalización de la tarea (YYYY-MM-DD): ";
         $fecha_fin = trim(fgets(STDIN));
-
-        $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin,$id_proyecto);
-        $this->tareas[] = $nuevaTarea;
-
-        echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " " . $id_tarea . "\n";
-        $this->guardarEnJSON();
+    
+        $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto);
+        $proyecto->agregarTarea($nuevaTarea); // Agregar tarea al proyecto
+        echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " " . $id_tarea . "\n";
     }
 
     //----------------- Obtener tarea--------------------------------

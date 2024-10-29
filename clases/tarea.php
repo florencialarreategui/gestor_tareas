@@ -10,6 +10,7 @@ class Tarea {
         private $descripcion;
         private $fecha_inicio;
         private $fecha_fin;
+        private $id_proyecto;
 
         public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto) {
             $this->id_tarea = $id_tarea;
@@ -66,7 +67,7 @@ class Tarea {
         }
 
         public function setIdProyecto($id_proyecto) {
-            $this->fecha_fin = $fecha_fin;
+            $this->id_proyecto = $id_proyecto;
         }
 
 

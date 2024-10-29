@@ -37,6 +37,10 @@ class Proyecto {
         return $this->fechaFin;
     }
 
+    public function getTareas() {
+        return $this->tareas;
+    }
+
     public function setIdProyecto($id_proyecto) {
         $this->id_proyecto = $id_proyecto;
     }

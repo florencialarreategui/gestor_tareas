@@ -62,7 +62,58 @@
             "descripcion": "f",
             "fechaInicio": "f",
             "fechaFin": "f",
-            "tareas": []
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "carmen",
+                    "descripcion": "aaa",
+                    "fecha_inicio": "a",
+                    "fecha_fin": "a",
+                    "id_proyecto": 8
+                }
+            ]
+        },
+        {
+            "id_proyecto": 9,
+            "nombre": "lalalaallalalalal",
+            "descripcion": "a",
+            "fechaInicio": "a",
+            "fechaFin": "a",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "tarea",
+                    "descripcion": "tata",
+                    "fecha_inicio": "t",
+                    "fecha_fin": "t",
+                    "id_proyecto": 1
+                }
+            ]
+        },
+        {
+            "id_proyecto": 10,
+            "nombre": "porfa",
+            "descripcion": "que ande",
+            "fechaInicio": "1",
+            "fechaFin": "2",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "porfis",
+                    "descripcion": "re porfis",
+                    "fecha_inicio": "1",
+                    "fecha_fin": "2",
+                    "id_proyecto": 10
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "dalee",
+                    "descripcion": "sisi",
+                    "fecha_inicio": "1",
+                    "fecha_fin": "2",
+                    "id_proyecto": 10
+                }
+            ]
         }
     ]
 }

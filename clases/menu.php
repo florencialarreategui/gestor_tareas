@@ -183,7 +183,7 @@ protected $gestorUsuario;
 
     }
     $gestorUsuario = new GestorUsuario();
-    $gestorProyecto = new GestorProyecto();
     $gestorTarea = new GestorTarea();
+    $gestorProyecto = new GestorProyecto($gestorTarea);
     $menu = new Menu($gestorUsuario, $gestorProyecto, $gestorTarea);
     $menu->iniciar();
