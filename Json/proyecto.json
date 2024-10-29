@@ -1,117 +1,35 @@
 {
     "proyecto": [
         {
-            "id_proyecto": 469,
-            "nombre": "lalalaall",
-            "descripcion": "prueba",
-            "fechaInicio": "333",
-            "fechaFin": "99",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 356,
-            "nombre": "proyecto",
-            "descripcion": "pro",
-            "fechaInicio": "p",
-            "fechaFin": "p",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 685,
-            "nombre": "edito nombre",
-            "descripcion": "lalalalala",
-            "fechaInicio": "4",
-            "fechaFin": "4",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 4,
-            "nombre": "pruebaa de id",
-            "descripcion": "id",
+            "id_proyecto": 1,
+            "nombre": "prueba",
+            "descripcion": "qwe",
             "fechaInicio": "1",
             "fechaFin": "1",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 5,
-            "nombre": "prueba 2 de id",
-            "descripcion": "d",
-            "fechaInicio": "d",
-            "fechaFin": "d",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 6,
-            "nombre": "prueba de id 3",
-            "descripcion": "a",
-            "fechaInicio": "a",
-            "fechaFin": "a",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 7,
-            "nombre": "prueba",
-            "descripcion": "aa",
-            "fechaInicio": "a",
-            "fechaFin": "a",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 8,
-            "nombre": "sfdsfdsf",
-            "descripcion": "f",
-            "fechaInicio": "f",
-            "fechaFin": "f",
             "tareas": [
                 {
                     "id_tarea": 1,
-                    "nombre": "carmen",
+                    "nombre": "hhh",
                     "descripcion": "aaa",
-                    "fecha_inicio": "a",
-                    "fecha_fin": "a",
-                    "id_proyecto": 8
-                }
-            ]
-        },
-        {
-            "id_proyecto": 9,
-            "nombre": "lalalaallalalalal",
-            "descripcion": "a",
-            "fechaInicio": "a",
-            "fechaFin": "a",
-            "tareas": [
-                {
-                    "id_tarea": 1,
-                    "nombre": "tarea",
-                    "descripcion": "tata",
-                    "fecha_inicio": "t",
-                    "fecha_fin": "t",
-                    "id_proyecto": 1
-                }
-            ]
-        },
-        {
-            "id_proyecto": 10,
-            "nombre": "porfa",
-            "descripcion": "que ande",
-            "fechaInicio": "1",
-            "fechaFin": "2",
-            "tareas": [
-                {
-                    "id_tarea": 1,
-                    "nombre": "porfis",
-                    "descripcion": "re porfis",
                     "fecha_inicio": "1",
                     "fecha_fin": "2",
-                    "id_proyecto": 10
+                    "id_proyecto": 1
                 },
                 {
                     "id_tarea": 2,
-                    "nombre": "dalee",
-                    "descripcion": "sisi",
-                    "fecha_inicio": "1",
+                    "nombre": "alala",
+                    "descripcion": "a",
+                    "fecha_inicio": "a",
+                    "fecha_fin": "a",
+                    "id_proyecto": 1
+                },
+                {
+                    "id_tarea": 3,
+                    "nombre": "sdsada",
+                    "descripcion": "sad",
+                    "fecha_inicio": "2",
                     "fecha_fin": "2",
-                    "id_proyecto": 10
+                    "id_proyecto": 1
                 }
             ]
         }
