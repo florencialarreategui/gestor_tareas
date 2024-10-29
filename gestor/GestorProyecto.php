@@ -144,36 +144,13 @@ class GestorProyecto {
         echo "Proyecto eliminado exitosamente.\n";
         $this->guardarEnJSON();
     }
-
-    // public function listarProyectoPorId() {
-    //     echo "Ingrese el ID del proyecto que desea ver: ";
-    //     $id_proyecto = trim(fgets(STDIN));
-    //     // Buscar el proyecto por ID
-    //     foreach ($this->proyectos as $proyecto) {
-    //         if ($proyecto->getIdProyecto() == $id_proyecto) {
-    //             // Proyecto encontrado, imprimir detalles
-    //             echo "=== Proyecto Encontrado ===\n";
-    //             echo "Id: " . $proyecto->getIdProyecto() . "\n";
-    //             echo "Nombre: " . $proyecto->getNombre() . "\n";
-    //             echo "Descripción: " . $proyecto->getDescripcion() . "\n";
-    //             echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
-    //             echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-    //             echo "Tareas: " . $proyecto->getTareas() . "\n";
-    //             return; 
-    //         }
-    //     }
-    
-    //     echo "Proyecto no encontrado.\n";
-    // }
     
     public function listarProyectoPorId() {
         echo "Ingrese el ID del proyecto que desea ver: ";
         $id_proyecto = trim(fgets(STDIN));
         
-        // Buscar el proyecto por ID
         foreach ($this->proyectos as $proyecto) {
             if ($proyecto->getIdProyecto() == $id_proyecto) {
-                // Proyecto encontrado, imprimir detalles
                 echo "=== Proyecto Encontrado ===\n";
                 echo "Id: " . $proyecto->getIdProyecto() . "\n";
                 echo "Nombre: " . $proyecto->getNombre() . "\n";
@@ -181,7 +158,6 @@ class GestorProyecto {
                 echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
                 echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
     
-                // Mostrar tareas
                 $tareas = $proyecto->getTareas();
                 if (!empty($tareas)) {
                     echo "Tareas:\n";
