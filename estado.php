@@ -1,5 +1,5 @@
 <?php
-require_once 'estados.json';
+require_once './Json/estados.json';
 class estado {
     private $estado;
     private $nombre;

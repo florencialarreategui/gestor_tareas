@@ -5,7 +5,7 @@ require_once 'funcionesAuxiliares.php';
 class GestorUsuario{
     private $usuarios = [];
     
-        private $archivoJson = 'usuario.json';
+        private $archivoJson = './Json/usuario.json';
 
         public function __construct()
         {

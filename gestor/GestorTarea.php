@@ -1,10 +1,9 @@
 <?php
 require_once 'tarea.php';
-require_once 'tarea.json';
 
 class GestorTarea{
         public $tareas = [];
-        private $archivoJson = 'tareas.json';
+        private $archivoJson = './Json/tareas.json';
         private $ultimoId;
 
         public function __construct()

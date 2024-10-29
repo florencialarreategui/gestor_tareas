@@ -7,7 +7,7 @@ require_once 'estado.php';
 
 class GestorProyecto {
     public $proyectos = [];
-    private $archivoJson = 'proyecto.json';
+    private $archivoJson = './Json/proyecto.json';
 
     public function __construct() {
         $this->cargarDesdeJSON();

@@ -1,46 +1,11 @@
 {
     "tarea": [
         {
-            "id_tarea": 1,
-            "nombre": "comprar zapatos",
-            "descripcion": "zapatos",
-            "fecha_inicio": "2222",
-            "fecha_fin": "1111"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "cambiar id",
-            "descripcion": "identificacion",
-            "fecha_inicio": "1234",
-            "fecha_fin": "4321"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "probar id",
-            "descripcion": "id",
-            "fecha_inicio": "33",
-            "fecha_fin": "33"
-        },
-        {
             "id_tarea": 2,
             "nombre": "sdsadsad",
             "descripcion": "asdada",
             "fecha_inicio": "asd",
             "fecha_fin": "ads"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "aaaaaaa",
-            "descripcion": "aaaaa",
-            "fecha_inicio": "a",
-            "fecha_fin": "a"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "florencia",
-            "descripcion": "alalal",
-            "fecha_inicio": "12",
-            "fecha_fin": "21"
         },
         {
             "id_tarea": 1,
@@ -125,6 +90,13 @@
             "descripcion": "asdas",
             "fecha_inicio": "asdas",
             "fecha_fin": "asdas"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "json",
+            "descripcion": "s",
+            "fecha_inicio": "q",
+            "fecha_fin": "q"
         }
     ]
 }
