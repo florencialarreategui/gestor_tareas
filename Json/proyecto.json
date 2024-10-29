@@ -20,6 +20,27 @@
             "descripcion": "lalalalala",
             "fechaInicio": "4",
             "fechaFin": "4"
+        },
+        {
+            "id_proyecto": 4,
+            "nombre": "pruebaa de id",
+            "descripcion": "id",
+            "fechaInicio": "1",
+            "fechaFin": "1"
+        },
+        {
+            "id_proyecto": 5,
+            "nombre": "prueba 2 de id",
+            "descripcion": "d",
+            "fechaInicio": "d",
+            "fechaFin": "d"
+        },
+        {
+            "id_proyecto": 6,
+            "nombre": "prueba de id 3",
+            "descripcion": "a",
+            "fechaInicio": "a",
+            "fechaFin": "a"
         }
     ]
 }

@@ -14,7 +14,7 @@ class GestorProyecto {
 
     
     public function agregarProyecto() {
-        $id_proyecto = generarIdNumerico();
+        $id_proyecto = count($this->proyectos) + 1;
         echo "Ingrese el nombre del proyecto: ";
         $nombre = trim(fgets(STDIN));
         echo "Ingrese la descripción del proyecto: ";
