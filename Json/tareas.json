@@ -97,6 +97,34 @@
             "descripcion": "s",
             "fecha_inicio": "q",
             "fecha_fin": "q"
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "pruebo id",
+            "descripcion": "id",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "prueba 2 de id",
+            "descripcion": "prueba",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "prueba 3 de id",
+            "descripcion": "prueba",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "qwqw",
+            "descripcion": "qwq",
+            "fecha_inicio": "wq",
+            "fecha_fin": "q"
         }
     ]
 }

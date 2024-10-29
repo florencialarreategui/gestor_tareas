@@ -41,7 +41,6 @@ class GestorComentario {
     public function editarComentario() {
         echo "Ingrese el ID del comentario que desea editar: ";
         $id_comentario = trim(fgets(STDIN));
-        // Busca el comentario por ID
         foreach ($this->comentarios as $comentario) {
             if ($comentario->getIdComentario() == $id_comentario) {
                 echo "Ingrese la nueva descripción del comentario: ";
@@ -61,7 +60,6 @@ class GestorComentario {
     public function eliminarComentario() {
         echo "Ingrese el ID del comentario que desea eliminar: ";
         $id_comentario = trim(fgets(STDIN));
-        // Busca el índice del comentario por ID
         $indiceComentario = null;
         foreach ($this->comentarios as $indice => $comentario) {
             if ($comentario->getIdComentario() == $id_comentario) { 
