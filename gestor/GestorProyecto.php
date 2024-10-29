@@ -139,9 +139,7 @@ class GestorProyecto {
         $jsonproyecto = json_encode(['proyecto' => $proyectos], JSON_PRETTY_PRINT);
         file_put_contents($this->archivoJson, $jsonproyecto);
     }
-
     
-   
     public function cargarDesdeJSON() {
         if (file_exists($this->archivoJson)) {
             $json = file_get_contents($this->archivoJson);
@@ -156,8 +154,23 @@ class GestorProyecto {
                         $proyectoData['nombre'],
                         $proyectoData['descripcion'],
                         $proyectoData['fechaInicio'],
-                        $proyectoData['fechaFin'],
+                        $proyectoData['fechaFin']
                     );
+    
+                    // Cargar las tareas del proyecto
+                    if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
+                        foreach ($proyectoData['tareas'] as $tareaData) {
+                            $tarea = new Tarea(
+                                $tareaData['id_tarea'],
+                                $tareaData['nombre'],
+                                $tareaData['descripcion'],
+                                $tareaData['fecha_inicio'],
+                                $tareaData['fecha_fin']
+                            );
+                            $proyecto->agregarTarea($tarea);
+                        }
+                    }
+    
                     $this->proyectos[] = $proyecto;
                 }
             } else {

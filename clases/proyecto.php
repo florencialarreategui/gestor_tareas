@@ -7,6 +7,7 @@ class Proyecto {
     private $descripcion;
     private $fechaInicio;
     private $fechaFin;
+    private $tareas = [];
 
     public function __construct($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin) {
         $this->id_proyecto = $id_proyecto;
@@ -56,16 +57,22 @@ class Proyecto {
         $this->fechaFin = $fechaFin;
     }
 
-    public function toArray() {
+    public function agregarTarea($tarea) {
+        $this->tareas[] = $tarea;
+    }
+
+   public function toArray() {
         return [
             'id_proyecto' => $this->id_proyecto,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'fechaInicio' => $this->fechaInicio,
             'fechaFin' => $this->fechaFin,
+            'tareas' => array_map(function($tarea) {
+                return $tarea->toArray(); // Asumiendo que la clase Tarea tiene un método toArray()
+            }, $this->tareas),
         ];
     }
-
     public static function fromArray($array) {
         return new self(
             $array['id_proyecto'],
@@ -76,3 +83,6 @@ class Proyecto {
         );
     }
 }
+
+   
+
