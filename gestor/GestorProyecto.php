@@ -145,9 +145,31 @@ class GestorProyecto {
         $this->guardarEnJSON();
     }
 
+    // public function listarProyectoPorId() {
+    //     echo "Ingrese el ID del proyecto que desea ver: ";
+    //     $id_proyecto = trim(fgets(STDIN));
+    //     // Buscar el proyecto por ID
+    //     foreach ($this->proyectos as $proyecto) {
+    //         if ($proyecto->getIdProyecto() == $id_proyecto) {
+    //             // Proyecto encontrado, imprimir detalles
+    //             echo "=== Proyecto Encontrado ===\n";
+    //             echo "Id: " . $proyecto->getIdProyecto() . "\n";
+    //             echo "Nombre: " . $proyecto->getNombre() . "\n";
+    //             echo "Descripción: " . $proyecto->getDescripcion() . "\n";
+    //             echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
+    //             echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+    //             echo "Tareas: " . $proyecto->getTareas() . "\n";
+    //             return; 
+    //         }
+    //     }
+    
+    //     echo "Proyecto no encontrado.\n";
+    // }
+    
     public function listarProyectoPorId() {
         echo "Ingrese el ID del proyecto que desea ver: ";
         $id_proyecto = trim(fgets(STDIN));
+        
         // Buscar el proyecto por ID
         foreach ($this->proyectos as $proyecto) {
             if ($proyecto->getIdProyecto() == $id_proyecto) {
@@ -158,15 +180,27 @@ class GestorProyecto {
                 echo "Descripción: " . $proyecto->getDescripcion() . "\n";
                 echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
                 echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-                echo "Tareas: " . $proyecto->getTareas() . "\n";
+    
+                // Mostrar tareas
+                $tareas = $proyecto->getTareas();
+                if (!empty($tareas)) {
+                    echo "Tareas:\n";
+                    foreach ($tareas as $tarea) {
+                        echo " - Id: " . $tarea->getIdTarea() . "\n";
+                        echo "   Nombre: " . $tarea->getNombre() . "\n";
+                        echo "   Descripción: " . $tarea->getDescripcion() . "\n";
+                        echo "   Fecha de Inicio: " . $tarea->getFechaInicio() . "\n";
+                        echo "   Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
+                    }
+                } else {
+                    echo "No hay tareas asociadas a este proyecto.\n";
+                }
                 return; 
             }
         }
     
         echo "Proyecto no encontrado.\n";
     }
-    
-
     public function guardarEnJSON() {
         $proyectos = [];
         foreach ($this->proyectos as $proyecto) {
