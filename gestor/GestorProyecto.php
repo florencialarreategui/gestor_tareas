@@ -7,11 +7,11 @@ require_once './gestor/GestorTarea.php';
 class GestorProyecto {
     public $proyectos = [];
     private $archivoJson = './Json/proyecto.json';
-    private $gestorTarea; // Declarar la propiedad
+    private $gestorTarea; 
 
     public function __construct(GestorTarea $gestorTarea) {
         $this->cargarDesdeJSON();
-        $this->gestorTarea = $gestorTarea; // Inicializar la propiedad en el constructor
+        $this->gestorTarea = $gestorTarea; 
     }
 
     
@@ -30,12 +30,12 @@ class GestorProyecto {
         $this->proyectos[] = $nuevoProyecto;
         echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
 
-        // Bucle para agregar tareas al proyecto
+        
     while (true) {
         echo "¿Desea agregar una tarea al proyecto? (s/n): ";
         $respuesta = trim(fgets(STDIN));
         if (strtolower($respuesta) !== 's') {
-            break; // Salir del bucle si la respuesta no es 's'
+            break; 
         }
         $this->gestorTarea->agregarTarea($nuevoProyecto);
     }
@@ -144,30 +144,39 @@ class GestorProyecto {
         echo "Proyecto eliminado exitosamente.\n";
         $this->guardarEnJSON();
     }
-
+    
     public function listarProyectoPorId() {
         echo "Ingrese el ID del proyecto que desea ver: ";
         $id_proyecto = trim(fgets(STDIN));
-        // Buscar el proyecto por ID
+        
         foreach ($this->proyectos as $proyecto) {
             if ($proyecto->getIdProyecto() == $id_proyecto) {
-                // Proyecto encontrado, imprimir detalles
                 echo "=== Proyecto Encontrado ===\n";
                 echo "Id: " . $proyecto->getIdProyecto() . "\n";
                 echo "Nombre: " . $proyecto->getNombre() . "\n";
                 echo "Descripción: " . $proyecto->getDescripcion() . "\n";
                 echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
                 echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-                echo "Tareas: " . $proyecto->getTareas() . "\n";
-                return; // Salir de la función después de mostrar el proyecto
+    
+                $tareas = $proyecto->getTareas();
+                if (!empty($tareas)) {
+                    echo "Tareas:\n";
+                    foreach ($tareas as $tarea) {
+                        echo " - Id: " . $tarea->getIdTarea() . "\n";
+                        echo "   Nombre: " . $tarea->getNombre() . "\n";
+                        echo "   Descripción: " . $tarea->getDescripcion() . "\n";
+                        echo "   Fecha de Inicio: " . $tarea->getFechaInicio() . "\n";
+                        echo "   Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
+                    }
+                } else {
+                    echo "No hay tareas asociadas a este proyecto.\n";
+                }
+                return; 
             }
         }
     
-        // Si no se encuentra el proyecto
         echo "Proyecto no encontrado.\n";
     }
-    
-
     public function guardarEnJSON() {
         $proyectos = [];
         foreach ($this->proyectos as $proyecto) {
@@ -194,7 +203,6 @@ class GestorProyecto {
                         $proyectoData['fechaFin']
                     );
     
-                    // Cargar las tareas del proyecto
                     if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
                         foreach ($proyectoData['tareas'] as $tareaData) {
                             $tarea = new Tarea(
