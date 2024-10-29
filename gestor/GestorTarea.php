@@ -1,5 +1,5 @@
 <?php
-require_once 'tarea.php';
+require_once './clases/tarea.php';
 
 class GestorTarea{
         public $tareas = [];

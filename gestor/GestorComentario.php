@@ -1,8 +1,8 @@
 <?php
 
-require_once 'usuario.php';
-require_once 'tarea.php';
-require_once 'comentario.php';
+require_once './clases/usuario.php';
+require_once './clases/tarea.php';
+require_once './clases/comentario.php';
 
 class GestorComentario {
     public $comentarios = [];

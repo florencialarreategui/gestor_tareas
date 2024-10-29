@@ -1,6 +1,6 @@
 <?php
-require_once 'usuario.php';
-require_once 'funcionesAuxiliares.php';
+require_once './clases/usuario.php';
+require_once './clases/funcionesAuxiliares.php';
 
 class GestorUsuario{
     private $usuarios = [];

@@ -1,5 +1,5 @@
 <?php
-require_once 'estado.php';
+require_once './clases/estado.php';
 
 
 class GestorEstado {

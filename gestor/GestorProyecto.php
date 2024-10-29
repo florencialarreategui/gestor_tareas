@@ -1,9 +1,8 @@
 <?php
-require_once 'funcionesAuxiliares.php';
-require_once 'proyecto.php';
-require_once 'tarea.php';
-require_once 'comentario.php';
-require_once 'estado.php';
+require_once './clases/funcionesAuxiliares.php';
+require_once './clases/proyecto.php';
+require_once './clases/tarea.php';
+require_once './clases/estado.php';
 
 class GestorProyecto {
     public $proyectos = [];
