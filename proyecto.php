@@ -7,15 +7,13 @@ class Proyecto {
     private $descripcion;
     private $fechaInicio;
     private $fechaFin;
-    private $estado;
 
-    public function __construct($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado) {
+    public function __construct($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin) {
         $this->id_proyecto = $id_proyecto;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
-        $this->estado= $estado;
     }
 
     public function getIdProyecto() {
@@ -38,10 +36,6 @@ class Proyecto {
         return $this->fechaFin;
     }
 
-    public function getEstado() {
-        return $this->estado;
-    }
-
     public function setIdProyecto($id_proyecto) {
         $this->id_proyecto = $id_proyecto;
     }
@@ -61,9 +55,6 @@ class Proyecto {
     public function setFechaFin($fechaFin) {
         $this->fechaFin = $fechaFin;
     }
-    public function setestado($estado) {
-        $this->estado = $estado;
-    }
 
     public function toArray() {
         return [
@@ -72,7 +63,6 @@ class Proyecto {
             'descripcion' => $this->descripcion,
             'fechaInicio' => $this->fechaInicio,
             'fechaFin' => $this->fechaFin,
-            'estado' => $this->estado,
         ];
     }
 
@@ -83,7 +73,6 @@ class Proyecto {
             $array['descripcion'],
             $array['fechaInicio'],
             $array['fechaFin'],
-            $array['estado'],
         );
     }
 }

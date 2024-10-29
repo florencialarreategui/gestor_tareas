@@ -2,13 +2,6 @@
     "tarea": [
         {
             "id_tarea": 1,
-            "nombre": "correr",
-            "descripcion": "saltar",
-            "fecha_inicio": "1",
-            "fecha_fin": "1"
-        },
-        {
-            "id_tarea": 1,
             "nombre": "comprar aceitunas",
             "descripcion": "ir al mercado",
             "fecha_inicio": "1276767",
@@ -121,10 +114,10 @@
         },
         {
             "id_tarea": 7,
-            "nombre": "45",
-            "descripcion": "45",
-            "fecha_inicio": "45",
-            "fecha_fin": "45"
+            "nombre": "ppppp",
+            "descripcion": "p",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
         },
         {
             "id_tarea": 1,
@@ -151,6 +144,13 @@
             "id_tarea": 1,
             "nombre": "lalalal",
             "descripcion": "1",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "mmmm",
+            "descripcion": "mmmm",
             "fecha_inicio": "1",
             "fecha_fin": "1"
         }

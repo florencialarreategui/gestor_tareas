@@ -5,16 +5,21 @@
             "nombre": "lalalaall",
             "descripcion": "prueba",
             "fechaInicio": "333",
-            "fechaFin": "99",
-            "estado": "Activo"
+            "fechaFin": "99"
         },
         {
             "id_proyecto": 356,
             "nombre": "proyecto",
             "descripcion": "pro",
             "fechaInicio": "p",
-            "fechaFin": "p",
-            "estado": "Activo"
+            "fechaFin": "p"
+        },
+        {
+            "id_proyecto": 685,
+            "nombre": "edito nombre",
+            "descripcion": "lalalalala",
+            "fechaInicio": "4",
+            "fechaFin": "4"
         }
     ]
 }

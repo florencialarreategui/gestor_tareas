@@ -16,7 +16,6 @@ class GestorProyecto {
     
     public function agregarProyecto() {
         $id_proyecto = generarIdNumerico();
-        $estado = "Activo";
         echo "Ingrese el nombre del proyecto: ";
         $nombre = trim(fgets(STDIN));
         echo "Ingrese la descripción del proyecto: ";
@@ -26,9 +25,9 @@ class GestorProyecto {
         echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
         $fechaFin = trim(fgets(STDIN));
         
-        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin,$estado);
+        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin);
         $this->proyectos[] = $nuevoProyecto;
-        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . " Estado: " . $estado ."\n";
+        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
 
         $this->guardarEnJSON();
     }
@@ -40,7 +39,7 @@ class GestorProyecto {
         }
         echo "=== Proyectos Registrados ===\n";
         foreach ($this->proyectos as $proyecto) {
-            echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin(). ", Estado: " . $proyecto->getEstado() . "\n";
+            echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin(). "\n";
         }
     }
 
@@ -49,20 +48,17 @@ class GestorProyecto {
         echo "Ingrese el ID del proyecto que desea editar: ";
         $id_proyecto = trim(fgets(STDIN));
         
-        // Variable para indicar si se encontró el proyecto
         $proyectoEncontrado = false;
-    
-        // Busca el proyecto por ID
+
         foreach ($this->proyectos as $proyecto) {
             if ($proyecto->getIdProyecto() == $id_proyecto) {
-                $proyectoEncontrado = true; // Se encontró el proyecto
+                $proyectoEncontrado = true; 
                 echo "=== Elija que campo desea editar ===\n";
                 while (true) {
                     echo "1. Nombre\n";
                     echo "2. Descripción\n";
                     echo "3. Fecha de inicio (YYYY-MM-DD): \n";
                     echo "4. Fecha de finalización (YYYY-MM-DD): \n";
-                    echo "5. Estado\n";
                     echo "0. Salir al Menú Principal\n";
     
                     $eleccion = trim(fgets(STDIN));
@@ -91,12 +87,6 @@ class GestorProyecto {
                             $proyecto->setFechaFin($fechaFin);
                             echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
                             break;
-                        case '5':
-                            echo "Ingrese activo o terminado según corresponda: ";
-                            $estado = trim(fgets(STDIN));
-                            $proyecto->setEstado($estado);
-                            echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
-                            break;
                         case '0':
                             return; 
                         default:
@@ -108,7 +98,6 @@ class GestorProyecto {
             }
         }
     
-        // Si se sale del bucle y no se encontró el proyecto
         if (!$proyectoEncontrado) {
             echo "Proyecto no encontrado.\n";
         }
@@ -118,7 +107,7 @@ class GestorProyecto {
     public function eliminarProyecto() {
         echo "Ingrese el ID del proyecto que desea eliminar: ";
         $id_proyecto = trim(fgets(STDIN));
-        // Busca el índice del proyecto por ID
+       
         $indiceProyecto = null;
         foreach ($this->proyectos as $indice => $p) {
             if ($p->getIdProyecto() == $id_proyecto) {
@@ -164,7 +153,6 @@ class GestorProyecto {
                         $proyectoData['descripcion'],
                         $proyectoData['fechaInicio'],
                         $proyectoData['fechaFin'],
-                        $proyectoData['estado'],
                     );
                     $this->proyectos[] = $proyecto;
                 }
