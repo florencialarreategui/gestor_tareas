@@ -1,14 +1,6 @@
 {
     "tarea": [
         {
-            "id_tarea": 2,
-            "nombre": "sdsadsad",
-            "descripcion": "asdada",
-            "fecha_inicio": "asd",
-            "fecha_fin": "ads",
-            "id_proyecto": null
-        },
-        {
             "id_tarea": 1,
             "nombre": "lililili",
             "descripcion": "lololo",
@@ -46,14 +38,6 @@
             "descripcion": "y",
             "fecha_inicio": "9",
             "fecha_fin": "8",
-            "id_proyecto": null
-        },
-        {
-            "id_tarea": 7,
-            "nombre": "ppppp",
-            "descripcion": "p",
-            "fecha_inicio": "1",
-            "fecha_fin": "1",
             "id_proyecto": null
         },
         {

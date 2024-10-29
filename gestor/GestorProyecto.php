@@ -71,6 +71,7 @@ class GestorProyecto {
                     echo "3. Fecha de inicio (YYYY-MM-DD): \n";
                     echo "4. Fecha de finalización (YYYY-MM-DD): \n";
                     echo "5. Agregar Tarea: \n";
+                    echo "6. Eliminar Tarea: \n";
                     echo "0. Salir al Menú Principal\n";
     
                     $eleccion = trim(fgets(STDIN));
@@ -101,6 +102,9 @@ class GestorProyecto {
                             break;
                             case '5':
                                 $this->gestorTarea->agregarTarea($proyecto);
+                                break;
+                            case '6':
+                                    $this->gestorTarea->eliminarTarea() ;
                                 break;
                         case '0':
                             return; 
@@ -141,12 +145,28 @@ class GestorProyecto {
         $this->guardarEnJSON();
     }
 
-    public function obtenerProyectoPorId() {
-        echo "Ingrese el id del proyecto: ";
+    public function listarProyectoPorId() {
+        echo "Ingrese el ID del proyecto que desea ver: ";
         $id_proyecto = trim(fgets(STDIN));
-        return $this->proyectos[$id_proyectos] ?? null;
+        // Buscar el proyecto por ID
+        foreach ($this->proyectos as $proyecto) {
+            if ($proyecto->getIdProyecto() == $id_proyecto) {
+                // Proyecto encontrado, imprimir detalles
+                echo "=== Proyecto Encontrado ===\n";
+                echo "Id: " . $proyecto->getIdProyecto() . "\n";
+                echo "Nombre: " . $proyecto->getNombre() . "\n";
+                echo "Descripción: " . $proyecto->getDescripcion() . "\n";
+                echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
+                echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+                echo "Tareas: " . $proyecto->getTareas() . "\n";
+                return; // Salir de la función después de mostrar el proyecto
+            }
+        }
+    
+        // Si no se encuentra el proyecto
+        echo "Proyecto no encontrado.\n";
     }
-
+    
 
     public function guardarEnJSON() {
         $proyectos = [];

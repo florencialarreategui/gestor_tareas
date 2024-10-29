@@ -13,7 +13,7 @@ class GestorTarea {
 
     //----------------- Agregar tarea--------------------------------
     public function agregarTarea($proyecto) {
-        $id_tarea = count($proyecto->getTareas()) + 1; // Método para obtener las tareas del proyecto
+        $id_tarea = count($proyecto->getTareas()) + 1; 
         $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el nombre de la tarea: ";
         $nombre = trim(fgets(STDIN));
@@ -28,7 +28,7 @@ class GestorTarea {
         $fecha_fin = trim(fgets(STDIN));
     
         $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto);
-        $proyecto->agregarTarea($nuevaTarea); // Agregar tarea al proyecto
+        $proyecto->agregarTarea($nuevaTarea); 
         echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " " . $id_tarea . "\n";
     }
 
@@ -51,7 +51,7 @@ class GestorTarea {
 
         echo "=== Tareas Registradas ===\n";
         foreach ($this->tareas as $tarea) {
-            echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . "\n"; // " Descripción: ". $tarea->getDescripcion() "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
+            echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . " Descripción: ". $tarea->getDescripcion() . "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
         }
     }
 
