@@ -2,10 +2,10 @@
     "tarea": [
         {
             "id_tarea": 1,
-            "nombre": "comer caramelos",
-            "descripcion": "comprar caramelos",
-            "fecha_inicio": "8765",
-            "fecha_fin": "0986"
+            "nombre": "correr",
+            "descripcion": "saltar",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
         },
         {
             "id_tarea": 1,
@@ -146,6 +146,13 @@
             "descripcion": "rf",
             "fecha_inicio": "d",
             "fecha_fin": "d"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "lalalal",
+            "descripcion": "1",
+            "fecha_inicio": "1",
+            "fecha_fin": "1"
         }
     ]
 }

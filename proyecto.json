@@ -1,0 +1,20 @@
+{
+    "proyecto": [
+        {
+            "id_proyecto": 469,
+            "nombre": "lalalaall",
+            "descripcion": "prueba",
+            "fechaInicio": "333",
+            "fechaFin": "99",
+            "estado": "Activo"
+        },
+        {
+            "id_proyecto": 356,
+            "nombre": "proyecto",
+            "descripcion": "pro",
+            "fechaInicio": "p",
+            "fechaFin": "p",
+            "estado": "Activo"
+        }
+    ]
+}

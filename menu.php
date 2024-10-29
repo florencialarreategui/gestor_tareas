@@ -170,7 +170,7 @@ protected $gestorUsuario;
                         $this->gestorTarea->listarTareas();
                         break;
                      case '3':
-                        $this->gestorTareas->editarTarea();
+                        $this->gestorTarea->editarTarea();
                         break;
                      case '4':
                         $this->gestorTarea->eliminarTarea();
