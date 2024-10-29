@@ -1,9 +1,9 @@
 <?php
-require_once 'GestorUsuario.php';
-require_once 'GestorTarea.php';
-require_once 'GestorComentario.php';
-require_once 'GestorProyecto.php';
-require_once 'GestorEstado.php';
+require_once './gestor/GestorUsuario.php';
+require_once './gestor/GestorTarea.php';
+require_once './gestor/GestorComentario.php';
+require_once './gestor/GestorProyecto.php';
+require_once './gestor/GestorEstado.php';
 
 
 

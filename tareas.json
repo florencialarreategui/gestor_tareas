@@ -2,41 +2,6 @@
     "tarea": [
         {
             "id_tarea": 1,
-            "nombre": "comprar aceitunas",
-            "descripcion": "ir al mercado",
-            "fecha_inicio": "1276767",
-            "fecha_fin": "989898"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "lavar los platos",
-            "descripcion": "lavar los platos",
-            "fecha_inicio": "4567",
-            "fecha_fin": "6789"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "comer sanguchitos",
-            "descripcion": "comprar fiambre",
-            "fecha_inicio": "5678",
-            "fecha_fin": "4321"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "Tomar agua",
-            "descripcion": "agua",
-            "fecha_inicio": "1234",
-            "fecha_fin": "5432"
-        },
-        {
-            "id_tarea": 1,
-            "nombre": "hacer pure de papas",
-            "descripcion": "comprar papas",
-            "fecha_inicio": "6543",
-            "fecha_fin": "8765"
-        },
-        {
-            "id_tarea": 1,
             "nombre": "comprar zapatos",
             "descripcion": "zapatos",
             "fecha_inicio": "2222",
@@ -153,6 +118,13 @@
             "descripcion": "mmmm",
             "fecha_inicio": "1",
             "fecha_fin": "1"
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "asdasd",
+            "descripcion": "asdas",
+            "fecha_inicio": "asdas",
+            "fecha_fin": "asdas"
         }
     ]
 }
