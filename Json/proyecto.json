@@ -70,6 +70,14 @@
                     "fecha_inicio": "a",
                     "fecha_fin": "a",
                     "id_proyecto": 8
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "tomar agua",
+                    "descripcion": "aa",
+                    "fecha_inicio": "a",
+                    "fecha_fin": "a",
+                    "id_proyecto": 8
                 }
             ]
         },
@@ -92,7 +100,7 @@
         },
         {
             "id_proyecto": 10,
-            "nombre": "porfa",
+            "nombre": "lalalla",
             "descripcion": "que ande",
             "fechaInicio": "1",
             "fechaFin": "2",
