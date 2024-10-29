@@ -171,9 +171,3 @@ class GestorTarea{
        
         }
 
-        //  $nuevaTarea = new GestorTarea();
-        //  $nuevaTarea->agregarTarea();
-        //  $nuevaTarea->listarTareas();
-        //  $nuevaTarea->agregarTarea();
-        //  $nuevaTarea->listarTareas();
-

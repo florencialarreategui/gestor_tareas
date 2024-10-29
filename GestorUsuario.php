@@ -163,13 +163,3 @@ class GestorUsuario{
 
 }
 
-
-// $gestor = new GestorUsuario ();
-// $gestor->crearUsuario();
-// $gestor->crearUsuario();
-// $gestor->crearUsuario();
-// $gestor->crearUsuario();
-// $gestor->listarUsuarios();
-// $gestor->editarUsuario();
-// $gestor->eliminarUsuario();
-// $gestor->listarUsuarios();

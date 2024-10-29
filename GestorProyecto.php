@@ -177,9 +177,3 @@ class GestorProyecto {
     }
     
 }
-
-// $nuevoProyecto = new GestorProyecto ();
-// // $nuevoProyecto->agregarProyecto();
-// $nuevoProyecto->listarProyectos();
-// $nuevoProyecto->editarProyecto();
-// $nuevoProyecto->listarProyectos();
