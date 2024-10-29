@@ -1,0 +1,148 @@
+{
+    "tarea": [
+        {
+            "id_tarea": 1,
+            "nombre": "lililili",
+            "descripcion": "lololo",
+            "fecha_inicio": "1",
+            "fecha_fin": "2",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "lululul",
+            "descripcion": "lelelel",
+            "fecha_inicio": "3",
+            "fecha_fin": "4",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "aaaa",
+            "descripcion": "eeee",
+            "fecha_inicio": "1",
+            "fecha_fin": "2",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "re",
+            "descripcion": "ra",
+            "fecha_inicio": "3",
+            "fecha_fin": "4",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 6,
+            "nombre": "rere",
+            "descripcion": "y",
+            "fecha_inicio": "9",
+            "fecha_fin": "8",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "",
+            "descripcion": "jkadjkasdjaskld",
+            "fecha_inicio": "fff",
+            "fecha_fin": "q",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 2,
+            "nombre": "lldldldldlld",
+            "descripcion": "d",
+            "fecha_inicio": "dd",
+            "fecha_fin": "d",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "re",
+            "descripcion": "rf",
+            "fecha_inicio": "d",
+            "fecha_fin": "d",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "lalalal",
+            "descripcion": "1",
+            "fecha_inicio": "1",
+            "fecha_fin": "1",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "mmmm",
+            "descripcion": "mmmm",
+            "fecha_inicio": "1",
+            "fecha_fin": "1",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "asdasd",
+            "descripcion": "asdas",
+            "fecha_inicio": "asdas",
+            "fecha_fin": "asdas",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "json",
+            "descripcion": "s",
+            "fecha_inicio": "q",
+            "fecha_fin": "q",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "pruebo id",
+            "descripcion": "id",
+            "fecha_inicio": "1",
+            "fecha_fin": "1",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "prueba 2 de id",
+            "descripcion": "prueba",
+            "fecha_inicio": "1",
+            "fecha_fin": "1",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "prueba 3 de id",
+            "descripcion": "prueba",
+            "fecha_inicio": "1",
+            "fecha_fin": "1",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "qwqw",
+            "descripcion": "qwq",
+            "fecha_inicio": "wq",
+            "fecha_fin": "q",
+            "id_proyecto": null
+        },
+        {
+            "id_tarea": 19,
+            "nombre": "prueba de relacionar tareas con proyectos",
+            "descripcion": "laaala",
+            "fecha_inicio": "1",
+            "fecha_fin": "1",
+            "id_proyecto": "6"
+        },
+        {
+            "id_tarea": 20,
+            "nombre": "prueba",
+            "descripcion": "ddd",
+            "fecha_inicio": "dd",
+            "fecha_fin": "d",
+            "id_proyecto": "2"
+        }
+    ]
+}

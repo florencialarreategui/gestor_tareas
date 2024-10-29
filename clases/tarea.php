@@ -11,18 +11,15 @@ class Tarea {
         private $fecha_inicio;
         private $fecha_fin;
         private $id_proyecto;
-        private $id_usuario;
-        private $id_estado;
 
-        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $id_usuario, $id_estado) {
+        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto) {
             $this->id_tarea = $id_tarea;
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->fecha_inicio = $fecha_inicio;
             $this->fecha_fin = $fecha_fin;
             $this->id_proyecto = $id_proyecto;
-            $this->id_usuario = $id_usuario;
-            $this->id_estado = $id_estado;
+
         }
 
         public function getIdTarea() {
@@ -49,14 +46,6 @@ class Tarea {
             return $this->id_proyecto;
         }
 
-        public function getIdUsuario() {
-            return $this->id_usuario;
-        }
-
-        public function getIdEstado() {
-            return $this->id_estado;
-        }
-
         public function setIdTarea($id_tarea) {
             $this->id_tarea = $id_tarea;
         }
@@ -81,13 +70,6 @@ class Tarea {
             $this->id_proyecto = $id_proyecto;
         }
 
-        public function setIdUsuario($id_usuario) {
-            $this->id_usuario = $id_usuario;
-        }
-
-        public function setIdEstado($id_estado) {
-            $this->id_estado = $id_estado;
-        }
 
         public function toArray() {
             return [
@@ -97,8 +79,6 @@ class Tarea {
                 'fecha_inicio' => $this->fecha_inicio,
                 'fecha_fin' => $this->fecha_fin,
                 'id_proyecto' => $this->id_proyecto,
-                'id_usuario' => $this->id_usuario,
-                'id_estado' => $this->id_estado
             ];
         }
         public static function fromArray($array) {
@@ -109,8 +89,6 @@ class Tarea {
                 $array['fecha_inicio'],
                 $array['fecha_fin'],
                 $array['id_proyecto'],
-                $array['id_usuario'],
-                $array['id_estado']
             );
         }
     

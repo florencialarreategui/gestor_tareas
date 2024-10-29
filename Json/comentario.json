@@ -1,0 +1,74 @@
+{
+    "comentario": [
+        {
+            "id_comentario": 1,
+            "id_tarea": 1,
+            "id_usuario": 1,
+            "contenido": "nuevo intento de comentario1",
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 3,
+            "id_tarea": 1,
+            "id_usuario": 1,
+            "contenido": "Este es un comentario sobre la Tarea 2",
+            "fecha": "2024-09-03"
+        },
+        {
+            "id_comentario": 4,
+            "id_tarea": 1,
+            "id_usuario": 1,
+            "contenido": "Este es otro comentario sobre la Tarea 2",
+            "fecha": "2024-09-02"
+        },
+        {
+            "id_comentario": 80,
+            "id_tarea": null,
+            "id_usuario": null,
+            "contenido": null,
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 94,
+            "id_tarea": "1",
+            "id_usuario": "1",
+            "contenido": "este es un comentario de prueba xx",
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 985,
+            "id_tarea": "1",
+            "id_usuario": "1",
+            "contenido": "este es otro intento",
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 820,
+            "id_tarea": "",
+            "id_usuario": "",
+            "contenido": "comentario de 820",
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 112,
+            "id_tarea": "xxx",
+            "id_usuario": "1",
+            "contenido": "llllllllllll",
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 579,
+            "id_tarea": "3",
+            "id_usuario": "1",
+            "contenido": "ddddd",
+            "fecha": "2024-10-27"
+        },
+        {
+            "id_comentario": 946,
+            "id_tarea": "kkk",
+            "id_usuario": "2",
+            "contenido": "jkkll",
+            "fecha": "2024-10-27"
+        }
+    ]
+}

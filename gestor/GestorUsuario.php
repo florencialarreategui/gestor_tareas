@@ -1,12 +1,10 @@
 <?php
-require_once 'usuario.php';
-require_once 'funcionesAuxiliares.php';
-// require_once 'menu.php';
+require_once './clases/usuario.php';
 
 class GestorUsuario{
     private $usuarios = [];
     
-        private $archivoJson = 'usuario.json';
+        private $archivoJson = './Json/usuario.json';
 
         public function __construct()
         {
@@ -15,7 +13,9 @@ class GestorUsuario{
 
 
     //----------------------------------------Validacion Usuario-----------------------------------------
-
+//necesita un foreach para recorrer usuarios y comparar nombre y contraseña 
+//sacar parametros 
+//hacer un foreach que compare dentro del array de usuarios getnombre con nombre ingresado y get clave con clave ingresada
     public function validarIngresoUsuario ($nombreUsuario,$claveUsuario) {
         echo "Si ya se encuentra registrado ingrese su nombre: ";
              $nombreUsuarioIngresado = trim(fgets(STDIN));
@@ -30,7 +30,7 @@ class GestorUsuario{
  
     // //-----------------------------crear usurario ---------------------------
     public function crearUsuario() {
-        $id_usuario = generarIdNumerico();
+        $id_usuario = count($this->tareas) + 1;
 
         echo "Ingrese nombre: ";
         $nombre = trim(fgets(STDIN));
@@ -162,14 +162,3 @@ class GestorUsuario{
 
 }
 
-
-$gestor = new GestorUsuario ();
-$gestor->crearUsuario();
-$gestor->crearUsuario();
-$gestor->crearUsuario();
-$gestor->crearUsuario();
-// $gestor->validarIngresoUsuario ("florencia", 1234);
-$gestor->listarUsuarios();
-$gestor->editarUsuario();
-$gestor->eliminarUsuario();
-$gestor->listarUsuarios();
