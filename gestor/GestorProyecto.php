@@ -16,7 +16,8 @@ class GestorProyecto {
 
     
     public function agregarProyecto() {
-        $id_proyecto = count($this->proyectos) + 1;
+        $id_proyecto = count($this->proyectos) + 1; 
+        $estado= "Activo";
         echo "Ingrese el nombre del proyecto: ";
         $nombre = trim(fgets(STDIN));
         echo "Ingrese la descripción del proyecto: ";
@@ -25,8 +26,9 @@ class GestorProyecto {
         $fechaInicio = trim(fgets(STDIN));
         echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
         $fechaFin = trim(fgets(STDIN));
-        
-        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin);
+        echo "Ingrese Estado: ";
+        $estado= "Activo";
+        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
         $this->proyectos[] = $nuevoProyecto;
         echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
 
@@ -70,9 +72,10 @@ class GestorProyecto {
                     echo "2. Descripción\n";
                     echo "3. Fecha de inicio (YYYY-MM-DD): \n";
                     echo "4. Fecha de finalización (YYYY-MM-DD): \n";
-                    echo "5. Agregar Tarea: \n";
-                    echo "6. Editar Tarea: \n";
-                    echo "7. Eliminar Tarea: \n";
+                    echo "5. Cambiar estado: \n";
+                    echo "6. Agregar Tarea: \n";
+                    echo "7. Editar Tarea: \n";
+                    echo "8. Eliminar Tarea: \n";
                     echo "0. Salir al Menú Principal\n";
     
                     $eleccion = trim(fgets(STDIN));
@@ -101,13 +104,19 @@ class GestorProyecto {
                             $proyecto->setFechaFin($fechaFin);
                             echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
                             break;
-                            case '5':
+                        case '5':
+                                echo "Ingrese Activo o Terminado según corresponda: ";
+                                $estado = trim(fgets(STDIN));
+                                $proyecto->setEstado($estado);
+                                echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                                break;
+                        case '6':
                                 $this->gestorTarea->agregarTarea($proyecto);
                                 break;
-                            case '6':
+                        case '7':
                                     $this->gestorTarea->editarTarea($proyecto) ;
                                 break;
-                            case '7':
+                        case '8':
                                     $this->gestorTarea->eliminarTarea($proyecto) ;
                                 break;
                         case '0':
@@ -161,6 +170,7 @@ class GestorProyecto {
                 echo "Descripción: " . $proyecto->getDescripcion() . "\n";
                 echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
                 echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+                echo "Estado: " . $proyecto->getEstado() . "\n";
     
                 $tareas = $proyecto->getTareas();
                 if (!empty($tareas)) {
@@ -204,7 +214,8 @@ class GestorProyecto {
                         $proyectoData['nombre'],
                         $proyectoData['descripcion'],
                         $proyectoData['fechaInicio'],
-                        $proyectoData['fechaFin']
+                        $proyectoData['fechaFin'],
+                        $proyectoData['estado'],
                     );
     
                     if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
