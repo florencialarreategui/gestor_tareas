@@ -16,6 +16,48 @@
                     "id_proyecto": 1
                 }
             ]
+        },
+        {
+            "id_proyecto": 10,
+            "nombre": "porfa",
+            "descripcion": "que ande",
+            "fechaInicio": "1",
+            "fechaFin": "2",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "porfis",
+                    "descripcion": "re porfis",
+                    "fecha_inicio": "1",
+                    "fecha_fin": "2",
+                    "id_proyecto": 10
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "dalee",
+                    "descripcion": "sisi",
+                    "fecha_inicio": "1",
+                    "fecha_fin": "2",
+                    "id_proyecto": 10
+                }
+            ]
+        },
+        {
+            "id_proyecto": 11,
+            "nombre": "rrrrr",
+            "descripcion": "este es proyecto r",
+            "fechaInicio": "2024-10-30",
+            "fechaFin": "2024-11-09",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "tarea del proyecto r",
+                    "descripcion": "es una tarea inicial",
+                    "fecha_inicio": "2024-11-09",
+                    "fecha_fin": "1010-98-67",
+                    "id_proyecto": 11
+                }
+            ]
         }
     ]
 }
