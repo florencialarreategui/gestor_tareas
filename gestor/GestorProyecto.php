@@ -71,7 +71,8 @@ class GestorProyecto {
                     echo "3. Fecha de inicio (YYYY-MM-DD): \n";
                     echo "4. Fecha de finalización (YYYY-MM-DD): \n";
                     echo "5. Agregar Tarea: \n";
-                    echo "6. Eliminar Tarea: \n";
+                    echo "6. Editar Tarea: \n";
+                    echo "7. Eliminar Tarea: \n";
                     echo "0. Salir al Menú Principal\n";
     
                     $eleccion = trim(fgets(STDIN));
@@ -104,7 +105,10 @@ class GestorProyecto {
                                 $this->gestorTarea->agregarTarea($proyecto);
                                 break;
                             case '6':
-                                    $this->gestorTarea->eliminarTarea() ;
+                                    $this->gestorTarea->editarTarea($proyecto) ;
+                                break;
+                            case '7':
+                                    $this->gestorTarea->eliminarTarea($proyecto) ;
                                 break;
                         case '0':
                             return; 

@@ -6,9 +6,11 @@ class GestorTarea {
     public $tareas = [];
     private $archivoJson = './Json/tareas.json';
     private $archivoJsonProyectos = './Json/proyecto.json';
+    private $proyectos = [];
 
     public function __construct() {
         $this->cargarDesdeJSON();
+        $this->proyectos = [];
     }
 
     //----------------- Agregar tarea--------------------------------
@@ -55,55 +57,88 @@ class GestorTarea {
         }
     }
 
-    //----------------- Editar tarea--------------------------------
-    public function editarTarea() {
+    public function editarTarea($proyecto) {
+        $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea editar: ";
         $id_tarea = trim(fgets(STDIN));
-        foreach ($this->tareas as $tarea) {
-            if ($tarea->getIdTarea() == $id_tarea) {
-                echo "Ingrese el nuevo nombre de la tarea: ";
-                $nombre = trim(fgets(STDIN));
-                $tarea->setNombre($nombre);
-                echo "Ingrese la nueva descripción de la tarea: ";
-                $descripcion = trim(fgets(STDIN));
-                $tarea->setDescripcion($descripcion);
-                echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
-                $fechaInicio = trim(fgets(STDIN));
-                $tarea->setFechaInicio($fechaInicio);
-                echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-                $fechaFin = trim(fgets(STDIN));
-                $tarea->setFechaFin($fechaFin);
-                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
-
-                $this->guardarEnJSON();
-                return;
+        
+     
+        if ($proyecto->getIdProyecto() == $id_proyecto) {
+            foreach ($proyecto->getTareas() as $tarea) {
+                if ($tarea->getIdTarea() == $id_tarea) {
+                    echo "Ingrese el nuevo nombre de la tarea: ";
+                    $nombre = trim(fgets(STDIN));
+                    $tarea->setNombre($nombre);
+                    echo "Ingrese la nueva descripción de la tarea: ";
+                    $descripcion = trim(fgets(STDIN));
+                    $tarea->setDescripcion($descripcion);
+                    echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+                    $fechaInicio = trim(fgets(STDIN));
+                    $tarea->setFechaInicio($fechaInicio);
+                    echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                    $fechaFin = trim(fgets(STDIN));
+                    $tarea->setFechaFin($fechaFin);
+                    echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
+    
+                    $this->guardarEnJSON();
+                    return;
+                }
             }
+            echo "Tarea no encontrada en el proyecto especificado.\n";
+        } else {
+            echo "Proyecto no encontrado.\n";
         }
-        echo "Tarea no encontrada.\n";
     }
+    
 
     //----------------- Eliminar tarea--------------------------------
-    public function eliminarTarea() {
+    // public function eliminarTarea() {
+    //     echo "Ingrese el ID de la tarea que desea eliminar: ";
+    //     $id_tarea = trim(fgets(STDIN));
+
+    //     $indiceTarea = null;
+
+    //     foreach ($this->tareas as $indice => $tarea) {
+    //         if ($tarea->getIdTarea() == $id_tarea) {
+    //             $indiceTarea = $indice;
+    //             break;
+    //         }
+    //     }
+    //     if ($indiceTarea === null) {
+    //         echo "Tarea no encontrada.\n";
+    //         return;
+    //     }
+
+    //     unset($this->tareas[$indiceTarea]);
+    //     $this->tareas = array_values($this->tareas);
+    //     echo "Tarea eliminada exitosamente.\n";
+    //     $this->guardarEnJSON();
+    // }
+
+    public function eliminarTarea($proyecto) {
+        $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea eliminar: ";
         $id_tarea = trim(fgets(STDIN));
-
-        $indiceTarea = null;
-
-        foreach ($this->tareas as $indice => $tarea) {
-            if ($tarea->getIdTarea() == $id_tarea) {
-                $indiceTarea = $indice;
-                break;
+        
+        if ($proyecto->getIdProyecto() == $id_proyecto) {
+            $tareas = $proyecto->getTareas();
+            $indiceTarea = null;
+    
+            foreach ($tareas as $indice => $tarea) {
+                if ($tarea->getIdTarea() == $id_tarea) {
+                    $indiceTarea = $indice;
+                    // Eliminar la tarea del proyecto
+                    unset($tareas[$indiceTarea]);
+                    $proyecto->setTareas(array_values($tareas)); // Reindexar el array
+                    echo "Tarea eliminada exitosamente.\n";
+                    $this->guardarEnJSON();
+                    return;
+                }
             }
+            echo "Tarea no encontrada en el proyecto especificado.\n";
+        } else {
+            echo "Proyecto no encontrado.\n";
         }
-        if ($indiceTarea === null) {
-            echo "Tarea no encontrada.\n";
-            return;
-        }
-
-        unset($this->tareas[$indiceTarea]);
-        $this->tareas = array_values($this->tareas);
-        echo "Tarea eliminada exitosamente.\n";
-        $this->guardarEnJSON();
     }
 
     //----------------- Guardar en JSON--------------------------------
