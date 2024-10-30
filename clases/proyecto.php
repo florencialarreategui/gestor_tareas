@@ -61,6 +61,10 @@ class Proyecto {
         $this->fechaFin = $fechaFin;
     }
 
+    public function setTareas($tareas) {
+        $this->tareas = $tareas;
+    }
+
     public function agregarTarea($tarea) {
         $this->tareas[] = $tarea;
     }

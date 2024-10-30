@@ -108,7 +108,7 @@ class GestorProyecto {
                                     $this->gestorTarea->editarTarea($proyecto) ;
                                 break;
                             case '7':
-                                    $this->gestorTarea->eliminarTarea($id_proyecto) ;
+                                    $this->gestorTarea->eliminarTarea($proyecto) ;
                                 break;
                         case '0':
                             return; 

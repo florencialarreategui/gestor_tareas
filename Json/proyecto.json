@@ -2,36 +2,11 @@
     "proyecto": [
         {
             "id_proyecto": 1,
-            "nombre": "prueba",
-            "descripcion": "qwe",
-            "fechaInicio": "1",
-            "fechaFin": "1",
-            "tareas": [
-                {
-                    "id_tarea": 1,
-                    "nombre": "hhh",
-                    "descripcion": "aaa",
-                    "fecha_inicio": "1",
-                    "fecha_fin": "2",
-                    "id_proyecto": 1
-                },
-                {
-                    "id_tarea": 2,
-                    "nombre": "alala",
-                    "descripcion": "a",
-                    "fecha_inicio": "a",
-                    "fecha_fin": "a",
-                    "id_proyecto": 1
-                },
-                {
-                    "id_tarea": 3,
-                    "nombre": "sdsada",
-                    "descripcion": "sad",
-                    "fecha_inicio": "2",
-                    "fecha_fin": "2",
-                    "id_proyecto": 1
-                }
-            ]
+            "nombre": "dsada",
+            "descripcion": "sadsad",
+            "fechaInicio": "asd",
+            "fechaFin": "asd",
+            "tareas": []
         }
     ]
 }
