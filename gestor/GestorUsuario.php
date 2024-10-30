@@ -17,7 +17,7 @@ class GestorUsuario{
 //sacar parametros 
 //hacer un foreach que compare dentro del array de usuarios getnombre con nombre ingresado y get clave con clave ingresada
    
-        public function validarUsuario($nombre,$clave) {
+        public function validarUsuario() {
             echo "Ingrese su nombre: ";
             $nombreUsuarioIngresado = trim(fgets(STDIN));
             echo "Ingrese su clave: ";
@@ -26,7 +26,7 @@ class GestorUsuario{
             foreach ($this->usuarios as $usuario) {
                
                 if ($usuario->getNombre() == $nombreUsuarioIngresado && $usuario->getClave() == $claveUsuarioIngresada) {
-                    echo "Usuario Válido";
+                    echo "Usuario Válido \n";;
                     return true; // encontró usuario válido
                 }
             }
@@ -38,7 +38,7 @@ class GestorUsuario{
  
     // //-----------------------------crear usurario ---------------------------
     public function crearUsuario() {
-        $id_usuario = count($this->tareas) + 1;
+        $id_usuario = count($this->usuarios) + 1;
 
         echo "Ingrese nombre: ";
         $nombre = trim(fgets(STDIN));

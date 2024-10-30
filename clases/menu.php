@@ -39,7 +39,7 @@ protected $gestorUsuario;
                             break;
             
                         case '2':
-                            $this->crearUsuario();
+                            $this->gestorUsuario->crearUsuario();
                             break;
             
                         case '0':

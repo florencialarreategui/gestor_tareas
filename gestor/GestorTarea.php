@@ -56,30 +56,61 @@ class GestorTarea {
             echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . " Descripción: ". $tarea->getDescripcion() . "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
         }
     }
+  //------------- Listar Tareas--------------------------------------
 
-    public function editarTarea($proyecto) {
+  public function editarTarea($proyecto) {
         $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea editar: ";
         $id_tarea = trim(fgets(STDIN));
-        
-     
         if ($proyecto->getIdProyecto() == $id_proyecto) {
             foreach ($proyecto->getTareas() as $tarea) {
                 if ($tarea->getIdTarea() == $id_tarea) {
-                    echo "Ingrese el nuevo nombre de la tarea: ";
-                    $nombre = trim(fgets(STDIN));
-                    $tarea->setNombre($nombre);
-                    echo "Ingrese la nueva descripción de la tarea: ";
-                    $descripcion = trim(fgets(STDIN));
-                    $tarea->setDescripcion($descripcion);
-                    echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
-                    $fechaInicio = trim(fgets(STDIN));
-                    $tarea->setFechaInicio($fechaInicio);
-                    echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-                    $fechaFin = trim(fgets(STDIN));
-                    $tarea->setFechaFin($fechaFin);
-                    echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
-    
+                    echo "=== Elija que campo desea editar ===\n";
+                while (true) {
+                    echo "1. Nombre\n";
+                    echo "2. Descripción\n";
+                    echo "3. Fecha de inicio (YYYY-MM-DD): \n";
+                    echo "4. Fecha de finalización (YYYY-MM-DD): \n";
+                    echo "0. Volver al menu de proyectos: \n";
+                    $eleccion = trim(fgets(STDIN));
+                    switch ($eleccion) {
+                        case '1':
+                            echo "Ingrese el nuevo nombre de la tarea: ";
+                            $nombre = trim(fgets(STDIN));
+                            $tarea->setNombre($nombre);
+                            break;
+                        case '1':
+                            echo "Ingrese el nuevo nombre de la tarea: ";
+                            $nombre = trim(fgets(STDIN));
+                            $tarea->setNombre($nombre);
+                            break;
+                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                        case '2':
+                            echo "Ingrese la nueva descripción: ";
+                            $descripcion = trim(fgets(STDIN));
+                            $tarea->setDescripcion($descripcion);
+                            break;
+                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                        case '3':
+                            echo "Ingrese la nueva fecha de inicio(YYYY-MM-DD): ";
+                            $fechaInicio = trim(fgets(STDIN));
+                            $tarea->setFechaInicio($fechaInicio);
+                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                            break;
+                        case '4':   
+                            echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                            $fechaFin = trim(fgets(STDIN));
+                            $tarea->setFechaFin($fechaFin);
+                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                            break;           
+                        case '0':
+                            return; 
+                        default:
+                            echo "Opción no válida. Inténtelo de nuevo.\n";
+                            break;
+                    }
+                    $this->guardarEnJSON();
+                }
                     $this->guardarEnJSON();
                     return;
                 }
