@@ -133,9 +133,8 @@ class GestorTarea {
             foreach ($tareas as $indice => $tarea) {
                 if ($tarea->getIdTarea() == $id_tarea) {
                     $indiceTarea = $indice;
-                    // Eliminar la tarea del proyecto
                     unset($tareas[$indiceTarea]);
-                    $proyecto->setTareas(array_values($tareas)); // Reindexar el array
+                    $proyecto->setTareas(array_values($tareas)); 
                     echo "Tarea eliminada exitosamente.\n";
                     $this->guardarEnJSON();
                     return;

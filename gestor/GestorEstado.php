@@ -4,7 +4,6 @@ require_once './clases/estado.php';
 
 class GestorEstado {
     public $estados = [];
-    private $archivoJson = 'estados.json';
 
     public function __construct() {
         $this->cargarDesdeJSON();

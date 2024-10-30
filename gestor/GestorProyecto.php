@@ -1,7 +1,6 @@
 <?php
 require_once './clases/proyecto.php';
 require_once './clases/tarea.php';
-require_once './clases/estado.php';
 require_once './gestor/GestorTarea.php';
 
 class GestorProyecto {
@@ -215,7 +214,7 @@ class GestorProyecto {
                         $proyectoData['descripcion'],
                         $proyectoData['fechaInicio'],
                         $proyectoData['fechaFin'],
-                        $proyectoData['estado'],
+                        $proyectoData['estado']
                     );
     
                     if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {

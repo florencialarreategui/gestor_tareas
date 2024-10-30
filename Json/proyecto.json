@@ -6,6 +6,7 @@
             "descripcion": "prueba de atributos",
             "fechaInicio": "2024-10-29",
             "fechaFin": "2024-11-29",
+            "estado": "2024-11-29",
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -23,6 +24,7 @@
             "descripcion": "que ande",
             "fechaInicio": "1",
             "fechaFin": "2",
+            "estado": null,
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -48,6 +50,7 @@
             "descripcion": "este es proyecto r",
             "fechaInicio": "2024-10-30",
             "fechaFin": "2024-11-09",
+            "estado": null,
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -56,6 +59,42 @@
                     "fecha_inicio": "2024-11-09",
                     "fecha_fin": "1010-98-67",
                     "id_proyecto": 11
+                }
+            ]
+        },
+        {
+            "id_proyecto": 4,
+            "nombre": "prueba estado",
+            "descripcion": "aa",
+            "fechaInicio": "a",
+            "fechaFin": "a",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "asdsad",
+                    "descripcion": "asdsa",
+                    "fecha_inicio": "s",
+                    "fecha_fin": "s",
+                    "id_proyecto": 4
+                }
+            ]
+        },
+        {
+            "id_proyecto": 5,
+            "nombre": "Pruebabababbaa",
+            "descripcion": "aa",
+            "fechaInicio": "aa",
+            "fechaFin": "a",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "dklsadksla",
+                    "descripcion": "a",
+                    "fecha_inicio": "a",
+                    "fecha_fin": "a",
+                    "id_proyecto": 5
                 }
             ]
         }
