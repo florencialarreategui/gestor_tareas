@@ -28,20 +28,21 @@ protected $gestorUsuario;
         
                 switch ($eleccion) {
                     case '1':  
-                        // if ($this->validarIngresoUsuario()) {
+                         if ($this->validarUsuario($nombre,$clave)) {
                             $this->menuPrincipal(); // Llama al menú de usuario si la validación es correcta
-                        // } else {
-                        //     echo "Validación fallida. Intente nuevamente.\n";
-                        // }
-                        // break;
+                         } else {
+                             echo "Validación fallida. Intente nuevamente.\n";
+                         }
+                         break;
+                         
         
                     case '2':
                         $this->crearUsuario(); //validarIngresoUsuario();
                         break;
         
-                        case '0':
+                    case '0':
                             echo "Saliendo del sistema...\n";
-                            exit;
+                            break;
         
                     default:
                         echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -169,7 +170,7 @@ protected $gestorUsuario;
                         $this->gestorProyecto->listarProyectoActivo();
                         break;
                      case '4':
-                        $this->gestorProyecto->litarProyectoInactivo();
+                        $this->gestorProyecto->listarProyectoInactivo();
                         break;
                     case '0':
                         return; 
