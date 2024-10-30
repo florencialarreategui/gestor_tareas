@@ -1,12 +1,21 @@
 {
     "proyecto": [
         {
-            "id_proyecto": 7,
-            "nombre": "prueba",
-            "descripcion": "aa",
-            "fechaInicio": "a",
-            "fechaFin": "a",
-            "tareas": []
+            "id_proyecto": 1,
+            "nombre": "Proyecto 1 de prueba",
+            "descripcion": "prueba de atributos",
+            "fechaInicio": "2024-10-29",
+            "fechaFin": "2024-11-29",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "Tarea 1",
+                    "descripcion": "Prueba de Tarea",
+                    "fecha_inicio": "2024-10-29",
+                    "fecha_fin": "2024-11-29",
+                    "id_proyecto": 1
+                }
+            ]
         }
     ]
 }

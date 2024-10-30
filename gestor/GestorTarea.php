@@ -90,31 +90,6 @@ class GestorTarea {
         }
     }
     
-
-    //----------------- Eliminar tarea--------------------------------
-    // public function eliminarTarea() {
-    //     echo "Ingrese el ID de la tarea que desea eliminar: ";
-    //     $id_tarea = trim(fgets(STDIN));
-
-    //     $indiceTarea = null;
-
-    //     foreach ($this->tareas as $indice => $tarea) {
-    //         if ($tarea->getIdTarea() == $id_tarea) {
-    //             $indiceTarea = $indice;
-    //             break;
-    //         }
-    //     }
-    //     if ($indiceTarea === null) {
-    //         echo "Tarea no encontrada.\n";
-    //         return;
-    //     }
-
-    //     unset($this->tareas[$indiceTarea]);
-    //     $this->tareas = array_values($this->tareas);
-    //     echo "Tarea eliminada exitosamente.\n";
-    //     $this->guardarEnJSON();
-    // }
-
     public function eliminarTarea($proyecto) {
         $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea eliminar: ";
