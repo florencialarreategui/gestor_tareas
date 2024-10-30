@@ -24,7 +24,7 @@ class GestorUsuario{
             $claveUsuarioIngresada = trim(fgets(STDIN));
 
             foreach ($this->usuarios as $usuario) {
-                // Asumiendo que $usuario tiene métodos getNombre() y getClave():
+               
                 if ($usuario->getNombre() == $nombreUsuarioIngresado && $usuario->getClave() == $claveUsuarioIngresada) {
                     echo "Usuario Válido";
                     return true; // encontró usuario válido
