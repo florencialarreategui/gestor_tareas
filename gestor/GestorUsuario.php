@@ -16,17 +16,25 @@ class GestorUsuario{
 //necesita un foreach para recorrer usuarios y comparar nombre y contraseña 
 //sacar parametros 
 //hacer un foreach que compare dentro del array de usuarios getnombre con nombre ingresado y get clave con clave ingresada
-    public function validarIngresoUsuario ($nombreUsuario,$claveUsuario) {
-        echo "Si ya se encuentra registrado ingrese su nombre: ";
-             $nombreUsuarioIngresado = trim(fgets(STDIN));
-             echo "Si ya se encuentra registrado ingrese su clave: ";
-             $claveUsuarioIngresada = trim(fgets(STDIN));
-                        if ($claveUsuario == $claveUsuarioIngresada && $nombreUsuario == $nombreUsuarioIngresado) {
-                            echo "ingresaste"; // $this->menuUsuario(); 
-                        } else {
-                            echo "Nombre o clave incorrecta.\n";
-                        }
-    }
+   
+        public function validarUsuario($nombre,$clave) {
+            echo "Ingrese su nombre: ";
+            $nombreUsuarioIngresado = trim(fgets(STDIN));
+            echo "Ingrese su clave: ";
+            $claveUsuarioIngresada = trim(fgets(STDIN));
+
+            foreach ($this->usuarios as $usuario) {
+               
+                if ($usuario->getNombre() == $nombreUsuarioIngresado && $usuario->getClave() == $claveUsuarioIngresada) {
+                    echo "Usuario Válido";
+                    return true; // encontró usuario válido
+                }
+            }
+            
+            echo "Nombre o clave incorrecta.\n";
+            return false; // no encontró usuario válido
+        }
+
  
     // //-----------------------------crear usurario ---------------------------
     public function crearUsuario() {
