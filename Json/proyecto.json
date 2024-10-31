@@ -97,6 +97,24 @@
                     "id_proyecto": 5
                 }
             ]
+        },
+        {
+            "id_proyecto": 6,
+            "nombre": "eeeee",
+            "descripcion": "eeee",
+            "fechaInicio": "eee",
+            "fechaFin": "ee",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "ccc",
+                    "descripcion": "ccc",
+                    "fecha_inicio": "ccc",
+                    "fecha_fin": "cc",
+                    "id_proyecto": 6
+                }
+            ]
         }
     ]
 }

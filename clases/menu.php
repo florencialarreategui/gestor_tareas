@@ -55,7 +55,6 @@ protected $gestorUsuario;
             while (true) {
                 echo "1. Menu Usuario\n";
                 echo "2. Menu proyecto\n";
-                echo "3. Menu Tarea\n";
                 echo "0. Salir al Menú inicial\n";
 
                 $eleccion = trim(fgets(STDIN));
@@ -182,38 +181,7 @@ protected $gestorUsuario;
             }
 
            
-            public function menuTarea() {
-                echo "=== Menú de Tareas ===\n";
-                while (true) {
-                    echo "1. Agregar tarea a un Proyecto\n";
-                    echo "2. Listar Tareas\n";
-                    echo "3. Editar Tarea\n";
-                    echo "4. Eliminar Tarea\n";
-                    echo "0. Salir al Menú de Proyecto\n";
-
-                    $eleccion = trim(fgets(STDIN));
-
-                    switch ($eleccion) {
-                        case '1':
-                            $this->gestorTarea->agregarTarea();
-                            break;
-                        case '2':
-                            $this->gestorTarea->listarTareas();
-                            break;
-                        case '3':
-                            $this->gestorTarea->editarTarea();
-                            break;
-                        case '4':
-                            $this->gestorTarea->eliminarTarea();
-                            break;
-                        case '0':
-                            return; 
-                        default:
-                            echo "Opción no válida. Inténtelo de nuevo.\n";
-                            break;
-                    }
-                }
-            }
+           
 
 
         }
