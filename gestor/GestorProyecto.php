@@ -104,19 +104,16 @@ class GestorProyecto {
                             echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
                             break;
                         case '5':
-                                echo "Ingrese Activo o Terminado según corresponda: ";
-                                $estado = trim(fgets(STDIN));
-                                $proyecto->setEstado($estado);
-                                echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                               $this->cambiarEstadoProyecto($proyecto);
                                 break;
                         case '6':
                                 $this->gestorTarea->agregarTarea($proyecto);
                                 break;
                         case '7':
-                                    $this->gestorTarea->editarTarea($proyecto) ;
+                                $this->gestorTarea->editarTarea($proyecto) ;
                                 break;
                         case '8':
-                                    $this->gestorTarea->eliminarTarea($proyecto) ;
+                                $this->gestorTarea->eliminarTarea($proyecto) ;
                                 break;
                         case '0':
                             return; 
@@ -133,8 +130,26 @@ class GestorProyecto {
             echo "Proyecto no encontrado.\n";
         }
     }
+//------------------------------------------------------
 
-    
+public function cambiarEstadoProyecto($proyecto){
+    echo "El actual estado del proyecto es: " . $proyecto->getEstado() . "\n";
+    echo "Aprete 1 para cambiarlo o 2 para dejarlo como está";
+    $eleccion = trim(fgets(STDIN));
+    if($eleccion == 1){
+        if($proyecto->getEstado() == "Activo"){
+            $proyecto->setEstado("Terminado");
+            echo "El actual estado del proyecto ahora es: " . $proyecto->getEstado() . "\n";
+        }
+        else if($proyecto->getEstado() == "Terminado"){
+            $proyecto->setEstado("Activo");
+            echo "El actual estado del proyecto ahora es: " . $proyecto->getEstado() . "\n";
+     }
+
+    }
+    echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+}
+    //------------------------------------------------------
     public function eliminarProyecto() {
         echo "Ingrese el ID del proyecto que desea eliminar: ";
         $id_proyecto = trim(fgets(STDIN));
@@ -213,10 +228,10 @@ public function menuListarProyecto() {
                 $this->listarProyectoPorId();
                 break;
             case '3':
-                $this->listarProyectoActivo();
+                $this->listarProyectosActivos();
                 break;
             case '4':
-                $this->listarProyectoInactivo();
+                $this->listarProyectosTerminados();
                 break;
             case '0':
                 return; 
@@ -226,6 +241,38 @@ public function menuListarProyecto() {
         }
     }
 
+}
+
+public function listarProyectosActivos() {
+    $proyectosActivos = array_filter($this->proyectos, function($proyecto) {
+        return $proyecto->getEstado() === 'Activo';
+    });
+
+    if (empty($proyectosActivos)) {
+        echo "No hay proyectos activos registrados.\n";
+        return;
+    }
+
+    echo "=== Proyectos Activos Registrados ===\n";
+    foreach ($proyectosActivos as $proyecto) {
+        echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+    }
+}
+
+public function listarProyectosTerminados() {
+    $proyectosTerminados = array_filter($this->proyectos, function($proyecto) {
+        return $proyecto->getEstado() === 'Terminado';
+    });
+
+    if (empty($proyectosTerminados)) {
+        echo "No hay proyectos terminados registrados.\n";
+        return;
+    }
+
+    echo "=== Proyectos Terminados Registrados ===\n";
+    foreach ($proyectosTerminados as $proyecto) {
+        echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+    }
 }
 
     //---------------------------------------------------------------
