@@ -4,7 +4,6 @@ require_once './gestor/GestorTarea.php';
 require_once './gestor/GestorProyecto.php';
 
 
-
 class Menu {
 protected $gestorUsuario;
  public function __construct($gestorUsuario,$gestorProyecto,$gestorTarea){
@@ -49,13 +48,12 @@ protected $gestorUsuario;
             }
             
             
-        //-----------------------------------------Menu principal-----------------------------------------
+  
         public function menuPrincipal() {
             echo "=== Menú principal ===\n";
             while (true) {
                 echo "1. Menu Usuario\n";
                 echo "2. Menu proyecto\n";
-                echo "3. Menu Tarea\n";
                 echo "0. Salir al Menú inicial\n";
 
                 $eleccion = trim(fgets(STDIN));
@@ -81,7 +79,7 @@ protected $gestorUsuario;
 
         
 
-        //----------------------------------------Menu  Usuario-----------------------------------------
+       
 
         public function menuUsuario() {
             echo "=== Menú de Usuario ===\n";
@@ -112,7 +110,7 @@ protected $gestorUsuario;
             }
         }
 
-        //------------------------------------Menu Proyecto-------------------------------------------
+        
             public function menuProyecto() {
                 echo "=== Menú de Proyecto ===\n";
                 while (true) {
@@ -146,31 +144,33 @@ protected $gestorUsuario;
                 }
             }
 
-        
-            //------------------------------------Menu Tarea-------------------------------------------
-            public function menuTarea() {
-                echo "=== Menú de Tareas ===\n";
+
+
+            public function menuListarProyecto() {
+
+                echo "=== Menú listar proyectos ===\n";
                 while (true) {
-                    echo "1. Agregar tarea a un Proyecto\n";
-                    echo "2. Listar Tareas\n";
-                    echo "3. Editar Tarea\n";
-                    echo "4. Eliminar Tarea\n";
-                    echo "0. Salir al Menú de Proyecto\n";
+                    echo "1. Listar todos los proyectos\n";
+                    echo "2. Listar proyecto por ID\n";
+                    echo "3. Listar proyectos activos\n";
+                    echo "4. Listar proyectos terminados\n";
+                    echo "0. Volver a menu proyectos\n";
+
 
                     $eleccion = trim(fgets(STDIN));
 
                     switch ($eleccion) {
                         case '1':
-                            $this->gestorTarea->agregarTarea();
+                            $this->gestorProyecto->listarProyectos();
                             break;
                         case '2':
-                            $this->gestorTarea->listarTareas();
+                            $this->gestorProyecto->listarProyectoPorId();
                             break;
                         case '3':
-                            $this->gestorTarea->editarTarea();
+                            $this->gestorProyecto->listarProyectoActivo();
                             break;
                         case '4':
-                            $this->gestorTarea->eliminarTarea();
+                            $this->gestorProyecto->listarProyectoInactivo();
                             break;
                         case '0':
                             return; 
@@ -179,10 +179,12 @@ protected $gestorUsuario;
                             break;
                     }
                 }
+
             }
 
-
         }
+
+        
         $gestorUsuario = new GestorUsuario();
         $gestorTarea = new GestorTarea();
         $gestorProyecto = new GestorProyecto($gestorTarea);

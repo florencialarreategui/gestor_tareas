@@ -17,6 +17,24 @@
                     "id_proyecto": 1
                 }
             ]
+        },
+        {
+            "id_proyecto": 2,
+            "nombre": "Proyecto de prueba",
+            "descripcion": "nueva prueba",
+            "fechaInicio": "2024-10-31",
+            "fechaFin": "2024-11-30",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "Ueva tarea",
+                    "descripcion": "tarea",
+                    "fecha_inicio": "2024-10-31",
+                    "fecha_fin": "2024-11-29",
+                    "id_proyecto": 2
+                }
+            ]
         }
     ]
 }

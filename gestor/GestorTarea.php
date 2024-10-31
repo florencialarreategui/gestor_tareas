@@ -13,7 +13,6 @@ class GestorTarea {
         $this->proyectos = [];
     }
 
- 
     public function agregarTarea($proyecto) {
         $id_tarea = count($proyecto->getTareas()) + 1; 
         $id_proyecto = $proyecto->getIdProyecto();
@@ -34,7 +33,6 @@ class GestorTarea {
         echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " " . $id_tarea . "\n";
     }
 
-   
     public function obtenerTarea($id_tarea) {
         foreach ($this->tareas as $tarea) {
             if ($tarea->getIdTarea() == $id_tarea) {
@@ -44,7 +42,6 @@ class GestorTarea {
         return null;
     }
 
-   
     public function listarTareas() {
         if (empty($this->tareas)) {
             echo "No hay tareas registradas.\n";
@@ -56,9 +53,8 @@ class GestorTarea {
             echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . " Descripción: ". $tarea->getDescripcion() . "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
         }
     }
- 
 
-  public function editarTarea($proyecto) {
+    public function editarTarea($proyecto) {
         $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea editar: ";
         $id_tarea = trim(fgets(STDIN));
@@ -158,7 +154,10 @@ class GestorTarea {
         file_put_contents($this->archivoJson, $jsontarea);
     }
 
+
   
+
+
     public function cargarDesdeJSON() {
         if (file_exists($this->archivoJson)) {
             $jsontarea = file_get_contents($this->archivoJson);

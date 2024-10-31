@@ -12,7 +12,7 @@ class GestorUsuario{
         }
 
 
-    //----------------------------------------Validacion Usuario-----------------------------------------
+    
         public function validarUsuario() {
             echo "Ingrese su nombre: ";
             $nombreUsuarioIngresado = trim(fgets(STDIN));
@@ -32,7 +32,7 @@ class GestorUsuario{
         }
 
  
-    // //-----------------------------crear usurario ---------------------------
+    
     public function crearUsuario() {
         $id_usuario = count($this->usuarios) + 1;
 
@@ -57,7 +57,7 @@ class GestorUsuario{
         $this->guardarEnJSON();
     }
 
-    // //-----------------------------listar usuarios----------------------------
+    
     public function listarUsuarios() {
         if (empty($this->usuarios)) {
             echo "No hay usuarios registrados.\n";
@@ -70,37 +70,46 @@ class GestorUsuario{
         }
     }
 
-    // //-----------------------------editar usurario ---------------------------
+
     public function editarUsuario() {
         echo "Ingrese el nombre del usuario que desea editar: ";
         $nombre = trim(fgets(STDIN));
     
         echo "Ingrese la clave del usuario que desea editar: ";
         $clave = trim(fgets(STDIN));
-        // Buscar el proyecto por ID
         
+        $usuarioEncontrado = false; 
+    
         foreach ($this->usuarios as $usuario) {
-            if ($usuario->getNombre() == $nombre && $usuario->getClave()==$clave) {
+            if ($usuario->getNombre() == $nombre && $usuario->getClave() == $clave) {
+                $usuarioEncontrado = true;
+    
                 echo "Ingrese el nuevo nombre del usuario: ";
-                 $nombre = trim(fgets(STDIN));
-                 $usuario->setNombre($nombre);
-
-                 echo "Ingrese el nuevo email: ";
-                 $email = trim(fgets(STDIN));
+                $nuevoNombre = trim(fgets(STDIN));
+                $usuario->setNombre($nuevoNombre);
+    
+                echo "Ingrese el nuevo email: ";
+                $email = trim(fgets(STDIN));
                 $usuario->setEmail($email);
-
+    
                 echo "Ingrese una nueva clave: ";
-                 $clave = trim(fgets(STDIN));
-                $usuario->setClave($clave);
+                $nuevaClave = trim(fgets(STDIN));
+                $usuario->setClave($nuevaClave);
+    
+                echo "Usuario editado exitosamente: " . $usuario->getNombre() . "\n";
+                $this->guardarEnJSON();
+                break; 
             }
         }
     
-        echo "Usuario editado exitosamente: " . $usuario->getNombre() . "\n";
-        $this->guardarEnJSON();
+        if (!$usuarioEncontrado) {
+            echo "Los datos son incorrectos. No se encontró el usuario.\n";
+        }
     }
+    
 
 
-    // //-----------------------------eliminar usurario---------------------------
+    
     public function eliminarUsuario() {
         echo "Ingrese el nombre del usuario que desea eliminar: ";
         $nombreIngresado = trim(fgets(STDIN));
