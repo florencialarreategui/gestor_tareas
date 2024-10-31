@@ -10,7 +10,7 @@
             "tareas": [
                 {
                     "id_tarea": 1,
-                    "nombre": "Tarea 1",
+                    "nombre": "Tarea",
                     "descripcion": "Prueba de Tarea",
                     "fecha_inicio": "2024-10-29",
                     "fecha_fin": "2024-11-29",

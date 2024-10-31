@@ -1,7 +1,6 @@
 <?php
 require_once 'usuario.php';
 require_once 'proyecto.php';
-require_once 'estado.php';
 
 
 class Tarea {
