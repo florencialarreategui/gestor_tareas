@@ -53,12 +53,9 @@ class GestorTarea {
 
         echo "=== Tareas Registradas ===\n";
         foreach ($this->tareas as $tarea) {
-            echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . " Descripción: ". $tarea->getDescripcion() . "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
-        }
-    }
-  
+            echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . " Descripción: ". $tarea->getDescripcion() . "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Fin
 
-  public function editarTarea($proyecto) {
+    public function editarTarea($proyecto) {
         $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea editar: ";
         $id_tarea = trim(fgets(STDIN));

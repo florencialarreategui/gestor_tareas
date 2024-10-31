@@ -5,8 +5,9 @@
             "nombre": "Proyecto 1 de prueba",
             "descripcion": "prueba de atributos",
             "fechaInicio": "2024-10-29",
-            "fechaFin": "2024-11-29",
-            "estado": "2024-11-29",
+            "fechaFin": "2024-11-2
+            "estado": "202
+
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -14,9 +15,7 @@
                     "descripcion": "Prueba de Tarea",
                     "fecha_inicio": "2024-10-29",
                     "fecha_fin": "2024-11-29",
-                    "id_proyecto": 1
-                }
-            ]
+           
         },
         {
             "id_proyecto": 10,
@@ -96,7 +95,7 @@
                     "fecha_fin": "a",
                     "id_proyecto": 5
                 }
-            ]
+  
         }
     ]
 }
