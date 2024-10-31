@@ -44,6 +44,42 @@ class GestorProyecto {
         $this->guardarEnJSON();
  }
 
+
+    public function menuListarProyecto() {
+
+        echo "=== Menú listar proyectos ===\n";
+        while (true) {
+            echo "1. Listar todos los proyectos\n";
+            echo "2. Listar proyecto por ID\n";
+            echo "3. Listar proyectos activos\n";
+            echo "4. Listar proyectos terminados\n";
+            echo "0. Volver a menu proyectos\n";
+    
+            $eleccion = trim(fgets(STDIN));
+    
+            switch ($eleccion) {
+                case '1':
+                    $this->listarProyectos();
+                    break;
+                case '2':
+                    $this->listarProyectoPorId();
+                    break;
+                case '3':
+                    $this->listarProyectosActivos();
+                    break;
+                case '4':
+                    $this->listarProyectosTerminados();
+                    break;
+                case '0':
+                    return; 
+                default:
+                    echo "Opción no válida. Inténtelo de nuevo.\n";
+                    break;
+            }
+        }
+    
+    }
+
     public function listarProyectos() {
         if (empty($this->proyectos)) {
             echo "No hay proyectos registrados.\n";
@@ -55,6 +91,72 @@ class GestorProyecto {
         }
     }
 
+    public function listarProyectoPorId() {
+        echo "Ingrese el ID del proyecto que desea ver: ";
+        $id_proyecto = trim(fgets(STDIN));
+        
+        foreach ($this->proyectos as $proyecto) {
+            if ($proyecto->getIdProyecto() == $id_proyecto) {
+                echo "=== Proyecto Encontrado ===\n";
+                echo "Id: " . $proyecto->getIdProyecto() . "\n";
+                echo "Nombre: " . $proyecto->getNombre() . "\n";
+                echo "Descripción: " . $proyecto->getDescripcion() . "\n";
+                echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
+                echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+                echo "Estado: " . $proyecto->getEstado() . "\n";
+    
+                $tareas = $proyecto->getTareas();
+                if (!empty($tareas)) {
+                    echo "Tareas:\n";
+                    foreach ($tareas as $tarea) {
+                        echo " - Id: " . $tarea->getIdTarea() . "\n";
+                        echo "   Nombre: " . $tarea->getNombre() . "\n";
+                        echo "   Descripción: " . $tarea->getDescripcion() . "\n";
+                        echo "   Fecha de Inicio: " . $tarea->getFechaInicio() . "\n";
+                        echo "   Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
+                    }
+                } else {
+                    echo "No hay tareas asociadas a este proyecto.\n";
+                }
+                return; 
+            }
+        }
+    
+        echo "Proyecto no encontrado.\n";
+    }
+
+
+public function listarProyectosActivos() {
+    $proyectosActivos = array_filter($this->proyectos, function($proyecto) {
+        return $proyecto->getEstado() === 'Activo';
+    });
+
+    if (empty($proyectosActivos)) {
+        echo "No hay proyectos activos registrados.\n";
+        return;
+    }
+
+    echo "=== Proyectos Activos Registrados ===\n";
+    foreach ($proyectosActivos as $proyecto) {
+        echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+    }
+}
+
+public function listarProyectosTerminados() {
+    $proyectosTerminados = array_filter($this->proyectos, function($proyecto) {
+        return $proyecto->getEstado() === 'Terminado';
+    });
+
+    if (empty($proyectosTerminados)) {
+        echo "No hay proyectos terminados registrados.\n";
+        return;
+    }
+
+    echo "=== Proyectos Terminados Registrados ===\n";
+    foreach ($proyectosTerminados as $proyecto) {
+        echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+    }
+}
 
     public function editarProyecto() {
         echo "Ingrese el ID del proyecto que desea editar: ";
@@ -130,7 +232,7 @@ class GestorProyecto {
             echo "Proyecto no encontrado.\n";
         }
     }
-//------------------------------------------------------
+
 
 public function cambiarEstadoProyecto($proyecto){
     echo "El actual estado del proyecto es: " . $proyecto->getEstado() . "\n";
@@ -149,7 +251,7 @@ public function cambiarEstadoProyecto($proyecto){
     }
     echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
 }
-    //------------------------------------------------------
+ 
     public function eliminarProyecto() {
         echo "Ingrese el ID del proyecto que desea eliminar: ";
         $id_proyecto = trim(fgets(STDIN));
@@ -172,110 +274,7 @@ public function cambiarEstadoProyecto($proyecto){
         $this->guardarEnJSON();
     }
     
-    public function listarProyectoPorId() {
-        echo "Ingrese el ID del proyecto que desea ver: ";
-        $id_proyecto = trim(fgets(STDIN));
-        
-        foreach ($this->proyectos as $proyecto) {
-            if ($proyecto->getIdProyecto() == $id_proyecto) {
-                echo "=== Proyecto Encontrado ===\n";
-                echo "Id: " . $proyecto->getIdProyecto() . "\n";
-                echo "Nombre: " . $proyecto->getNombre() . "\n";
-                echo "Descripción: " . $proyecto->getDescripcion() . "\n";
-                echo "Fecha de Inicio: " . $proyecto->getFechaInicio() . "\n";
-                echo "Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-                echo "Estado: " . $proyecto->getEstado() . "\n";
-    
-                $tareas = $proyecto->getTareas();
-                if (!empty($tareas)) {
-                    echo "Tareas:\n";
-                    foreach ($tareas as $tarea) {
-                        echo " - Id: " . $tarea->getIdTarea() . "\n";
-                        echo "   Nombre: " . $tarea->getNombre() . "\n";
-                        echo "   Descripción: " . $tarea->getDescripcion() . "\n";
-                        echo "   Fecha de Inicio: " . $tarea->getFechaInicio() . "\n";
-                        echo "   Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
-                    }
-                } else {
-                    echo "No hay tareas asociadas a este proyecto.\n";
-                }
-                return; 
-            }
-        }
-    
-        echo "Proyecto no encontrado.\n";
-    }
 
-//-------------------------------------------------------------
-
-public function menuListarProyecto() {
-
-    echo "=== Menú listar proyectos ===\n";
-    while (true) {
-        echo "1. Listar todos los proyectos\n";
-        echo "2. Listar proyecto por ID\n";
-        echo "3. Listar proyectos activos\n";
-        echo "4. Listar proyectos terminados\n";
-        echo "0. Volver a menu proyectos\n";
-
-        $eleccion = trim(fgets(STDIN));
-
-        switch ($eleccion) {
-            case '1':
-                $this->listarProyectos();
-                break;
-            case '2':
-                $this->listarProyectoPorId();
-                break;
-            case '3':
-                $this->listarProyectosActivos();
-                break;
-            case '4':
-                $this->listarProyectosTerminados();
-                break;
-            case '0':
-                return; 
-            default:
-                echo "Opción no válida. Inténtelo de nuevo.\n";
-                break;
-        }
-    }
-
-}
-
-public function listarProyectosActivos() {
-    $proyectosActivos = array_filter($this->proyectos, function($proyecto) {
-        return $proyecto->getEstado() === 'Activo';
-    });
-
-    if (empty($proyectosActivos)) {
-        echo "No hay proyectos activos registrados.\n";
-        return;
-    }
-
-    echo "=== Proyectos Activos Registrados ===\n";
-    foreach ($proyectosActivos as $proyecto) {
-        echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-    }
-}
-
-public function listarProyectosTerminados() {
-    $proyectosTerminados = array_filter($this->proyectos, function($proyecto) {
-        return $proyecto->getEstado() === 'Terminado';
-    });
-
-    if (empty($proyectosTerminados)) {
-        echo "No hay proyectos terminados registrados.\n";
-        return;
-    }
-
-    echo "=== Proyectos Terminados Registrados ===\n";
-    foreach ($proyectosTerminados as $proyecto) {
-        echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
-    }
-}
-
-    //---------------------------------------------------------------
     public function guardarEnJSON() {
         $proyectos = [];
         foreach ($this->proyectos as $proyecto) {
