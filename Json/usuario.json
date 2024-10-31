@@ -14,75 +14,9 @@
         },
         {
             "id_usuario": 3,
-            "nombre": "jos\u00e9",
-            "email": "otro@ejemplo.com",
-            "clave": "password678"
-        },
-        {
-            "id_usuario": 4,
-            "nombre": "Maria",
-            "email": "otro@ejemplo.com",
-            "clave": "password999"
-        },
-        {
-            "id_usuario": 304,
-            "nombre": "marilin",
-            "email": "solekjhhf",
-            "clave": "777"
-        },
-        {
-            "id_usuario": 584,
-            "nombre": "maria",
-            "email": "jjkkkll",
-            "clave": "345"
-        },
-        {
-            "id_usuario": 986,
-            "nombre": "pedro",
-            "email": "ddddd",
-            "clave": "999"
-        },
-        {
-            "id_usuario": 879,
-            "nombre": "silvana",
-            "email": "sksjjhfhf",
-            "clave": "123"
-        },
-        {
-            "id_usuario": 584,
-            "nombre": "flor",
-            "email": "kfldkf",
-            "clave": "fsdf"
-        },
-        {
-            "id_usuario": 146,
-            "nombre": "sdsdsds",
-            "email": "sdsd",
-            "clave": "sdsds"
-        },
-        {
-            "id_usuario": 576,
-            "nombre": "sdsds",
-            "email": "sdsds",
-            "clave": "ds"
-        },
-        {
-            "id_usuario": 378,
-            "nombre": "sds",
-            "email": "dfgfdg",
-            "clave": "dfgdfg"
-        },
-        {
-            "id_usuario": 888,
             "nombre": "",
             "email": "",
             "clave": ""
-        },
-        {
-            "id_usuario": 450,
-            "nombre": "fdfsf",
-            "email": "fdsfs",
-            "clave": "sdfs"
         }
     ]
 }

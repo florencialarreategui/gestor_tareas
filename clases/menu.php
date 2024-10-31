@@ -129,7 +129,7 @@ protected $gestorUsuario;
                             $this->gestorProyecto->agregarProyecto();
                             break;
                         case '2':
-                            $this->menuListarProyecto();
+                            $this->gestorProyecto->menuListarProyecto();
                             break;
                         case '3':
                             $this->gestorProyecto->editarProyecto();
@@ -146,41 +146,7 @@ protected $gestorUsuario;
                 }
             }
 
-            public function menuListarProyecto() {
-
-                echo "=== Menú listar proyectos ===\n";
-                while (true) {
-                    echo "1. Listar todos los proyectos\n";
-                    echo "2. Listar proyecto por ID\n";
-                    echo "3. Listar proyectos activos\n";
-                    echo "4. Listar proyectos terminados\n";
-                    echo "0. Volver a menu proyectos\n";
-
-                    $eleccion = trim(fgets(STDIN));
-
-                    switch ($eleccion) {
-                        case '1':
-                            $this->gestorProyecto->listarProyectos();
-                            break;
-                        case '2':
-                            $this->gestorProyecto->listarProyectoPorId();
-                            break;
-                        case '3':
-                            $this->gestorProyecto->listarProyectoActivo();
-                            break;
-                        case '4':
-                            $this->gestorProyecto->listarProyectoInactivo();
-                            break;
-                        case '0':
-                            return; 
-                        default:
-                            echo "Opción no válida. Inténtelo de nuevo.\n";
-                            break;
-                    }
-                }
-
-            }
-
+        
             //------------------------------------Menu Tarea-------------------------------------------
             public function menuTarea() {
                 echo "=== Menú de Tareas ===\n";

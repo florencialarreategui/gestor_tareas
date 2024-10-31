@@ -190,6 +190,45 @@ class GestorProyecto {
     
         echo "Proyecto no encontrado.\n";
     }
+
+//-------------------------------------------------------------
+
+public function menuListarProyecto() {
+
+    echo "=== Menú listar proyectos ===\n";
+    while (true) {
+        echo "1. Listar todos los proyectos\n";
+        echo "2. Listar proyecto por ID\n";
+        echo "3. Listar proyectos activos\n";
+        echo "4. Listar proyectos terminados\n";
+        echo "0. Volver a menu proyectos\n";
+
+        $eleccion = trim(fgets(STDIN));
+
+        switch ($eleccion) {
+            case '1':
+                $this->listarProyectos();
+                break;
+            case '2':
+                $this->listarProyectoPorId();
+                break;
+            case '3':
+                $this->listarProyectoActivo();
+                break;
+            case '4':
+                $this->listarProyectoInactivo();
+                break;
+            case '0':
+                return; 
+            default:
+                echo "Opción no válida. Inténtelo de nuevo.\n";
+                break;
+        }
+    }
+
+}
+
+    //---------------------------------------------------------------
     public function guardarEnJSON() {
         $proyectos = [];
         foreach ($this->proyectos as $proyecto) {
