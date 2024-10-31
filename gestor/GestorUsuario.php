@@ -12,7 +12,7 @@ class GestorUsuario{
         }
 
 
-    //----------------------------------------Validacion Usuario-----------------------------------------
+    
         public function validarUsuario() {
             echo "Ingrese su nombre: ";
             $nombreUsuarioIngresado = trim(fgets(STDIN));
@@ -32,7 +32,7 @@ class GestorUsuario{
         }
 
  
-    // //-----------------------------crear usurario ---------------------------
+    
     public function crearUsuario() {
         $id_usuario = count($this->usuarios) + 1;
 
@@ -57,7 +57,7 @@ class GestorUsuario{
         $this->guardarEnJSON();
     }
 
-    // //-----------------------------listar usuarios----------------------------
+    
     public function listarUsuarios() {
         if (empty($this->usuarios)) {
             echo "No hay usuarios registrados.\n";
@@ -70,7 +70,7 @@ class GestorUsuario{
         }
     }
 
-    // //-----------------------------editar usurario ---------------------------
+
     public function editarUsuario() {
         echo "Ingrese el nombre del usuario que desea editar: ";
         $nombre = trim(fgets(STDIN));
@@ -100,7 +100,7 @@ class GestorUsuario{
     }
 
 
-    // //-----------------------------eliminar usurario---------------------------
+    
     public function eliminarUsuario() {
         echo "Ingrese el nombre del usuario que desea eliminar: ";
         $nombreIngresado = trim(fgets(STDIN));
