@@ -6,7 +6,7 @@
             "descripcion": "prueba de atributos",
             "fechaInicio": "2024-10-29",
             "fechaFin": "2024-11-29",
-            "estado": null,
+            "estado": "2024-11-29",
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -15,6 +15,104 @@
                     "fecha_inicio": "2024-10-29",
                     "fecha_fin": "2024-11-29",
                     "id_proyecto": 1
+                }
+            ]
+        },
+        {
+            "id_proyecto": 10,
+            "nombre": "porfa",
+            "descripcion": "que ande",
+            "fechaInicio": "1",
+            "fechaFin": "2",
+            "estado": null,
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "porfis",
+                    "descripcion": "re porfis",
+                    "fecha_inicio": "1",
+                    "fecha_fin": "2",
+                    "id_proyecto": 10
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "dalee",
+                    "descripcion": "sisi",
+                    "fecha_inicio": "1",
+                    "fecha_fin": "2",
+                    "id_proyecto": 10
+                }
+            ]
+        },
+        {
+            "id_proyecto": 11,
+            "nombre": "rrrrr",
+            "descripcion": "este es proyecto r",
+            "fechaInicio": "2024-10-30",
+            "fechaFin": "2024-11-09",
+            "estado": null,
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "tarea del proyecto r",
+                    "descripcion": "es una tarea inicial",
+                    "fecha_inicio": "2024-11-09",
+                    "fecha_fin": "1010-98-67",
+                    "id_proyecto": 11
+                }
+            ]
+        },
+        {
+            "id_proyecto": 4,
+            "nombre": "prueba estado",
+            "descripcion": "aa",
+            "fechaInicio": "a",
+            "fechaFin": "a",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "asdsad",
+                    "descripcion": "asdsa",
+                    "fecha_inicio": "s",
+                    "fecha_fin": "s",
+                    "id_proyecto": 4
+                }
+            ]
+        },
+        {
+            "id_proyecto": 5,
+            "nombre": "Pruebabababbaa",
+            "descripcion": "aa",
+            "fechaInicio": "aa",
+            "fechaFin": "a",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "dklsadksla",
+                    "descripcion": "a",
+                    "fecha_inicio": "a",
+                    "fecha_fin": "a",
+                    "id_proyecto": 5
+                }
+            ]
+        },
+        {
+            "id_proyecto": 6,
+            "nombre": "eeeee",
+            "descripcion": "eeee",
+            "fechaInicio": "eee",
+            "fechaFin": "ee",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "ccc",
+                    "descripcion": "ccc",
+                    "fecha_inicio": "ccc",
+                    "fecha_fin": "cc",
+                    "id_proyecto": 6
                 }
             ]
         }

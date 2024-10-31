@@ -13,7 +13,7 @@ class GestorTarea {
         $this->proyectos = [];
     }
 
-    //----------------- Agregar tarea--------------------------------
+    
     public function agregarTarea($proyecto) {
         $id_tarea = count($proyecto->getTareas()) + 1; 
         $id_proyecto = $proyecto->getIdProyecto();
@@ -34,7 +34,7 @@ class GestorTarea {
         echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " " . $id_tarea . "\n";
     }
 
-    //----------------- Obtener tarea--------------------------------
+    
     public function obtenerTarea($id_tarea) {
         foreach ($this->tareas as $tarea) {
             if ($tarea->getIdTarea() == $id_tarea) {
@@ -44,7 +44,7 @@ class GestorTarea {
         return null;
     }
 
-    //------------- Listar Tareas--------------------------------------
+
     public function listarTareas() {
         if (empty($this->tareas)) {
             echo "No hay tareas registradas.\n";
@@ -56,6 +56,7 @@ class GestorTarea {
             echo "Id: " . $tarea->getIdTarea() . "  Nombre: " . $tarea->getNombre() . " Descripción: ". $tarea->getDescripcion() . "Fecha de Inicio: " . $tarea->getFechaInicio() . ", Fecha de Finalización: " . $tarea->getFechaFin() . "\n";
         }
     }
+  
 
     public function editarTarea($proyecto) {
         $id_proyecto = $proyecto->getIdProyecto();
@@ -132,9 +133,8 @@ class GestorTarea {
             foreach ($tareas as $indice => $tarea) {
                 if ($tarea->getIdTarea() == $id_tarea) {
                     $indiceTarea = $indice;
-                    // Eliminar la tarea del proyecto
                     unset($tareas[$indiceTarea]);
-                    $proyecto->setTareas(array_values($tareas)); // Reindexar el array
+                    $proyecto->setTareas(array_values($tareas)); 
                     echo "Tarea eliminada exitosamente.\n";
                     $this->guardarEnJSON();
                     return;
@@ -146,7 +146,7 @@ class GestorTarea {
         }
     }
 
-    //----------------- Guardar en JSON--------------------------------
+    
     public function guardarEnJSON() {
         $tareas = [];
 
@@ -158,7 +158,6 @@ class GestorTarea {
         file_put_contents($this->archivoJson, $jsontarea);
     }
 
-    //----------------- Cargar desde JSON --------------------------------
     public function cargarDesdeJSON() {
         if (file_exists($this->archivoJson)) {
             $jsontarea = file_get_contents($this->archivoJson);
