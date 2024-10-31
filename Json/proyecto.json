@@ -6,7 +6,7 @@
             "descripcion": "prueba de atributos",
             "fechaInicio": "2024-10-29",
             "fechaFin": "2024-11-29",
-            "estado": "2024-11-29",
+            "estado": "Terminado",
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -14,6 +14,14 @@
                     "descripcion": "Prueba de Tarea",
                     "fecha_inicio": "2024-10-29",
                     "fecha_fin": "2024-11-29",
+                    "id_proyecto": 1
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "NUeva tarea",
+                    "descripcion": "tarea",
+                    "fecha_inicio": "2024",
+                    "fecha_fin": "2024",
                     "id_proyecto": 1
                 }
             ]

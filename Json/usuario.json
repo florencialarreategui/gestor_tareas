@@ -11,6 +11,12 @@
             "nombre": "silvana",
             "email": "otro@ejemplo.com",
             "clave": "password456"
+        },
+        {
+            "id_usuario": 3,
+            "nombre": "",
+            "email": "",
+            "clave": ""
         }
     ]
 }
