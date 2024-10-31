@@ -88,7 +88,7 @@ class Proyecto {
             'fechaFin' => $this->fechaFin,
             'estado' => $this->estado,
             'tareas' => array_map(function($tarea) {
-                return $tarea->toArray(); // Asumiendo que la clase Tarea tiene un método toArray()
+                return $tarea->toArray(); //  la clase Tarea tiene un método toArray()
             }, $this->tareas),
         ];
     }
