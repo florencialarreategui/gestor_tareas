@@ -58,7 +58,7 @@ class GestorTarea {
     }
   
 
-  public function editarTarea($proyecto) {
+    public function editarTarea($proyecto) {
         $id_proyecto = $proyecto->getIdProyecto();
         echo "Ingrese el ID de la tarea que desea editar: ";
         $id_tarea = trim(fgets(STDIN));
