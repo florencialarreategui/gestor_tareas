@@ -49,7 +49,7 @@ protected $gestorUsuario;
             }
             
             
-        //-----------------------------------------Menu principal-----------------------------------------
+  
         public function menuPrincipal() {
             echo "=== Menú principal ===\n";
             while (true) {
@@ -81,7 +81,7 @@ protected $gestorUsuario;
 
         
 
-        //----------------------------------------Menu  Usuario-----------------------------------------
+       
 
         public function menuUsuario() {
             echo "=== Menú de Usuario ===\n";
@@ -112,7 +112,7 @@ protected $gestorUsuario;
             }
         }
 
-        //------------------------------------Menu Proyecto-------------------------------------------
+        
             public function menuProyecto() {
                 echo "=== Menú de Proyecto ===\n";
                 while (true) {
@@ -181,7 +181,7 @@ protected $gestorUsuario;
 
             }
 
-            //------------------------------------Menu Tarea-------------------------------------------
+           
             public function menuTarea() {
                 echo "=== Menú de Tareas ===\n";
                 while (true) {
