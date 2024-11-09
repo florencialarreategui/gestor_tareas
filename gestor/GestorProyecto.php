@@ -16,60 +16,60 @@ class GestorProyecto {
         
         
 
-   public function esFechaValida($fecha, $formato = 'Y-m-d') {
-        $d = DateTime::createFromFormat($formato, $fecha);
-        return $d && $d->format($formato) === $fecha;
-    }
-    
-    
-
-
-
-public function agregarProyecto() {
-    $id_proyecto = count($this->proyectos) + 1; 
-    $estado = "Activo";
-
-    echo "Ingrese el nombre del proyecto: ";
-    $nombre = trim(fgets(STDIN));
-
-    echo "Ingrese la descripción del proyecto: ";
-    $descripcion = trim(fgets(STDIN));
-
-    // Validación de fecha
-    do {
-        echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
-        $fechaInicio = trim(fgets(STDIN));
-        if ($this->esFechaValida($fechaInicio)) {
-            break;  
-        } else {
-            echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
-        }
-    } while (true);
-
-    
-    do {
-        echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
-        $fechaFin = trim(fgets(STDIN));
-        if ($this->esFechaValida($fechaFin)) {
-            // Verificamos que la fecha de finalización no sea anterior a la fecha de inicio
-            $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fechaInicio);
-            $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
-            if ($fechaFinObj >= $fechaInicioObj) {
-                break;   
-            } else {
-                echo "La fecha de finalización no puede ser anterior a la fecha de inicio. Intenta nuevamente.\n";
+        public function esFechaValida($fecha, $formato = 'Y-m-d') {
+                $d = DateTime::createFromFormat($formato, $fecha);
+                return $d && $d->format($formato) === $fecha;
             }
-        } else {
-            echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
-        }
-    } while (true);
+    
+    
 
-    echo "Ingrese Estado: ";
-    $estado = "Activo"; 
-    $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
-    $this->proyectos[] = $nuevoProyecto;
-    echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
-}
+
+
+        public function agregarProyecto() {
+            $id_proyecto = count($this->proyectos) + 1; 
+            $estado = "Activo";
+
+            echo "Ingrese el nombre del proyecto: ";
+            $nombre = trim(fgets(STDIN));
+
+            echo "Ingrese la descripción del proyecto: ";
+            $descripcion = trim(fgets(STDIN));
+
+            // Validación de fecha
+            do {
+                echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
+                $fechaInicio = trim(fgets(STDIN));
+                if ($this->esFechaValida($fechaInicio)) {
+                    break;  
+                } else {
+                    echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                }
+            } while (true);
+
+            
+            do {
+                echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                $fechaFin = trim(fgets(STDIN));
+                if ($this->esFechaValida($fechaFin)) {
+                    // Verificamos que la fecha de finalización no sea anterior a la fecha de inicio
+                    $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fechaInicio);
+                    $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
+                    if ($fechaFinObj >= $fechaInicioObj) {
+                        break;   
+                    } else {
+                        echo "La fecha de finalización no puede ser anterior a la fecha de inicio. Intenta nuevamente.\n";
+                    }
+                } else {
+                    echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
+                }
+            } while (true);
+
+            echo "Ingrese Estado: ";
+            $estado = "Activo"; 
+            $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
+            $this->proyectos[] = $nuevoProyecto;
+            echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
+        }
 
     
     
@@ -172,21 +172,21 @@ public function agregarProyecto() {
         }
     }
 
-    public function listarProyectosTerminados() {
-        $proyectosTerminados = array_filter($this->proyectos, function($proyecto) {
-            return $proyecto->getEstado() === 'Terminado';
-        });
+        public function listarProyectosTerminados() {
+            $proyectosTerminados = array_filter($this->proyectos, function($proyecto) {
+                return $proyecto->getEstado() === 'Terminado';
+            });
 
-        if (empty($proyectosTerminados)) {
-            echo "No hay proyectos terminados registrados.\n";
-            return;
-        }
+            if (empty($proyectosTerminados)) {
+                echo "No hay proyectos terminados registrados.\n";
+                return;
+            }
 
-        echo "=== Proyectos Terminados Registrados ===\n";
-        foreach ($proyectosTerminados as $proyecto) {
-            echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+            echo "=== Proyectos Terminados Registrados ===\n";
+            foreach ($proyectosTerminados as $proyecto) {
+                echo "Id: " . $proyecto->getIdProyecto() . "  Nombre: " . $proyecto->getNombre() . ", Fecha de Inicio: " . $proyecto->getFechaInicio() . ", Fecha de Finalización: " . $proyecto->getFechaFin() . "\n";
+            }
         }
-    }
 
         public function editarProyecto() {
             echo "Ingrese el ID del proyecto que desea editar: ";
