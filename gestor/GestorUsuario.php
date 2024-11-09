@@ -2,7 +2,7 @@
 require_once './clases/usuario.php';
 
 class GestorUsuario{
-    private $usuarios = [];
+        private $usuarios = [];
     
         private $archivoJson = './Json/usuario.json';
 

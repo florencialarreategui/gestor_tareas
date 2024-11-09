@@ -5,11 +5,11 @@ require_once './gestor/GestorProyecto.php';
 
 
 class Menu {
-protected $gestorUsuario;
- public function __construct($gestorUsuario,$gestorProyecto,$gestorTarea){
-    $this->gestorUsuario= $gestorUsuario;
-    $this->gestorProyecto=$gestorProyecto;
-    $this->gestorTarea = $gestorTarea;
+    protected $gestorUsuario;
+            public function __construct($gestorUsuario,$gestorProyecto,$gestorTarea){
+                $this->gestorUsuario= $gestorUsuario;
+                $this->gestorProyecto=$gestorProyecto;
+                $this->gestorTarea = $gestorTarea;
 
  }
 
