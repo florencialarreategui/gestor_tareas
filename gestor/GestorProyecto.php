@@ -13,18 +13,11 @@ class GestorProyecto {
             $this->gestorTarea = $gestorTarea; 
         }
 
-        
-        
-
         public function esFechaValida($fecha, $formato = 'Y-m-d') {
                 $d = DateTime::createFromFormat($formato, $fecha);
                 return $d && $d->format($formato) === $fecha;
             }
     
-    
-
-
-
         public function agregarProyecto() {
             $id_proyecto = count($this->proyectos) + 1; 
             $estado = "Activo";
@@ -70,10 +63,6 @@ class GestorProyecto {
             $this->proyectos[] = $nuevoProyecto;
             echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
         }
-
-    
-    
-
 
         public function menuListarProyecto() {
 
