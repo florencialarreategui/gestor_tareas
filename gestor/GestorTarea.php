@@ -122,16 +122,31 @@ class GestorTarea {
                                 break;
                                 echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
                             case '3':
-                                echo "Ingrese la nueva fecha de inicio(YYYY-MM-DD): ";
-                                $fechaInicio = trim(fgets(STDIN));
-                                $tarea->setFechaInicio($fechaInicio);
-                                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                do {
+                                    echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
+                                    $fecha_inicio = trim(fgets(STDIN));
+                                    if ($this->esFechaValida($fecha_inicio)) {
+                                        $tarea->setFechaInicio($fecha_inicio);
+                                        echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
+                                        break;  
+                                    } else {
+                                        echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                                    }
+                                } while (true); 
                                 break;
                             case '4':   
-                                echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-                                $fechaFin = trim(fgets(STDIN));
-                                $tarea->setFechaFin($fechaFin);
-                                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                do {
+                                    echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                                    $fecha_fin = trim(fgets(STDIN));
+                                    $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
+                                    if ($validacion === true) {
+                                        $tarea->setFechaFin($fecha_fin);
+                                         echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                        break;
+                                    } else {
+                                        echo $validacion . "\n";
+                                    }
+                                } while (true);
                                 break;           
                             case '0':
                                 return; 
