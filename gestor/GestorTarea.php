@@ -13,6 +13,12 @@ class GestorTarea {
             $this->proyectos = [];
         }
 
+        public function esFechaValida($fecha, $formato = 'Y-m-d') {
+            $d = DateTime::createFromFormat($formato, $fecha);
+            return $d && $d->format($formato) === $fecha;
+        }
+
+
         public function agregarTarea($proyecto) {
             $id_tarea = count($proyecto->getTareas()) + 1; 
             $id_proyecto = $proyecto->getIdProyecto();
@@ -22,17 +28,45 @@ class GestorTarea {
             echo "Ingrese la descripción de la tarea: ";
             $descripcion = trim(fgets(STDIN));
         
-            echo "Ingrese la fecha de inicio de la tarea (YYYY-MM-DD): ";
-            $fecha_inicio = trim(fgets(STDIN));
-        
-            echo "Ingrese la fecha de finalización de la tarea (YYYY-MM-DD): ";
-            $fecha_fin = trim(fgets(STDIN));
+            // Validación de fecha
+            do {
+                echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
+                $fecha_inicio = trim(fgets(STDIN));
+                if ($this->esFechaValida($fecha_inicio)) {
+                    break;  
+                } else {
+                    echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                }
+            } while (true);
+
+            
+            do {
+                echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                $fecha_fin = trim(fgets(STDIN));
+                $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
+                if ($validacion === true) {
+                    break;
+                } else {
+                    echo $validacion . "\n";
+                }
+            } while (true);
         
             $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto);
             $proyecto->agregarTarea($nuevaTarea); 
             echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " " . $id_tarea . "\n";
         }
 
+        private function validarFechaInicioFin($fecha_inicio, $fecha_fin) {
+            $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio);
+            $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fecha_fin);
+            if (!$fechaInicioObj || !$fechaFinObj) {
+                return "Una de las fechas no es válida.";
+            }
+            if ($fechaFinObj < $fechaInicioObj) {
+                return "La fecha de finalización no puede ser anterior a la de inicio.";
+            }
+            return true; // Las fechas son válidas
+        }
         public function obtenerTarea($id_tarea) {
             foreach ($this->tareas as $tarea) {
                 if ($tarea->getIdTarea() == $id_tarea) {
@@ -88,16 +122,31 @@ class GestorTarea {
                                 break;
                                 echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
                             case '3':
-                                echo "Ingrese la nueva fecha de inicio(YYYY-MM-DD): ";
-                                $fechaInicio = trim(fgets(STDIN));
-                                $tarea->setFechaInicio($fechaInicio);
-                                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                do {
+                                    echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
+                                    $fecha_inicio = trim(fgets(STDIN));
+                                    if ($this->esFechaValida($fecha_inicio)) {
+                                        $tarea->setFechaInicio($fecha_inicio);
+                                        echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
+                                        break;  
+                                    } else {
+                                        echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                                    }
+                                } while (true); 
                                 break;
                             case '4':   
-                                echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-                                $fechaFin = trim(fgets(STDIN));
-                                $tarea->setFechaFin($fechaFin);
-                                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                do {
+                                    echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                                    $fecha_fin = trim(fgets(STDIN));
+                                    $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
+                                    if ($validacion === true) {
+                                        $tarea->setFechaFin($fecha_fin);
+                                         echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                        break;
+                                    } else {
+                                        echo $validacion . "\n";
+                                    }
+                                } while (true);
                                 break;           
                             case '0':
                                 return; 
