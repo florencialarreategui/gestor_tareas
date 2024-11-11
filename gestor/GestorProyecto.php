@@ -230,12 +230,11 @@ class GestorProyecto {
                             case '3':
                                 // Validar fecha de inicio
                                 do {
-                                    echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+                                    echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
                                     $fechaInicio = trim(fgets(STDIN));
                                     if ($this->esFechaValida($fechaInicio)) {
                                         $proyecto->setFechaInicio($fechaInicio);
-                                        echo "Fecha de inicio actualizada exitosamente.\n";
-                                        break;
+                                        break;  
                                     } else {
                                         echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
                                     }
@@ -244,21 +243,14 @@ class GestorProyecto {
                             case '4':
                                 // Validar fecha de finalización
                                 do {
-                                    echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                                    echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
                                     $fechaFin = trim(fgets(STDIN));
-                                    if ($this->esFechaValida($fechaFin)) {
-                                        // Comprobamos que la fecha de finalización no sea anterior a la de inicio
-                                        $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $proyecto->getFechaInicio());
-                                        $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
-                                        if ($fechaFinObj >= $fechaInicioObj) {
-                                            $proyecto->setFechaFin($fechaFin);
-                                            echo "Fecha de finalización actualizada exitosamente.\n";
-                                            break;
-                                        } else {
-                                            echo "La fecha de finalización no puede ser anterior a la fecha de inicio. Intenta nuevamente.\n";
-                                        }
+                                    $validacion = $this->validarFechaInicioFin($fechaInicio, $fechaFin);
+                                    if ($validacion === true) {
+                                        $proyecto->setFechaFin($fechaFin);
+                                        break;
                                     } else {
-                                        echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
+                                        echo $validacion . "\n";
                                     }
                                 } while (true);
                                 break;
