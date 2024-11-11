@@ -180,22 +180,22 @@ class GestorProyecto {
         public function editarProyecto() {
             echo "Ingrese el ID del proyecto que desea editar: ";
             $id_proyecto = trim(fgets(STDIN));
-            
+        
             $proyectoEncontrado = false;
-
+        
             foreach ($this->proyectos as $proyecto) {
                 if ($proyecto->getIdProyecto() == $id_proyecto) {
-                    $proyectoEncontrado = true; 
-                    echo "=== Elija que campo desea editar ===\n";
+                    $proyectoEncontrado = true;
+                    echo "=== Elija qué campo desea editar ===\n";
                     while (true) {
                         echo "1. Nombre\n";
                         echo "2. Descripción\n";
                         echo "3. Fecha de inicio (YYYY-MM-DD): \n";
                         echo "4. Fecha de finalización (YYYY-MM-DD): \n";
-                        echo "5. Cambiar estado: \n";
-                        echo "6. Agregar Tarea: \n";
-                        echo "7. Editar Tarea: \n";
-                        echo "8. Eliminar Tarea: \n";
+                        echo "5. Cambiar estado\n";
+                        echo "6. Agregar Tarea\n";
+                        echo "7. Editar Tarea\n";
+                        echo "8. Eliminar Tarea\n";
                         echo "0. Salir al Menú Principal\n";
         
                         $eleccion = trim(fgets(STDIN));
@@ -213,31 +213,54 @@ class GestorProyecto {
                                 echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
                                 break;
                             case '3':
-                                echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
-                                $fechaInicio = trim(fgets(STDIN));
-                                $proyecto->setFechaInicio($fechaInicio);
-                                echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                                // Validar fecha de inicio
+                                do {
+                                    echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD): ";
+                                    $fechaInicio = trim(fgets(STDIN));
+                                    if ($this->esFechaValida($fechaInicio)) {
+                                        $proyecto->setFechaInicio($fechaInicio);
+                                        echo "Fecha de inicio actualizada exitosamente.\n";
+                                        break;
+                                    } else {
+                                        echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                                    }
+                                } while (true);
                                 break;
                             case '4':
-                                echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
-                                $fechaFin = trim(fgets(STDIN));
-                                $proyecto->setFechaFin($fechaFin);
-                                echo "Proyecto editado exitosamente: " . $proyecto->getNombre() . "\n";
+                                // Validar fecha de finalización
+                                do {
+                                    echo "Ingrese la nueva fecha de finalización (YYYY-MM-DD): ";
+                                    $fechaFin = trim(fgets(STDIN));
+                                    if ($this->esFechaValida($fechaFin)) {
+                                        // Comprobamos que la fecha de finalización no sea anterior a la de inicio
+                                        $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $proyecto->getFechaInicio());
+                                        $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
+                                        if ($fechaFinObj >= $fechaInicioObj) {
+                                            $proyecto->setFechaFin($fechaFin);
+                                            echo "Fecha de finalización actualizada exitosamente.\n";
+                                            break;
+                                        } else {
+                                            echo "La fecha de finalización no puede ser anterior a la fecha de inicio. Intenta nuevamente.\n";
+                                        }
+                                    } else {
+                                        echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
+                                    }
+                                } while (true);
                                 break;
                             case '5':
                                 $this->cambiarEstadoProyecto($proyecto);
-                                    break;
+                                break;
                             case '6':
-                                    $this->gestorTarea->agregarTarea($proyecto);
-                                    break;
+                                $this->gestorTarea->agregarTarea($proyecto);
+                                break;
                             case '7':
-                                    $this->gestorTarea->editarTarea($proyecto) ;
-                                    break;
+                                $this->gestorTarea->editarTarea($proyecto);
+                                break;
                             case '8':
-                                    $this->gestorTarea->eliminarTarea($proyecto) ;
-                                    break;
+                                $this->gestorTarea->eliminarTarea($proyecto);
+                                break;
                             case '0':
-                                return; 
+                                return;
                             default:
                                 echo "Opción no válida. Inténtelo de nuevo.\n";
                                 break;
@@ -251,7 +274,7 @@ class GestorProyecto {
                 echo "Proyecto no encontrado.\n";
             }
         }
-
+                                  
 
         public function cambiarEstadoProyecto($proyecto){
             echo "El actual estado del proyecto es: " . $proyecto->getEstado() . "\n";

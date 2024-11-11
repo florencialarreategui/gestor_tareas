@@ -4,7 +4,7 @@
             "id_proyecto": 1,
             "nombre": "Proyecto 1 de prueba",
             "descripcion": "prueba de atributos",
-            "fechaInicio": "2024-10-29",
+            "fechaInicio": "2024-10-27",
             "fechaFin": "2024-11-29",
             "estado": "Terminado",
             "tareas": [
@@ -30,8 +30,8 @@
             "id_proyecto": 2,
             "nombre": "Proyecto de prueba",
             "descripcion": "nueva prueba",
-            "fechaInicio": "2024-10-31",
-            "fechaFin": "2024-11-30",
+            "fechaInicio": "2024-11-28",
+            "fechaFin": "2025-11-15",
             "estado": "Activo",
             "tareas": [
                 {
