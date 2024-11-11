@@ -43,25 +43,40 @@ class GestorProyecto {
             do {
                 echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
                 $fechaFin = trim(fgets(STDIN));
-                if ($this->esFechaValida($fechaFin)) {
-                    // Verificamos que la fecha de finalización no sea anterior a la fecha de inicio
-                    $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fechaInicio);
-                    $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
-                    if ($fechaFinObj >= $fechaInicioObj) {
-                        break;   
-                    } else {
-                        echo "La fecha de finalización no puede ser anterior a la fecha de inicio. Intenta nuevamente.\n";
-                    }
+                $validacion = $this->validarFechaInicioFin($fechaInicio, $fechaFin);
+                if ($validacion === true) {
+                    break;
                 } else {
-                    echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
+                    echo $validacion . "\n";
                 }
             } while (true);
 
-            echo "Ingrese Estado: ";
-            $estado = "Activo"; 
             $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
             $this->proyectos[] = $nuevoProyecto;
             echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
+
+            while (true) {
+                echo "¿Desea agregar una tarea al proyecto? (s/n): ";
+                $respuesta = trim(fgets(STDIN));
+                if (strtolower($respuesta) !== 's') {
+                    break; 
+                }
+                $this->gestorTarea->agregarTarea($nuevoProyecto);
+            }
+        
+                $this->guardarEnJSON();
+        }
+
+        private function validarFechaInicioFin($fechaInicio, $fechaFin) {
+            $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fechaInicio);
+            $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
+            if (!$fechaInicioObj || !$fechaFinObj) {
+                return "Una de las fechas no es válida.";
+            }
+            if ($fechaFinObj < $fechaInicioObj) {
+                return "La fecha de finalización no puede ser anterior a la de inicio.";
+            }
+            return true; // Las fechas son válidas
         }
 
         public function menuListarProyecto() {
