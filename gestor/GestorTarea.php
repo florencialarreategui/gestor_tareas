@@ -70,11 +70,28 @@
             echo "Ingrese la descripción de la tarea: ";
             $descripcion = trim(fgets(STDIN));
         
-            echo "Ingrese la fecha de inicio de la tarea (YYYY-MM-DD): ";
-            $fecha_inicio = trim(fgets(STDIN));
-        
-            echo "Ingrese la fecha de finalización de la tarea (YYYY-MM-DD): ";
-            $fecha_fin = trim(fgets(STDIN));
+            // Validación de fecha
+            do {
+                echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
+                $fecha_inicio = trim(fgets(STDIN));
+                if ($this->esFechaValida($fecha_inicio)) {
+                    break;  
+                } else {
+                    echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                }
+            } while (true);
+
+            
+            do {
+                echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                $fecha_fin = trim(fgets(STDIN));
+                $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
+                if ($validacion === true) {
+                    break;
+                } else {
+                    echo $validacion . "\n";
+                }
+            } while (true);
         
             // Validación de fechas
             if (!strtotime($fecha_inicio) || !strtotime($fecha_fin)) {
