@@ -13,10 +13,16 @@
             "clave": "password456"
         },
         {
-            "id_usuario": 3,
-            "nombre": "",
-            "email": "",
-            "clave": ""
+            "id_usuario": 4,
+            "nombre": "pedro",
+            "email": "pedro79@gmail.com",
+            "clave": "password789"
+        },
+        {
+            "id_usuario": 4,
+            "nombre": "sol",
+            "email": "sol33@gmail.com",
+            "clave": "password999"
         }
     ]
 }

@@ -99,9 +99,28 @@ class Proyecto {
             $array['descripcion'],
             $array['fechaInicio'],
             $array['fechaFin'],
-            $array['estado'],
+            $array['estado']
         );
+        
+    
+    return $proyecto;
+     // Asegúrate de reconstruir las tareas correctamente
+     if (isset($data['tareas']) && is_array($data['tareas'])) {
+        foreach ($data['tareas'] as $tareaData) {
+            $tarea = Tarea::fromArray($tareaData);
+            $proyecto->agregarTarea($tarea);
+        }
     }
+          // Asegúrate de reconstruir las tareas correctamente
+    if (isset($data['tareas']) && is_array($data['tareas'])) {
+        foreach ($data['tareas'] as $tareaData) {
+            $tarea = Tarea::fromArray($tareaData);
+            $proyecto->agregarTarea($tarea);
+        }
+    }
+    return $proyecto;
+    }
+    
 }
 
    

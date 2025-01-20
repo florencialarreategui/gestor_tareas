@@ -61,6 +61,10 @@ class GestorProyecto {
             $estado = "Activo"; 
             $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
             $this->proyectos[] = $nuevoProyecto;
+
+            // Llamamos a guardarEnJSON para persistir los cambios
+            
+            $this-> guardarEnJSON();
             echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " " . $id_proyecto . "\n";
         }
 

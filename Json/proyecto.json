@@ -2,47 +2,50 @@
     "proyecto": [
         {
             "id_proyecto": 1,
-            "nombre": "Proyecto 1 de prueba",
-            "descripcion": "prueba de atributos",
-            "fechaInicio": "2024-10-27",
-            "fechaFin": "2024-11-29",
-            "estado": "Terminado",
+            "nombre": "pepe",
+            "descripcion": "este proyecto se guarda en proyecto.json",
+            "fechaInicio": "2025-12-03",
+            "fechaFin": "2025-12-10",
+            "estado": "Activo",
             "tareas": [
                 {
-                    "id_tarea": 1,
-                    "nombre": "Tarea",
-                    "descripcion": "Prueba de Tarea",
-                    "fecha_inicio": "2024-10-29",
-                    "fecha_fin": "2024-11-29",
-                    "id_proyecto": 1
-                },
-                {
                     "id_tarea": 2,
-                    "nombre": "NUeva tarea",
-                    "descripcion": "tarea",
-                    "fecha_inicio": "2024",
-                    "fecha_fin": "2024",
-                    "id_proyecto": 1
+                    "nombre": "ddddd",
+                    "descripcion": "ffff",
+                    "fecha_inicio": "2025-01-20",
+                    "fecha_fin": "2025-01-22",
+                    "id_proyecto": 1,
+                    "dependencias": []
                 }
             ]
         },
         {
             "id_proyecto": 2,
-            "nombre": "Proyecto de prueba",
-            "descripcion": "nueva prueba",
-            "fechaInicio": "2024-11-28",
-            "fechaFin": "2025-11-15",
+            "nombre": "papa",
+            "descripcion": "ddffgggg",
+            "fechaInicio": "2025-03-29",
+            "fechaFin": "2025-03-30",
             "estado": "Activo",
             "tareas": [
                 {
                     "id_tarea": 1,
-                    "nombre": "Ueva tarea",
-                    "descripcion": "tarea",
-                    "fecha_inicio": "2024-10-31",
-                    "fecha_fin": "2024-11-29",
-                    "id_proyecto": 2
+                    "nombre": "esta tarea es para papa",
+                    "descripcion": "como pelar papas",
+                    "fecha_inicio": "2025-03-29",
+                    "fecha_fin": "2025-03-30",
+                    "id_proyecto": 2,
+                    "dependencias": []
                 }
             ]
+        },
+        {
+            "id_proyecto": 3,
+            "nombre": "pppepepepe",
+            "descripcion": "peprprprpprpr",
+            "fechaInicio": "2025-01-25",
+            "fechaFin": "2025-01-29",
+            "estado": "Activo",
+            "tareas": []
         }
     ]
 }

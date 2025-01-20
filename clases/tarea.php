@@ -10,6 +10,8 @@ class Tarea {
         private $fecha_inicio;
         private $fecha_fin;
         private $id_proyecto;
+        private $dependencias = [];  // Array para almacenar tareas dependientes
+
 
         public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto) {
             $this->id_tarea = $id_tarea;
@@ -19,6 +21,15 @@ class Tarea {
             $this->fecha_fin = $fecha_fin;
             $this->id_proyecto = $id_proyecto;
 
+        }
+
+        // Método para agregar dependencias
+        public function agregarDependencia($tarea) {
+            $this->dependencias[] = $tarea;
+        }
+        
+        public function getDependencias() {
+            return $this->dependencias;
         }
 
         public function getIdTarea() {
@@ -71,6 +82,10 @@ class Tarea {
 
 
         public function toArray() {
+              // Convertir las dependencias a solo sus IDs (o a otro formato representativo)
+                $dependencias = array_map(function($tarea) {
+                    return $tarea->getIdTarea();
+                }, $this->dependencias);
             return [
                 'id_tarea' => $this->id_tarea,
                 'nombre' => $this->nombre,
@@ -78,18 +93,37 @@ class Tarea {
                 'fecha_inicio' => $this->fecha_inicio,
                 'fecha_fin' => $this->fecha_fin,
                 'id_proyecto' => $this->id_proyecto,
+                'dependencias' => $dependencias,  // Guardar solo los IDs de las dependencias
             ];
         }
         public static function fromArray($array) {
+             // Crear la tarea base sin dependencias
             return new self(
                 $array['id_tarea'],
                 $array['nombre'],
                 $array['descripcion'],
                 $array['fecha_inicio'],
                 $array['fecha_fin'],
-                $array['id_proyecto'],
+                $array['id_proyecto']
+                
             );
-        }
+
+            // Asociar las dependencias utilizando los IDs
+            if (isset($array['dependencias']) && is_array($array['dependencias'])) {
+                foreach ($array['dependencias'] as $id_dependencia) {
+                    // Buscar la tarea dependiente en la lista de tareas (todas las tareas ya cargadas)
+                    foreach ($todasLasTareas as $tareaExistente) {
+                        if ($tareaExistente->getIdTarea() == $id_dependencia) {
+                            // Agregar la dependencia
+                            $tarea->agregarDependencia($tareaExistente);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return $tarea;
+                }
     
 
     }
