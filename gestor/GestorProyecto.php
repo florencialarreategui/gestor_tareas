@@ -359,7 +359,8 @@ class GestorProyecto {
                                     $tareaData['descripcion'],
                                     $tareaData['fecha_inicio'],
                                     $tareaData['fecha_fin'],
-                                    $tareaData['id_proyecto']
+                                    $tareaData['id_proyecto'],
+                                    $tareaData['tareaCorrelativa'],
                                 );
                                 $proyecto->agregarTarea($tarea);
                             }

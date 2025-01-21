@@ -2,11 +2,11 @@
     "proyecto": [
         {
             "id_proyecto": 1,
-            "nombre": "Proyecto 1 de prueba",
+            "nombre": "Cmabio proyecto",
             "descripcion": "prueba de atributos",
-            "fechaInicio": "2024-10-27",
-            "fechaFin": "2024-11-29",
-            "estado": "Terminado",
+            "fechaInicio": "2024-11-11",
+            "fechaFin": "2024-11-17",
+            "estado": "Activo",
             "tareas": [
                 {
                     "id_tarea": 1,
@@ -14,7 +14,8 @@
                     "descripcion": "Prueba de Tarea",
                     "fecha_inicio": "2024-10-29",
                     "fecha_fin": "2024-11-29",
-                    "id_proyecto": 1
+                    "id_proyecto": 1,
+                    "tareaCorrelativa": null
                 },
                 {
                     "id_tarea": 2,
@@ -22,7 +23,17 @@
                     "descripcion": "tarea",
                     "fecha_inicio": "2024",
                     "fecha_fin": "2024",
-                    "id_proyecto": 1
+                    "id_proyecto": 1,
+                    "tareaCorrelativa": null
+                },
+                {
+                    "id_tarea": 3,
+                    "nombre": "Nueva tarea proyecto 1",
+                    "descripcion": "nueva tarea",
+                    "fecha_inicio": "2024-11-11",
+                    "fecha_fin": "2024-11-18",
+                    "id_proyecto": 1,
+                    "tareaCorrelativa": null
                 }
             ]
         },
@@ -40,7 +51,158 @@
                     "descripcion": "tarea",
                     "fecha_inicio": "2024-10-31",
                     "fecha_fin": "2024-11-29",
-                    "id_proyecto": 2
+                    "id_proyecto": 2,
+                    "tareaCorrelativa": null
+                }
+            ]
+        },
+        {
+            "id_proyecto": 3,
+            "nombre": "Nuevo proyecto",
+            "descripcion": "nuevo",
+            "fechaInicio": "2024-11-11",
+            "fechaFin": "2024-12-11",
+            "estado": "Terminado",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "tarea",
+                    "descripcion": "a",
+                    "fecha_inicio": "2024-11-12",
+                    "fecha_fin": "2024-11-15",
+                    "id_proyecto": 3,
+                    "tareaCorrelativa": null
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "comprar \u0000tiles escolares",
+                    "descripcion": "Comprar l\u0000pices, tijera, goma y saca puntas",
+                    "fecha_inicio": "2024-11-12",
+                    "fecha_fin": "2024-13-11",
+                    "id_proyecto": 3,
+                    "tareaCorrelativa": null
+                }
+            ]
+        },
+        {
+            "id_proyecto": 4,
+            "nombre": "NUevo proyecto para modificaciones",
+            "descripcion": "creamos nuevo atributo",
+            "fechaInicio": "2025-01-14",
+            "fechaFin": "2025-02-14",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "prueba de nueva tarea",
+                    "descripcion": "creamos nuevo atributo para tareas",
+                    "fecha_inicio": "2025-02-12",
+                    "fecha_fin": "2025-02-15",
+                    "id_proyecto": 4,
+                    "tareaCorrelativa": null
+                }
+            ]
+        },
+        {
+            "id_proyecto": 5,
+            "nombre": "as",
+            "descripcion": "as",
+            "fechaInicio": "2025-01-14",
+            "fechaFin": "2025-02-14",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "qwer",
+                    "descripcion": "w",
+                    "fecha_inicio": "2025-01-15",
+                    "fecha_fin": "2025-02-16",
+                    "id_proyecto": 5,
+                    "tareaCorrelativa": null
+                }
+            ]
+        },
+        {
+            "id_proyecto": 6,
+            "nombre": "nuevo proyecto",
+            "descripcion": "lala",
+            "fechaInicio": "2024-01-11",
+            "fechaFin": "2024-02-11",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "probando tarea",
+                    "descripcion": "aaaa",
+                    "fecha_inicio": "2024-01-01",
+                    "fecha_fin": "2024-12-01",
+                    "id_proyecto": 6,
+                    "tareaCorrelativa": null
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "lili",
+                    "descripcion": "lala",
+                    "fecha_inicio": "2025-01-12",
+                    "fecha_fin": "2025-01-13",
+                    "id_proyecto": 6,
+                    "tareaCorrelativa": []
+                }
+            ]
+        },
+        {
+            "id_proyecto": 7,
+            "nombre": "nuevo proyecto prueba",
+            "descripcion": "Se prueban las funciones de validacion de fechas de tareas dentro del proyecto",
+            "fechaInicio": "2024-12-01",
+            "fechaFin": "2025-01-01",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "nueva tarea prueba validacion",
+                    "descripcion": "nueva tarea",
+                    "fecha_inicio": "2024-12-03",
+                    "fecha_fin": "2024-12-05",
+                    "id_proyecto": 7,
+                    "tareaCorrelativa": null
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "prueba 2",
+                    "descripcion": "probando id",
+                    "fecha_inicio": "2025-12-06",
+                    "fecha_fin": "2024-12-05",
+                    "id_proyecto": 7,
+                    "tareaCorrelativa": null
+                }
+            ]
+        },
+        {
+            "id_proyecto": 8,
+            "nombre": "alalla",
+            "descripcion": "lal",
+            "fechaInicio": "2025-01-01",
+            "fechaFin": "2025-01-30",
+            "estado": "Activo",
+            "tareas": [
+                {
+                    "id_tarea": 1,
+                    "nombre": "liliiii",
+                    "descripcion": "aaa",
+                    "fecha_inicio": "2025-01-01",
+                    "fecha_fin": "2025-01-12",
+                    "id_proyecto": 8,
+                    "tareaCorrelativa": null
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "nueva",
+                    "descripcion": "lalalal",
+                    "fecha_inicio": "2025-01-03",
+                    "fecha_fin": "2025-01-12",
+                    "id_proyecto": 8,
+                    "tareaCorrelativa": null
                 }
             ]
         }
