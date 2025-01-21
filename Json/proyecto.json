@@ -100,6 +100,15 @@
             "fechaFin": "2025-03-10",
             "estado": "Activo",
             "tareas": []
+        },
+        {
+            "id_proyecto": 10,
+            "nombre": "rere",
+            "descripcion": "hhdwhe",
+            "fechaInicio": "2025-04-29",
+            "fechaFin": "2025-05-15",
+            "estado": "Activo",
+            "tareas": []
         }
     ]
 }

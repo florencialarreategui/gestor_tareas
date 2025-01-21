@@ -138,44 +138,43 @@ class Menu {
         }
     }
 
-    // Menú para gestionar tareas dentro de un proyecto
     public function menuTarea() {
         echo "=== Menú de Tareas ===\n";
-        echo "1. Crear Tarea\n";
-        echo "2. Listar Tareas\n";
-        echo "3. Editar Tarea\n";
-        echo "4. Eliminar Tarea\n";
-        echo "5. Calcular Camino Crítico\n";
-        echo "0. Salir al Menú Principal\n";
+        while (true) {
+            echo "1. Crear Tarea\n";
+            echo "2. Listar Tareas\n";
+            echo "3. Editar Tarea\n";
+            echo "4. Eliminar Tarea\n";
+            echo "5. Calcular Camino Crítico\n";
+            echo "0. Salir al Menú Principal\n";
         
-        $opcion = trim(fgets(STDIN));
+            $opcion = trim(fgets(STDIN));
     
-        switch ($opcion) {
-            case '1': 
-                $this->gestorTarea->crearTarea();
-                break;
-            case '2':
-                $this->listarTareas();
-                break;
-            case '3':
-                $this->editarTarea();
-                break;
-            case '4':
-                $this->eliminarTarea();
-                break;
-            case '5':
-                $this->calcularCaminoCritico();
-                break;
-            case '0':
-                return;
-            default:
-                echo "Opción no válida. Inténtelo de nuevo.\n";
-                break;
+            switch ($opcion) {
+                case '1': 
+                    $this->gestorTarea->crearTarea($this->gestorProyecto);  // Pasar el gestor de proyectos para crear la tarea
+                    break;
+                case '2':
+                    $this->gestorTarea->listarTareas();  // Llamar al gestorTarea para listar tareas
+                    break;
+                case '3':
+                    $this->gestorTarea->editarTarea();  // Llamar al gestorTarea para editar tareas
+                    break;
+                case '4':
+                    $this->gestorTarea->eliminarTarea();  // Llamar al gestorTarea para eliminar tareas
+                    break;
+                case '5':
+                    $this->gestorTarea->calcularCaminoCritico();  // Llamar al gestorTarea para calcular el camino crítico
+                    break;
+                case '0':
+                    return;  // Volver al menú principal
+                default:
+                    echo "Opción no válida. Inténtelo de nuevo.\n";
+                    break;
+            }
         }
     }
-    
-    
-    
+
     public function menuListarProyecto() {
         echo "=== Menú listar proyectos ===\n";
         while (true) {
@@ -212,7 +211,9 @@ class Menu {
 
 // Crear instancias de los gestores y menú
 $gestorUsuario = new GestorUsuario();
-$gestorTarea = new GestorTarea();
 $gestorProyecto = new GestorProyecto($gestorTarea);
+$gestorTarea = new GestorTarea($gestorProyecto);
 $menu = new Menu($gestorUsuario, $gestorProyecto, $gestorTarea);
 $menu->iniciar();
+?>
+

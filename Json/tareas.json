@@ -1,14 +1,5 @@
 {
-    "tarea": [
-        {
-            "id_tarea": 1,
-            "nombre": "esta tarea es para papa",
-            "descripcion": "como pelar papas",
-            "fecha_inicio": "2025-03-29",
-            "fecha_fin": "2025-03-30",
-            "id_proyecto": 2,
-            "dependencias": []
-        },
+    "tareas": [
         {
             "id_tarea": 2,
             "nombre": "ddddd",
@@ -16,6 +7,15 @@
             "fecha_inicio": "2025-01-20",
             "fecha_fin": "2025-01-22",
             "id_proyecto": 1,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 1,
+            "nombre": "esta tarea es para papa",
+            "descripcion": "como pelar papas",
+            "fecha_inicio": "2025-03-29",
+            "fecha_fin": "2025-03-30",
+            "id_proyecto": 2,
             "dependencias": []
         }
     ]
