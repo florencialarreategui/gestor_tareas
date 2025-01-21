@@ -1,7 +1,7 @@
 <?php
 require_once './gestor/GestorUsuario.php';
-require_once './gestor/GestorTarea.php';
 require_once './gestor/GestorProyecto.php';
+require_once './gestor/GestorTarea.php';
 
 class Menu {
     protected $gestorUsuario;
@@ -52,7 +52,6 @@ class Menu {
         while (true) {
             echo "1. Menú Usuario\n";
             echo "2. Menú Proyecto\n";
-            echo "3. Menú Tarea\n";
             echo "0. Salir al Menú inicial\n";
 
             $eleccion = trim(fgets(STDIN));
@@ -63,9 +62,6 @@ class Menu {
                     break;
                 case '2':
                     $this->menuProyecto();
-                    break;
-                case '3':
-                    $this->menuTarea();
                     break;
                 case '0':
                     return; 
@@ -112,16 +108,19 @@ class Menu {
             echo "2. Listar Proyectos\n";
             echo "3. Editar Proyecto\n";
             echo "4. Eliminar Proyecto\n";
+            echo "5. Crear Tarea\n";
+            echo "6. Listar Tareas de Proyecto\n";
+            echo "7. Calcular Camino Crítico\n";
             echo "0. Salir al Menú Principal\n";
-
+    
             $eleccion = trim(fgets(STDIN));
-
+    
             switch ($eleccion) {
                 case '1':
                     $this->gestorProyecto->agregarProyecto();
                     break;
                 case '2':
-                    $this->gestorProyecto->menuListarProyecto();
+                    $this->gestorProyecto->listarProyectos();
                     break;
                 case '3':
                     $this->gestorProyecto->editarProyecto();
@@ -129,75 +128,15 @@ class Menu {
                 case '4':
                     $this->gestorProyecto->eliminarProyecto();
                     break;
-                case '0':
-                    return; 
-                default:
-                    echo "Opción no válida. Inténtelo de nuevo.\n";
-                    break;
-            }
-        }
-    }
-
-    public function menuTarea() {
-        echo "=== Menú de Tareas ===\n";
-        while (true) {
-            echo "1. Crear Tarea\n";
-            echo "2. Listar Tareas\n";
-            echo "3. Editar Tarea\n";
-            echo "4. Eliminar Tarea\n";
-            echo "5. Calcular Camino Crítico\n";
-            echo "0. Salir al Menú Principal\n";
-        
-            $opcion = trim(fgets(STDIN));
-    
-            switch ($opcion) {
-                case '1': 
-                    $this->gestorTarea->crearTarea($this->gestorProyecto);  // Pasar el gestor de proyectos para crear la tarea
-                    break;
-                case '2':
-                    $this->gestorTarea->listarTareas();  // Llamar al gestorTarea para listar tareas
-                    break;
-                case '3':
-                    $this->gestorTarea->editarTarea();  // Llamar al gestorTarea para editar tareas
-                    break;
-                case '4':
-                    $this->gestorTarea->eliminarTarea();  // Llamar al gestorTarea para eliminar tareas
-                    break;
                 case '5':
-                    $this->gestorTarea->calcularCaminoCritico();  // Llamar al gestorTarea para calcular el camino crítico
+                    // Pasar $gestorProyecto a la función crearTarea
+                    $this->gestorTarea->crearTarea($this->gestorProyecto);
                     break;
-                case '0':
-                    return;  // Volver al menú principal
-                default:
-                    echo "Opción no válida. Inténtelo de nuevo.\n";
+                case '6':
+                    $this->gestorProyecto->listarTareasDelProyecto();
                     break;
-            }
-        }
-    }
-
-    public function menuListarProyecto() {
-        echo "=== Menú listar proyectos ===\n";
-        while (true) {
-            echo "1. Listar todos los proyectos\n";
-            echo "2. Listar proyecto por ID\n";
-            echo "3. Listar proyectos activos\n";
-            echo "4. Listar proyectos terminados\n";
-            echo "0. Volver al menú proyectos\n";
-
-            $eleccion = trim(fgets(STDIN));
-
-            switch ($eleccion) {
-                case '1':
-                    $this->gestorProyecto->listarProyectos();
-                    break;
-                case '2':
-                    $this->gestorProyecto->listarProyectoPorId();
-                    break;
-                case '3':
-                    $this->gestorProyecto->listarProyectoActivo();
-                    break;
-                case '4':
-                    $this->gestorProyecto->listarProyectoInactivo();
+                case '7':
+                    $this->gestorProyecto->calcularCaminoCritico();
                     break;
                 case '0':
                     return; 
@@ -207,13 +146,14 @@ class Menu {
             }
         }
     }
-}
+    
 
 // Crear instancias de los gestores y menú
-$gestorUsuario = new GestorUsuario();
-$gestorProyecto = new GestorProyecto($gestorTarea);
-$gestorTarea = new GestorTarea($gestorProyecto);
+$gestorUsuario = new GestorUsuario(); 
+$gestorTarea = new GestorTarea(); // El gestor de tareas sigue existiendo
+$gestorProyecto = new GestorProyecto($gestorTarea); 
 $menu = new Menu($gestorUsuario, $gestorProyecto, $gestorTarea);
-$menu->iniciar();
-?>
+$menu->iniciar(); 
+
+
 
