@@ -5,9 +5,9 @@
    
     class GestorTarea {
         public $tareas = [];
-        public $proyectos = [];
+        
         private $archivoJsonTareas = './Json/tareas.json';
-        private $archivoJsonProyectos = './Json/proyecto.json';
+       
 
         public function __construct() {
             $this->cargarDesdeJSON();
@@ -57,9 +57,35 @@
                 }
             }
         }
-
-        // Método para agregar una nueva tarea a un proyecto
-
+            public function crearTarea() {
+            // Primero aseguramos que hay proyectos disponibles
+            if (empty($this->gestorProyecto->proyectos)) {
+                echo "No hay proyectos disponibles. No se puede crear una tarea.\n";
+                return;
+            }
+              // Mostrar los proyectos disponibles para que el usuario elija uno
+            echo "Seleccione un proyecto para asignar la tarea:\n";
+            foreach ($this->gestorProyecto->proyectos as $index => $proyecto) {
+                echo ($index + 1) . ". " . $proyecto->getNombre() . "\n";
+            }
+            echo "Ingrese el número del proyecto: ";
+            $opcionProyecto = trim(fgets(STDIN));
+        
+            // Validar que la opción elegida es válida
+            if ($opcionProyecto < 1 || $opcionProyecto > count($this->gestorProyecto->proyectos)) {
+                echo "Opción no válida. Inténtelo de nuevo.\n";
+                return;
+            }
+        
+            // Obtener el proyecto elegido
+            $proyectoSeleccionado = $this->gestorProyecto->proyectos[$opcionProyecto - 1];
+        
+            // Llamar al método para agregar la tarea al proyecto seleccionado
+            $this->gestorTarea->agregarTarea($proyectoSeleccionado);
+        }
+        
+        
+        
         public function agregarTarea($proyecto) {
             // Generar un ID para la nueva tarea
             $id_tarea = count($this->tareas) + 1; // Asegúrate de que este ID sea único
@@ -70,7 +96,7 @@
             echo "Ingrese la descripción de la tarea: ";
             $descripcion = trim(fgets(STDIN));
         
-            // Validación de fecha
+            // Validación de la fecha de inicio
             do {
                 echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
                 $fecha_inicio = trim(fgets(STDIN));
@@ -80,8 +106,8 @@
                     echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
                 }
             } while (true);
-
-            
+        
+            // Validación de la fecha de finalización
             do {
                 echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
                 $fecha_fin = trim(fgets(STDIN));
@@ -93,16 +119,10 @@
                 }
             } while (true);
         
-            // Validación de fechas
-            if (!strtotime($fecha_inicio) || !strtotime($fecha_fin)) {
-                echo "Fecha inválida.\n";
-                return;
-            }
-        
             // Crear la nueva tarea con los datos proporcionados
             $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $proyecto->getIdProyecto());
         
-            // Agregar la tarea al proyecto
+            // Agregar la tarea al proyecto correspondiente
             $proyecto->agregarTarea($nuevaTarea);
         
             // También agregar la tarea a la lista global de tareas
@@ -110,9 +130,10 @@
         
             echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " (ID: " . $id_tarea . ")\n";
         
-            // Guardar las tareas en JSON
-            $this->guardarEnJSON();
+            // Guardar las tareas y los proyectos en los archivos JSON
+            $this->guardarEnJSON();  // Llamamos al método para guardar en ambos archivos
         }
+        
         
         
         public function listarTareas() {
@@ -201,55 +222,91 @@
             }
         }
 
-        // Método para guardar tareas y proyectos en JSON
+       
         public function guardarEnJSON() {
-            // Guardamos las tareas
+            // Primero, guarda las tareas en el archivo tareas.json
             $tareas = array_map(fn($tarea) => $tarea->toArray(), $this->tareas);
-            $jsontarea = json_encode(['tarea' => $tareas], JSON_PRETTY_PRINT);
-            file_put_contents($this->archivoJsonTareas, $jsontarea);
-
-            // Guardamos los proyectos
-            $proyectos = array_map(fn($proyecto) => $proyecto->toArray(), $this->proyectos);
-            $jsonproyecto = json_encode(['proyectos' => $proyectos], JSON_PRETTY_PRINT);
-            file_put_contents($this->archivoJsonProyectos, $jsonproyecto);
+            $jsontarea = json_encode(['tareas' => $tareas], JSON_PRETTY_PRINT);
+            file_put_contents($this->archivoJsonTareas, $jsontarea); // Guardar tareas en tareas.json
+        
+            // Luego, guarda las tareas dentro de los proyectos en proyecto.json
+            $proyectos = array_map(function($proyecto) {
+                // Para cada proyecto, aseguramos que las tareas estén en su propiedad 'tareas'
+                $tareasProyecto = array_map(fn($tarea) => $tarea->toArray(), $proyecto->getTareas());
+                $proyectoArray = $proyecto->toArray();
+                $proyectoArray['tareas'] = $tareasProyecto; // Incluir tareas en el proyecto
+        
+                return $proyectoArray;
+            }, $this->proyectos);
+        
+            // Guardar proyectos con tareas actualizadas en proyecto.json
+            $jsonproyecto = json_encode(['proyecto' => $proyectos], JSON_PRETTY_PRINT);
+            file_put_contents($this->archivoJsonProyectos, $jsonproyecto); // Guardar proyectos en proyecto.json
         }
-
-        // Método para cargar desde JSON (tareas y proyectos)
-        public function cargarDesdeJSON() {
-            echo "Cargando desde archivo JSON: " . $this->archivoJsonProyectos . "\n"; // Mensaje de depuración
+        
+       /* public function cargarDesdeJSON() {
+            // Cargar tareas desde el archivo tareas.json
+            if (file_exists($this->archivoJsonTareas)) {
+                $jsontarea = file_get_contents($this->archivoJsonTareas);
+                $data = json_decode($jsontarea, true);
+        
+                if (isset($data['tareas']) && is_array($data['tareas'])) {
+                    $tareas = $data['tareas'];
+                    $this->tareas = [];
+                    foreach ($tareas as $tareaData) {
+                        $tarea = Tarea::fromArray($tareaData); // Asegúrate de que Tarea tenga un método fromArray()
+                        $this->tareas[] = $tarea;
+                    }
+                }
+            } else {
+                $this->tareas = [];  // Si no existe el archivo, iniciamos la lista de tareas vacía
+            }
+        
+            // Cargar proyectos desde el archivo proyecto.json
             if (file_exists($this->archivoJsonProyectos)) {
                 $jsonproyecto = file_get_contents($this->archivoJsonProyectos);
                 $data = json_decode($jsonproyecto, true);
         
-                if (isset($data['proyectos']) && is_array($data['proyectos'])) {
-                    $proyectos = $data['proyectos'];
+                if (isset($data['proyecto']) && is_array($data['proyecto'])) {
+                    $proyectos = $data['proyecto'];
                     $this->proyectos = [];
                     foreach ($proyectos as $proyectoData) {
-                        $proyecto = Proyecto::fromArray($proyectoData);
+                        $proyecto = Proyecto::fromArray($proyectoData); // Asegúrate de que Proyecto tenga un método fromArray()
         
+                        // Asegúrate de que las tareas del proyecto sean cargadas
                         if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
                             foreach ($proyectoData['tareas'] as $tareaData) {
                                 $tarea = Tarea::fromArray($tareaData);
-                                $proyecto->agregarTarea($tarea);
+                                $proyecto->agregarTarea($tarea);  // Agregar la tarea al proyecto
                             }
                         }
         
                         $this->proyectos[] = $proyecto;
                     }
-                } else {
-                    $this->proyectos = [];
                 }
             } else {
-                $this->proyectos = [];
+                $this->proyectos = [];  // Si no existe el archivo, iniciamos la lista de proyectos vacía
             }
+        }*/
+        public function cargarDesdeJSON() {
+            // Cargar tareas desde el archivo tareas.json
+            if (file_exists($this->archivoJsonTareas)) {
+                $jsontarea = file_get_contents($this->archivoJsonTareas);
+                $data = json_decode($jsontarea, true);
         
-        
-        
-            // Verifica que los proyectos se cargaron correctamente
-            var_dump($this->proyectos);  // Esto te ayudará a depurar si los proyectos están siendo cargados correctamente
+                if (isset($data['tareas']) && is_array($data['tareas'])) {
+                    $this->tareas = []; // Inicializar arreglo de tareas vacío
+                    foreach ($data['tareas'] as $tareaData) {
+                        // Pasamos todas las tareas para poder reconstruir las dependencias correctamente
+                        $tarea = Tarea::fromArray($tareaData, $this->tareas);
+                        $this->tareas[] = $tarea;
+                    }
+                }
+            } else {
+                $this->tareas = []; // Si no existe el archivo, inicializamos la lista vacía
+            }
         }
         
-
         // Método para obtener tarea por ID
         public function obtenerTarea($id_tarea) {
             foreach ($this->tareas as $tarea) {

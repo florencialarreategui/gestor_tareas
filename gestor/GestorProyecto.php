@@ -66,6 +66,7 @@ class GestorProyecto {
                     break; 
                 }
                 $this->gestorTarea->agregarTarea($nuevoProyecto);
+
             }
         
                 $this->guardarEnJSON();
@@ -335,8 +336,18 @@ class GestorProyecto {
             }
             $jsonproyecto = json_encode(['proyecto' => $proyectos], JSON_PRETTY_PRINT);
             file_put_contents($this->archivoJson, $jsonproyecto);
-        }
-        
+
+             // Guardar tareas
+                $tareas = [];
+                foreach ($this->proyectos as $proyecto) {
+                    foreach ($proyecto->getTareas() as $tarea) {
+                        $tareas[] = $tarea->toArray();
+                    }
+                }
+                $jsonTareas = json_encode(['tareas' => $tareas], JSON_PRETTY_PRINT);
+                file_put_contents('./Json/tareas.json', $jsonTareas);
+        } 
+       
         public function cargarDesdeJSON() {
             if (file_exists($this->archivoJson)) {
                 $json = file_get_contents($this->archivoJson);
@@ -345,6 +356,7 @@ class GestorProyecto {
                 if (isset($data['proyecto']) && is_array($data['proyecto'])) {
                     $proyectos = $data['proyecto'];
                     $this->proyectos = [];
+        
                     foreach ($proyectos as $proyectoData) {
                         $proyecto = new Proyecto(
                             $proyectoData['id_proyecto'],
@@ -355,6 +367,7 @@ class GestorProyecto {
                             $proyectoData['estado']
                         );
         
+                        // Agregar tareas al proyecto
                         if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
                             foreach ($proyectoData['tareas'] as $tareaData) {
                                 $tarea = new Tarea(
@@ -365,7 +378,15 @@ class GestorProyecto {
                                     $tareaData['fecha_fin'],
                                     $tareaData['id_proyecto']
                                 );
-                                $proyecto->agregarTarea($tarea);
+        
+                                // Si tienes dependencias, las asignas aquí
+                                if (isset($tareaData['dependencias']) && is_array($tareaData['dependencias'])) {
+                                    foreach ($tareaData['dependencias'] as $idDependencia) {
+                                        $tarea->agregarDependencia($idDependencia);  // Agregar dependencias
+                                    }
+                                }
+        
+                                $proyecto->agregarTarea($tarea);  // Agregar tarea al proyecto
                             }
                         }
         
@@ -377,6 +398,16 @@ class GestorProyecto {
             } else {
                 $this->proyectos = [];
             }
-        }
         
-    }
+            // Verificación de carga de proyectos y tareas
+            echo "Proyectos cargados:\n";
+            foreach ($this->proyectos as $proyecto) {
+                echo "Proyecto: " . $proyecto->getNombre() . "\n";
+                foreach ($proyecto->getTareas() as $tarea) {
+                    echo "- Tarea: " . $tarea->getNombre() . "\n";
+                    echo "  Dependencias: " . implode(", ", $tarea->getDependencias()) . "\n";
+                }
+            }
+        }}
+        
+       

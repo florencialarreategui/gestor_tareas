@@ -46,6 +46,60 @@
             "fechaFin": "2025-01-29",
             "estado": "Activo",
             "tareas": []
+        },
+        {
+            "id_proyecto": 4,
+            "nombre": "pipiripipi",
+            "descripcion": "ultima prueba de hoy",
+            "fechaInicio": "2025-01-20",
+            "fechaFin": "2025-01-29",
+            "estado": "Activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 5,
+            "nombre": "pepe",
+            "descripcion": "este proyecto es una copia",
+            "fechaInicio": "2025-01-20",
+            "fechaFin": "2025-01-29",
+            "estado": "Activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 6,
+            "nombre": "tres tristes intentos",
+            "descripcion": "nvfyurygirejkl",
+            "fechaInicio": "2025-01-22",
+            "fechaFin": "2025-01-29",
+            "estado": "Activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 7,
+            "nombre": "perepe",
+            "descripcion": "dhhfuieadc",
+            "fechaInicio": "2025-02-15",
+            "fechaFin": "2025-02-28",
+            "estado": "Activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 8,
+            "nombre": "feeeav",
+            "descripcion": "hffeshfoe",
+            "fechaInicio": "2025-02-23",
+            "fechaFin": "2025-02-28",
+            "estado": "Activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 9,
+            "nombre": "poropopo",
+            "descripcion": "fjhfhgifkffls",
+            "fechaInicio": "2025-02-23",
+            "fechaFin": "2025-03-10",
+            "estado": "Activo",
+            "tareas": []
         }
     ]
 }

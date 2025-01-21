@@ -1,5 +1,5 @@
 <?php
-
+require_once './clases/tarea.php';
 
 class Proyecto {
     private $id_proyecto;
@@ -41,11 +41,18 @@ class Proyecto {
 
     public function getEstado() {
         return $this->estado;
+
+    }
+    public function agregarTarea($tarea) {
+        $this->tareas[] = $tarea; // Agregar tarea al array de tareas
     }
 
     public function getTareas() {
-        return $this->tareas;
+        return $this->tareas; // Retornar todas las tareas asociadas al proyecto
     }
+
+  
+    
 
     public function setIdProyecto($id_proyecto) {
         $this->id_proyecto = $id_proyecto;
@@ -75,9 +82,7 @@ class Proyecto {
         $this->tareas = $tareas;
     }
 
-    public function agregarTarea($tarea) {
-        $this->tareas[] = $tarea;
-    }
+  
 
    public function toArray() {
         return [
@@ -103,24 +108,23 @@ class Proyecto {
         );
         
     
-    return $proyecto;
+   
      // Asegúrate de reconstruir las tareas correctamente
      if (isset($data['tareas']) && is_array($data['tareas'])) {
         foreach ($data['tareas'] as $tareaData) {
-            $tarea = Tarea::fromArray($tareaData);
-            $proyecto->agregarTarea($tarea);
+            $tarea = Tarea::fromArray($tareaData);//se crea la tarea
+            $proyecto->agregarTarea($tarea);//se agrega al proyecto
         }
     }
-          // Asegúrate de reconstruir las tareas correctamente
-    if (isset($data['tareas']) && is_array($data['tareas'])) {
-        foreach ($data['tareas'] as $tareaData) {
-            $tarea = Tarea::fromArray($tareaData);
-            $proyecto->agregarTarea($tarea);
-        }
-    }
+       
     return $proyecto;
+    $proyecto = Proyecto::fromArray($data);  // Llamas al método estático
+    print_r($proyecto->getTareas());          // Accedes a las tareas del proyecto  
+
+
     }
-    
+
+      
 }
 
    

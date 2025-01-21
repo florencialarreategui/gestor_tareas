@@ -93,25 +93,24 @@ class Tarea {
                 'fecha_inicio' => $this->fecha_inicio,
                 'fecha_fin' => $this->fecha_fin,
                 'id_proyecto' => $this->id_proyecto,
-                'dependencias' => $dependencias,  // Guardar solo los IDs de las dependencias
+                'dependencias' => $this->dependencias ,  // Guardar solo los IDs de las dependencias
             ];
         }
-        public static function fromArray($array) {
-             // Crear la tarea base sin dependencias
-            return new self(
+        public static function fromArray($array, $todasLasTareas = []) {
+            // Crear la tarea base sin dependencias
+            $tarea = new self(
                 $array['id_tarea'],
                 $array['nombre'],
                 $array['descripcion'],
                 $array['fecha_inicio'],
                 $array['fecha_fin'],
                 $array['id_proyecto']
-                
             );
-
+        
             // Asociar las dependencias utilizando los IDs
             if (isset($array['dependencias']) && is_array($array['dependencias'])) {
                 foreach ($array['dependencias'] as $id_dependencia) {
-                    // Buscar la tarea dependiente en la lista de tareas (todas las tareas ya cargadas)
+                    // Buscar la tarea dependiente en la lista de todas las tareas (pasada como parámetro)
                     foreach ($todasLasTareas as $tareaExistente) {
                         if ($tareaExistente->getIdTarea() == $id_dependencia) {
                             // Agregar la dependencia
@@ -121,9 +120,11 @@ class Tarea {
                     }
                 }
             }
-
+        
             return $tarea;
-                }
+        }
+        
+           
     
 
     }

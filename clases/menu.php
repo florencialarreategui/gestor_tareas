@@ -152,7 +152,7 @@ class Menu {
     
         switch ($opcion) {
             case '1': 
-                $this->crearTarea();
+                $this->gestorTarea->crearTarea();
                 break;
             case '2':
                 $this->listarTareas();
@@ -172,34 +172,6 @@ class Menu {
                 echo "Opción no válida. Inténtelo de nuevo.\n";
                 break;
         }
-    }
-    
-    private function crearTarea() {
-        // Primero aseguramos que hay proyectos disponibles
-        if (empty($this->gestorProyecto->proyectos)) {
-            echo "No hay proyectos disponibles. No se puede crear una tarea.\n";
-            return;
-        }
-    
-        // Mostrar los proyectos disponibles para que el usuario elija uno
-        echo "Seleccione un proyecto para asignar la tarea:\n";
-        foreach ($this->gestorProyecto->proyectos as $index => $proyecto) {
-            echo ($index + 1) . ". " . $proyecto->getNombre() . "\n";
-        }
-        echo "Ingrese el número del proyecto: ";
-        $opcionProyecto = trim(fgets(STDIN));
-    
-        // Validar que la opción elegida es válida
-        if ($opcionProyecto < 1 || $opcionProyecto > count($this->gestorProyecto->proyectos)) {
-            echo "Opción no válida. Inténtelo de nuevo.\n";
-            return;
-        }
-    
-        // Obtener el proyecto elegido
-        $proyectoSeleccionado = $this->gestorProyecto->proyectos[$opcionProyecto - 1];
-    
-        // Llamar al método para agregar la tarea al proyecto seleccionado
-        $this->gestorTarea->agregarTarea($proyectoSeleccionado);
     }
     
     
