@@ -8,7 +8,8 @@ class Proyecto {
     private $fechaInicio;
     private $fechaFin;
     private $estado;
-    private $tareas = [];
+    private $tareasDependientes = [];
+    private $tareasIndependientes = [];
 
     public function __construct($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado) {
         $this->id_proyecto = $id_proyecto;
@@ -44,9 +45,24 @@ class Proyecto {
     }
 
     public function getTareas() {
-        return $this->tareas;
+        return array_merge($this->tareasDependientes, $this->tareasIndependientes);
     }
-
+   
+    public function agregarTareaDependiente($tarea) {
+        $this->tareasDependientes[] = $tarea;
+    }
+    
+    public function agregarTareaIndependiente($tarea) {
+        $this->tareasIndependientes[] = $tarea;
+    }
+    
+    public function getTareasDependientes() {
+        return $this->tareasDependientes;
+    }
+    
+    public function getTareasIndependientes() {
+        return $this->tareasIndependientes;
+    }
     public function setIdProyecto($id_proyecto) {
         $this->id_proyecto = $id_proyecto;
     }
@@ -71,12 +87,12 @@ class Proyecto {
         $this->estado = $estado;
     }
 
-    public function setTareas($tareas) {
-        $this->tareas = $tareas;
+    public function setTareas($tareasIndependientes) {
+        $this->tareasIndependientes = $tareasIndependientes;
     }
 
-    public function agregarTarea($tarea) {
-        $this->tareas[] = $tarea;
+    public function agregarTarea($tareasDedependientes) {
+        $this->tareasDedependientes[] = $tareasDedependientes;
     }
 
    public function toArray() {
@@ -87,9 +103,12 @@ class Proyecto {
             'fechaInicio' => $this->fechaInicio,
             'fechaFin' => $this->fechaFin,
             'estado' => $this->estado,
-            'tareas' => array_map(function($tarea) {
+            'tareasDependientes' => array_map(function($tarea) {
                 return $tarea->toArray(); //  la clase Tarea tiene un método toArray()
-            }, $this->tareas),
+            }, $this->tareasDependientes),
+            'tareasIndependientes' => array_map(function($tarea) {
+                return $tarea->toArray(); //  la clase Tarea tiene un método toArray()
+            }, $this->tareasIndependientes),
         ];
     }
     public static function fromArray($array) {

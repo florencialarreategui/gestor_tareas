@@ -10,16 +10,16 @@ class Tarea {
         private $fecha_inicio;
         private $fecha_fin;
         private $id_proyecto;
-        private $tareaCorrelativa;
+    
 
-        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto,  $tareaCorrelativa) {
+        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto) {
             $this->id_tarea = $id_tarea;
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->fecha_inicio = $fecha_inicio;
             $this->fecha_fin = $fecha_fin;
             $this->id_proyecto = $id_proyecto;
-            $this->tareaCorrelativa = $tareaCorrelativa;
+            
         }
 
         public function getIdTarea() {
@@ -44,14 +44,6 @@ class Tarea {
 
         public function getIdProyecto() {
             return $this->id_proyecto;
-        }
-
-        public function getTareaCorrelativa() {
-            return $this->tareaCorrelativa;
-        }
-    
-        public function setTareaCorrelativa($tareaCorrelativa) {
-            $this->tareaCorrelativa = $tareaCorrelativa;
         }
 
         public function setIdTarea($id_tarea) {

@@ -19,113 +19,167 @@ class GestorTarea {
         }
 
 
-       public function agregarTarea($proyecto) {
-    $id_tarea = count($proyecto->getTareas()) + 1; 
-    $id_proyecto = $proyecto->getIdProyecto();
-    echo "Ingrese el nombre de la tarea: ";
-    $nombre = trim(fgets(STDIN));
-    
-    echo "Ingrese la descripción de la tarea: ";
-    $descripcion = trim(fgets(STDIN));
-    
-    // Obtener fechas de inicio y fin del proyecto
-    $fecha_inicio_proyecto = $proyecto->getFechaInicio(); // Debe estar implementado en el objeto proyecto
-    $fecha_fin_proyecto = $proyecto->getFechaFin(); // Debe estar implementado en el objeto proyecto
-
-    // Validación de fecha de inicio
-    do {
-        echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
-        $fecha_inicio = trim(fgets(STDIN));
+        public function agregarTarea($proyecto) {
+            $id_tarea = count($proyecto->getTareas()) + 1; 
+            $id_proyecto = $proyecto->getIdProyecto();
+            
+            echo "Ingrese el nombre de la tarea: ";
+            $nombre = trim(fgets(STDIN));
+            
+            echo "Ingrese la descripción de la tarea: ";
+            $descripcion = trim(fgets(STDIN));
         
-        if (!$this->esFechaValida($fecha_inicio)) {
-            echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
-            continue;
-        }
-
-        // Verificar que la fecha de inicio esté dentro del rango del proyecto
-        $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio);
-        $fechaInicioProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio_proyecto);
-
-        if ($fechaInicioObj < $fechaInicioProyectoObj) {
-            echo "La fecha de inicio no puede ser antes de la fecha de inicio del proyecto.\n";
-            continue;
-        }
-
-        break; // La fecha de inicio es válida
-    } while (true);
-
-    // Validación de fecha de finalización
-    do {
-        echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
-        $fecha_fin = trim(fgets(STDIN));
-        $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
-
-        if (!$this->esFechaValida($fecha_fin)) {
-            echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
-            continue;
-        }
-
-        // Verificar que la fecha de fin esté dentro del rango del proyecto
-        $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fecha_fin);
-        $fechaFinProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_fin_proyecto);
-
-        if ($fechaFinObj > $fechaFinProyectoObj) {
-            echo "La fecha de finalización no puede ser después de la fecha de finalización del proyecto.\n";
-            continue;
-        }
-
-        break; // La fecha de finalización es válida
-    } while (true);
-
-    // Preguntar si la tarea depende de otra
-    $tareaCorrelativa = null;
-    echo "¿La tarea depende de otra tarea? (sí/no): ";
-    $respuesta = trim(fgets(STDIN));
-    if (strtolower($respuesta) === 'sí' || strtolower($respuesta) === 'si') {
-        echo "Ingrese el ID de la tarea de la cual depende: ";
-        $id_tarea_correlativa = trim(fgets(STDIN));
-
-        // Buscar si existe la tarea correlativa
-        foreach ($proyecto->getTareas() as $tarea) {
-            if ($tarea->getIdTarea() == $id_tarea_correlativa) {
-                $tareaCorrelativa = $tarea;
+            // Obtener fechas de inicio y fin del proyecto
+            $fecha_inicio_proyecto = $proyecto->getFechaInicio();
+            $fecha_fin_proyecto = $proyecto->getFechaFin();
+        
+            // Validación de fecha de inicio
+            do {
+                echo "Ingrese la fecha de inicio en formato fecha (YYYY-MM-DD): ";
+                $fecha_inicio = trim(fgets(STDIN));
+            
+                if (!$this->esFechaValida($fecha_inicio)) {
+                    echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                    continue;
+                }
+        
+                $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio);
+                $fechaInicioProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio_proyecto);
+        
+                if ($fechaInicioObj < $fechaInicioProyectoObj) {
+                    echo "La fecha de inicio no puede ser antes de la fecha de inicio del proyecto.\n";
+                    continue;
+                }
+        
                 break;
+            } while (true);
+        
+            // Validación de fecha de finalización
+            do {
+                echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                $fecha_fin = trim(fgets(STDIN));
+                $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
+        
+                if (!$this->esFechaValida($fecha_fin)) {
+                    echo "La fecha de finalización no es válida. Intenta nuevamente.\n";
+                    continue;
+                }
+        
+                $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fecha_fin);
+                $fechaFinProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_fin_proyecto);
+        
+                if ($fechaFinObj > $fechaFinProyectoObj) {
+                    echo "La fecha de finalización no puede ser después de la fecha de finalización del proyecto.\n";
+                    continue;
+                }
+        
+                break;
+            } while (true);
+        
+            // Elegir si la tarea será dependiente o independiente
+            echo "¿La tarea es dependiente o independiente? (1: Dependiente, 2: Independiente): ";
+            $tipo_tarea = trim(fgets(STDIN));
+            
+            // Crear la nueva tarea
+            $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto);
+        
+            // Añadir la tarea al arreglo adecuado del proyecto
+            if ($tipo_tarea == 1) {
+                $proyecto->agregarTareaDependiente($nuevaTarea);
+                echo "Tarea dependiente agregada exitosamente: " . $nuevaTarea->getNombre() . " (ID: $id_tarea)\n";
+            } elseif ($tipo_tarea == 2) {
+                $proyecto->agregarTareaIndependiente($nuevaTarea);
+                echo "Tarea independiente agregada exitosamente: " . $nuevaTarea->getNombre() . " (ID: $id_tarea)\n";
+            } else {
+                echo "Opción no válida. La tarea no se ha agregado.\n";
             }
         }
-
-        if (!$tareaCorrelativa) {
-            echo "No se encontró la tarea correlativa con ID $id_tarea_correlativa.\n";
-        }
-    }
-
-    // Crear la nueva tarea con su tarea correlativa (si existe)
-    $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $tareaCorrelativa);
-    $proyecto->agregarTarea($nuevaTarea); 
-    echo "Tarea agregada exitosamente: " . $nuevaTarea->getNombre() . " (ID: $id_tarea)\n";
-
-      // Si la fecha de finalización de la tarea es posterior a la fecha de finalización del proyecto, calculamos el atraso
-      $fechaFinTareaObj = DateTime::createFromFormat('Y-m-d', $fecha_fin);
-      $fechaFinProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_fin_proyecto);
-  
-      // Si la fecha de finalización de la tarea es posterior a la fecha de finalización del proyecto
-      if ($fechaFinTareaObj > $fechaFinProyectoObj) {
-          $diasDeAtraso = $fechaFinTareaObj->diff($fechaFinProyectoObj)->days;
-          echo "La tarea está atrasada en $diasDeAtraso días.\n";
-          
-          // Actualizar la fecha de finalización del proyecto
-          $fechaNuevaFinProyecto = $fechaFinProyectoObj->add(new DateInterval("P{$diasDeAtraso}D"));
-          $proyecto->setFechaFin($fechaNuevaFinProyecto->format('Y-m-d')); // Asumiendo que existe el método setFechaFin() en la clase Proyecto
-          echo "La nueva fecha de finalización del proyecto es: " . $fechaNuevaFinProyecto->format('Y-m-d') . "\n";
-      }
-
-}
-
 
         private function validarFechaInicioFin($fecha_inicio, $fecha_fin) {
             $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio);
             $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fecha_fin);
             if (!$fechaInicioObj || !$fechaFinObj) {
                 return "Una de las fechas no es válida.";
+            }
+            
+            function agregarTarea($proyecto) {
+                $id_tarea = count($proyecto->getTareas()) + 1; 
+                $id_proyecto = $proyecto->getIdProyecto();
+                
+                echo "Ingrese el nombre de la tarea: ";
+                $nombre = trim(fgets(STDIN));
+                
+                echo "Ingrese la descripción de la tarea: ";
+                $descripcion = trim(fgets(STDIN));
+            
+                // Obtener fechas de inicio y fin del proyecto
+                $fecha_inicio_proyecto = $proyecto->getFechaInicio();
+                $fecha_fin_proyecto = $proyecto->getFechaFin();
+            
+                // Validación de fecha de inicio
+                do {
+                    echo "Ingrese la fecha de inicio en formato fecha (YYYY-MM-DD): ";
+                    $fecha_inicio = trim(fgets(STDIN));
+                
+                    if (!$this->esFechaValida($fecha_inicio)) {
+                        echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                        continue;
+                    }
+            
+                    $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio);
+                    $fechaInicioProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio_proyecto);
+            
+                    if ($fechaInicioObj < $fechaInicioProyectoObj) {
+                        echo "La fecha de inicio no puede ser antes de la fecha de inicio del proyecto.\n";
+                        continue;
+                    }
+            
+                    break;
+                } while (true);
+            
+                // Solicitar la cantidad de días de duración de la tarea
+                do {
+                    echo "Ingrese la cantidad de días de duración de la tarea: ";
+                    $dias_duracion = trim(fgets(STDIN));
+                    
+                    if (!is_numeric($dias_duracion) || $dias_duracion <= 0) {
+                        echo "Por favor, ingresa un número válido de días.\n";
+                        continue;
+                    }
+            
+                    break;
+                } while (true);
+            
+                // Calcular la fecha de fin sumando los días de duración a la fecha de inicio
+                $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fecha_inicio);
+                $fechaFinObj = clone $fechaInicioObj;
+                $fechaFinObj->add(new DateInterval('P' . $dias_duracion . 'D'));
+                $fecha_fin = $fechaFinObj->format('Y-m-d');
+            
+                // Verificar que la fecha de fin no esté fuera del rango del proyecto
+                $fechaFinProyectoObj = DateTime::createFromFormat('Y-m-d', $fecha_fin_proyecto);
+                if ($fechaFinObj > $fechaFinProyectoObj) {
+                    echo "La fecha de finalización calculada está fuera del rango del proyecto.\n";
+                    return; // Finalizar sin agregar la tarea si la fecha de fin es inválida
+                }
+            
+                // Elegir si la tarea será dependiente o independiente
+                echo "¿La tarea es dependiente o independiente? (1: Dependiente, 2: Independiente): ";
+                $tipo_tarea = trim(fgets(STDIN));
+                
+                // Crear la nueva tarea
+                $nuevaTarea = new Tarea($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto);
+            
+                // Añadir la tarea al arreglo adecuado del proyecto
+                if ($tipo_tarea == 1) {
+                    $proyecto->agregarTareaDependiente($nuevaTarea);
+                    echo "Tarea dependiente agregada exitosamente: " . $nuevaTarea->getNombre() . " (ID: $id_tarea)\n";
+                } elseif ($tipo_tarea == 2) {
+                    $proyecto->agregarTareaIndependiente($nuevaTarea);
+                    echo "Tarea independiente agregada exitosamente: " . $nuevaTarea->getNombre() . " (ID: $id_tarea)\n";
+                } else {
+                    echo "Opción no válida. La tarea no se ha agregado.\n";
+                }
             }
             if ($fechaFinObj < $fechaInicioObj) {
                 return "La fecha de finalización no puede ser anterior a la de inicio.";
@@ -182,33 +236,50 @@ class GestorTarea {
                                 $tarea->setDescripcion($descripcion);
                                 break;
                                 echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
-                            case '3':
-                                do {
-                                    echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
-                                    $fecha_inicio = trim(fgets(STDIN));
-                                    if ($this->esFechaValida($fecha_inicio)) {
-                                        $tarea->setFechaInicio($fecha_inicio);
-                                        echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
-                                        break;  
-                                    } else {
-                                        echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
-                                    }
-                                } while (true); 
-                                break;
-                            case '4':   
-                                do {
-                                    echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
-                                    $fecha_fin = trim(fgets(STDIN));
-                                    $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
-                                    if ($validacion === true) {
-                                        $tarea->setFechaFin($fecha_fin);
-                                         echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
-                                        break;
-                                    } else {
-                                        echo $validacion . "\n";
-                                    }
-                                } while (true);
-                                break;           
+                                case '3':
+                                    do {
+                                        echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
+                                        $fecha_inicio = trim(fgets(STDIN));
+                                        if ($this->esFechaValida($fecha_inicio)) {
+                                            // Calcular los días de atraso
+                                            $fecha_actual = new DateTime();
+                                            $fecha_inicio_obj = new DateTime($fecha_inicio);
+                                            $intervalo = $fecha_actual->diff($fecha_inicio_obj);
+                                            $dias_atraso = $intervalo->days;
+        
+                                            // Si la fecha de inicio es en el futuro, no hay atraso
+                                            if ($fecha_inicio_obj > $fecha_actual) {
+                                                $dias_atraso = 0;
+                                            }
+        
+                                            $tarea->setFechaInicio($fecha_inicio);
+                                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
+                                            
+                                            // Actualizar la fecha final del proyecto
+                                            $fecha_fin_actual = new DateTime($proyecto->getFechaFin());
+                                            $fecha_fin_actual->modify("+$dias_atraso days");
+                                            $proyecto->setFechaFin($fecha_fin_actual->format('Y-m-d'));
+                                            echo "La fecha de finalización del proyecto ha sido extendida.\n";
+                                            break;
+                                        } else {
+                                            echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
+                                        }
+                                    } while (true);
+                                    break;
+                                case '4':   
+                                    do {
+                                        echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
+                                        $fecha_fin = trim(fgets(STDIN));
+                                        $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
+                                        if ($validacion === true) {
+                                            $tarea->setFechaFin($fecha_fin);
+                                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
+                                            break;
+                                        } else {
+                                            echo $validacion . "\n";
+                                        }
+                                    } while (true);
+                                    break;                   
                             case '0':
                                 return; 
                             default:
