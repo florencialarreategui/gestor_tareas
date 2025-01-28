@@ -107,18 +107,106 @@
             "fechaInicio": "2025-01-01",
             "fechaFin": "2025-05-01",
             "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 12,
+            "nombre": "nuevopro",
+            "descripcion": "popo",
+            "fechaInicio": "2025-01-14",
+            "fechaFin": "2025-02-16",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 13,
+            "nombre": "laaa",
+            "descripcion": "aa",
+            "fechaInicio": "2025-01-02",
+            "fechaFin": "2025-03-10",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 14,
+            "nombre": "sisis",
+            "descripcion": "soso",
+            "fechaInicio": "2025-01-01",
+            "fechaFin": "2025-05-10",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 15,
+            "nombre": "porfi",
+            "descripcion": "lali",
+            "fechaInicio": "2025-01-10",
+            "fechaFin": "2025-06-11",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 16,
+            "nombre": "kasdjksldj",
+            "descripcion": "d",
+            "fechaInicio": "2025-01-01",
+            "fechaFin": "2025-10-10",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 17,
+            "nombre": "probando tipos de tareas",
+            "descripcion": "akkaka",
+            "fechaInicio": "2025-01-01",
+            "fechaFin": "2025-07-10",
+            "estado": "Activo",
             "tareasDependientes": [
                 {
                     "id_tarea": 1,
-                    "nombre": "depe",
+                    "nombre": "primera",
                     "descripcion": "dependiente",
-                    "fecha_inicio": "2025-01-15",
-                    "fecha_fin": "2025-02-15",
-                    "id_proyecto": 11,
-                    "tareaCorrelativa": null
+                    "fecha_inicio": "2025-01-01",
+                    "dias_duracion": "6",
+                    "fecha_fin": "2025-01-07",
+                    "id_proyecto": 17
+                },
+                {
+                    "id_tarea": 2,
+                    "nombre": "segunda",
+                    "descripcion": "depe",
+                    "fecha_inicio": "2025-01-07",
+                    "dias_duracion": "7",
+                    "fecha_fin": "2025-01-14",
+                    "id_proyecto": 17
+                },
+                {
+                    "id_tarea": 3,
+                    "nombre": "tercera",
+                    "descripcion": "depe",
+                    "fecha_inicio": "2025-01-14",
+                    "dias_duracion": "9",
+                    "fecha_fin": "2025-01-23",
+                    "id_proyecto": 17
                 }
             ],
-            "tareasIndependientes": []
+            "tareasIndependientes": [
+                {
+                    "id_tarea": 4,
+                    "nombre": "independiente",
+                    "descripcion": "aleluya",
+                    "fecha_inicio": "2025-02-01",
+                    "dias_duracion": "8",
+                    "fecha_fin": "2025-02-09",
+                    "id_proyecto": 17
+                }
+            ]
         }
     ]
 }

@@ -9,16 +9,18 @@ class Tarea {
         private $descripcion;
         private $fecha_inicio;
         private $fecha_fin;
+        private $dias_duracion;
         private $id_proyecto;
     
 
-        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto) {
+        public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $dias_duracion) {
             $this->id_tarea = $id_tarea;
             $this->nombre = $nombre;
             $this->descripcion = $descripcion;
             $this->fecha_inicio = $fecha_inicio;
             $this->fecha_fin = $fecha_fin;
             $this->id_proyecto = $id_proyecto;
+            $this->dias_duracion = $dias_duracion;
             
         }
 
@@ -46,6 +48,13 @@ class Tarea {
             return $this->id_proyecto;
         }
 
+        public function getDiasDuracion(){
+            return $this->dias_duracion;
+        }
+
+        public function setDiasDuracion($dias_duracion) {
+            $this->dias_duracion = $dias_duracion;
+        } 
         public function setIdTarea($id_tarea) {
             $this->id_tarea = $id_tarea;
         }
@@ -77,9 +86,9 @@ class Tarea {
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
                 'fecha_inicio' => $this->fecha_inicio,
+                'dias_duracion' => $this->dias_duracion,
                 'fecha_fin' => $this->fecha_fin,
                 'id_proyecto' => $this->id_proyecto,
-                'tareaCorrelativa'=> $this->tareaCorrelativa
             ];
         }
         public static function fromArray($array) {
@@ -88,9 +97,10 @@ class Tarea {
                 $array['nombre'],
                 $array['descripcion'],
                 $array['fecha_inicio'],
+                $array['dias_duracion'],
                 $array['fecha_fin'],
                 $array['id_proyecto'],
-                $array['tareaCorrelativa'],
+                
 
             );
         }
