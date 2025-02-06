@@ -1,113 +1,55 @@
 {
     "proyecto": [
         {
-            "id_proyecto": 1,
-            "nombre": "pepe",
-            "descripcion": "este proyecto se guarda en proyecto.json",
-            "fechaInicio": "2025-12-03",
-            "fechaFin": "2025-12-10",
-            "estado": "Activo",
-            "tareas": [
-                {
-                    "id_tarea": 2,
-                    "nombre": "ddddd",
-                    "descripcion": "ffff",
-                    "fecha_inicio": "2025-01-20",
-                    "fecha_fin": "2025-01-22",
-                    "id_proyecto": 1,
-                    "dependencias": []
-                }
-            ]
+            "id_proyecto": 2,
+            "nombre": "recetas",
+            "descripcion": "son recetas de cocina",
+            "fechaInicio": "2025-03-12",
+            "fechaFin": "2025-03-19",
+            "estado": "activo",
+            "tareas": []
         },
         {
-            "id_proyecto": 2,
-            "nombre": "papa",
-            "descripcion": "ddffgggg",
-            "fechaInicio": "2025-03-29",
-            "fechaFin": "2025-03-30",
-            "estado": "Activo",
+            "id_proyecto": 1,
+            "nombre": "limpieza",
+            "descripcion": "son tareas de limpieza",
+            "fechaInicio": "2025-06-01",
+            "fechaFin": "2025-09-01",
+            "estado": "activo",
             "tareas": [
-                {
-                    "id_tarea": 1,
-                    "nombre": "esta tarea es para papa",
-                    "descripcion": "como pelar papas",
-                    "fecha_inicio": "2025-03-29",
-                    "fecha_fin": "2025-03-30",
-                    "id_proyecto": 2,
-                    "dependencias": []
-                }
+                14
             ]
         },
         {
             "id_proyecto": 3,
-            "nombre": "pppepepepe",
-            "descripcion": "peprprprpprpr",
-            "fechaInicio": "2025-01-25",
-            "fechaFin": "2025-01-29",
-            "estado": "Activo",
-            "tareas": []
+            "nombre": "construccion de vivienda",
+            "descripcion": "se construira una casa en 12 meses",
+            "fechaInicio": "2025-02-04",
+            "fechaFin": "2025-08-26",
+            "estado": "activo",
+            "tareas": [
+                9,
+                12,
+                13,
+                15
+            ]
         },
         {
             "id_proyecto": 4,
-            "nombre": "pipiripipi",
-            "descripcion": "ultima prueba de hoy",
-            "fechaInicio": "2025-01-20",
-            "fechaFin": "2025-01-29",
-            "estado": "Activo",
+            "nombre": "pepe 2",
+            "descripcion": "es un proeycto para pepe",
+            "fechaInicio": "2025-04-22",
+            "fechaFin": "2025-06-20",
+            "estado": "activo",
             "tareas": []
         },
         {
             "id_proyecto": 5,
-            "nombre": "pepe",
-            "descripcion": "este proyecto es una copia",
-            "fechaInicio": "2025-01-20",
-            "fechaFin": "2025-01-29",
-            "estado": "Activo",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 6,
-            "nombre": "tres tristes intentos",
-            "descripcion": "nvfyurygirejkl",
-            "fechaInicio": "2025-01-22",
-            "fechaFin": "2025-01-29",
-            "estado": "Activo",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 7,
-            "nombre": "perepe",
-            "descripcion": "dhhfuieadc",
-            "fechaInicio": "2025-02-15",
-            "fechaFin": "2025-02-28",
-            "estado": "Activo",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 8,
-            "nombre": "feeeav",
-            "descripcion": "hffeshfoe",
-            "fechaInicio": "2025-02-23",
-            "fechaFin": "2025-02-28",
-            "estado": "Activo",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 9,
-            "nombre": "poropopo",
-            "descripcion": "fjhfhgifkffls",
-            "fechaInicio": "2025-02-23",
-            "fechaFin": "2025-03-10",
-            "estado": "Activo",
-            "tareas": []
-        },
-        {
-            "id_proyecto": 10,
-            "nombre": "rere",
-            "descripcion": "hhdwhe",
-            "fechaInicio": "2025-04-29",
-            "fechaFin": "2025-05-15",
-            "estado": "Activo",
+            "nombre": "dos",
+            "descripcion": "dos",
+            "fechaInicio": "2025-05-03",
+            "fechaFin": "2025-06-04",
+            "estado": "finalizado",
             "tareas": []
         }
     ]

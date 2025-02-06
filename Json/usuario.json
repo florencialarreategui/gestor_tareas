@@ -8,9 +8,9 @@
         },
         {
             "id_usuario": 2,
-            "nombre": "silvana",
-            "email": "otro@ejemplo.com",
-            "clave": "password456"
+            "nombre": "marilin",
+            "email": "otromail@gmail.com",
+            "clave": "password345"
         },
         {
             "id_usuario": 4,
@@ -23,6 +23,18 @@
             "nombre": "sol",
             "email": "sol33@gmail.com",
             "clave": "password999"
+        },
+        {
+            "id_usuario": 5,
+            "nombre": "pabblo",
+            "email": "hdqocqcqe@gmail.com",
+            "clave": "password789"
+        },
+        {
+            "id_usuario": 6,
+            "nombre": "silvana",
+            "email": "password456",
+            "clave": "password141"
         }
     ]
 }

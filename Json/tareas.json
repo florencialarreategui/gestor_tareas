@@ -1,22 +1,55 @@
 {
     "tareas": [
         {
-            "id_tarea": 2,
-            "nombre": "ddddd",
-            "descripcion": "ffff",
-            "fecha_inicio": "2025-01-20",
-            "fecha_fin": "2025-01-22",
-            "id_proyecto": 1,
+            "id_tarea": 13,
+            "nombre": "instalar servicios",
+            "descripcion": "se instalan los servicios",
+            "fecha_inicio": "2025-04-26",
+            "fecha_fin": "2025-08-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 14,
+            "nombre": "tarea para pepe",
+            "descripcion": "es una tarea para proyecto pepe",
+            "fecha_inicio": "2025-05-20",
+            "fecha_fin": "2025-06-20",
+            "id_proyecto": 4,
             "dependencias": []
         },
         {
-            "id_tarea": 1,
-            "nombre": "esta tarea es para papa",
-            "descripcion": "como pelar papas",
-            "fecha_inicio": "2025-03-29",
-            "fecha_fin": "2025-03-30",
-            "id_proyecto": 2,
+            "id_tarea": 12,
+            "nombre": "estructura",
+            "descripcion": "se construye la estructura",
+            "fecha_inicio": "2025-04-17",
+            "fecha_fin": "2025-04-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "11"
+            ]
+        },
+        {
+            "id_tarea": 9,
+            "nombre": "licencias2",
+            "descripcion": "conseguir habilitaciones",
+            "fecha_inicio": "2025-02-06",
+            "fecha_fin": "2025-02-16",
+            "id_proyecto": 3,
             "dependencias": []
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "reboque",
+            "descripcion": "rebocar paredes",
+            "fecha_inicio": "2025-04-27",
+            "fecha_fin": "2025-04-30",
+            "id_proyecto": "3",
+            "dependencias": [
+                "12"
+            ]
         }
     ]
 }

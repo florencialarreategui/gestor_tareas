@@ -1,22 +1,29 @@
 <?php
+require_once './clases/proyecto.php';
 class Tarea {
     private $id_tarea;
     private $nombre;
     private $descripcion;
-    private $fechaInicio;
-    private $fechaFin;
+    private $fecha_inicio;
+    private $fecha_fin;
     private $id_proyecto;
-    private $dependencias = [];
+    private $dependencias;  // Dependencias de otras tareas (array de IDs de tareas)
 
-    public function __construct($id_tarea, $nombre, $descripcion, $fechaInicio, $fechaFin, $id_proyecto) {
+    public function __construct($id_tarea, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $id_proyecto, $dependencias = []) {
         $this->id_tarea = $id_tarea;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
-        $this->fechaInicio = new DateTime($fechaInicio); // Convertimos a DateTime
-        $this->fechaFin = new DateTime($fechaFin); // Convertimos a DateTime
+        // Comprobamos si $fecha_inicio es ya un objeto DateTime
+        $this->fecha_inicio = $fecha_inicio instanceof DateTime ? $fecha_inicio : new DateTime($fecha_inicio);
+        
+        // Comprobamos si $fecha_fin es ya un objeto DateTime
+        $this->fecha_fin = $fecha_fin instanceof DateTime ? $fecha_fin : new DateTime($fecha_fin);
+        
         $this->id_proyecto = $id_proyecto;
+        $this->dependencias = $dependencias;
     }
 
+    // Métodos getter
     public function getIdTarea() {
         return $this->id_tarea;
     }
@@ -30,59 +37,103 @@ class Tarea {
     }
 
     public function getFechaInicio() {
-        return $this->fechaInicio;
+        return $this->fecha_inicio;
     }
 
     public function getFechaFin() {
-        return $this->fechaFin;
+        return $this->fecha_fin;
     }
 
     public function getIdProyecto() {
         return $this->id_proyecto;
     }
 
-    public function agregarDependencia($idDependencia) {
-        $this->dependencias[] = $idDependencia;
-    }
-
     public function getDependencias() {
         return $this->dependencias;
     }
 
-    public function getDuracion() {
-        $intervalo = $this->fechaInicio->diff($this->fechaFin);
-        return $intervalo->days; // Retorna la duración en días
+    // Métodos setter
+    public function setFechaInicio($fecha_inicio) {
+        $this->fecha_inicio = new DateTime($fecha_inicio);
+    }
+    public function setFechaFin($fecha_fin) {
+        $this->fecha_fin = new DateTime($fecha_fin);
     }
 
+    public function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
+
+    public function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
+    }
+
+    public function agregarDependencia($id_tarea) {
+        $this->dependencias[] = $id_tarea;
+    }
+
+    // Método toArray() - convierte el objeto en un array
     public function toArray() {
         return [
             'id_tarea' => $this->id_tarea,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
-            'fecha_inicio' => $this->fechaInicio->format('Y-m-d'),
-            'fecha_fin' => $this->fechaFin->format('Y-m-d'),
+            'fecha_inicio' => $this->fecha_inicio->format('Y-m-d'),
+            'fecha_fin' => $this->fecha_fin->format('Y-m-d'),
             'id_proyecto' => $this->id_proyecto,
-            'dependencias' => $this->dependencias
+            'dependencias' => $this->dependencias,
         ];
     }
-
     public static function fromArray($array) {
-        $tarea = new self(
-            $array['id_tarea'],
-            $array['nombre'],
-            $array['descripcion'],
-            $array['fecha_inicio'],
-            $array['fecha_fin'],
-            $array['id_proyecto']
-        );
-
-        if (isset($array['dependencias']) && is_array($array['dependencias'])) {
-            foreach ($array['dependencias'] as $idDependencia) {
-                $tarea->agregarDependencia($idDependencia);
-            }
+        // Depuración: Ver el contenido del array para comprobar qué datos están llegando
+      //  var_dump($array);  // Esto te permitirá ver qué datos están presentes
+    
+        // Verificar y asignar valores predeterminados si faltan claves
+        $idTarea = isset($array['id_tarea']) ? $array['id_tarea'] : null;
+        $nombre = isset($array['nombre']) ? $array['nombre'] : '';
+        $descripcion = isset($array['descripcion']) ? $array['descripcion'] : '';
+        $fechaInicio = isset($array['fecha_inicio']) ? $array['fecha_inicio'] : '';
+        $fechaFin = isset($array['fecha_fin']) ? $array['fecha_fin'] : '';
+        $idProyecto = isset($array['id_proyecto']) ? (int) $array['id_proyecto'] : null;
+        $dependencias = isset($array['dependencias']) ? $array['dependencias'] : [];
+    
+        // Validar que todos los campos requeridos estén presentes
+        if (empty($idTarea)) {
+            throw new InvalidArgumentException("Falta el 'id_tarea' en los datos.");
         }
-
-        return $tarea;
+        if (empty($nombre)) {
+            throw new InvalidArgumentException("Falta el 'nombre' en los datos.");
+        }
+        if (empty($fechaInicio)) {
+            throw new InvalidArgumentException("Falta 'fecha_inicio' en los datos.");
+        }
+        if (empty($fechaFin)) {
+            throw new InvalidArgumentException("Falta 'fecha_fin' en los datos.");
+        }
+        if (empty($idProyecto)) {
+            throw new InvalidArgumentException("Falta 'id_proyecto' en los datos.");
+        }
+    
+        // Convertir 'id_tarea' a entero, para asegurarnos de que se procesa correctamente
+        if (!is_int($idTarea)) {
+            $idTarea = (int) $idTarea;
+        }
+    
+        // Asegurarse de que las fechas sean cadenas y convertirlas a objetos DateTime si es necesario
+        if (!empty($fechaInicio) && !$fechaInicio instanceof DateTime) {
+            $fechaInicio = new DateTime($fechaInicio); // Convertir la cadena a DateTime
+        }
+    
+        if (!empty($fechaFin) && !$fechaFin instanceof DateTime) {
+            $fechaFin = new DateTime($fechaFin); // Convertir la cadena a DateTime
+        }
+    
+        // Ahora crear la tarea con los datos validados
+        return new self($idTarea, $nombre, $descripcion, $fechaInicio, $fechaFin, $idProyecto, $dependencias);
     }
+    
+    
 }
 
+
+  

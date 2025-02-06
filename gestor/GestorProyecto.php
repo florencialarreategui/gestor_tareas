@@ -1,217 +1,441 @@
 <?php
-require_once './clases/Proyecto.php';
-require_once './clases/Tarea.php';  // Aseguramos que cargamos también la clase Tarea
+require_once './clases/proyecto.php';
+require_once './clases/tarea.php';  
 require_once './gestor/GestorTarea.php';
 
+
+
 class GestorProyecto {
-    protected $gestorTarea;
-    private $archivoProyectos = './archivos/proyectos.json';
-    private $archivoTareas = './archivos/tareas.json';
+    private $proyectos = [];
+    private $archivoJson = './Json/proyecto.json';
+    private $gestorTarea; // Atributo para gestionar tareas
 
     public function __construct($gestorTarea) {
+        $this->gestorTarea = $gestorTarea; // Asignar la instancia de GestorTarea
+        $this->cargarDesdeJSON();
+    }
+    public function setGestorTarea($gestorTarea) {
         $this->gestorTarea = $gestorTarea;
     }
 
-    // Método para agregar un nuevo proyecto
-    public function agregarProyecto() {
+    // Crear un nuevo proyecto
+    public function crearProyecto() {
+        $id_proyecto = count($this->proyectos) + 1;
+
         echo "Ingrese el nombre del proyecto: ";
         $nombre = trim(fgets(STDIN));
 
         echo "Ingrese la descripción del proyecto: ";
         $descripcion = trim(fgets(STDIN));
 
-        echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
+        echo "Ingrese la fecha de inicio (formato: Y-m-d): ";
         $fechaInicio = trim(fgets(STDIN));
 
-        echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
+        echo "Ingrese la fecha de fin (formato: Y-m-d): ";
         $fechaFin = trim(fgets(STDIN));
 
-        echo "Ingrese el estado del proyecto (activo/inactivo): ";
+        echo "Ingrese el estado del proyecto (por ejemplo: en progreso, finalizado): ";
         $estado = trim(fgets(STDIN));
 
-        // Creación del proyecto
-        $idProyecto = uniqid(); // Asignamos un ID único al proyecto
-        $proyecto = new Proyecto($idProyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
+        // Crear un nuevo proyecto
+        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
 
-        echo "Proyecto creado exitosamente.\n";
+        // Almacenar el nuevo proyecto en el array
+        $this->proyectos[] = $nuevoProyecto;
 
-        // Guardar el proyecto en el archivo JSON
-        $this->guardarEnJson($proyecto);
+        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " con ID " . $nuevoProyecto->getId_proyecto() . "\n";
+
+        $this->guardarEnJSON();
     }
 
-    // Método para listar todos los proyectos
-    public function listarProyectos() {
-        $proyectos = $this->cargarDesdeJson();  // Obtener proyectos desde archivo JSON
-        echo "=== Lista de Proyectos ===\n";
+    // Listar proyectos
+    public function listarProyectosPorId() {
+
+        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
+    
+        if (empty($proyectos)) {
+            echo "No hay proyectos disponibles.\n";
+            return;
+        }
+    
+        // Ordenar proyectos por ID
+        usort($proyectos, function($a, $b) {
+            return $a-> getId_proyecto() <=> $b-> getId_proyecto();  // Ordenar por ID
+        });
+    
+        echo "=== Lista de Proyectos Ordenados por ID ===\n";
         foreach ($proyectos as $proyecto) {
-            echo "ID: {$proyecto->getIdProyecto()}\n";
+            echo "ID: {$proyecto->getId_proyecto()}\n";
             echo "Nombre: {$proyecto->getNombre()}\n";
             echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()}\n";
-            echo "Fecha de Fin: {$proyecto->getFechaFin()}\n";
+            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
+            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
             echo "Estado: {$proyecto->getEstado()}\n";
             echo "-------------------------\n";
         }
     }
-
-    // Método para editar un proyecto
-    public function editarProyecto() {
-        echo "Ingrese el ID del proyecto a editar: ";
-        $idProyecto = trim(fgets(STDIN));
-
-        $proyecto = $this->buscarProyectoPorId($idProyecto);
-        if ($proyecto) {
-            echo "Proyecto encontrado. Ingrese los nuevos datos.\n";
-
-            echo "Nuevo nombre: ";
-            $proyecto->setNombre(trim(fgets(STDIN)));
-
-            echo "Nueva descripción: ";
-            $proyecto->setDescripcion(trim(fgets(STDIN)));
-
-            echo "Nueva fecha de inicio (YYYY-MM-DD): ";
-            $proyecto->setFechaInicio(trim(fgets(STDIN)));
-
-            echo "Nueva fecha de fin (YYYY-MM-DD): ";
-            $proyecto->setFechaFin(trim(fgets(STDIN)));
-
-            echo "Nuevo estado (activo/inactivo): ";
-            $proyecto->setEstado(trim(fgets(STDIN)));
-
-            echo "Proyecto actualizado exitosamente.\n";
-
-            // Guardar proyecto actualizado en el archivo JSON
-            $this->guardarEnJson($proyecto);
-        } else {
-            echo "Proyecto no encontrado.\n";
+    
+    public function listarProyectosPorNombre() {
+        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
+    
+        if (empty($proyectos)) {
+            echo "No hay proyectos disponibles.\n";
+            return;
         }
-    }
-
-    // Método para eliminar un proyecto
-    public function eliminarProyecto() {
-        echo "Ingrese el ID del proyecto a eliminar: ";
-        $idProyecto = trim(fgets(STDIN));
-
-        $proyecto = $this->buscarProyectoPorId($idProyecto);
-        if ($proyecto) {
-            // Eliminar proyecto del archivo JSON
-            $this->eliminarProyectoPorId($idProyecto);
-            echo "Proyecto eliminado exitosamente.\n";
-        } else {
-            echo "Proyecto no encontrado.\n";
-        }
-    }
-
-    // Método para listar proyectos activos
-    public function listarProyectoActivo() {
-        $proyectos = $this->cargarDesdeJson();
-        echo "=== Proyectos Activos ===\n";
+    
+        usort($proyectos, function($a, $b) {
+            return strcmp($a->getNombre(), $b->getNombre());  // Ordenar por nombre
+        });
+    
+        echo "=== Lista de Proyectos Ordenados por Nombre ===\n";
         foreach ($proyectos as $proyecto) {
-            if ($proyecto->getEstado() == 'activo') {
-                echo "ID: {$proyecto->getIdProyecto()}\n";
-                echo "Nombre: {$proyecto->getNombre()}\n";
-                echo "Descripción: {$proyecto->getDescripcion()}\n";
-                echo "Fecha de Inicio: {$proyecto->getFechaInicio()}\n";
-                echo "Fecha de Fin: {$proyecto->getFechaFin()}\n";
-                echo "-------------------------\n";
-            }
-        }
-    }
-
-    // Método para listar proyectos inactivos
-    public function listarProyectoInactivo() {
-        $proyectos = $this->cargarDesdeJson();
-        echo "=== Proyectos Inactivos ===\n";
-        foreach ($proyectos as $proyecto) {
-            if ($proyecto->getEstado() == 'inactivo') {
-                echo "ID: {$proyecto->getIdProyecto()}\n";
-                echo "Nombre: {$proyecto->getNombre()}\n";
-                echo "Descripción: {$proyecto->getDescripcion()}\n";
-                echo "Fecha de Inicio: {$proyecto->getFechaInicio()}\n";
-                echo "Fecha de Fin: {$proyecto->getFechaFin()}\n";
-                echo "-------------------------\n";
-            }
-        }
-    }
-
-    // Método para listar un proyecto por ID
-    public function listarProyectoPorId() {
-        echo "Ingrese el ID del proyecto: ";
-        $idProyecto = trim(fgets(STDIN));
-
-        $proyecto = $this->buscarProyectoPorId($idProyecto);
-        if ($proyecto) {
-            echo "ID: {$proyecto->getIdProyecto()}\n";
+            echo "ID: {$proyecto->getId_proyecto()}\n";
             echo "Nombre: {$proyecto->getNombre()}\n";
             echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()}\n";
-            echo "Fecha de Fin: {$proyecto->getFechaFin()}\n";
-        } else {
-            echo "Proyecto no encontrado.\n";
+            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
+            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
+            echo "Estado: {$proyecto->getEstado()}\n";
+            echo "-------------------------\n";
         }
     }
-
-    // Método para calcular el camino crítico
-    public function calcularCaminoCritico() {
-        echo "Calculando el camino crítico...\n";
-        
-        // Obtener todas las tareas del proyecto (asumiendo que cada proyecto tiene tareas asociadas)
-        $proyectos = $this->cargarDesdeJson();
+    
+    public function listarProyectosPorFechaInicio() {
+        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
+    
+        if (empty($proyectos)) {
+            echo "No hay proyectos disponibles.\n";
+            return;
+        }
+    
+        usort($proyectos, function($a, $b) {
+            return strtotime($a->getFechaInicio()->format('Y-m-d')) <=> strtotime($b->getFechaInicio()->format('Y-m-d'));  // Ordenar por fecha de inicio
+        });
+    
+        echo "=== Lista de Proyectos Ordenados por Fecha de Inicio ===\n";
         foreach ($proyectos as $proyecto) {
-            echo "=== Proyecto: {$proyecto->getNombre()} ===\n";
-            $tareas = $proyecto->getTareas();
-            $this->gestorTarea->calcularCaminoCritico($tareas);  // Llamamos al método del GestorTarea para calcular el camino crítico
+            echo "ID: {$proyecto->getId_proyecto()}\n";
+            echo "Nombre: {$proyecto->getNombre()}\n";
+            echo "Descripción: {$proyecto->getDescripcion()}\n";
+            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";  // Corregido
+            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";        // Corregido
+            echo "Estado: {$proyecto->getEstado()}\n";
+            echo "-------------------------\n";
         }
     }
-
-    // Métodos de soporte para manejar proyectos (almacenamiento en archivos JSON)
-
-    // Cargar proyectos desde el archivo JSON
-    public function cargarDesdeJson() {
-        if (file_exists($this->archivoProyectos)) {
-            $json = file_get_contents($this->archivoProyectos);
-            $datos = json_decode($json, true);  // Decodificar el contenido JSON a un array
-            $proyectos = [];
-            foreach ($datos as $proyectoData) {
-                $proyectos[] = Proyecto::fromArray($proyectoData);  // Crear objetos Proyecto desde los datos
+    
+    public function listarProyectosPorFechaFin() {
+        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
+    
+        if (empty($proyectos)) {
+            echo "No hay proyectos disponibles.\n";
+            return;
+        }
+    
+        usort($proyectos, function($a, $b) {
+            return strtotime($a->getFechaFin()->format('Y-m-d')) <=> strtotime($b->getFechaFin()->format('Y-m-d'));  // Ordenar por fecha de fin
+        });
+    
+        echo "=== Lista de Proyectos Ordenados por Fecha de Fin ===\n";
+        foreach ($proyectos as $proyecto) {
+            echo "ID: {$proyecto->getId_proyecto()}\n";
+            echo "Nombre: {$proyecto->getNombre()}\n";
+            echo "Descripción: {$proyecto->getDescripcion()}\n";
+            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
+            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
+            echo "Estado: {$proyecto->getEstado()}\n";
+            echo "-------------------------\n";
+        }
+    }
+    
+    public function listarProyectosPorEstado() {
+        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
+    
+        if (empty($proyectos)) {
+            echo "No hay proyectos disponibles.\n";
+            return;
+        }
+    
+        usort($proyectos, function($a, $b) {
+            return strcmp(strtolower($a->getEstado()), strtolower($b->getEstado()));  // Ordenar por estado (en minúsculas)
+        });
+    
+        echo "=== Lista de Proyectos Ordenados por Estado ===\n";
+        foreach ($proyectos as $proyecto) {
+            echo "ID: {$proyecto->getId_proyecto()}\n";
+            echo "Nombre: {$proyecto->getNombre()}\n";
+            echo "Descripción: {$proyecto->getDescripcion()}\n";
+            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
+            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
+            echo "Estado: {$proyecto->getEstado()}\n";
+            echo "-------------------------\n";
+        }
+    }
+     // Agregar un proyecto al gestor
+     public function agregarProyecto($proyecto) {
+        $this->proyectos[] = $proyecto;
+    }
+      // Listar tareas de un proyecto
+      public function listarTareasPorProyecto($id_proyecto) {
+        $proyecto = null;
+        foreach ($this->proyectos as $p) {
+            if ($p->getId_proyecto() == $id_proyecto) {
+                $proyecto = $p;
+                break;
             }
-            return $proyectos;
         }
-        return [];  // Si el archivo no existe, devolver un array vacío
-    }
 
-    // Guardar un proyecto en el archivo JSON
-    public function guardarEnJson(Proyecto $proyecto) {
-        // Leer los proyectos actuales
-        $proyectos = $this->cargarDesdeJson();
-        // Agregar el nuevo proyecto
-        $proyectos[] = $proyecto->toArray();  // Convertir a array antes de guardar
-        // Guardar nuevamente en el archivo JSON
-        file_put_contents($this->archivoProyectos, json_encode($proyectos, JSON_PRETTY_PRINT));
-    }
+        if (!$proyecto) {
+            echo "Proyecto con ID {$id_proyecto} no encontrado.\n";
+            return;
+        }
 
-    // Buscar un proyecto por ID
-    public function buscarProyectoPorId($idProyecto) {
-        $proyectos = $this->cargarDesdeJson();
-        foreach ($proyectos as $proyecto) {
-            if ($proyecto->getIdProyecto() == $idProyecto) {
+        // Usamos el GestorTarea para obtener las tareas asociadas a este proyecto
+        $tareas = $this->gestorTarea->getTareasPorProyecto($id_proyecto);
+        
+        if (empty($tareas)) {
+            echo "No hay tareas asociadas a este proyecto.\n";
+            return;
+        }
+
+        echo "=== Tareas del Proyecto: {$proyecto->getNombre()} ===\n";
+        foreach ($tareas as $tarea) {
+            echo "ID Tarea: {$tarea->getIdTarea()}\n";
+            echo "Nombre: {$tarea->getNombre()}\n";
+            echo "Descripción: {$tarea->getDescripcion()}\n";
+            echo "Fecha de Inicio: {$tarea->getFechaInicio()->format('Y-m-d')}\n";
+            echo "Fecha de Fin: {$tarea->getFechaFin()->format('Y-m-d')}\n";
+            echo "-------------------------\n";
+        }
+    }
+         // Método privado para buscar un proyecto por su ID
+    private function buscarProyectoPorId($id_proyecto) {
+        foreach ($this->proyectos as $proyecto) {
+            if ($proyecto->getId_proyecto() == $id_proyecto) {
                 return $proyecto;
             }
         }
-        return null;
+        return null;  // Si no se encuentra el proyecto
     }
 
-    // Eliminar un proyecto por ID
-    public function eliminarProyectoPorId($idProyecto) {
-        $proyectos = $this->cargarDesdeJson();
-        $proyectosFiltrados = array_filter($proyectos, function($proyecto) use ($idProyecto) {
-            return $proyecto->getIdProyecto() != $idProyecto;
-        });
-        // Guardar los proyectos filtrados en el archivo JSON
-        file_put_contents($this->archivoProyectos, json_encode(array_values($proyectosFiltrados), JSON_PRETTY_PRINT));
-    }
-}
 
-
+    // Editar un proyecto
+    public function editarProyecto($id_proyecto) {
+        // Buscar el proyecto con el ID proporcionado
+        $proyecto = null;
+        foreach ($this->proyectos as $p) {
+            if ($p->getId_proyecto() == $id_proyecto) {
+                $proyecto = $p;
+                break;
+            }
+        }
+    
+        if (!$proyecto) {
+            echo "Proyecto con ID {$id_proyecto} no encontrado.\n";
+            return;
+        }
+    
+        // Mostrar los detalles actuales del proyecto
+        echo "Proyecto encontrado:\n";
+        echo "ID: {$proyecto->getId_proyecto()}\n";
+        echo "Nombre: {$proyecto->getNombre()}\n";
+        echo "Descripción: {$proyecto->getDescripcion()}\n";
+        echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
+        echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
+        echo "Estado: {$proyecto->getEstado()}\n";
+    
+        // Preguntar qué campo desea editar
+        echo "¿Qué campo desea editar?\n";
+        echo "1. Nombre\n";
+        echo "2. Descripción\n";
+        echo "3. Fecha de Inicio\n";
+        echo "4. Fecha de Fin\n";
+        echo "5. Estado\n";
+        echo "0. Volver\n";
         
-       
+        $opcion = trim(fgets(STDIN));
+    
+        switch ($opcion) {
+            case '1':
+                echo "Ingrese el nuevo nombre del proyecto: ";
+                $nuevoNombre = trim(fgets(STDIN));
+                $proyecto->setNombre($nuevoNombre);
+                echo "Nombre actualizado.\n";
+                break;
+            case '2':
+                echo "Ingrese la nueva descripción del proyecto: ";
+                $nuevaDescripcion = trim(fgets(STDIN));
+                $proyecto->setDescripcion($nuevaDescripcion);
+                echo "Descripción actualizada.\n";
+                break;
+            case '3':
+                echo "Ingrese la nueva fecha de inicio (formato: Y-m-d): ";
+                $nuevaFechaInicio = trim(fgets(STDIN));
+                $proyecto->setFechaInicio(new DateTime($nuevaFechaInicio));
+                echo "Fecha de inicio actualizada.\n";
+                break;
+            case '4':
+                echo "Ingrese la nueva fecha de fin (formato: Y-m-d): ";
+                $nuevaFechaFin = trim(fgets(STDIN));
+                $proyecto->setFechaFin(new DateTime($nuevaFechaFin));
+                echo "Fecha de fin actualizada.\n";
+                break;
+            case '5':
+                echo "Ingrese el nuevo estado del proyecto: ";
+                $nuevoEstado = trim(fgets(STDIN));
+                $proyecto->setEstado($nuevoEstado);
+                echo "Estado actualizado.\n";
+                break;
+            case '0':
+                echo "Volviendo al menú anterior...\n";
+                return;
+            default:
+                echo "Opción no válida.\n";
+                break;
+        }
+    
+        // Guardar los cambios en el archivo JSON
+        $this->guardarEnJSON();
+    }
+    
+    public function eliminarProyecto($id_proyecto) {
+        $indiceProyecto = null;
+        foreach ($this->proyectos as $key => $proyecto) {
+            if ($proyecto->getId_proyecto() == $id_proyecto) {
+                $indiceProyecto = $key;
+                break;
+            }
+        }
+    
+        if ($indiceProyecto === null) {
+            echo "Proyecto con ID {$id_proyecto} no encontrado.\n";
+            return;
+        }
+    
+        // Eliminar el proyecto del array
+        unset($this->proyectos[$indiceProyecto]);
+        $this->proyectos = array_values($this->proyectos); // Reindexar el array
+    
+        echo "Proyecto eliminado exitosamente.\n";
+        $this->guardarEnJSON();
+    }
+    
+    public function cargarDesdeJson() {
+        // Cargar proyectos desde el archivo JSON
+        if (file_exists($this->archivoJson)) {
+            $contenidoJson = file_get_contents($this->archivoJson);
+            $data = json_decode($contenidoJson, true); // Decodificar JSON en un array asociativo
+
+            if (isset($data['proyecto'])) {
+                $this->proyectos = [];
+                foreach ($data['proyecto'] as $proyectoData) {
+                    // Verificar si el proyecto tiene tareas y cargarlas correctamente
+                    $tareas = [];
+                    if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
+                        foreach ($proyectoData['tareas'] as $idTarea) {
+                            $tarea = $this->gestorTarea->buscarTareaPorId($idTarea); // Buscar tarea por ID
+                            if ($tarea) {
+                                $tareas[] = $tarea; // Asignar la tarea al proyecto
+                            }
+                        }
+                    }
+
+                    // Crear el objeto Proyecto, pasando las tareas cargadas
+                    $this->proyectos[] = new Proyecto(
+                        $proyectoData['id_proyecto'],
+                        $proyectoData['nombre'],
+                        $proyectoData['descripcion'],
+                        new DateTime($proyectoData['fechaInicio']),
+                        new DateTime($proyectoData['fechaFin']),
+                        $proyectoData['estado'],
+                        $tareas // Pasar las tareas como un array de objetos Tarea
+                    );
+                }
+            }
+        }
+    }
+   
+    // Guardar los proyectos en el archivo JSON
+    public function guardarEnJSON() {
+        $proyectos = [];
+
+        foreach ($this->proyectos as $proyecto) {
+            // Obtener solo los IDs de las tareas asociadas
+            $tareasIds = [];
+            foreach ($proyecto->getTareas() as $tarea) {
+                $tareasIds[] = $tarea->getIdTarea(); // Obtener el ID de la tarea
+            }
+
+            // Convertir cada proyecto a un array
+            $proyectos[] = [
+                'id_proyecto' => $proyecto->getId_proyecto(),
+                'nombre' => $proyecto->getNombre(),
+                'descripcion' => $proyecto->getDescripcion(),
+                'fechaInicio' => $proyecto->getFechaInicio()->format('Y-m-d'),
+                'fechaFin' => $proyecto->getFechaFin()->format('Y-m-d'),
+                'estado' => $proyecto->getEstado(),
+                'tareas' => $tareasIds // Guardar solo los IDs de las tareas
+            ];
+        }
+
+        // Convertir el array de proyectos a JSON y guardarlo en el archivo
+        $jsonProyectos = json_encode(['proyecto' => $proyectos], JSON_PRETTY_PRINT);
+        file_put_contents($this->archivoJson, $jsonProyectos);
+    }
+    public function agregarTareaAlProyecto($id_proyecto, $nuevaTarea) {
+        foreach ($this->proyectos as $proyecto) {
+            if ($proyecto->getId_proyecto() == $id_proyecto) {
+                $proyecto->agregarTarea($nuevaTarea); // Usar un método para agregar la tarea al proyecto
+                break;
+            }
+        }
+    
+        // Guardar el archivo 'proyecto.json' actualizado
+        $this->guardarEnJSON();
+    }
+    public function eliminarTareaDeProyecto($id_proyecto, $id_tarea) {
+        foreach ($this->proyectos as $proyecto) {
+            if ($proyecto->getId_proyecto() == $id_proyecto) {
+                $proyecto->eliminarTarea($id_tarea); // Método para eliminar la tarea del proyecto
+                break;
+            }
+        }
+    
+        // Guardar el archivo 'proyecto.json' actualizado
+        $this->guardarEnJSON();
+    }
+    public function actualizarFechaFinProyecto($id_proyecto) {
+        // Buscar el proyecto
+        $proyecto = null;
+        foreach ($this->proyectos as $p) {
+            if ($p->getId_proyecto() == $id_proyecto) {
+                $proyecto = $p;
+                break;
+            }
+        }
+    
+        if ($proyecto) {
+            // Recalcular la fecha de fin del proyecto según las tareas
+            $fechaFinMaxima = new DateTime('1970-01-01');  // Fecha mínima posible
+            foreach ($this->gestorTarea->getTareasPorProyecto($id_proyecto) as $tarea) {
+                if ($tarea->getFechaFin() > $fechaFinMaxima) {
+                    $fechaFinMaxima = $tarea->getFechaFin();
+                }
+            }
+    
+            // Actualizar la fecha de fin del proyecto
+            $proyecto->setFechaFin($fechaFinMaxima);
+            $this->guardarEnJSON();  // Guardar cambios en proyecto.json
+    
+            echo "Fecha de fin del proyecto actualizada: " . $fechaFinMaxima->format('Y-m-d') . "\n";
+        } else {
+            echo "Proyecto con ID {$id_proyecto} no encontrado.\n";
+        }
+    }
+    
+
+   
+}
+    
+    
+
+
