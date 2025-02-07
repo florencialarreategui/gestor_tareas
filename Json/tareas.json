@@ -50,6 +50,17 @@
             "dependencias": [
                 "12"
             ]
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "tarea para proyecto pipo",
+            "descripcion": "tarea test",
+            "fecha_inicio": "2025-06-21",
+            "fecha_fin": "2025-06-23",
+            "id_proyecto": "4",
+            "dependencias": [
+                "14"
+            ]
         }
     ]
 }

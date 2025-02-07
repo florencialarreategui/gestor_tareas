@@ -10,14 +10,14 @@
             "tareas": []
         },
         {
-            "id_proyecto": 1,
-            "nombre": "limpieza",
-            "descripcion": "son tareas de limpieza",
-            "fechaInicio": "2025-06-01",
-            "fechaFin": "2025-09-01",
+            "id_proyecto": 4,
+            "nombre": "pipo",
+            "descripcion": "es un proeycto para pepe",
+            "fechaInicio": "2025-04-22",
+            "fechaFin": "2025-06-20",
             "estado": "activo",
             "tareas": [
-                14
+                16
             ]
         },
         {
@@ -35,11 +35,11 @@
             ]
         },
         {
-            "id_proyecto": 4,
-            "nombre": "pepe 2",
-            "descripcion": "es un proeycto para pepe",
-            "fechaInicio": "2025-04-22",
-            "fechaFin": "2025-06-20",
+            "id_proyecto": 1,
+            "nombre": "limpieza2",
+            "descripcion": "son tareas de limpieza",
+            "fechaInicio": "2025-06-01",
+            "fechaFin": "2025-09-01",
             "estado": "activo",
             "tareas": []
         },

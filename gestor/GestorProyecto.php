@@ -47,83 +47,91 @@ class GestorProyecto {
 
         $this->guardarEnJSON();
     }
-
-    // Listar proyectos
     public function listarProyectosPorId() {
-
-        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
-    
-        if (empty($proyectos)) {
+      //  var_dump($this->proyectos); // Verifica el contenido de $proyectos
+        if (count($this->proyectos) > 0) {
+            echo "Listando proyectos por ID...\n";
+            foreach ($this->proyectos as $proyecto) {
+                echo "ID: " . $proyecto->getId_proyecto() . " - Nombre: " . $proyecto->getNombre() . "\n";
+            }
+        } else {
             echo "No hay proyectos disponibles.\n";
-            return;
-        }
-    
-        // Ordenar proyectos por ID
-        usort($proyectos, function($a, $b) {
-            return $a-> getId_proyecto() <=> $b-> getId_proyecto();  // Ordenar por ID
-        });
-    
-        echo "=== Lista de Proyectos Ordenados por ID ===\n";
-        foreach ($proyectos as $proyecto) {
-            echo "ID: {$proyecto->getId_proyecto()}\n";
-            echo "Nombre: {$proyecto->getNombre()}\n";
-            echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
-            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
-            echo "Estado: {$proyecto->getEstado()}\n";
-            echo "-------------------------\n";
         }
     }
-    
     public function listarProyectosPorNombre() {
-        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
-    
-        if (empty($proyectos)) {
-            echo "No hay proyectos disponibles.\n";
-            return;
-        }
-    
-        usort($proyectos, function($a, $b) {
-            return strcmp($a->getNombre(), $b->getNombre());  // Ordenar por nombre
+        echo "Listando proyectos por Nombre...\n";
+        
+        // Ordenar los proyectos por nombre
+        usort($this->proyectos, function($a, $b) {
+            return strcmp($a->getNombre(), $b->getNombre());
         });
     
-        echo "=== Lista de Proyectos Ordenados por Nombre ===\n";
-        foreach ($proyectos as $proyecto) {
-            echo "ID: {$proyecto->getId_proyecto()}\n";
-            echo "Nombre: {$proyecto->getNombre()}\n";
-            echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
-            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
-            echo "Estado: {$proyecto->getEstado()}\n";
-            echo "-------------------------\n";
+        // Mostrar los proyectos ordenados
+        if (count($this->proyectos) > 0) {
+            foreach ($this->proyectos as $proyecto) {
+                echo "ID: " . $proyecto->getId_proyecto() . " - Nombre: " . $proyecto->getNombre() . "\n";
+            }
+        } else {
+            echo "No hay proyectos disponibles.\n";
         }
     }
-    
     public function listarProyectosPorFechaInicio() {
-        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
-    
-        if (empty($proyectos)) {
-            echo "No hay proyectos disponibles.\n";
-            return;
-        }
-    
-        usort($proyectos, function($a, $b) {
-            return strtotime($a->getFechaInicio()->format('Y-m-d')) <=> strtotime($b->getFechaInicio()->format('Y-m-d'));  // Ordenar por fecha de inicio
+        echo "Listando proyectos por Fecha de Inicio...\n";
+        
+        // Ordenar los proyectos por fecha de inicio
+        usort($this->proyectos, function($a, $b) {
+            return $a->getFechaInicio() <=> $b->getFechaInicio(); // Comparar fechas
         });
     
-        echo "=== Lista de Proyectos Ordenados por Fecha de Inicio ===\n";
-        foreach ($proyectos as $proyecto) {
-            echo "ID: {$proyecto->getId_proyecto()}\n";
-            echo "Nombre: {$proyecto->getNombre()}\n";
-            echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";  // Corregido
-            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";        // Corregido
-            echo "Estado: {$proyecto->getEstado()}\n";
-            echo "-------------------------\n";
+        // Mostrar los proyectos ordenados
+        if (count($this->proyectos) > 0) {
+            foreach ($this->proyectos as $proyecto) {
+                echo "ID: " . $proyecto->getId_proyecto() . " - Nombre: " . $proyecto->getNombre() . " - Fecha de Inicio: " . $proyecto->getFechaInicio()->format('Y-m-d') . "\n";
+            }
+        } else {
+            echo "No hay proyectos disponibles.\n";
+        }
+    }
+    public function listarProyectosPorFechaFin() {
+        echo "Listando proyectos por Fecha de Fin...\n";
+        
+        // Ordenar los proyectos por fecha de fin
+        usort($this->proyectos, function($a, $b) {
+            return $a->getFechaFin() <=> $b->getFechaFin(); // Comparar fechas
+        });
+    
+        // Mostrar los proyectos ordenados
+        if (count($this->proyectos) > 0) {
+            foreach ($this->proyectos as $proyecto) {
+                echo "ID: " . $proyecto->getId_proyecto() . " - Nombre: " . $proyecto->getNombre() . " - Fecha de Fin: " . $proyecto->getFechaFin()->format('Y-m-d') . "\n";
+            }
+        } else {
+            echo "No hay proyectos disponibles.\n";
+        }
+    }
+
+    public function listarProyectosPorEstado() {
+        echo "Listando proyectos por Estado...\n";
+        
+        // Ordenar los proyectos por estado
+        usort($this->proyectos, function($a, $b) {
+            return strcmp($a->getEstado(), $b->getEstado()); // Comparar estados
+        });
+    
+        // Mostrar los proyectos ordenados
+        if (count($this->proyectos) > 0) {
+            foreach ($this->proyectos as $proyecto) {
+                echo "ID: " . $proyecto->getId_proyecto() . " - Nombre: " . $proyecto->getNombre() . " - Estado: " . $proyecto->getEstado() . "\n";
+            }
+        } else {
+            echo "No hay proyectos disponibles.\n";
         }
     }
     
-    public function listarProyectosPorFechaFin() {
+    
+
+    
+   /* public function listarProyectosPorFechaFin() {
         $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
     
         if (empty($proyectos)) {
@@ -145,9 +153,9 @@ class GestorProyecto {
             echo "Estado: {$proyecto->getEstado()}\n";
             echo "-------------------------\n";
         }
-    }
+    } */
     
-    public function listarProyectosPorEstado() {
+   /*public function listarProyectosPorEstado() {
         $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
     
         if (empty($proyectos)) {
@@ -169,7 +177,7 @@ class GestorProyecto {
             echo "Estado: {$proyecto->getEstado()}\n";
             echo "-------------------------\n";
         }
-    }
+    } */
      // Agregar un proyecto al gestor
      public function agregarProyecto($proyecto) {
         $this->proyectos[] = $proyecto;
@@ -318,8 +326,54 @@ class GestorProyecto {
         echo "Proyecto eliminado exitosamente.\n";
         $this->guardarEnJSON();
     }
-    
+
     public function cargarDesdeJson() {
+        // Cargar proyectos desde el archivo JSON
+        if (file_exists($this->archivoJson)) {
+            $contenidoJson = file_get_contents($this->archivoJson);
+            $data = json_decode($contenidoJson, true); // Decodificar JSON en un array asociativo
+    
+            // Verifica si la clave 'proyecto' existe y si tiene datos
+            if (isset($data['proyecto']) && is_array($data['proyecto'])) {
+                $this->proyectos = []; // Vaciar proyectos actuales
+    
+                // Iterar sobre los proyectos en el JSON y cargarlos correctamente
+                foreach ($data['proyecto'] as $proyectoData) {
+                    // Verificar si el proyecto tiene tareas y cargarlas correctamente
+                    $tareas = [];
+                    if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
+                        foreach ($proyectoData['tareas'] as $idTarea) {
+                            $tarea = $this->gestorTarea->buscarTareaPorId($idTarea); // Buscar tarea por ID
+                            if ($tarea) {
+                                $tareas[] = $tarea; // Asignar la tarea al proyecto
+                            }
+                        }
+                    }
+    
+                    // Crear el objeto Proyecto, pasando las tareas cargadas
+                    $this->proyectos[] = new Proyecto(
+                        $proyectoData['id_proyecto'],
+                        $proyectoData['nombre'],
+                        $proyectoData['descripcion'],
+                        new DateTime($proyectoData['fechaInicio']),
+                        new DateTime($proyectoData['fechaFin']),
+                        $proyectoData['estado'],
+                        $tareas // Pasar las tareas como un array de objetos Tarea
+                    );
+                }
+    
+                // Depuración: Verifica que proyectos se hayan cargado
+                echo "Proyectos cargados correctamente: " . count($this->proyectos) . "\n";
+            } else {
+                echo "No se encontró la clave 'proyecto' o está vacía en el JSON.\n";
+            }
+        } else {
+            echo "El archivo JSON no existe.\n";
+        }
+    }
+    
+    
+   /* public function cargarDesdeJson() {
         // Cargar proyectos desde el archivo JSON
         if (file_exists($this->archivoJson)) {
             $contenidoJson = file_get_contents($this->archivoJson);
@@ -352,7 +406,7 @@ class GestorProyecto {
                 }
             }
         }
-    }
+    }*/
    
     // Guardar los proyectos en el archivo JSON
     public function guardarEnJSON() {
