@@ -176,85 +176,57 @@ class GestorTarea {
             $id_proyecto = $proyecto->getIdProyecto();
             echo "Ingrese el ID de la tarea que desea editar: ";
             $id_tarea = trim(fgets(STDIN));
+        
             if ($proyecto->getIdProyecto() == $id_proyecto) {
-                foreach ($proyecto->getTareas() as $tarea) {
+                foreach ($proyecto->getTareas() as $key => $tarea) {
                     if ($tarea->getIdTarea() == $id_tarea) {
-                        echo "=== Elija que campo desea editar ===\n";
-                    while (true) {
-                        echo "1. Nombre\n";
-                        echo "2. Descripción\n";
-                        echo "3. Fecha de inicio (YYYY-MM-DD): \n";
-                        echo "4. Fecha de finalización (YYYY-MM-DD): \n";
-                        echo "5. Tarea correlativa: \n";
-                        echo "0. Volver al menu de proyectos: \n";
-                        $eleccion = trim(fgets(STDIN));
-                        switch ($eleccion) {
-                            case '1':
-                                echo "Ingrese el nuevo nombre de la tarea: ";
-                                $nombre = trim(fgets(STDIN));
-                                $tarea->setNombre($nombre);
-                                break;
-                                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
-                            case '2':
-                                echo "Ingrese la nueva descripción: ";
-                                $descripcion = trim(fgets(STDIN));
-                                $tarea->setDescripcion($descripcion);
-                                break;
-                                echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
-                                case '3':
-                                    do {
-                                        echo "Ingrese la fecha de inicio en formato fecha(YYYY-MM-DD): ";
-                                        $fecha_inicio = trim(fgets(STDIN));
-                                        if ($this->esFechaValida($fecha_inicio)) {
-                                            // Calcular los días de atraso
-                                            $fecha_actual = new DateTime();
-                                            $fecha_inicio_obj = new DateTime($fecha_inicio);
-                                            $intervalo = $fecha_actual->diff($fecha_inicio_obj);
-                                            $dias_atraso = $intervalo->days;
-        
-                                            // Si la fecha de inicio es en el futuro, no hay atraso
-                                            if ($fecha_inicio_obj > $fecha_actual) {
-                                                $dias_atraso = 0;
-                                            }
-        
-                                            $tarea->setFechaInicio($fecha_inicio);
-                                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n";
-                                            
-                                            // Actualizar la fecha final del proyecto
-                                            $fecha_fin_actual = new DateTime($proyecto->getFechaFin());
-                                            $fecha_fin_actual->modify("+$dias_atraso days");
-                                            $proyecto->setFechaFin($fecha_fin_actual->format('Y-m-d'));
-                                            echo "La fecha de finalización del proyecto ha sido extendida.\n";
-                                            break;
-                                        } else {
-                                            echo "La fecha de inicio no es válida. Intenta nuevamente.\n";
-                                        }
-                                    } while (true);
+                        echo "=== Elija qué campo desea editar ===\n";
+                        while (true) {
+                            echo "1. Nombre\n";
+                            echo "2. Descripción\n";
+                            echo "3. Dependencia (Dependiente/Independiente):\n";
+                            echo "4. Cantidad de días:\n";
+                            echo "0. Volver al menú de proyectos:\n";
+                            $eleccion = trim(fgets(STDIN));
+                            switch ($eleccion) {
+                                case '1':
+                                    echo "Ingrese el nuevo nombre de la tarea: ";
+                                    $nombre = trim(fgets(STDIN));
+                                    $tarea->setNombre($nombre);
                                     break;
-                                case '4':   
-                                    do {
-                                        echo "Ingrese la fecha de finalización (YYYY-MM-DD): ";
-                                        $fecha_fin = trim(fgets(STDIN));
-                                        $validacion = $this->validarFechaInicioFin($fecha_inicio, $fecha_fin);
-                                        if ($validacion === true) {
-                                            $tarea->setFechaFin($fecha_fin);
-                                            echo "Tarea editada exitosamente: " . $tarea->getNombre() . "\n"; 
-                                            break;
-                                        } else {
-                                            echo $validacion . "\n";
-                                        }
-                                    } while (true);
-                                    break;                   
-                            case '0':
-                                return; 
-                            default:
-                                echo "Opción no válida. Inténtelo de nuevo.\n";
-                                break;
+                                case '2':
+                                    echo "Ingrese la nueva descripción: ";
+                                    $descripcion = trim(fgets(STDIN));
+                                    $tarea->setDescripcion($descripcion);
+                                    break;
+                                case '3':
+                                    echo "¿La tarea será dependiente o independiente? (1: Dependiente, 2: Independiente): ";
+                                    $tipo_tarea = trim(fgets(STDIN));
+        
+                                    if ($tipo_tarea == 1) {
+                                        $tarea->setDependiente(true, $proyecto);
+                                        echo "La tarea ha sido marcada como dependiente.\n";
+                                    } elseif ($tipo_tarea == 2) {
+                                        $tarea->setDependiente(false, $proyecto);
+                                        echo "La tarea ha sido marcada como independiente.\n";
+                                    } else {
+                                        echo "Opción no válida. No se ha cambiado el tipo de tarea.\n";
+                                    }
+                                    break;
+                                case '4':
+                                    echo "Ingrese la cantidad de días de duración: ";
+                                    $dias_duracion = trim(fgets(STDIN));
+                                    $tarea->setDiasDuracion($dias_duracion);
+                                    break;
+                                case '0':
+                                    return; // Salir del menú
+                                default:
+                                    echo "Opción no válida. Inténtelo de nuevo.\n";
+                                    break;
+                            }
+                            $this->guardarEnJSON();
                         }
-                        $this->guardarEnJSON();
-                    }
-                        $this->guardarEnJSON();
-                        return;
+                        return;  // Salir después de editar la tarea
                     }
                 }
                 echo "Tarea no encontrada en el proyecto especificado.\n";
@@ -262,7 +234,6 @@ class GestorTarea {
                 echo "Proyecto no encontrado.\n";
             }
         }
-        
         public function eliminarTarea($proyecto) {
             $id_proyecto = $proyecto->getIdProyecto();
             echo "Ingrese el ID de la tarea que desea eliminar: ";

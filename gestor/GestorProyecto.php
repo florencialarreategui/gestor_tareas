@@ -274,6 +274,7 @@ class GestorProyecto {
                         }
                         $this->guardarEnJSON();
                     }
+                    $this->guardarEnJSON();
                 }
             }
         
@@ -360,7 +361,6 @@ class GestorProyecto {
                                     $tareaData['fecha_inicio'],
                                     $tareaData['fecha_fin'],
                                     $tareaData['id_proyecto'],
-                                    $tareaData['tareaCorrelativa'],
                                 );
                                 $proyecto->agregarTarea($tarea);
                             }

@@ -167,46 +167,59 @@
             "fechaInicio": "2025-01-01",
             "fechaFin": "2025-07-10",
             "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 18,
+            "nombre": "nuevo",
+            "descripcion": "alla",
+            "fechaInicio": "2025-02-10",
+            "fechaFin": "2025-07-10",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 19,
+            "nombre": "dasda",
+            "descripcion": "sad",
+            "fechaInicio": "2025-01-01",
+            "fechaFin": "2025-04-10",
+            "estado": "Activo",
+            "tareasDependientes": [],
+            "tareasIndependientes": []
+        },
+        {
+            "id_proyecto": 20,
+            "nombre": "dasdsadsa",
+            "descripcion": "asdsad",
+            "fechaInicio": "2025-10-01",
+            "fechaFin": "2025-10-10",
+            "estado": "Activo",
             "tareasDependientes": [
                 {
                     "id_tarea": 1,
-                    "nombre": "primera",
-                    "descripcion": "dependiente",
-                    "fecha_inicio": "2025-01-01",
-                    "dias_duracion": "6",
-                    "fecha_fin": "2025-01-07",
-                    "id_proyecto": 17
+                    "nombre": "nueva tarea 1",
+                    "descripcion": "dsad",
+                    "fecha_inicio": "2025-10-03",
+                    "dias_duracion": "4",
+                    "fecha_fin": "2025-10-07",
+                    "id_proyecto": 20,
+                    "dependiente": false
                 },
                 {
                     "id_tarea": 2,
-                    "nombre": "segunda",
-                    "descripcion": "depe",
-                    "fecha_inicio": "2025-01-07",
-                    "dias_duracion": "7",
-                    "fecha_fin": "2025-01-14",
-                    "id_proyecto": 17
-                },
-                {
-                    "id_tarea": 3,
-                    "nombre": "tercera",
-                    "descripcion": "depe",
-                    "fecha_inicio": "2025-01-14",
-                    "dias_duracion": "9",
-                    "fecha_fin": "2025-01-23",
-                    "id_proyecto": 17
+                    "nombre": "aaa",
+                    "descripcion": "aaaa",
+                    "fecha_inicio": "2025-10-07",
+                    "dias_duracion": "1",
+                    "fecha_fin": "2025-10-08",
+                    "id_proyecto": 20,
+                    "dependiente": false
                 }
             ],
-            "tareasIndependientes": [
-                {
-                    "id_tarea": 4,
-                    "nombre": "independiente",
-                    "descripcion": "aleluya",
-                    "fecha_inicio": "2025-02-01",
-                    "dias_duracion": "8",
-                    "fecha_fin": "2025-02-09",
-                    "id_proyecto": 17
-                }
-            ]
+            "tareasIndependientes": []
         }
     ]
 }

@@ -43,18 +43,6 @@ class Proyecto {
     public function getEstado() {
         return $this->estado;
     }
-
-    public function getTareas() {
-        return array_merge($this->tareasDependientes, $this->tareasIndependientes);
-    }
-   
-    public function agregarTareaDependiente($tarea) {
-        $this->tareasDependientes[] = $tarea;
-    }
-    
-    public function agregarTareaIndependiente($tarea) {
-        $this->tareasIndependientes[] = $tarea;
-    }
     
     public function getTareasDependientes() {
         return $this->tareasDependientes;
@@ -95,6 +83,41 @@ class Proyecto {
         $this->tareasDedependientes[] = $tareasDedependientes;
     }
 
+    // Agregar tarea dependiente
+    public function agregarTareaDependiente($tarea) {
+        $this->tareasDependientes[] = $tarea;
+    }
+
+    // Agregar tarea independiente
+    public function agregarTareaIndependiente($tarea) {
+        $this->tareasIndependientes[] = $tarea;
+    }
+
+    // Remover tarea dependiente
+    public function removerTareaDependiente($tarea) {
+        foreach ($this->tareasDependientes as $key => $t) {
+            if ($t->getIdTarea() == $tarea->getIdTarea()) {
+                unset($this->tareasDependientes[$key]);
+                break;
+            }
+        }
+    }
+
+    // Remover tarea independiente
+    public function removerTareaIndependiente($tarea) {
+        foreach ($this->tareasIndependientes as $key => $t) {
+            if ($t->getIdTarea() == $tarea->getIdTarea()) {
+                unset($this->tareasIndependientes[$key]);
+                break;
+            }
+        }
+    }
+
+    // Obtener todas las tareas (dependientes + independientes)
+    public function getTareas() {
+        return array_merge($this->tareasDependientes, $this->tareasIndependientes);
+    }
+
    public function toArray() {
         return [
             'id_proyecto' => $this->id_proyecto,
@@ -111,6 +134,35 @@ class Proyecto {
             }, $this->tareasIndependientes),
         ];
     }
+
+    public static function guardarEnJSON($proyectos) {
+        $data = [];
+
+        foreach ($proyectos as $proyecto) {
+            $data[] = $proyecto->toArray();
+        }
+
+        // Guardar en un archivo JSON
+        file_put_contents('proyectos.json', json_encode($data, JSON_PRETTY_PRINT));
+    }
+
+    // Método estático para cargar los proyectos desde un archivo JSON
+    public static function cargarDesdeJSON() {
+        if (file_exists('proyectos.json')) {
+            $jsonData = file_get_contents('proyectos.json');
+            $proyectosArray = json_decode($jsonData, true);
+
+            $proyectos = [];
+            foreach ($proyectosArray as $proyectoData) {
+                $proyectos[] = self::fromArray($proyectoData);
+            }
+
+            return $proyectos;
+        }
+
+        return [];
+    }
+
     public static function fromArray($array) {
         return new self(
             $array['id_proyecto'],
