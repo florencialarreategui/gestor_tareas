@@ -39,53 +39,6 @@
         return null; // Si no se encuentra la tarea
     }
 
- /*   public function guardarTareaEnJson($tareaActualizada) {
-        $tareasData = [];
-    
-        // Cargar tareas actuales desde el archivo JSON
-        if (file_exists($this->archivoJsonTareas)) {
-            $contenidoJson = file_get_contents($this->archivoJsonTareas);
-            $data = json_decode($contenidoJson, true);
-            if (isset($data['tareas'])) {
-                foreach ($data['tareas'] as $tareaData) {
-                    // Si la tarea coincide con la que estamos actualizando, se actualiza
-                    if ($tareaData['id_tarea'] == $tareaActualizada->getIdTarea()) {
-                        $tareasData[] = $tareaActualizada->toArray();
-                    } else {
-                        $tareasData[] = $tareaData;
-                    }
-                }
-            }
-        }
-    
-        // Guardar el array de tareas actualizado en tareas.json
-        file_put_contents($this->archivoJsonTareas, json_encode(['tareas' => $tareasData], JSON_PRETTY_PRINT));
-    }*/
-    
-            
-       /* public function guardarTareaEnJson($nuevaTarea) {
-            $tareasData = [];
-        
-            // Cargar tareas actuales desde el archivo JSON
-            if (file_exists($this->archivoJsonTareas)) {
-                $contenidoJson = file_get_contents($this->archivoJsonTareas);
-                $data = json_decode($contenidoJson, true);
-                if (isset($data['tareas'])) {
-                    foreach ($data['tareas'] as $tareaData) {
-                        $tareasData[] = $tareaData; // Añadir tareas existentes
-                    }
-                }
-            }
-        
-            // Añadir la nueva tarea
-            $tareasData[] = $nuevaTarea->toArray();
-        
-            // Guardar el array de tareas actualizado en tareas.json
-            file_put_contents($this->archivoJsonTareas, json_encode(['tareas' => $tareasData], JSON_PRETTY_PRINT));
-        }*/
-        
-        
-
 
      // Método en la clase GestorTarea para obtener un nuevo ID único
      public function obtenerNuevoIdTarea() {
@@ -187,68 +140,7 @@
         $gestorProyecto->agregarTareaAlProyecto($id_proyecto, $nuevaTarea);
     
         echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " con ID " . $nuevaTarea->getIdTarea() . "\n";
-    }
-    
-    /* public function crearTarea($gestorProyecto) {
-        echo "Ingrese el nombre de la tarea: ";
-        $nombre = trim(fgets(STDIN));
-    
-        echo "Ingrese la descripción de la tarea: ";
-        $descripcion = trim(fgets(STDIN));
-    
-        // Validar la fecha de inicio
-        do {
-            echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
-            $fechaInicioInput = trim(fgets(STDIN));
-            $fechaInicio = new DateTime($fechaInicioInput);
-            
-            if ($fechaInicio->format('Y') < 2025) {
-                echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
-            }
-        } while ($fechaInicio->format('Y') < 2025);
-    
-        // Validar la fecha de fin
-        do {
-            echo "Ingrese la fecha de fin de la tarea (formato: Y-m-d): ";
-            $fechaFinInput = trim(fgets(STDIN));
-            $fechaFin = new DateTime($fechaFinInput);
-            
-            if ($fechaFin < $fechaInicio) {
-                echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
-            }
-        } while ($fechaFin < $fechaInicio);
-    
-        echo "Ingrese el ID del proyecto al que pertenece la tarea: ";
-        $id_proyecto = trim(fgets(STDIN));
-    
-        // Preguntar si la tarea tiene dependencias
-        echo "¿La tarea tiene dependencias? (sí/no): ";
-        $respuesta = trim(fgets(STDIN));
-    
-        $dependencias = [];
-        if (strtolower($respuesta) == "sí" || strtolower($respuesta) == "si") {
-            echo "Ingrese los IDs de las tareas de las cuales depende (separados por comas): ";
-            $dependencias = explode(",", trim(fgets(STDIN)));  // Convertimos a array y eliminamos espacios en blanco
-            $dependencias = array_map('trim', $dependencias); // Asegurarse de que no haya espacios en blanco
-        }
-    
-        // Crear la nueva tarea
-        $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
-        $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicio, $fechaFin, $id_proyecto, $dependencias);
-    
-        // Guardar la tarea en tareas.json
-        $this->guardarTareaEnJson($nuevaTarea);
-    
-        // Añadir la tarea al campo "tareas" del proyecto correspondiente
-        $gestorProyecto->agregarTareaAlProyecto($id_proyecto, $nuevaTarea);
-    
-        echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " con ID " . $nuevaTarea->getIdTarea() . "\n";
-    } */
-    
-    
-        
-
-          
+    }     
          
             public function obtenerTodasLasTareas() {
                 return $this->tareas;
@@ -284,8 +176,58 @@
                         $descripcion = trim(fgets(STDIN));
                         $tarea->setDescripcion($descripcion);
                         break;
-                    case '3':
-                        do {
+                   
+                     case '3':
+                            do {
+                                echo "Ingrese la nueva fecha de inicio de la tarea (formato: Y-m-d): ";
+                                $fecha_inicio_input = trim(fgets(STDIN));
+                
+                                // Validar el formato de la fecha
+                                if ($this->validarFecha($fecha_inicio_input)) {
+                                    $fecha_inicio = new DateTime($fecha_inicio_input);
+                                    if ($fecha_inicio->format('Y') < 2025) {
+                                        echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
+                                    } else {
+                                        break; // Si la fecha es válida, salir del ciclo
+                                    }
+                                } else {
+                                    echo "El formato de fecha ingresado no es válido. Debe ser Y-m-d. Ejemplo: 2025-02-08.\n";
+                                }
+                            } while (true);
+                
+                            $tarea->setFechaInicio($fecha_inicio->format('Y-m-d'));
+                            // Recalcular fechas del proyecto
+                            $this->gestorProyecto->actualizarFechaFinProyecto($tarea->getIdProyecto());
+                            // Verificar y actualizar el camino crítico
+                            $this->verificarYActualizarCaminoCritico($tarea);
+                            echo "Fecha modificada. Actualización del camino crítico.\n";
+                            break;
+                        
+                        case '4':
+                            do {
+                                echo "Ingrese la nueva fecha de fin de la tarea (formato: Y-m-d): ";
+                                $fecha_fin_input = trim(fgets(STDIN));
+                
+                                // Validar el formato de la fecha
+                                if ($this->validarFecha($fecha_fin_input)) {
+                                    $fecha_fin = new DateTime($fecha_fin_input);
+                                    if ($fecha_fin < $tarea->getFechaInicio()) {
+                                        echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
+                                    } else {
+                                        break; // Si la fecha es válida, salir del ciclo
+                                    }
+                                } else {
+                                    echo "El formato de fecha ingresado no es válido. Debe ser Y-m-d. Ejemplo: 2025-02-08.\n";
+                                }
+                            } while (true);
+                
+                            $tarea->setFechaFin($fecha_fin->format('Y-m-d'));
+                            $this->gestorProyecto->actualizarFechaFinProyecto($tarea->getIdProyecto());
+                            // Verificar y actualizar el camino crítico
+                            $this->verificarYActualizarCaminoCritico($tarea);
+                            echo "Fecha modificada. Actualización del camino crítico.\n";
+                            break;
+                       /* do {
                             echo "Ingrese la nueva fecha de inicio de la tarea (formato: Y-m-d): ";
                             $fecha_inicio_input = trim(fgets(STDIN));
                             $fecha_inicio = new DateTime($fecha_inicio_input);
@@ -311,7 +253,7 @@
                         $tarea->setFechaFin($fecha_fin->format('Y-m-d'));
                         $this->gestorProyecto->actualizarFechaFinProyecto($tarea->getIdProyecto());
                         echo "Fecha modificada actualización del camino crítico, redirijase a la opción 7 .\n";
-                        break;
+                        break;*/
                     case '5':
                         echo "Ingrese el ID de la tarea dependiente: ";
                         $id_dependencia = trim(fgets(STDIN));
@@ -328,161 +270,64 @@
                 $this->guardarTareaEnJson($tarea);
                 echo "Tarea actualizada.\n";
             }
+            public function validarFecha($fecha) {
+                // Verificar si la fecha es válida en formato Y-m-d usando regex
+                $patron = '/^\d{4}-\d{2}-\d{2}$/';
+                return preg_match($patron, $fecha) === 1;
+            }
             
-         /*   public function editarTarea($id_tarea) {
-                $tarea = $this->buscarTareaPorId($id_tarea);
+            public function verificarYActualizarCaminoCritico($tarea) {
+                // Ordenar tareas por fecha de inicio
+                usort($this->tareas, function($a, $b) {
+                    return $a->getFechaInicio() <=> $b->getFechaInicio();
+                });
             
-                if (!$tarea) {
-                    echo "Tarea con ID {$id_tarea} no encontrada.\n";
-                    return;
+                // Verificar si el cambio de fecha afecta al camino crítico
+                echo "=== Recalculando el camino crítico ===\n";
+                $nuevaFechaFinProyecto = null;
+            
+                foreach ($this->tareas as $index => $t) {
+                    // Verificar si la fecha de inicio de la siguiente tarea es posterior
+                    if (isset($this->tareas[$index + 1]) && $t->getFechaFin() > $this->tareas[$index + 1]->getFechaInicio()) {
+                       // echo "La fecha de una tarea ha afectado el camino crítico.\n";
+                        // Recalcular y actualizar fechas
+                        $nuevaFechaFinProyecto = $t->getFechaFin();
+                    }
+                    echo "La fecha de una tarea ha afectado el camino crítico.\n";
+
                 }
             
-                echo "Tarea encontrada: {$tarea->getNombre()}\n";
-                echo "¿Qué campo deseas editar?\n";
-                echo "1. Nombre\n";
-                echo "2. Descripción\n";
-                echo "3. Fecha de Inicio\n";
-                echo "4. Fecha de Fin\n";
-                echo "5. Dependencias\n";
-                echo "0. Volver\n";
-            
-                $opcion = trim(fgets(STDIN));
-            
-                switch ($opcion) {
-                    case '1':
-                        echo "Ingrese el nuevo nombre de la tarea: ";
-                        $nombre = trim(fgets(STDIN));
-                        $tarea->setNombre($nombre);
-                        break;
-                    case '2':
-                        echo "Ingrese la nueva descripción de la tarea: ";
-                        $descripcion = trim(fgets(STDIN));
-                        $tarea->setDescripcion($descripcion);
-                        break;
-                    case '3':
-                        do {
-                            echo "Ingrese la nueva fecha de inicio de la tarea (formato: Y-m-d): ";
-                            $fecha_inicio_input = trim(fgets(STDIN));
-                            $fecha_inicio = new DateTime($fecha_inicio_input);
-            
-                            if ($fecha_inicio->format('Y') < 2025) {
-                                echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
-                            }
-                        } while ($fecha_inicio->format('Y') < 2025);
-            
-                        $tarea->setFechaInicio($fecha_inicio->format('Y-m-d'));
-                        break;
-                    case '4':
-                        do {
-                            echo "Ingrese la nueva fecha de fin de la tarea (formato: Y-m-d): ";
-                            $fecha_fin_input = trim(fgets(STDIN));
-                            $fecha_fin = new DateTime($fecha_fin_input);
-            
-                            if ($fecha_fin < $tarea->getFechaInicio()) {
-                                echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
-                            }
-                        } while ($fecha_fin < $tarea->getFechaInicio());
-            
-                        $tarea->setFechaFin($fecha_fin->format('Y-m-d'));
-                        $this->gestorProyecto->actualizarFechaFinProyecto($tarea->getIdProyecto());
-                        echo "Fecha modificada por corrección del camino crítico.\n";
-                        break;
-                    case '5':
-                        echo "Ingrese el ID de la tarea dependiente: ";
-                        $id_dependencia = trim(fgets(STDIN));
-                        $tarea->agregarDependencia($id_dependencia);
-                        break;
-                    case '0':
-                        return;
-                    default:
-                        echo "Opción no válida.\n";
-                        break;
+                if ($nuevaFechaFinProyecto) {
+                    echo "El proyecto tendrá una nueva fecha de finalización: " . $nuevaFechaFinProyecto->format('Y-m-d') . "\n";
+                    // Aquí también podrías actualizar la fecha de finalización del proyecto
+                    // $this->gestorProyecto->actualizarFechaFinProyecto($nuevaFechaFinProyecto);
                 }
-            
-                // Guardar la tarea actualizada en tareas.json
-                $this->guardarTareaEnJson($tarea);
-                echo "Tarea actualizada.\n";
-            } */
-            
-            
-        
-         /*   public function editarTarea($id_tarea) {
-                $tarea = $this->buscarTareaPorId($id_tarea);
-            
-                if (!$tarea) {
-                    echo "Tarea con ID {$id_tarea} no encontrada.\n";
-                    return;
-                }
-            
-                echo "Tarea encontrada: {$tarea->getNombre()}\n";
-                echo "¿Que campo deseas editar?";
-                echo "1. Nombre\n";
-                echo "2. Descripción\n";
-                echo "3. Fecha de Inicio\n";
-                echo "4. Fecha de Fin\n";
-                echo "5. Dependencias\n";
-                echo "0. Volver\n";
-            
-                $opcion = trim(fgets(STDIN));
-            
-                switch ($opcion) {
-                    case '1':
-                        echo "Ingrese el nuevo nombre de la tarea: ";
-                        $nombre = trim(fgets(STDIN));
-                        $tarea->setNombre($nombre);
-                        break;
-                    case '2':
-                        echo "Ingrese la nueva descripción de la tarea: ";
-                        $descripcion = trim(fgets(STDIN));
-                        $tarea->setDescripcion($descripcion);
-                        break;
-                    case '3':
-                        do {
-                            echo "Ingrese la nueva fecha de inicio de la tarea (formato: Y-m-d): ";
-                            $fecha_inicio_input = trim(fgets(STDIN));
-                            $fecha_inicio = new DateTime($fecha_inicio_input);
-            
-                            if ($fecha_inicio->format('Y') < 2025) {
-                                echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
-                            }
-                        } while ($fecha_inicio->format('Y') < 2025);
-            
-                        $tarea->setFechaInicio($fecha_inicio->format('Y-m-d'));
-                        break;
-                    case '4':
-                        do {
-                            echo "Ingrese la nueva fecha de fin de la tarea (formato: Y-m-d): ";
-                            $fecha_fin_input = trim(fgets(STDIN));
-                            $fecha_fin = new DateTime($fecha_fin_input);
-            
-                            if ($fecha_fin < $tarea->getFechaInicio()) {
-                                echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
-                            }
-                        } while ($fecha_fin < $tarea->getFechaInicio());
-            
-                        $tarea->setFechaFin($fecha_fin->format('Y-m-d'));
-                        // Actualizar la fecha fin del proyecto si se cambia la fecha fin de la tarea
-                        $this->gestorProyecto->actualizarFechaFinProyecto($tarea->getIdProyecto());
-                        echo "Fecha modificada por corrección del camino crítico.\n";
-                        break;
-                    case '5':
-                        echo "Ingrese el ID de la tarea dependiente: ";
-                        $id_dependencia = trim(fgets(STDIN));
-                        $tarea->agregarDependencia($id_tarea);
-                        break;
-                    case '0':
-                        return;
-                    default:
-                        echo "Opción no válida.\n";
-                        break;
-                }
-            
-                $this->guardarTareaEnJson($tarea) ;
-                echo "Tarea actualizada.\n";
-            } */
-            
-       
-            
+            }
+            // En el método que se encarga de actualizar la fecha de finalización del proyecto
+             public function actualizarFechaFinProyecto($id_proyecto) {
+                    // Obtener todas las tareas del proyecto
+                    $tareasDelProyecto = $this->getTareasPorProyecto($id_proyecto);
+                    
+                    // Ordenar las tareas por la fecha de fin (de la más tarde a la más temprana)
+                    usort($tareasDelProyecto, function($a, $b) {
+                        return $a->getFechaFin() <=> $b->getFechaFin();
+                    });
+                    
+                    // La última tarea en la lista será la que determine la fecha de finalización
+                    $ultimaTarea = end($tareasDelProyecto);
+                    
+                    // Actualizar la fecha de finalización del proyecto
+                    if ($ultimaTarea) {
+                        // Se obtiene la fecha de fin de la última tarea
+                        $nuevaFechaFinProyecto = $ultimaTarea->getFechaFin();
+                        echo "Fecha de finalización del proyecto actualizada: " . $nuevaFechaFinProyecto->format('Y-m-d') . "\n";
+                    }
+                    
+                    // Ahora actualiza también la fecha de finalización del proyecto en su base de datos o archivo
+                    // Código adicional para guardar la nueva fecha final en tu base de datos o archivo JSON
+                }   
+
+                            
         
             // Eliminar una tarea
             public function eliminarTarea($id_tarea) {
@@ -530,50 +375,8 @@
                 file_put_contents($this->archivoJsonTareas, json_encode(['tareas' => $tareasData], JSON_PRETTY_PRINT));
             }
 
-           /* public function calcularCaminoCritico($id_proyecto) {
-                $tareasProyecto = $this->getTareasPorProyecto($id_proyecto);
-            
-                if (empty($tareasProyecto)) {
-                    echo "No hay tareas asociadas a este proyecto.\n";
-                    return;
-                }
-            
-                // Mostrar la lista de tareas existentes
-                echo "=== Lista de Tareas ===\n";
-                foreach ($tareasProyecto as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
-            
-                // Ordenar las tareas por fecha de inicio
-                usort($tareasProyecto, function($a, $b) {
-                    return $a->getFechaInicio() <=> $b->getFechaInicio();
-                });
-            
-                echo "=== Tareas Ordenadas por Fecha de Inicio ===\n";
-                foreach ($tareasProyecto as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
-            
-                // Determinar y mostrar el camino crítico
-                echo "=== Camino Crítico ===\n";
-                $tareasCriticas = [];
-                foreach ($tareasProyecto as $tarea) {
-                    if (empty($tarea->getDependencias())) {
-                        $tareasCriticas[] = $tarea;
-                    } else {
-                        foreach ($tarea->getDependencias() as $dependencia) {
-                            $tareaDependencia = $this->buscarTareaPorId($dependencia);
-                            if ($tareaDependencia && $tarea->getFechaInicio() <= $tareaDependencia->getFechaFin()) {
-                                $tareasCriticas[] = $tarea;
-                            }
-                        }
-                    }
-                }
-            
-                foreach ($tareasCriticas as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
-            }*/
+        
+              
             public function calcularCaminoCritico($id_proyecto) {
                 // Obtener las tareas del proyecto
                 $tareasProyecto = $this->getTareasPorProyecto($id_proyecto);
@@ -601,94 +404,6 @@
             }
             
         
-            
-
-          /*  public function calcularCaminoCritico($id_proyecto) {
-                $tareasProyecto = $this->getTareasPorProyecto($id_proyecto);
-            
-                if (empty($tareasProyecto)) {
-                    echo "No hay tareas asociadas a este proyecto.\n";
-                    return;
-                }
-            
-                // Inicialización
-                $fechasTempranas = [];
-                $fechasTardías = [];
-                $duracionTotal = 0;
-                $tareasCriticas = [];
-            
-                // Calcular fechas tempranas
-                foreach ($tareasProyecto as $tarea) {
-                    $idTarea = $tarea->getIdTarea();
-                    $fechaInicio = $tarea->getFechaInicio();
-                    $fechaFin = $tarea->getFechaFin();
-                    $duracion = $fechaFin->diff($fechaInicio)->days;
-            
-                    if (!isset($fechasTempranas[$idTarea])) {
-                        $fechasTempranas[$idTarea] = clone $fechaInicio;
-                    }
-            
-                    foreach ($tarea->getDependencias() as $dependencia) {
-                        if (!isset($fechasTempranas[$dependencia])) {
-                            $fechasTempranas[$dependencia] = clone $fechaInicio;
-                        }
-                        $fechaFinDependencia = clone $fechasTempranas[$dependencia];
-                        $fechaFinDependencia->add(new DateInterval("P{$duracion}D"));
-            
-                        if ($fechasTempranas[$idTarea] < $fechaFinDependencia) {
-                            $fechasTempranas[$idTarea] = clone $fechaFinDependencia;
-                        }
-                    }
-            
-                    if ($duracionTotal < $fechaFin->getTimestamp()) {
-                        $duracionTotal = $fechaFin->getTimestamp();
-                    }
-                }
-            
-                // Calcular fechas tardías
-                foreach (array_reverse($tareasProyecto) as $tarea) {
-                    $idTarea = $tarea->getIdTarea();
-                    $fechaFin = $tarea->getFechaFin();
-            
-                    if (!isset($fechasTardías[$idTarea])) {
-                        $fechasTardías[$idTarea] = new DateTime();
-                        $fechasTardías[$idTarea]->setTimestamp($duracionTotal);
-                    }
-            
-                    foreach ($tarea->getDependencias() as $dependencia) {
-                        if (!isset($fechasTardías[$dependencia])) {
-                            $fechasTardías[$dependencia] = new DateTime('9999-12-31');
-                        }
-                        $fechaInicioDependencia = clone $fechasTardías[$dependencia];
-                        $fechaInicioDependencia->sub(new DateInterval("P{$duracion}D"));
-            
-                        if ($fechasTardías[$idTarea] > $fechaInicioDependencia) {
-                            $fechasTardías[$idTarea] = clone $fechaInicioDependencia;
-                        }
-                    }
-                }
-            
-                // Determinar las tareas críticas
-                foreach ($tareasProyecto as $tarea) {
-                    $idTarea = $tarea->getIdTarea();
-                    $holgura = ($fechasTardías[$idTarea]->getTimestamp() - $fechasTempranas[$idTarea]->getTimestamp()) / (24 * 60 * 60); // Convertir a días
-                    echo "Tarea: " . $tarea->getNombre() . " (ID: " . $idTarea . ") - Holgura: " . $holgura . " días\n";
-                    if (round($holgura) == 0) {
-                        $tareasCriticas[] = $tarea;
-                    }
-                }
-            
-                // Ordenar las tareas críticas por fechas tempranas
-                usort($tareasCriticas, function($a, $b) use ($fechasTempranas) {
-                    return $fechasTempranas[$a->getIdTarea()] <=> $fechasTempranas[$b->getIdTarea()];
-                });
-            
-                echo "El camino crítico es:\n";
-                foreach ($tareasCriticas as $tarea) {
-                    echo "Tarea: " . $tarea->getNombre() . " (ID: " . $tarea->getIdTarea() . ") - Fecha Inicio: " . $fechasTempranas[$tarea->getIdTarea()]->format('Y-m-d') . "\n";
-                }
-            }*/
-            
             
             
             public function getTareasPorProyecto($id_proyecto) {

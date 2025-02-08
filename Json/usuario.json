@@ -35,6 +35,12 @@
             "nombre": "silvana",
             "email": "password456",
             "clave": "password141"
+        },
+        {
+            "id_usuario": 7,
+            "nombre": "",
+            "email": "",
+            "clave": ""
         }
     ]
 }

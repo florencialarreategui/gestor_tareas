@@ -128,57 +128,7 @@ class GestorProyecto {
         }
     }
     
-    
-
-    
-   /* public function listarProyectosPorFechaFin() {
-        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
-    
-        if (empty($proyectos)) {
-            echo "No hay proyectos disponibles.\n";
-            return;
-        }
-    
-        usort($proyectos, function($a, $b) {
-            return strtotime($a->getFechaFin()->format('Y-m-d')) <=> strtotime($b->getFechaFin()->format('Y-m-d'));  // Ordenar por fecha de fin
-        });
-    
-        echo "=== Lista de Proyectos Ordenados por Fecha de Fin ===\n";
-        foreach ($proyectos as $proyecto) {
-            echo "ID: {$proyecto->getId_proyecto()}\n";
-            echo "Nombre: {$proyecto->getNombre()}\n";
-            echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
-            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
-            echo "Estado: {$proyecto->getEstado()}\n";
-            echo "-------------------------\n";
-        }
-    } */
-    
-   /*public function listarProyectosPorEstado() {
-        $proyectos = $this->cargarDesdeJson(); // Cargar todos los proyectos
-    
-        if (empty($proyectos)) {
-            echo "No hay proyectos disponibles.\n";
-            return;
-        }
-    
-        usort($proyectos, function($a, $b) {
-            return strcmp(strtolower($a->getEstado()), strtolower($b->getEstado()));  // Ordenar por estado (en minúsculas)
-        });
-    
-        echo "=== Lista de Proyectos Ordenados por Estado ===\n";
-        foreach ($proyectos as $proyecto) {
-            echo "ID: {$proyecto->getId_proyecto()}\n";
-            echo "Nombre: {$proyecto->getNombre()}\n";
-            echo "Descripción: {$proyecto->getDescripcion()}\n";
-            echo "Fecha de Inicio: {$proyecto->getFechaInicio()->format('Y-m-d')}\n";
-            echo "Fecha de Fin: {$proyecto->getFechaFin()->format('Y-m-d')}\n";
-            echo "Estado: {$proyecto->getEstado()}\n";
-            echo "-------------------------\n";
-        }
-    } */
-     // Agregar un proyecto al gestor
+      // Agregar un proyecto al gestor
      public function agregarProyecto($proyecto) {
         $this->proyectos[] = $proyecto;
     }
@@ -372,41 +322,6 @@ class GestorProyecto {
         }
     }
     
-    
-   /* public function cargarDesdeJson() {
-        // Cargar proyectos desde el archivo JSON
-        if (file_exists($this->archivoJson)) {
-            $contenidoJson = file_get_contents($this->archivoJson);
-            $data = json_decode($contenidoJson, true); // Decodificar JSON en un array asociativo
-
-            if (isset($data['proyecto'])) {
-                $this->proyectos = [];
-                foreach ($data['proyecto'] as $proyectoData) {
-                    // Verificar si el proyecto tiene tareas y cargarlas correctamente
-                    $tareas = [];
-                    if (isset($proyectoData['tareas']) && is_array($proyectoData['tareas'])) {
-                        foreach ($proyectoData['tareas'] as $idTarea) {
-                            $tarea = $this->gestorTarea->buscarTareaPorId($idTarea); // Buscar tarea por ID
-                            if ($tarea) {
-                                $tareas[] = $tarea; // Asignar la tarea al proyecto
-                            }
-                        }
-                    }
-
-                    // Crear el objeto Proyecto, pasando las tareas cargadas
-                    $this->proyectos[] = new Proyecto(
-                        $proyectoData['id_proyecto'],
-                        $proyectoData['nombre'],
-                        $proyectoData['descripcion'],
-                        new DateTime($proyectoData['fechaInicio']),
-                        new DateTime($proyectoData['fechaFin']),
-                        $proyectoData['estado'],
-                        $tareas // Pasar las tareas como un array de objetos Tarea
-                    );
-                }
-            }
-        }
-    }*/
    
     // Guardar los proyectos en el archivo JSON
     public function guardarEnJSON() {

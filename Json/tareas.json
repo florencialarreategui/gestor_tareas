@@ -3,7 +3,7 @@
         {
             "id_tarea": 13,
             "nombre": "instalar servicios",
-            "descripcion": "se instalan los servicios",
+            "descripcion": "se instalaran servicios por unidad",
             "fecha_inicio": "2025-04-26",
             "fecha_fin": "2025-08-26",
             "id_proyecto": 3,
@@ -36,7 +36,7 @@
             "nombre": "licencias2",
             "descripcion": "conseguir habilitaciones",
             "fecha_inicio": "2025-02-06",
-            "fecha_fin": "2025-02-16",
+            "fecha_fin": "2026-05-09",
             "id_proyecto": 3,
             "dependencias": []
         },
@@ -60,6 +60,26 @@
             "id_proyecto": "4",
             "dependencias": [
                 "14"
+            ]
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "llslslslsl",
+            "descripcion": "goog",
+            "fecha_inicio": "2025-02-14",
+            "fecha_fin": "2025-02-28",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "otra tarea",
+            "descripcion": "ayyyyy",
+            "fecha_inicio": "2025-03-14",
+            "fecha_fin": "2025-05-12",
+            "id_proyecto": 7,
+            "dependencias": [
+                "17"
             ]
         }
     ]
