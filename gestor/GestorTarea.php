@@ -227,33 +227,7 @@
                             $this->verificarYActualizarCaminoCritico($tarea);
                             echo "Fecha modificada. Actualización del camino crítico.\n";
                             break;
-                       /* do {
-                            echo "Ingrese la nueva fecha de inicio de la tarea (formato: Y-m-d): ";
-                            $fecha_inicio_input = trim(fgets(STDIN));
-                            $fecha_inicio = new DateTime($fecha_inicio_input);
-            
-                            if ($fecha_inicio->format('Y') < 2025) {
-                                echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
-                            }
-                        } while ($fecha_inicio->format('Y') < 2025);
-            
-                        $tarea->setFechaInicio($fecha_inicio->format('Y-m-d'));
-                        break;
-                    case '4':
-                        do {
-                            echo "Ingrese la nueva fecha de fin de la tarea (formato: Y-m-d): ";
-                            $fecha_fin_input = trim(fgets(STDIN));
-                            $fecha_fin = new DateTime($fecha_fin_input);
-            
-                            if ($fecha_fin < $tarea->getFechaInicio()) {
-                                echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
-                            }
-                        } while ($fecha_fin < $tarea->getFechaInicio());
-            
-                        $tarea->setFechaFin($fecha_fin->format('Y-m-d'));
-                        $this->gestorProyecto->actualizarFechaFinProyecto($tarea->getIdProyecto());
-                        echo "Fecha modificada actualización del camino crítico, redirijase a la opción 7 .\n";
-                        break;*/
+                       
                     case '5':
                         echo "Ingrese el ID de la tarea dependiente: ";
                         $id_dependencia = trim(fgets(STDIN));
@@ -396,26 +370,17 @@
                     return $a->getFechaInicio() <=> $b->getFechaInicio();
                 });
             
-                echo "=== Tareas Ordenadas por Fecha de Inicio ===\n";
-                foreach ($tareasProyecto as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
+             
             
                 // Determinar el orden de ejecución respetando las dependencias
                 $ordenTareas = $this->ordenarTareasPorDependencias($tareasProyecto);
                 
-                echo "=== Orden Correcto de Ejecución de Tareas ===\n";
-                foreach ($ordenTareas as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
+            
             
                 // Calcular el camino crítico (usaremos el método de calcular dependencias de las tareas)
                 $caminoCritico = $this->calcularCaminoCriticoReal($ordenTareas);
             
-                echo "=== Camino Crítico ===\n";
-                foreach ($caminoCritico as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
+             
             }
             
             
@@ -469,20 +434,21 @@
                     $caminoCritico = [];
                     $fechaActual = new DateTime('2025-01-01'); // Fecha de inicio del proyecto
                     
+                    // Procesamos las tareas para calcular fechas de inicio y fin
                     foreach ($tareasOrdenadas as $tarea) {
-                        echo "Procesando tarea: " . $tarea->getNombre() . "\n";
+                        echo "Procesando tarea: " . $tarea->getNombre() . "\n"; // Esto solo es para depuración
                         
-                        // La tarea puede comenzar después de la fecha actual
+                        // Si la tarea puede comenzar después de la fecha actual
                         if ($fechaActual < $tarea->getFechaInicio()) {
                             $fechaActual = $tarea->getFechaInicio();
                         }
                 
                         // Calculamos la fecha de fin de la tarea
                         $fechaFinTarea = clone $fechaActual;
-                        $fechaFinTarea->add(new DateInterval('P' . $tarea->getDuracion() . 'D'));
+                        $fechaFinTarea->add(new DateInterval('P' . $tarea->getDuracion() . 'D')); // 'P' es el prefijo para un intervalo de días
                 
-                        echo "Fecha de inicio para " . $tarea->getNombre() . ": " . $fechaActual->format('Y-m-d') . "\n";
-                        echo "Fecha de fin para " . $tarea->getNombre() . ": " . $fechaFinTarea->format('Y-m-d') . "\n";
+                        echo "Fecha de inicio para " . $tarea->getNombre() . ": " . $fechaActual->format('Y-m-d') . "\n"; // Depuración
+                        echo "Fecha de fin para " . $tarea->getNombre() . ": " . $fechaFinTarea->format('Y-m-d') . "\n"; // Depuración
                 
                         // Asignamos la fecha de fin calculada
                         $tarea->setFechaFin($fechaFinTarea);
@@ -492,7 +458,7 @@
                         $fechaActual = $fechaFinTarea;
                     }
                 
-                    // Aquí puedes agregar la lógica para calcular el "camino crítico" real
+                    // Ahora imprimimos el camino crítico, solo una vez
                     echo "=== Camino Crítico ===\n";
                     foreach ($caminoCritico as $tarea) {
                         echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
@@ -502,36 +468,6 @@
                 }
                 
                 
-            
-               
-          /*  public function calcularCaminoCritico($id_proyecto) {
-                // Obtener las tareas del proyecto
-                $tareasProyecto = $this->getTareasPorProyecto($id_proyecto);
-            
-                if (empty($tareasProyecto)) {
-                    echo "No hay tareas asociadas a este proyecto.\n";
-                    return;
-                }
-            
-                // Mostrar la lista de tareas existentes
-                echo "=== Lista de Tareas ===\n";
-                foreach ($tareasProyecto as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
-            
-                // Ordenar las tareas por fecha de inicio
-                usort($tareasProyecto, function($a, $b) {
-                    return $a->getFechaInicio() <=> $b->getFechaInicio();
-                });
-            
-                echo "=== Tareas dependientes ordenadas  ===\n";
-                foreach ($tareasProyecto as $tarea) {
-                    echo "ID: " . $tarea->getIdTarea() . ", Nombre: " . $tarea->getNombre() . ", Fecha Inicio: " . $tarea->getFechaInicio()->format('Y-m-d') . ", Fecha Fin: " . $tarea->getFechaFin()->format('Y-m-d') . "\n";
-                }
-            }*/
-            
-        
-            
             
             public function getTareasPorProyecto($id_proyecto) {
                 // Devuelve todas las tareas asociadas a un proyecto
