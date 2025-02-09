@@ -24,17 +24,6 @@
             "tareas": []
         },
         {
-            "id_proyecto": 4,
-            "nombre": "pipo",
-            "descripcion": "es un proeycto para pepe",
-            "fechaInicio": "2025-04-22",
-            "fechaFin": "2025-06-20",
-            "estado": "activo",
-            "tareas": [
-                16
-            ]
-        },
-        {
             "id_proyecto": 5,
             "nombre": "dos",
             "descripcion": "dos",
@@ -63,14 +52,25 @@
         },
         {
             "id_proyecto": 7,
-            "nombre": "lalla",
-            "descripcion": "allala",
-            "fechaInicio": "2025-02-13",
-            "fechaFin": "2025-04-12",
+            "nombre": "Limpieza de edificio",
+            "descripcion": "limpieza final de obra",
+            "fechaInicio": "2025-04-20",
+            "fechaFin": "2025-08-20",
+            "estado": "activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 8,
+            "nombre": "produccion de pasteles",
+            "descripcion": "se produciran 60 pasteles de bodas",
+            "fechaInicio": "2025-04-09",
+            "fechaFin": "2025-05-09",
             "estado": "activo",
             "tareas": [
-                17,
-                18
+                21,
+                22,
+                23,
+                24
             ]
         }
     ]

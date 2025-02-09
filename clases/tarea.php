@@ -51,14 +51,32 @@ class Tarea {
     public function getDependencias() {
         return $this->dependencias;
     }
+     // Método getDuracion para calcular la duración de la tarea en días
+     public function getDuracion() {
+        // Calculamos la diferencia entre la fecha de inicio y fin de la tarea
+        $intervalo = $this->fecha_inicio->diff($this->fecha_fin);
+        return $intervalo->days;
+    }
 
     // Métodos setter
     public function setFechaInicio($fecha_inicio) {
-        $this->fecha_inicio = new DateTime($fecha_inicio);
+        // Solo asignamos la fecha si no es un objeto DateTime ya
+        if (!$fecha_inicio instanceof DateTime) {
+            $this->fecha_inicio = new DateTime($fecha_inicio);
+        } else {
+            $this->fecha_inicio = $fecha_inicio;
+        }
     }
+    
     public function setFechaFin($fecha_fin) {
-        $this->fecha_fin = new DateTime($fecha_fin);
+        // Solo asignamos la fecha si no es un objeto DateTime ya
+        if (!$fecha_fin instanceof DateTime) {
+            $this->fecha_fin = new DateTime($fecha_fin);
+        } else {
+            $this->fecha_fin = $fecha_fin;
+        }
     }
+    
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;

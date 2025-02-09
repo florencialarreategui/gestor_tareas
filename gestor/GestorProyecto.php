@@ -21,6 +21,71 @@ class GestorProyecto {
     // Crear un nuevo proyecto
     public function crearProyecto() {
         $id_proyecto = count($this->proyectos) + 1;
+    
+        echo "Ingrese el nombre del proyecto: ";
+        $nombre = trim(fgets(STDIN));
+    
+        echo "Ingrese la descripción del proyecto: ";
+        $descripcion = trim(fgets(STDIN));
+    
+        // Validación de la fecha de inicio
+        $fechaInicioValida = false;
+        while (!$fechaInicioValida) {
+            echo "Ingrese la fecha de inicio (formato: Y-m-d): ";
+            $fechaInicio = trim(fgets(STDIN));
+    
+            // Validar que el formato sea correcto y que el año no sea inferior a 2025
+            $fechaInicioObj = DateTime::createFromFormat('Y-m-d', $fechaInicio);
+            if ($fechaInicioObj && $fechaInicioObj->format('Y-m-d') === $fechaInicio) {
+                // Validar que el año de la fecha de inicio sea 2025 o superior
+                $anioInicio = $fechaInicioObj->format('Y');
+                if ($anioInicio >= 2025) {
+                    $fechaInicioValida = true;
+                } else {
+                    echo "El año de la fecha de inicio no puede ser inferior a 2025.\n";
+                }
+            } else {
+                echo "El formato de fecha ingresado no es válido. Debe ser Y-m-d. Ejemplo: 2025-02-08.\n";
+            }
+        }
+    
+        // Validación de la fecha de fin
+        $fechaFinValida = false;
+        while (!$fechaFinValida) {
+            echo "Ingrese la fecha de fin (formato: Y-m-d): ";
+            $fechaFin = trim(fgets(STDIN));
+    
+            // Validar que el formato de la fecha de fin sea correcto y que no sea inferior a la de inicio
+            $fechaFinObj = DateTime::createFromFormat('Y-m-d', $fechaFin);
+            if ($fechaFinObj && $fechaFinObj->format('Y-m-d') === $fechaFin) {
+                // Comparar la fecha de fin con la de inicio para asegurar que la fecha de fin no sea anterior
+                if ($fechaFinObj >= $fechaInicioObj) {
+                    $fechaFinValida = true;
+                } else {
+                    echo "La fecha de fin no puede ser anterior a la fecha de inicio.\n";
+                }
+            } else {
+                echo "El formato de fecha ingresado no es válido. Debe ser Y-m-d. Ejemplo: 2025-02-08.\n";
+            }
+        }
+    
+        // Asignar "activo" por defecto sin pedir al usuario
+        $estado = 'activo';  // Estado asignado automáticamente
+    
+        // Crear un nuevo proyecto
+        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
+    
+        // Almacenar el nuevo proyecto en el array
+        $this->proyectos[] = $nuevoProyecto;
+    
+        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " con ID " . $nuevoProyecto->getId_proyecto() . "\n";
+    
+        $this->guardarEnJSON();
+    }
+    
+    
+  /*  public function crearProyecto() {
+        $id_proyecto = count($this->proyectos) + 1;
 
         echo "Ingrese el nombre del proyecto: ";
         $nombre = trim(fgets(STDIN));
@@ -46,7 +111,7 @@ class GestorProyecto {
         echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " con ID " . $nuevoProyecto->getId_proyecto() . "\n";
 
         $this->guardarEnJSON();
-    }
+    }*/
     public function listarProyectosPorId() {
       //  var_dump($this->proyectos); // Verifica el contenido de $proyectos
         if (count($this->proyectos) > 0) {
