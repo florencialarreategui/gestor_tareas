@@ -72,6 +72,61 @@
                 23,
                 24
             ]
+        },
+        {
+            "id_proyecto": 8,
+            "nombre": "Torta de cumplea\u00f1os",
+            "descripcion": "Pasos a seguir para preparar una torta",
+            "fechaInicio": "2025-02-11",
+            "fechaFin": "2025-06-11",
+            "estado": "activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 9,
+            "nombre": "nuevo nuevo nuevo",
+            "descripcion": "nuevo",
+            "fechaInicio": "2025-02-11",
+            "fechaFin": "2025-02-12",
+            "estado": "activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 10,
+            "nombre": "hacer arroz",
+            "descripcion": "arroz",
+            "fechaInicio": "2025-02-11",
+            "fechaFin": "2025-06-11",
+            "estado": "activo",
+            "tareas": [
+                26
+            ]
+        },
+        {
+            "id_proyecto": 11,
+            "nombre": "jardin",
+            "descripcion": "dise\u0000o y ejecutado de un jardin para una casa de campo",
+            "fechaInicio": "2025-02-13",
+            "fechaFin": "2025-04-20",
+            "estado": "activo",
+            "tareas": [
+                27
+            ]
+        },
+        {
+            "id_proyecto": 12,
+            "nombre": "preparar raviole",
+            "descripcion": "raviole",
+            "fechaInicio": "2025-02-14",
+            "fechaFin": "2025-04-12",
+            "estado": "activo",
+            "tareas": [
+                28,
+                29,
+                30,
+                31,
+                32
+            ]
         }
     ]
 }

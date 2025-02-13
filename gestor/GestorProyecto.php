@@ -84,34 +84,6 @@ class GestorProyecto {
     }
     
     
-  /*  public function crearProyecto() {
-        $id_proyecto = count($this->proyectos) + 1;
-
-        echo "Ingrese el nombre del proyecto: ";
-        $nombre = trim(fgets(STDIN));
-
-        echo "Ingrese la descripción del proyecto: ";
-        $descripcion = trim(fgets(STDIN));
-
-        echo "Ingrese la fecha de inicio (formato: Y-m-d): ";
-        $fechaInicio = trim(fgets(STDIN));
-
-        echo "Ingrese la fecha de fin (formato: Y-m-d): ";
-        $fechaFin = trim(fgets(STDIN));
-
-        echo "Ingrese el estado del proyecto (por ejemplo: en progreso, finalizado): ";
-        $estado = trim(fgets(STDIN));
-
-        // Crear un nuevo proyecto
-        $nuevoProyecto = new Proyecto($id_proyecto, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado);
-
-        // Almacenar el nuevo proyecto en el array
-        $this->proyectos[] = $nuevoProyecto;
-
-        echo "Proyecto creado exitosamente: " . $nuevoProyecto->getNombre() . " con ID " . $nuevoProyecto->getId_proyecto() . "\n";
-
-        $this->guardarEnJSON();
-    }*/
     public function listarProyectosPorId() {
       //  var_dump($this->proyectos); // Verifica el contenido de $proyectos
         if (count($this->proyectos) > 0) {
@@ -231,7 +203,7 @@ class GestorProyecto {
         }
     }
          // Método privado para buscar un proyecto por su ID
-    private function buscarProyectoPorId($id_proyecto) {
+    public function buscarProyectoPorId($id_proyecto) {
         foreach ($this->proyectos as $proyecto) {
             if ($proyecto->getId_proyecto() == $id_proyecto) {
                 return $proyecto;

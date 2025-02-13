@@ -86,61 +86,136 @@
         file_put_contents($this->archivoJsonTareas, json_encode(['tareas' => $tareasData], JSON_PRETTY_PRINT));
     }
     
+    // public function crearTarea($gestorProyecto) {
+    //     // Primero preguntar el ID del proyecto
+    //     echo "Ingrese el ID del proyecto al que pertenece la tarea: ";
+    //     $id_proyecto = trim(fgets(STDIN));
+        
+    //     // Preguntar si la tarea tiene dependencias
+    //     echo "¿La tarea tiene dependencias? (sí/no): ";
+    //     $respuesta = trim(fgets(STDIN));
+        
+    //     $dependencias = [];
+    //     if (strtolower($respuesta) == "sí" || strtolower($respuesta) == "si") {
+    //         echo "Ingrese los IDs de las tareas de las cuales depende (separados por comas): ";
+    //         $dependencias = explode(",", trim(fgets(STDIN)));  // Convertimos a array y eliminamos espacios en blanco
+    //         $dependencias = array_map('trim', $dependencias); // Asegurarse de que no haya espacios en blanco
+    //     }
+        
+    //     // Ahora preguntar los datos de la tarea
+    //     echo "Ingrese el nombre de la tarea: ";
+    //     $nombre = trim(fgets(STDIN));
+        
+    //     echo "Ingrese la descripción de la tarea: ";
+    //     $descripcion = trim(fgets(STDIN));
+        
+    //     // Validar la fecha de inicio
+    //     do {
+    //         echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
+    //         $fechaInicioInput = trim(fgets(STDIN));
+    //         $fechaInicio = new DateTime($fechaInicioInput);
+            
+    //         if ($fechaInicio->format('Y') < 2025) {
+    //             echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
+    //         }
+    //     } while ($fechaInicio->format('Y') < 2025);
+        
+    //     // Validar la fecha de fin
+    //     do {
+    //         echo "Ingrese la fecha de fin de la tarea (formato: Y-m-d): ";
+    //         $fechaFinInput = trim(fgets(STDIN));
+    //         $fechaFin = new DateTime($fechaFinInput);
+            
+    //         if ($fechaFin < $fechaInicio) {
+    //             echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
+    //         }
+    //     } while ($fechaFin < $fechaInicio);
+        
+    //     // Crear la nueva tarea
+    //     $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
+    //     $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicio, $fechaFin, $id_proyecto, $dependencias);
+        
+    //     // Guardar la tarea en tareas.json
+    //     $this->guardarTareaEnJson($nuevaTarea);
+        
+    //     // Añadir la tarea al campo "tareas" del proyecto correspondiente
+    //     $gestorProyecto->agregarTareaAlProyecto($id_proyecto, $nuevaTarea);
+        
+    //     echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " con ID " . $nuevaTarea->getIdTarea() . "\n";
+    // }
+        
     public function crearTarea($gestorProyecto) {
-        echo "Ingrese el nombre de la tarea: ";
-        $nombre = trim(fgets(STDIN));
-    
-        echo "Ingrese la descripción de la tarea: ";
-        $descripcion = trim(fgets(STDIN));
-    
-        // Validar la fecha de inicio
-        do {
-            echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
-            $fechaInicioInput = trim(fgets(STDIN));
-            $fechaInicio = new DateTime($fechaInicioInput);
-            
-            if ($fechaInicio->format('Y') < 2025) {
-                echo "La fecha de inicio no puede ser inferior a 2025. Por favor, ingrese una fecha válida.\n";
-            }
-        } while ($fechaInicio->format('Y') < 2025);
-    
-        // Validar la fecha de fin
-        do {
-            echo "Ingrese la fecha de fin de la tarea (formato: Y-m-d): ";
-            $fechaFinInput = trim(fgets(STDIN));
-            $fechaFin = new DateTime($fechaFinInput);
-            
-            if ($fechaFin < $fechaInicio) {
-                echo "La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, ingrese una fecha válida.\n";
-            }
-        } while ($fechaFin < $fechaInicio);
-    
+        // Primero preguntar el ID del proyecto
         echo "Ingrese el ID del proyecto al que pertenece la tarea: ";
         $id_proyecto = trim(fgets(STDIN));
-    
+        
+        // Obtener el proyecto desde el gestor de proyectos
+        $proyecto = $gestorProyecto->buscarProyectoPorId($id_proyecto);
+        
+        if (!$proyecto) {
+            echo "El proyecto con ID $id_proyecto no existe.\n";
+            return;  // Si el proyecto no existe, terminamos la función
+        }
+        
+        // Obtener las fechas de inicio y fin del proyecto
+        $fechaInicioProyecto = $proyecto->getFechaInicio(); // Ya es un objeto DateTime
+        $fechaFinProyecto = $proyecto->getFechaFin(); // Ya es un objeto DateTime
+        
         // Preguntar si la tarea tiene dependencias
         echo "¿La tarea tiene dependencias? (sí/no): ";
         $respuesta = trim(fgets(STDIN));
-    
+        
         $dependencias = [];
         if (strtolower($respuesta) == "sí" || strtolower($respuesta) == "si") {
             echo "Ingrese los IDs de las tareas de las cuales depende (separados por comas): ";
             $dependencias = explode(",", trim(fgets(STDIN)));  // Convertimos a array y eliminamos espacios en blanco
             $dependencias = array_map('trim', $dependencias); // Asegurarse de que no haya espacios en blanco
         }
-    
-        // Crear la nueva tarea
+        
+        // Ahora preguntar los datos de la tarea
+        echo "Ingrese el nombre de la tarea: ";
+        $nombre = trim(fgets(STDIN));
+        
+        echo "Ingrese la descripción de la tarea: ";
+        $descripcion = trim(fgets(STDIN));
+        
+        do {
+            echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
+            $fechaInicioInput = trim(fgets(STDIN));
+            $fechaInicioTarea = new DateTime($fechaInicioInput);
+        
+            // Verificar que la fecha de inicio de la tarea esté dentro del rango del proyecto
+            if ($fechaInicioTarea < $fechaInicioProyecto) {
+                echo "La fecha de inicio de la tarea no puede ser anterior a la fecha de inicio del proyecto.\n";
+            }
+        } while ($fechaInicioTarea < $fechaInicioProyecto);
+        
+        // Validar la fecha de fin de la tarea
+        do {
+            echo "Ingrese la fecha de fin de la tarea (formato: Y-m-d): ";
+            $fechaFinInput = trim(fgets(STDIN));
+            $fechaFinTarea = new DateTime($fechaFinInput);
+        
+            // Verificar que la fecha de fin de la tarea esté dentro del rango del proyecto
+            if ($fechaFinTarea > $fechaFinProyecto) {
+                echo "La fecha de fin de la tarea no puede ser posterior a la fecha de fin del proyecto.\n";
+            }
+        } while ($fechaFinTarea > $fechaFinProyecto);
+        
+        // Ahora, al crear la tarea, debemos usar las variables de fecha corregidas
         $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
-        $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicio, $fechaFin, $id_proyecto, $dependencias);
-    
+        $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicioTarea, $fechaFinTarea, $id_proyecto, $dependencias);
+        
         // Guardar la tarea en tareas.json
         $this->guardarTareaEnJson($nuevaTarea);
-    
+        
         // Añadir la tarea al campo "tareas" del proyecto correspondiente
         $gestorProyecto->agregarTareaAlProyecto($id_proyecto, $nuevaTarea);
-    
+        
         echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " con ID " . $nuevaTarea->getIdTarea() . "\n";
-    }     
+    }
+    
+    
          
             public function obtenerTodasLasTareas() {
                 return $this->tareas;

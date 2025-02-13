@@ -37,7 +37,7 @@
             "descripcion": "rebocar paredes",
             "fecha_inicio": "2025-04-27",
             "fecha_fin": "2025-04-30",
-            "id_proyecto": "3",
+            "id_proyecto": 3,
             "dependencias": [
                 "12"
             ]
@@ -48,7 +48,7 @@
             "descripcion": "tarea test",
             "fecha_inicio": "2025-06-21",
             "fecha_fin": "2025-06-23",
-            "id_proyecto": "4",
+            "id_proyecto": 4,
             "dependencias": [
                 "14"
             ]
@@ -88,7 +88,7 @@
             "descripcion": "se limpia pasillo continuaci\u0000n del holl",
             "fecha_inicio": "2025-05-22",
             "fecha_fin": "2025-05-23",
-            "id_proyecto": "7",
+            "id_proyecto": 7,
             "dependencias": [
                 "19"
             ]
@@ -99,7 +99,7 @@
             "descripcion": "se compran los ingredientes",
             "fecha_inicio": "2025-04-09",
             "fecha_fin": "2025-04-10",
-            "id_proyecto": "8",
+            "id_proyecto": 8,
             "dependencias": []
         },
         {
@@ -108,7 +108,7 @@
             "descripcion": "mezclar los ingredientes",
             "fecha_inicio": "2025-04-11",
             "fecha_fin": "2025-04-12",
-            "id_proyecto": "8",
+            "id_proyecto": 8,
             "dependencias": [
                 "21"
             ]
@@ -119,7 +119,7 @@
             "descripcion": "se deja la mezcla en reposo",
             "fecha_inicio": "2025-04-12",
             "fecha_fin": "2025-04-13",
-            "id_proyecto": "8",
+            "id_proyecto": 8,
             "dependencias": [
                 "21",
                 "22"
@@ -131,10 +131,499 @@
             "descripcion": "se lleva la mezcla a horno moderado",
             "fecha_inicio": "2025-04-13",
             "fecha_fin": "2025-04-14",
-            "id_proyecto": "8",
+            "id_proyecto": 8,
             "dependencias": [
                 "23"
             ]
+        },
+        {
+            "id_tarea": 13,
+            "nombre": "instalar servicios",
+            "descripcion": "se instalaran servicios por unidad",
+            "fecha_inicio": "2025-04-26",
+            "fecha_fin": "2025-08-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 12,
+            "nombre": "estructura",
+            "descripcion": "se construye la estructura",
+            "fecha_inicio": "2025-04-17",
+            "fecha_fin": "2025-04-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "11"
+            ]
+        },
+        {
+            "id_tarea": 9,
+            "nombre": "licencias2",
+            "descripcion": "conseguir habilitaciones",
+            "fecha_inicio": "2025-02-06",
+            "fecha_fin": "2026-05-09",
+            "id_proyecto": 3,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "reboque",
+            "descripcion": "rebocar paredes",
+            "fecha_inicio": "2025-04-27",
+            "fecha_fin": "2025-04-30",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "tarea para proyecto pipo",
+            "descripcion": "tarea test",
+            "fecha_inicio": "2025-06-21",
+            "fecha_fin": "2025-06-23",
+            "id_proyecto": 4,
+            "dependencias": [
+                "14"
+            ]
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "llslslslsl",
+            "descripcion": "goog",
+            "fecha_inicio": "2025-02-14",
+            "fecha_fin": "2025-02-28",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "otra tarea",
+            "descripcion": "ayyyyy",
+            "fecha_inicio": "2025-03-14",
+            "fecha_fin": "2025-05-12",
+            "id_proyecto": 7,
+            "dependencias": [
+                "17"
+            ]
+        },
+        {
+            "id_tarea": 19,
+            "nombre": "Limpieza del hall",
+            "descripcion": "se limpia el holl",
+            "fecha_inicio": "2025-05-20",
+            "fecha_fin": "2025-05-21",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 20,
+            "nombre": "limpieza pasillo",
+            "descripcion": "se limpia pasillo continuaci\u0000n del holl",
+            "fecha_inicio": "2025-05-22",
+            "fecha_fin": "2025-05-23",
+            "id_proyecto": 7,
+            "dependencias": [
+                "19"
+            ]
+        },
+        {
+            "id_tarea": 21,
+            "nombre": "compra de los ingredientes",
+            "descripcion": "se compran los ingredientes",
+            "fecha_inicio": "2025-04-09",
+            "fecha_fin": "2025-04-10",
+            "id_proyecto": 8,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 22,
+            "nombre": "mezcla",
+            "descripcion": "mezclar los ingredientes",
+            "fecha_inicio": "2025-04-11",
+            "fecha_fin": "2025-04-12",
+            "id_proyecto": 8,
+            "dependencias": [
+                "21"
+            ]
+        },
+        {
+            "id_tarea": 23,
+            "nombre": "reposado",
+            "descripcion": "se deja la mezcla en reposo",
+            "fecha_inicio": "2025-04-12",
+            "fecha_fin": "2025-04-13",
+            "id_proyecto": 8,
+            "dependencias": [
+                "21",
+                "22"
+            ]
+        },
+        {
+            "id_tarea": 24,
+            "nombre": "coccion",
+            "descripcion": "se lleva la mezcla a horno moderado",
+            "fecha_inicio": "2025-04-13",
+            "fecha_fin": "2025-04-14",
+            "id_proyecto": 8,
+            "dependencias": [
+                "23"
+            ]
+        },
+        {
+            "id_tarea": 13,
+            "nombre": "instalar servicios",
+            "descripcion": "se instalaran servicios por unidad",
+            "fecha_inicio": "2025-04-26",
+            "fecha_fin": "2025-08-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 12,
+            "nombre": "estructura",
+            "descripcion": "se construye la estructura",
+            "fecha_inicio": "2025-04-17",
+            "fecha_fin": "2025-04-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "11"
+            ]
+        },
+        {
+            "id_tarea": 9,
+            "nombre": "licencias2",
+            "descripcion": "conseguir habilitaciones",
+            "fecha_inicio": "2025-02-06",
+            "fecha_fin": "2026-05-09",
+            "id_proyecto": 3,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "reboque",
+            "descripcion": "rebocar paredes",
+            "fecha_inicio": "2025-04-27",
+            "fecha_fin": "2025-04-30",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "tarea para proyecto pipo",
+            "descripcion": "tarea test",
+            "fecha_inicio": "2025-06-21",
+            "fecha_fin": "2025-06-23",
+            "id_proyecto": 4,
+            "dependencias": [
+                "14"
+            ]
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "llslslslsl",
+            "descripcion": "goog",
+            "fecha_inicio": "2025-02-14",
+            "fecha_fin": "2025-02-28",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "otra tarea",
+            "descripcion": "ayyyyy",
+            "fecha_inicio": "2025-03-14",
+            "fecha_fin": "2025-05-12",
+            "id_proyecto": 7,
+            "dependencias": [
+                "17"
+            ]
+        },
+        {
+            "id_tarea": 19,
+            "nombre": "Limpieza del hall",
+            "descripcion": "se limpia el holl",
+            "fecha_inicio": "2025-05-20",
+            "fecha_fin": "2025-05-21",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 20,
+            "nombre": "limpieza pasillo",
+            "descripcion": "se limpia pasillo continuaci\u0000n del holl",
+            "fecha_inicio": "2025-05-22",
+            "fecha_fin": "2025-05-23",
+            "id_proyecto": 7,
+            "dependencias": [
+                "19"
+            ]
+        },
+        {
+            "id_tarea": 21,
+            "nombre": "compra de los ingredientes",
+            "descripcion": "se compran los ingredientes",
+            "fecha_inicio": "2025-04-09",
+            "fecha_fin": "2025-04-10",
+            "id_proyecto": 8,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 22,
+            "nombre": "mezcla",
+            "descripcion": "mezclar los ingredientes",
+            "fecha_inicio": "2025-04-11",
+            "fecha_fin": "2025-04-12",
+            "id_proyecto": 8,
+            "dependencias": [
+                "21"
+            ]
+        },
+        {
+            "id_tarea": 23,
+            "nombre": "reposado",
+            "descripcion": "se deja la mezcla en reposo",
+            "fecha_inicio": "2025-04-12",
+            "fecha_fin": "2025-04-13",
+            "id_proyecto": 8,
+            "dependencias": [
+                "21",
+                "22"
+            ]
+        },
+        {
+            "id_tarea": 24,
+            "nombre": "coccion",
+            "descripcion": "se lleva la mezcla a horno moderado",
+            "fecha_inicio": "2025-04-13",
+            "fecha_fin": "2025-04-14",
+            "id_proyecto": 8,
+            "dependencias": [
+                "23"
+            ]
+        },
+        {
+            "id_tarea": 13,
+            "nombre": "instalar servicios",
+            "descripcion": "se instalaran servicios por unidad",
+            "fecha_inicio": "2025-04-26",
+            "fecha_fin": "2025-08-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 12,
+            "nombre": "estructura",
+            "descripcion": "se construye la estructura",
+            "fecha_inicio": "2025-04-17",
+            "fecha_fin": "2025-04-26",
+            "id_proyecto": 3,
+            "dependencias": [
+                "11"
+            ]
+        },
+        {
+            "id_tarea": 9,
+            "nombre": "licencias2",
+            "descripcion": "conseguir habilitaciones",
+            "fecha_inicio": "2025-02-06",
+            "fecha_fin": "2026-05-09",
+            "id_proyecto": 3,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "reboque",
+            "descripcion": "rebocar paredes",
+            "fecha_inicio": "2025-04-27",
+            "fecha_fin": "2025-04-30",
+            "id_proyecto": 3,
+            "dependencias": [
+                "12"
+            ]
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "tarea para proyecto pipo",
+            "descripcion": "tarea test",
+            "fecha_inicio": "2025-06-21",
+            "fecha_fin": "2025-06-23",
+            "id_proyecto": 4,
+            "dependencias": [
+                "14"
+            ]
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "llslslslsl",
+            "descripcion": "goog",
+            "fecha_inicio": "2025-02-14",
+            "fecha_fin": "2025-02-28",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "otra tarea",
+            "descripcion": "ayyyyy",
+            "fecha_inicio": "2025-03-14",
+            "fecha_fin": "2025-05-12",
+            "id_proyecto": 7,
+            "dependencias": [
+                "17"
+            ]
+        },
+        {
+            "id_tarea": 19,
+            "nombre": "Limpieza del hall",
+            "descripcion": "se limpia el holl",
+            "fecha_inicio": "2025-05-20",
+            "fecha_fin": "2025-05-21",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 20,
+            "nombre": "limpieza pasillo",
+            "descripcion": "se limpia pasillo continuaci\u0000n del holl",
+            "fecha_inicio": "2025-05-22",
+            "fecha_fin": "2025-05-23",
+            "id_proyecto": 7,
+            "dependencias": [
+                "19"
+            ]
+        },
+        {
+            "id_tarea": 21,
+            "nombre": "compra de los ingredientes",
+            "descripcion": "se compran los ingredientes",
+            "fecha_inicio": "2025-04-09",
+            "fecha_fin": "2025-04-10",
+            "id_proyecto": 8,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 22,
+            "nombre": "mezcla",
+            "descripcion": "mezclar los ingredientes",
+            "fecha_inicio": "2025-04-11",
+            "fecha_fin": "2025-04-12",
+            "id_proyecto": 8,
+            "dependencias": [
+                "21"
+            ]
+        },
+        {
+            "id_tarea": 23,
+            "nombre": "reposado",
+            "descripcion": "se deja la mezcla en reposo",
+            "fecha_inicio": "2025-04-12",
+            "fecha_fin": "2025-04-13",
+            "id_proyecto": 8,
+            "dependencias": [
+                "21",
+                "22"
+            ]
+        },
+        {
+            "id_tarea": 24,
+            "nombre": "coccion",
+            "descripcion": "se lleva la mezcla a horno moderado",
+            "fecha_inicio": "2025-04-13",
+            "fecha_fin": "2025-04-14",
+            "id_proyecto": 8,
+            "dependencias": [
+                "23"
+            ]
+        },
+        {
+            "id_tarea": 25,
+            "nombre": "Calentar el agua",
+            "descripcion": "tomar la olla y llenarla con agua de la canilla, luego ponerla a fuego fuerte en la hornalla",
+            "fecha_inicio": "2025-02-11",
+            "fecha_fin": "2025-02-12",
+            "id_proyecto": 10,
+            "dependencias": [
+                "1",
+                "0"
+            ]
+        },
+        {
+            "id_tarea": 26,
+            "nombre": "sal",
+            "descripcion": "agregar sal al agua en hervor",
+            "fecha_inicio": "2025-02-12",
+            "fecha_fin": "2025-02-13",
+            "id_proyecto": 10,
+            "dependencias": [
+                "25"
+            ]
+        },
+        {
+            "id_tarea": 27,
+            "nombre": "nueva",
+            "descripcion": "lala",
+            "fecha_inicio": "2025-01-12",
+            "fecha_fin": "2025-02-12",
+            "id_proyecto": "11",
+            "dependencias": [
+                "0"
+            ]
+        },
+        {
+            "id_tarea": 28,
+            "nombre": "nueva tarea",
+            "descripcion": "tata",
+            "fecha_inicio": "2025-01-01",
+            "fecha_fin": "2025-03-01",
+            "id_proyecto": "12",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 29,
+            "nombre": "lili",
+            "descripcion": "lolo",
+            "fecha_inicio": "2025-02-13",
+            "fecha_fin": "2025-02-13",
+            "id_proyecto": "12",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 30,
+            "nombre": "laaa",
+            "descripcion": "leee",
+            "fecha_inicio": "2025-02-13",
+            "fecha_fin": "2025-02-13",
+            "id_proyecto": "12",
+            "dependencias": [
+                "29"
+            ]
+        },
+        {
+            "id_tarea": 31,
+            "nombre": "yaaaa",
+            "descripcion": "a",
+            "fecha_inicio": "2025-02-13",
+            "fecha_fin": "2025-02-13",
+            "id_proyecto": "12",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 32,
+            "nombre": "kaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "descripcion": "keeeeeeeeeeeeeeeeeeeeeeee",
+            "fecha_inicio": "2025-02-15",
+            "fecha_fin": "2025-03-12",
+            "id_proyecto": "12",
+            "dependencias": []
         }
     ]
 }
