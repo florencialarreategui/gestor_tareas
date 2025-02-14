@@ -64,7 +64,7 @@
             "nombre": "produccion de pasteles",
             "descripcion": "se produciran 60 pasteles de bodas",
             "fechaInicio": "2025-04-09",
-            "fechaFin": "2025-05-09",
+            "fechaFin": "2023-05-20",
             "estado": "activo",
             "tareas": [
                 21,
@@ -72,6 +72,15 @@
                 23,
                 24
             ]
+        },
+        {
+            "id_proyecto": 8,
+            "nombre": "papas",
+            "descripcion": "es para papas",
+            "fechaInicio": "2025-04-10",
+            "fechaFin": "2025-05-12",
+            "estado": "activo",
+            "tareas": []
         }
     ]
 }

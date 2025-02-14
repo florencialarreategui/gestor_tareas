@@ -37,7 +37,7 @@
             "descripcion": "rebocar paredes",
             "fecha_inicio": "2025-04-27",
             "fecha_fin": "2025-04-30",
-            "id_proyecto": "3",
+            "id_proyecto": 3,
             "dependencias": [
                 "12"
             ]
@@ -48,7 +48,7 @@
             "descripcion": "tarea test",
             "fecha_inicio": "2025-06-21",
             "fecha_fin": "2025-06-23",
-            "id_proyecto": "4",
+            "id_proyecto": 4,
             "dependencias": [
                 "14"
             ]
@@ -85,29 +85,29 @@
         {
             "id_tarea": 20,
             "nombre": "limpieza pasillo",
-            "descripcion": "se limpia pasillo continuaci\u0000n del holl",
+            "descripcion": "se limpia pasillo continuacion del hall",
             "fecha_inicio": "2025-05-22",
             "fecha_fin": "2025-05-23",
-            "id_proyecto": "7",
+            "id_proyecto": 7,
             "dependencias": [
                 "19"
             ]
         },
         {
             "id_tarea": 21,
-            "nombre": "compra de los ingredientes",
-            "descripcion": "se compran los ingredientes",
-            "fecha_inicio": "2025-04-09",
-            "fecha_fin": "2025-04-10",
+            "nombre": "compra de ingredientes",
+            "descripcion": "jjfierjqjolw\u0000gtr",
+            "fecha_inicio": "2025-02-12",
+            "fecha_fin": "2025-02-15",
             "id_proyecto": "8",
             "dependencias": []
         },
         {
             "id_tarea": 22,
-            "nombre": "mezcla",
-            "descripcion": "mezclar los ingredientes",
-            "fecha_inicio": "2025-04-11",
-            "fecha_fin": "2025-04-12",
+            "nombre": "preparacion",
+            "descripcion": "se preparan los ingredientes",
+            "fecha_inicio": "2025-02-15",
+            "fecha_fin": "2025-02-17",
             "id_proyecto": "8",
             "dependencias": [
                 "21"
@@ -115,23 +115,22 @@
         },
         {
             "id_tarea": 23,
-            "nombre": "reposado",
-            "descripcion": "se deja la mezcla en reposo",
-            "fecha_inicio": "2025-04-12",
-            "fecha_fin": "2025-04-13",
-            "id_proyecto": "8",
+            "nombre": "mezcla",
+            "descripcion": "se prepara la mezcla",
+            "fecha_inicio": "2025-02-19",
+            "fecha_fin": "2025-02-24",
+            "id_proyecto": 8,
             "dependencias": [
-                "21",
                 "22"
             ]
         },
         {
             "id_tarea": 24,
             "nombre": "coccion",
-            "descripcion": "se lleva la mezcla a horno moderado",
-            "fecha_inicio": "2025-04-13",
-            "fecha_fin": "2025-04-14",
-            "id_proyecto": "8",
+            "descripcion": "se cocina la mezcla",
+            "fecha_inicio": "2025-02-21",
+            "fecha_fin": "2025-02-21",
+            "id_proyecto": 8,
             "dependencias": [
                 "23"
             ]

@@ -250,7 +250,7 @@ public function SubMenuEditarProyectos() {
     
 
 // Crear instancias de los gestores y menú
-$gestorTarea = new GestorTarea(null);  // Inicializar con null primero
+/*$gestorTarea = new GestorTarea(null);  // Inicializar con null primero
 $gestorProyecto = new GestorProyecto($gestorTarea);
 $gestorTarea = new GestorTarea($gestorProyecto);  // Ahora pasar gestorProyecto correctamente
 
@@ -258,7 +258,21 @@ $gestorUsuario = new GestorUsuario();
 $menu = new Menu($gestorUsuario, $gestorProyecto, $gestorTarea);
 
 // Iniciar el menú
+$menu->iniciar();*/
+// Crear primero el gestor de proyectos
+$gestorTarea = new GestorTarea(null);  // Inicialización temporal, si es necesario
+$gestorProyecto = new GestorProyecto($gestorTarea);  // Ahora pasas gestorTarea al gestorProyecto
+
+// Ahora crea el gestorTarea con el gestorProyecto correctamente
+$gestorTarea = new GestorTarea($gestorProyecto);
+
+// Después, el gestor de usuarios y el menú
+$gestorUsuario = new GestorUsuario();
+$menu = new Menu($gestorUsuario, $gestorProyecto, $gestorTarea);
+
+// Iniciar el menú
 $menu->iniciar();
+
 
 
 
