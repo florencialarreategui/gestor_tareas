@@ -624,6 +624,33 @@
             "fecha_fin": "2025-03-12",
             "id_proyecto": "12",
             "dependencias": []
+        },
+        {
+            "id_tarea": 33,
+            "nombre": "ufa",
+            "descripcion": "al",
+            "fecha_inicio": "2025-02-27",
+            "fecha_fin": "2025-03-04",
+            "id_proyecto": "12",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 34,
+            "nombre": "prueba formato fecha",
+            "descripcion": "fecha",
+            "fecha_inicio": "2025-02-15",
+            "fecha_fin": "2025-02-21",
+            "id_proyecto": "12",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 35,
+            "nombre": "a",
+            "descripcion": "s",
+            "fecha_inicio": "2025-03-03",
+            "fecha_fin": "2025-03-06",
+            "id_proyecto": "12",
+            "dependencias": []
         }
     ]
 }

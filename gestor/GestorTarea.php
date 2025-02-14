@@ -161,50 +161,105 @@
         $fechaInicioProyecto = $proyecto->getFechaInicio(); // Ya es un objeto DateTime
         $fechaFinProyecto = $proyecto->getFechaFin(); // Ya es un objeto DateTime
         
-        // Preguntar si la tarea tiene dependencias
-        echo "¿La tarea tiene dependencias? (sí/no): ";
-        $respuesta = trim(fgets(STDIN));
+        // Preguntar al usuario si la tarea es dependiente o independiente
+        echo "¿La tarea es dependiente o independiente? (dependiente/independiente): ";
+        $tipoTarea = trim(fgets(STDIN));
+    
+        // Obtener todas las tareas del proyecto
+        $tareasProyecto = $gestorProyecto->obtenerTareasPorIdProyecto($id_proyecto);
         
-        $dependencias = [];
-        if (strtolower($respuesta) == "sí" || strtolower($respuesta) == "si") {
-            echo "Ingrese los IDs de las tareas de las cuales depende (separados por comas): ";
-            $dependencias = explode(",", trim(fgets(STDIN)));  // Convertimos a array y eliminamos espacios en blanco
-            $dependencias = array_map('trim', $dependencias); // Asegurarse de que no haya espacios en blanco
-        }
+        // Ordenar las tareas por fecha de fin (descendente) para encontrar la última tarea
+        usort($tareasProyecto, function($a, $b) {
+            return $a->getFechaFin() < $b->getFechaFin();
+        });
+    
+        // Si hay tareas en el proyecto, la última tarea es la primera en la lista después de ordenar
+        $ultimaTarea = (count($tareasProyecto) > 0) ? $tareasProyecto[0] : null;
         
-        // Ahora preguntar los datos de la tarea
-        echo "Ingrese el nombre de la tarea: ";
-        $nombre = trim(fgets(STDIN));
-        
-        echo "Ingrese la descripción de la tarea: ";
-        $descripcion = trim(fgets(STDIN));
-        
-        do {
-            echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
-            $fechaInicioInput = trim(fgets(STDIN));
-            $fechaInicioTarea = new DateTime($fechaInicioInput);
-        
-            // Verificar que la fecha de inicio de la tarea esté dentro del rango del proyecto
-            if ($fechaInicioTarea < $fechaInicioProyecto) {
-                echo "La fecha de inicio de la tarea no puede ser anterior a la fecha de inicio del proyecto.\n";
+        // Ahora proceder según el tipo de tarea
+        if (strtolower($tipoTarea) == 'dependiente') {
+            // Si la tarea es dependiente, asignamos las fechas en función de la última tarea
+    
+            // Si hay tareas en el proyecto, la fecha de inicio de la nueva tarea debe ser al día siguiente de la fecha de fin de la última tarea
+            if ($ultimaTarea) {
+                $fechaInicioTarea = clone $ultimaTarea->getFechaFin();
+                $fechaInicioTarea->modify("+1 day");  // Comenzar al día siguiente
+            } else {
+                // Si no hay tareas previas, asignamos la fecha de inicio como la fecha de inicio del proyecto
+                $fechaInicioTarea = $fechaInicioProyecto;
             }
-        } while ($fechaInicioTarea < $fechaInicioProyecto);
-        
-        // Validar la fecha de fin de la tarea
-        do {
-            echo "Ingrese la fecha de fin de la tarea (formato: Y-m-d): ";
-            $fechaFinInput = trim(fgets(STDIN));
-            $fechaFinTarea = new DateTime($fechaFinInput);
-        
-            // Verificar que la fecha de fin de la tarea esté dentro del rango del proyecto
+            
+            // Preguntar los datos de la tarea
+            echo "Ingrese el nombre de la tarea: ";
+            $nombre = trim(fgets(STDIN));
+            
+            echo "Ingrese la descripción de la tarea: ";
+            $descripcion = trim(fgets(STDIN));
+            
+            // Preguntar la cantidad de días que durará la tarea
+            do {
+                echo "Ingrese la cantidad de días que durará la tarea: ";
+                $diasDuracion = trim(fgets(STDIN));
+                if (!is_numeric($diasDuracion) || $diasDuracion <= 0) {
+                    echo "La duración debe ser un número entero mayor que 0.\n";
+                }
+            } while (!is_numeric($diasDuracion) || $diasDuracion <= 0);
+            
+            // Calcular la fecha de fin de la tarea sumando los días de duración
+            $fechaFinTarea = clone $fechaInicioTarea;  // Clonar la fecha de inicio para no modificarla
+            $fechaFinTarea->modify("+$diasDuracion days");  // Sumar la duración en días
+            
+            // Verificar que la fecha de fin esté dentro del rango del proyecto
             if ($fechaFinTarea > $fechaFinProyecto) {
                 echo "La fecha de fin de la tarea no puede ser posterior a la fecha de fin del proyecto.\n";
+                return;  // Salir si la fecha de fin es inválida
             }
-        } while ($fechaFinTarea > $fechaFinProyecto);
-        
-        // Ahora, al crear la tarea, debemos usar las variables de fecha corregidas
-        $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
-        $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicioTarea, $fechaFinTarea, $id_proyecto, $dependencias);
+            
+            // Crear la nueva tarea
+            $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
+            $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicioTarea, $fechaFinTarea, $id_proyecto, []);
+    
+        } elseif (strtolower($tipoTarea) == 'independiente') {
+            // Si la tarea es independiente, pedimos las fechas de inicio y cantidad de días
+    
+            // Preguntar la fecha de inicio de la tarea
+            do {
+                echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
+                $fechaInicioInput = trim(fgets(STDIN));
+                $fechaInicioTarea = new DateTime($fechaInicioInput);
+    
+                // Verificar que la fecha de inicio esté dentro del rango del proyecto
+                if ($fechaInicioTarea < $fechaInicioProyecto) {
+                    echo "La fecha de inicio de la tarea no puede ser anterior a la fecha de inicio del proyecto.\n";
+                }
+            } while ($fechaInicioTarea < $fechaInicioProyecto);
+    
+            // Preguntar la cantidad de días que durará la tarea
+            do {
+                echo "Ingrese la cantidad de días que durará la tarea: ";
+                $diasDuracion = trim(fgets(STDIN));
+                if (!is_numeric($diasDuracion) || $diasDuracion <= 0) {
+                    echo "La duración debe ser un número entero mayor que 0.\n";
+                }
+            } while (!is_numeric($diasDuracion) || $diasDuracion <= 0);
+    
+            // Calcular la fecha de fin de la tarea sumando los días de duración
+            $fechaFinTarea = clone $fechaInicioTarea;  // Clonar la fecha de inicio para no modificarla
+            $fechaFinTarea->modify("+$diasDuracion days");  // Sumar la duración en días
+            
+            // Verificar que la fecha de fin esté dentro del rango del proyecto
+            if ($fechaFinTarea > $fechaFinProyecto) {
+                echo "La fecha de fin de la tarea no puede ser posterior a la fecha de fin del proyecto.\n";
+                return;  // Salir si la fecha de fin es inválida
+            }
+    
+            // Crear la nueva tarea
+            $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
+            $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicioTarea, $fechaFinTarea, $id_proyecto, []);
+        } else {
+            echo "Tipo de tarea no válido. Debe ser 'dependiente' o 'independiente'.\n";
+            return;
+        }
         
         // Guardar la tarea en tareas.json
         $this->guardarTareaEnJson($nuevaTarea);
