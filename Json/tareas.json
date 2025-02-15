@@ -1,139 +1,137 @@
 {
     "tareas": [
         {
-            "id_tarea": 13,
-            "nombre": "instalar servicios",
-            "descripcion": "se instalaran servicios por unidad",
-            "fecha_inicio": "2025-04-26",
-            "fecha_fin": "2025-08-26",
-            "id_proyecto": 3,
-            "dependencias": [
-                "12"
-            ]
-        },
-        {
-            "id_tarea": 12,
-            "nombre": "estructura",
-            "descripcion": "se construye la estructura",
-            "fecha_inicio": "2025-04-17",
-            "fecha_fin": "2025-04-26",
-            "id_proyecto": 3,
-            "dependencias": [
-                "11"
-            ]
-        },
-        {
-            "id_tarea": 9,
-            "nombre": "licencias2",
-            "descripcion": "conseguir habilitaciones",
-            "fecha_inicio": "2025-02-06",
-            "fecha_fin": "2026-05-09",
-            "id_proyecto": 3,
+            "id_tarea": 25,
+            "nombre": "limpieza del hall",
+            "descripcion": "se limpia el hall",
+            "fecha_inicio": "2025-03-19",
+            "fecha_fin": "2025-03-24",
+            "id_proyecto": 1,
             "dependencias": []
         },
         {
-            "id_tarea": 15,
-            "nombre": "reboque",
-            "descripcion": "rebocar paredes",
-            "fecha_inicio": "2025-04-27",
-            "fecha_fin": "2025-04-30",
-            "id_proyecto": 3,
+            "id_tarea": 26,
+            "nombre": "pasillo",
+            "descripcion": "se limpia el pasillo",
+            "fecha_inicio": "2025-03-24",
+            "fecha_fin": "2025-03-29",
+            "id_proyecto": 1,
             "dependencias": [
-                "12"
+                "25"
             ]
         },
         {
-            "id_tarea": 16,
-            "nombre": "tarea para proyecto pipo",
-            "descripcion": "tarea test",
-            "fecha_inicio": "2025-06-21",
-            "fecha_fin": "2025-06-23",
-            "id_proyecto": 4,
+            "id_tarea": 27,
+            "nombre": "escaleras",
+            "descripcion": "limpieza de escalera lateral",
+            "fecha_inicio": "2025-03-29",
+            "fecha_fin": "2025-04-03",
+            "id_proyecto": 1,
             "dependencias": [
-                "14"
+                "26"
             ]
         },
         {
-            "id_tarea": 17,
-            "nombre": "llslslslsl",
-            "descripcion": "goog",
-            "fecha_inicio": "2025-02-14",
-            "fecha_fin": "2025-02-28",
-            "id_proyecto": 7,
-            "dependencias": []
-        },
-        {
-            "id_tarea": 18,
-            "nombre": "otra tarea",
-            "descripcion": "ayyyyy",
-            "fecha_inicio": "2025-03-14",
-            "fecha_fin": "2025-05-12",
-            "id_proyecto": 7,
+            "id_tarea": 28,
+            "nombre": "vidrios",
+            "descripcion": "limpieza de vidrios",
+            "fecha_inicio": "2025-03-22",
+            "fecha_fin": "2025-04-01",
+            "id_proyecto": 1,
             "dependencias": [
-                "17"
+                "29"
             ]
         },
         {
-            "id_tarea": 19,
-            "nombre": "Limpieza del hall",
-            "descripcion": "se limpia el holl",
-            "fecha_inicio": "2025-05-20",
-            "fecha_fin": "2025-05-21",
-            "id_proyecto": 7,
-            "dependencias": []
-        },
-        {
-            "id_tarea": 20,
-            "nombre": "limpieza pasillo",
-            "descripcion": "se limpia pasillo continuacion del hall",
-            "fecha_inicio": "2025-05-22",
-            "fecha_fin": "2025-05-23",
-            "id_proyecto": 7,
+            "id_tarea": 29,
+            "nombre": "habitaciones",
+            "descripcion": "se limpian los cuartos",
+            "fecha_inicio": "2025-04-03",
+            "fecha_fin": "2026-08-16",
+            "id_proyecto": 1,
             "dependencias": [
-                "19"
+                "27"
             ]
         },
         {
-            "id_tarea": 21,
-            "nombre": "compra de ingredientes",
-            "descripcion": "jjfierjqjolw\u0000gtr",
+            "id_tarea": 30,
+            "nombre": "tarea 1 proyecto",
+            "descripcion": "lalalala",
             "fecha_inicio": "2025-02-12",
-            "fecha_fin": "2025-02-15",
-            "id_proyecto": "8",
+            "fecha_fin": "2025-02-18",
+            "id_proyecto": 3,
             "dependencias": []
         },
         {
-            "id_tarea": 22,
-            "nombre": "preparacion",
-            "descripcion": "se preparan los ingredientes",
-            "fecha_inicio": "2025-02-15",
+            "id_tarea": 25,
+            "nombre": "limpieza del hall",
+            "descripcion": "se limpia el hall",
+            "fecha_inicio": "2025-03-19",
+            "fecha_fin": "2025-03-24",
+            "id_proyecto": 1,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 26,
+            "nombre": "pasillo",
+            "descripcion": "se limpia el pasillo",
+            "fecha_inicio": "2025-03-24",
+            "fecha_fin": "2025-03-29",
+            "id_proyecto": 1,
+            "dependencias": [
+                "25"
+            ]
+        },
+        {
+            "id_tarea": 27,
+            "nombre": "escaleras",
+            "descripcion": "limpieza de escalera lateral",
+            "fecha_inicio": "2025-03-29",
+            "fecha_fin": "2025-04-03",
+            "id_proyecto": 1,
+            "dependencias": [
+                "26"
+            ]
+        },
+        {
+            "id_tarea": 28,
+            "nombre": "vidrios",
+            "descripcion": "limpieza de vidrios",
+            "fecha_inicio": "2025-03-22",
+            "fecha_fin": "2025-04-01",
+            "id_proyecto": 1,
+            "dependencias": [
+                "29"
+            ]
+        },
+        {
+            "id_tarea": 29,
+            "nombre": "habitaciones",
+            "descripcion": "se limpian los cuartos",
+            "fecha_inicio": "2025-04-03",
+            "fecha_fin": "2026-08-16",
+            "id_proyecto": 1,
+            "dependencias": [
+                "27"
+            ]
+        },
+        {
+            "id_tarea": 30,
+            "nombre": "tarea 1 proyecto",
+            "descripcion": "lalalala",
+            "fecha_inicio": "2025-02-12",
+            "fecha_fin": "2025-02-18",
+            "id_proyecto": 3,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 31,
+            "nombre": "limpieza de terraza",
+            "descripcion": "se limpia la terraza",
+            "fecha_inicio": "2025-02-17",
             "fecha_fin": "2025-02-17",
-            "id_proyecto": "8",
-            "dependencias": [
-                "21"
-            ]
-        },
-        {
-            "id_tarea": 23,
-            "nombre": "mezcla",
-            "descripcion": "se prepara la mezcla",
-            "fecha_inicio": "2025-02-19",
-            "fecha_fin": "2025-02-24",
-            "id_proyecto": 8,
-            "dependencias": [
-                "22"
-            ]
-        },
-        {
-            "id_tarea": 24,
-            "nombre": "coccion",
-            "descripcion": "se cocina la mezcla",
-            "fecha_inicio": "2025-02-21",
-            "fecha_fin": "2025-02-21",
-            "id_proyecto": 8,
-            "dependencias": [
-                "23"
-            ]
+            "id_proyecto": 3,
+            "dependencias": []
         }
     ]
 }
