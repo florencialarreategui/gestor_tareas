@@ -70,7 +70,8 @@
                 21,
                 22,
                 23,
-                24
+                24,
+                25
             ]
         },
         {
@@ -81,6 +82,42 @@
             "fechaFin": "2025-05-12",
             "estado": "activo",
             "tareas": []
+        },
+        {
+            "id_proyecto": 9,
+            "nombre": "lili",
+            "descripcion": "lala",
+            "fechaInicio": "2025-02-16",
+            "fechaFin": "2025-04-18",
+            "estado": "activo",
+            "tareas": [
+                26,
+                27
+            ]
+        },
+        {
+            "id_proyecto": 10,
+            "nombre": "yayaya",
+            "descripcion": "jajajaj",
+            "fechaInicio": "2025-02-04",
+            "fechaFin": "2025-02-08",
+            "estado": "activo",
+            "tareas": [
+                28,
+                29
+            ]
+        },
+        {
+            "id_proyecto": 11,
+            "nombre": "proyecto nuevo",
+            "descripcion": "aaaaaaaaaa",
+            "fechaInicio": "2025-02-15",
+            "fechaFin": "2025-05-15",
+            "estado": "activo",
+            "tareas": [
+                30,
+                31
+            ]
         }
     ]
 }

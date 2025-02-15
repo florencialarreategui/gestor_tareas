@@ -134,6 +134,79 @@
             "dependencias": [
                 "23"
             ]
+        },
+        {
+            "id_tarea": 25,
+            "nombre": "nor",
+            "descripcion": "r",
+            "fecha_inicio": "2025-01-01",
+            "fecha_fin": "2025-01-06",
+            "id_proyecto": "8",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 26,
+            "nombre": "aaaaaaaaaaa",
+            "descripcion": "wwwwwwwwwwwwwwww",
+            "fecha_inicio": "2025-02-01",
+            "fecha_fin": "2025-02-07",
+            "id_proyecto": "9",
+            "dependencias": [
+                "0"
+            ]
+        },
+        {
+            "id_tarea": 27,
+            "nombre": "qqq",
+            "descripcion": "qqq",
+            "fecha_inicio": "2025-01-10",
+            "fecha_fin": "2025-01-11",
+            "id_proyecto": "9",
+            "dependencias": [
+                "26"
+            ]
+        },
+        {
+            "id_tarea": 28,
+            "nombre": "li",
+            "descripcion": "lo",
+            "fecha_inicio": "2025-01-02",
+            "fecha_fin": "2025-01-06",
+            "id_proyecto": "10",
+            "dependencias": [
+                "0"
+            ]
+        },
+        {
+            "id_tarea": 29,
+            "nombre": "la",
+            "descripcion": "a",
+            "fecha_inicio": "2025-01-01",
+            "fecha_fin": "2025-01-03",
+            "id_proyecto": "10",
+            "dependencias": [
+                "28"
+            ]
+        },
+        {
+            "id_tarea": 30,
+            "nombre": "independiente",
+            "descripcion": "alallala",
+            "fecha_inicio": "2025-01-13",
+            "fecha_fin": "2025-01-22",
+            "id_proyecto": "11",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 31,
+            "nombre": "nueva",
+            "descripcion": "aaa",
+            "fecha_inicio": "2025-01-23",
+            "fecha_fin": "2025-01-27",
+            "id_proyecto": "11",
+            "dependencias": [
+                "30"
+            ]
         }
     ]
 }

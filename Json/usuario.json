@@ -47,6 +47,12 @@
             "nombre": "",
             "email": "",
             "clave": ""
+        },
+        {
+            "id_usuario": 9,
+            "nombre": "",
+            "email": "",
+            "clave": ""
         }
     ]
 }
