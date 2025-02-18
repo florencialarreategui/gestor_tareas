@@ -32,8 +32,64 @@
             "fechaFin": "2025-04-15",
             "estado": "activo",
             "tareas": [
-                30,
+                30
+            ]
+        },
+        {
+            "id_proyecto": 4,
+            "nombre": "nuevo",
+            "descripcion": "jjjjjjjjjjjjjjjjj",
+            "fechaInicio": "2025-02-06",
+            "fechaFin": "2025-06-02",
+            "estado": "activo",
+            "tareas": [
                 32
+            ]
+        },
+        {
+            "id_proyecto": 5,
+            "nombre": "nuevo",
+            "descripcion": "a",
+            "fechaInicio": "2025-02-20",
+            "fechaFin": "2025-05-20",
+            "estado": "activo",
+            "tareas": [
+                33,
+                34
+            ]
+        },
+        {
+            "id_proyecto": 6,
+            "nombre": "nuevovovov",
+            "descripcion": "s",
+            "fechaInicio": "2025-02-03",
+            "fechaFin": "2025-08-02",
+            "estado": "activo",
+            "tareas": []
+        },
+        {
+            "id_proyecto": 7,
+            "nombre": "zapatilla",
+            "descripcion": "a",
+            "fechaInicio": "2025-02-19",
+            "fechaFin": "2025-04-19",
+            "estado": "activo",
+            "tareas": [
+                36,
+                37
+            ]
+        },
+        {
+            "id_proyecto": 8,
+            "nombre": "dios",
+            "descripcion": "dios",
+            "fechaInicio": "2025-02-19",
+            "fechaFin": "2025-04-10",
+            "estado": "activo",
+            "tareas": [
+                38,
+                39,
+                40
             ]
         }
     ]

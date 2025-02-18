@@ -132,6 +132,84 @@
             "fecha_fin": "2025-02-17",
             "id_proyecto": 3,
             "dependencias": []
+        },
+        {
+            "id_tarea": 32,
+            "nombre": "lol",
+            "descripcion": "a",
+            "fecha_inicio": "2025-02-07",
+            "fecha_fin": "2025-02-11",
+            "id_proyecto": 4,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 33,
+            "nombre": "nueva",
+            "descripcion": "aaa",
+            "fecha_inicio": "2025-02-21",
+            "fecha_fin": "2025-02-24",
+            "id_proyecto": 5,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 34,
+            "nombre": "segunda",
+            "descripcion": "a",
+            "fecha_inicio": "2025-02-20",
+            "fecha_fin": "2025-02-22",
+            "id_proyecto": 5,
+            "dependencias": [
+                "33"
+            ]
+        },
+        {
+            "id_tarea": 36,
+            "nombre": "rere",
+            "descripcion": "e",
+            "fecha_inicio": "2025-02-20",
+            "fecha_fin": "2025-03-22",
+            "id_proyecto": 7,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 37,
+            "nombre": "s",
+            "descripcion": "s",
+            "fecha_inicio": "2025-02-19",
+            "fecha_fin": "2025-03-01",
+            "id_proyecto": 7,
+            "dependencias": [
+                "36"
+            ]
+        },
+        {
+            "id_tarea": 38,
+            "nombre": "dios por dios",
+            "descripcion": "sss",
+            "fecha_inicio": "2025-02-19",
+            "fecha_fin": "2025-03-21",
+            "id_proyecto": 8,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 39,
+            "nombre": "segunda",
+            "descripcion": "a",
+            "fecha_inicio": "2025-02-26",
+            "fecha_fin": "2025-03-11",
+            "id_proyecto": 8,
+            "dependencias": [
+                "38"
+            ]
+        },
+        {
+            "id_tarea": 40,
+            "nombre": "f",
+            "descripcion": "f",
+            "fecha_inicio": "2025-02-19",
+            "fecha_fin": "2025-03-31",
+            "id_proyecto": 8,
+            "dependencias": []
         }
     ]
 }
