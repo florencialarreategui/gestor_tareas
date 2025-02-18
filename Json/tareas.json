@@ -2,10 +2,10 @@
     "tareas": [
         {
             "id_tarea": 25,
-            "nombre": "limpieza del hall",
+            "nombre": "limpieza del hall2",
             "descripcion": "se limpia el hall",
             "fecha_inicio": "2025-03-19",
-            "fecha_fin": "2025-03-24",
+            "fecha_fin": "2025-03-26",
             "id_proyecto": 1,
             "dependencias": []
         },
@@ -64,10 +64,10 @@
         },
         {
             "id_tarea": 25,
-            "nombre": "limpieza del hall",
+            "nombre": "limpieza del hall2",
             "descripcion": "se limpia el hall",
             "fecha_inicio": "2025-03-19",
-            "fecha_fin": "2025-03-24",
+            "fecha_fin": "2025-03-26",
             "id_proyecto": 1,
             "dependencias": []
         },
