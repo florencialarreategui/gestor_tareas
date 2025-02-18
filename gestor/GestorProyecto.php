@@ -88,7 +88,7 @@ class GestorProyecto {
     public function listarProyectosPorId() {
       //  var_dump($this->proyectos); // Verifica el contenido de $proyectos
         if (count($this->proyectos) > 0) {
-            echo "Listando proyectos por ID...\n";
+          //  echo "Listando proyectos por ID...\n";
             foreach ($this->proyectos as $proyecto) {
                 echo "ID: " . $proyecto->getId_proyecto() . " - Nombre: " . $proyecto->getNombre() . "\n";
             }
@@ -97,7 +97,7 @@ class GestorProyecto {
         }
     }
     public function listarProyectosPorNombre() {
-        echo "Listando proyectos por Nombre...\n";
+       // echo "Listando proyectos por Nombre...\n";
         
         // Ordenar los proyectos por nombre
         usort($this->proyectos, function($a, $b) {
@@ -114,7 +114,7 @@ class GestorProyecto {
         }
     }
     public function listarProyectosPorFechaInicio() {
-        echo "Listando proyectos por Fecha de Inicio...\n";
+       // echo "Listando proyectos por Fecha de Inicio...\n";
         
         // Ordenar los proyectos por fecha de inicio
         usort($this->proyectos, function($a, $b) {
@@ -131,7 +131,7 @@ class GestorProyecto {
         }
     }
     public function listarProyectosPorFechaFin() {
-        echo "Listando proyectos por Fecha de Fin...\n";
+       // echo "Listando proyectos por Fecha de Fin...\n";
         
         // Ordenar los proyectos por fecha de fin
         usort($this->proyectos, function($a, $b) {
@@ -149,7 +149,7 @@ class GestorProyecto {
     }
 
     public function listarProyectosPorEstado() {
-        echo "Listando proyectos por Estado...\n";
+       // echo "Listando proyectos por Estado...\n";
         
         // Ordenar los proyectos por estado
         usort($this->proyectos, function($a, $b) {
