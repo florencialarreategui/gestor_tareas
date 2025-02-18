@@ -45,8 +45,8 @@
             "nombre": "paredes",
             "descripcion": "se construyen las paredes",
             "fecha_inicio": "2025-03-25",
-            "fecha_fin": "2025-03-27",
-            "id_proyecto": "2",
+            "fecha_fin": "2025-03-28",
+            "id_proyecto": 2,
             "dependencias": [
                 "6"
             ]
