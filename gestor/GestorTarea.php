@@ -1,4 +1,4 @@
-        <?php
+<?php
         require_once './clases/tarea.php';
         class GestorTarea {
             private $tareas = [];
@@ -165,6 +165,7 @@
             public function obtenerTodasLasTareas() {
                 return $this->tareas;
             }
+            
 
             public function editarTarea($id_tarea) {
                 $tarea = $this->buscarTareaPorId($id_tarea);

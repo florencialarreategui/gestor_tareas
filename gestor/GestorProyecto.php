@@ -203,6 +203,7 @@ class GestorProyecto {
             echo "-------------------------\n";
         }
     }
+       
          // Método privado para buscar un proyecto por su ID
      public function buscarProyectoPorId($id_proyecto) {
         foreach ($this->proyectos as $proyecto) {
@@ -293,7 +294,7 @@ class GestorProyecto {
         $this->guardarEnJSON();
     }
     
-    public function eliminarProyecto($id_proyecto) {
+   /* public function eliminarProyecto($id_proyecto) {
         $indiceProyecto = null;
         foreach ($this->proyectos as $key => $proyecto) {
             if ($proyecto->getId_proyecto() == $id_proyecto) {
@@ -313,7 +314,80 @@ class GestorProyecto {
     
         echo "Proyecto eliminado exitosamente.\n";
         $this->guardarEnJSON();
+    }*/
+    public function eliminarProyecto($id_proyecto) {
+        $indiceProyecto = null;
+    
+        // Buscar el proyecto
+        foreach ($this->proyectos as $key => $proyecto) {
+            if ($proyecto->getId_proyecto() == $id_proyecto) {
+                $indiceProyecto = $key;
+                break;
+            }
+        }
+    
+        // Verificar si el proyecto existe
+        if ($indiceProyecto === null) {
+            echo "Proyecto con ID {$id_proyecto} no encontrado.\n";
+            return;
+        }
+    
+        // Eliminar las tareas asociadas al proyecto
+        $this->eliminarTareasAsociadas($id_proyecto);
+    
+        // Eliminar el proyecto del array
+        unset($this->proyectos[$indiceProyecto]);
+        $this->proyectos = array_values($this->proyectos); // Reindexar el array
+    
+        echo "Proyecto y sus tareas eliminados exitosamente.\n";
+    
+        // Guardar los cambios en los archivos JSON
+        $this->guardarEnJSON();
+       
     }
+    
+    private function eliminarTareasAsociadas($id_proyecto) {
+        // Ruta del archivo tareas.json
+        $archivoTareas = './Json/tareas.json';
+    
+     /*   // Verificar si la carpeta Json existe, si no, intentar crearla
+        if (!is_dir('./Json')) {
+            echo "La carpeta './Json' no existe. Creándola...\n";
+            mkdir('./Json', 0777, true); // Crear la carpeta Json si no existe
+        }*/
+    
+        // Verificar si el archivo tareas.json existe
+        if (!file_exists($archivoTareas)) {
+            echo "El archivo tareas.json no existe.\n";
+            return; // Salir de la función si el archivo no existe
+        }
+    
+        // Cargar las tareas desde el archivo tareas.json
+        $contenidoJson = file_get_contents($archivoTareas);
+        $tareas = json_decode($contenidoJson, true);
+    
+        // Verificar si el JSON contiene la clave 'tareas' y que no sea null
+        if ($tareas === null || !isset($tareas['tareas'])) {
+            echo "No se pudo leer correctamente el archivo tareas.json o no contiene tareas.\n";
+            return; // Salir si el archivo no contiene tareas válidas
+        }
+    
+        // Filtrar las tareas que no pertenezcan al proyecto que estamos eliminando
+        $tareasRestantes = array_filter($tareas['tareas'], function($tarea) use ($id_proyecto) {
+            return $tarea['id_proyecto'] != $id_proyecto;
+        });
+    
+        // Guardar las tareas restantes en el archivo tareas.json
+        file_put_contents($archivoTareas, json_encode(['tareas' => array_values($tareasRestantes)], JSON_PRETTY_PRINT));
+    
+        echo "Tareas asociadas al proyecto eliminadas correctamente.\n";
+    }
+    
+    
+    
+    
+    
+    
 
     public function cargarDesdeJson() {
         // Cargar proyectos desde el archivo JSON

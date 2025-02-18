@@ -1,39 +1,29 @@
 {
     "proyecto": [
         {
-            "id_proyecto": 1,
-            "nombre": "limpieza fin de obra",
-            "descripcion": "se realiza limpieza final de obra",
+            "id_proyecto": 2,
+            "nombre": "construccion1",
+            "descripcion": "se construye una casa por etapas",
             "fechaInicio": "2025-03-19",
-            "fechaFin": "2025-10-20",
+            "fechaFin": "2026-03-19",
             "estado": "activo",
             "tareas": [
-                25,
-                26,
-                27,
-                28,
-                29
+                5,
+                6,
+                7,
+                8
             ]
         },
         {
-            "id_proyecto": 2,
-            "nombre": "produccion de pasteles",
-            "descripcion": "se hacen 1000 pasteles de boda",
-            "fechaInicio": "2025-06-19",
-            "fechaFin": "2026-06-19",
-            "estado": "activo",
-            "tareas": []
-        },
-        {
             "id_proyecto": 3,
-            "nombre": "proyecto porfa",
-            "descripcion": "hacer mate",
-            "fechaInicio": "2025-02-15",
-            "fechaFin": "2025-04-15",
+            "nombre": "papa2",
+            "descripcion": "descripcion1",
+            "fechaInicio": "2025-05-30",
+            "fechaFin": "2025-08-20",
             "estado": "activo",
             "tareas": [
-                30,
-                32
+                3,
+                4
             ]
         }
     ]
