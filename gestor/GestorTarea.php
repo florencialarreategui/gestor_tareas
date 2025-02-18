@@ -87,7 +87,7 @@
             }
 
        
-            public function crearTarea($gestorProyecto) {
+           /* public function crearTarea($gestorProyecto) {
                 echo "Ingrese el nombre de la tarea: ";
                 $nombre = trim(fgets(STDIN));
             
@@ -154,8 +154,123 @@
                 $gestorProyecto->agregarTareaAlProyecto($id_proyecto, $nuevaTarea);
             
                 echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " con ID " . $nuevaTarea->getIdTarea() . "\n";
+            }*/
+            public function crearTarea($gestorProyecto) {
+
+                // Solicitar ID del proyecto
+                echo "Ingrese el ID del proyecto al que pertenece la tarea: ";
+                $id_proyecto = trim(fgets(STDIN));
+            
+                // Verificar si el proyecto existe usando el método buscarProyectoPorId
+                $proyecto = $gestorProyecto->buscarProyectoPorId($id_proyecto);
+                if ($proyecto === null) {
+                    echo "El proyecto con ID $id_proyecto no existe. Por favor, ingrese un ID válido.\n";
+                    return;  // Salir de la función si el proyecto no existe
+                }
+            
+                // Preguntar si la tarea tiene dependencias
+                echo "¿La tarea tiene dependencias? (sí/no): ";
+                $respuesta = trim(fgets(STDIN));
+            
+                $dependencias = [];
+                if (strtolower($respuesta) == "sí" || strtolower($respuesta) == "si") {
+                    echo "Ingrese los IDs de las tareas de las cuales depende (separados por comas): ";
+                    $dependencias = explode(",", trim(fgets(STDIN)));  // Convertimos a array y eliminamos espacios en blanco
+                    $dependencias = array_map('trim', $dependencias); // Asegurarse de que no haya espacios en blanco
+                }
+            
+                //-------------------------------------------------------------------------------------
+                // Si la tarea tiene dependencias, tomar la fecha de fin de la última tarea dependiente
+                if (count($dependencias) > 0) {
+                    // Usar tu método para obtener la fecha de fin de la última dependencia
+                    $fechaInicio = $this->obtenerFechaDeFinDeUltimaDependencia($dependencias, $gestorProyecto);
+                } else {
+                    // Si no tiene dependencias, seguir el flujo normal de fecha de inicio
+                    do {
+                        echo "Ingrese la fecha de inicio de la tarea (formato: Y-m-d): ";
+                        $fechaInicioInput = trim(fgets(STDIN));
+                        $fechaInicio = new DateTime($fechaInicioInput);
+            
+                        // Verificar que la fecha de inicio esté dentro del rango del proyecto
+                        $fechaInicioProyecto = $proyecto->getFechaInicio();  // Obtener fecha de inicio del proyecto
+                        $fechaFinProyecto = $proyecto->getFechaFin();  // Obtener fecha de fin del proyecto
+            
+                        if ($fechaInicio < $fechaInicioProyecto) {
+                            echo "La fecha de inicio de la tarea no puede ser anterior a la fecha de inicio del proyecto ({$fechaInicioProyecto->format('Y-m-d')}).\n";
+                        } elseif ($fechaInicio > $fechaFinProyecto) {
+                            echo "La fecha de inicio de la tarea no puede ser posterior a la fecha de fin del proyecto ({$fechaFinProyecto->format('Y-m-d')}).\n";
+                        }
+                    } while ($fechaInicio < $fechaInicioProyecto || $fechaInicio > $fechaFinProyecto);
+                }
+                //-------------------------------------------------------------------------------------
+            
+                // Solicitar el nombre y la descripción de la tarea
+                echo "Ingrese el nombre de la tarea: ";
+                $nombre = trim(fgets(STDIN));
+            
+                echo "Ingrese la descripción de la tarea: ";
+                $descripcion = trim(fgets(STDIN));
+            
+                // Pedir duración de la tarea en días y calcular la fecha de fin
+                do {
+                    echo "Ingrese la duración de la tarea en días: ";
+                    $duracion = trim(fgets(STDIN));
+            
+                    // Validar que la duración sea un número entero positivo
+                    if (!is_numeric($duracion) || $duracion <= 0) {
+                        echo "La duración debe ser un número positivo.\n";
+                    }
+                } while (!is_numeric($duracion) || $duracion <= 0);
+            
+                // Calcular la fecha de fin sumando la duración en días a la fecha de inicio
+                $fechaFin = clone $fechaInicio;  // Crear una copia de la fecha de inicio
+                $fechaFin->modify("+$duracion days");
+            
+                echo "La fecha de fin calculada para la tarea es: " . $fechaFin->format('Y-m-d') . "\n";
+            
+                // Crear la nueva tarea
+                $idTarea = $this->obtenerNuevoIdTarea();  // Método para obtener el próximo ID disponible
+                $nuevaTarea = new Tarea($idTarea, $nombre, $descripcion, $fechaInicio, $fechaFin, $id_proyecto, $dependencias);
+            
+                // Guardar la tarea en tareas.json
+                $this->guardarTareaEnJson($nuevaTarea);
+            
+                // Añadir la tarea al campo "tareas" del proyecto correspondiente
+                $gestorProyecto->agregarTareaAlProyecto($id_proyecto, $nuevaTarea);
+            
+                echo "Tarea creada exitosamente: " . $nuevaTarea->getNombre() . " con ID " . $nuevaTarea->getIdTarea() . "\n";
             }
             
+              // Aquí va la nueva función obtenerFechaDeFinDeUltimaDependencia
+              private function obtenerFechaDeFinDeUltimaDependencia($dependencias, $gestorProyecto) {
+                // Obtener la fecha de fin de la última tarea dependiente
+                $ultimaFechaFin = null;
+        
+                foreach ($dependencias as $idDependencia) {
+                    // Buscar tarea en el gestor de tareas
+                    $tareaDependiente = $this->buscarTareaPorId($idDependencia);
+                    if ($tareaDependiente === null) {
+                        echo "La tarea con ID $idDependencia no existe. Verifique las dependencias.\n";
+                        return null;  // Si una tarea dependiente no existe
+                    }
+        
+                    // Obtener la fecha de fin de la tarea dependiente
+                    $fechaFinDependiente = $tareaDependiente->getFechaFin();
+                    
+                    // Si es la primera dependencia o la fecha de fin es posterior a la anterior, actualizamos
+                    if ($ultimaFechaFin === null || $fechaFinDependiente > $ultimaFechaFin) {
+                        $ultimaFechaFin = $fechaFinDependiente;
+                    }
+                }
+        
+                // La fecha de inicio de la nueva tarea será al día siguiente de la última tarea dependiente
+                $fechaInicio = clone $ultimaFechaFin;
+                $fechaInicio->modify('+1 day');  // Para que la nueva tarea inicie al día siguiente
+        
+                echo "La fecha de inicio de la nueva tarea será: " . $fechaInicio->format('Y-m-d') . "\n";
+                
+                return $fechaInicio;
+            }
 
           
                     

@@ -61,6 +61,26 @@
             "dependencias": [
                 "7"
             ]
+        },
+        {
+            "id_tarea": 9,
+            "nombre": "papa3",
+            "descripcion": "es una papa",
+            "fecha_inicio": "2025-06-06",
+            "fecha_fin": "2025-06-10",
+            "id_proyecto": 3,
+            "dependencias": [
+                "4"
+            ]
+        },
+        {
+            "id_tarea": 10,
+            "nombre": "papa4",
+            "descripcion": "es otra papa",
+            "fecha_inicio": "2025-06-09",
+            "fecha_fin": "2025-06-11",
+            "id_proyecto": "3",
+            "dependencias": []
         }
     ]
 }

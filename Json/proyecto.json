@@ -23,7 +23,9 @@
             "estado": "activo",
             "tareas": [
                 3,
-                4
+                4,
+                9,
+                10
             ]
         }
     ]
