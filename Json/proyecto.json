@@ -15,17 +15,18 @@
             ]
         },
         {
-            "id_proyecto": 3,
-            "nombre": "papa2",
-            "descripcion": "descripcion1",
-            "fechaInicio": "2025-05-30",
-            "fechaFin": "2025-10-12",
+            "id_proyecto": 4,
+            "nombre": "cascaron",
+            "descripcion": "porrrfaaavooooor",
+            "fechaInicio": "2025-05-10",
+            "fechaFin": "2026-05-10",
             "estado": "activo",
             "tareas": [
-                3,
-                4,
-                9,
-                10
+                12,
+                13,
+                14,
+                15,
+                16
             ]
         }
     ]

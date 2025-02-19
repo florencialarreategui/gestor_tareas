@@ -1,32 +1,12 @@
 {
     "tareas": [
         {
-            "id_tarea": 3,
-            "nombre": "tarea papa1",
-            "descripcion": "hssjdk",
-            "fecha_inicio": "2025-06-01",
-            "fecha_fin": "2025-06-03",
-            "id_proyecto": "3",
-            "dependencias": []
-        },
-        {
-            "id_tarea": 4,
-            "nombre": "papa2",
-            "descripcion": "hskdkl",
-            "fecha_inicio": "2025-06-03",
-            "fecha_fin": "2025-06-05",
-            "id_proyecto": "3",
-            "dependencias": [
-                "3"
-            ]
-        },
-        {
             "id_tarea": 5,
             "nombre": "nivelacion",
             "descripcion": "se nivela el suelo",
             "fecha_inicio": "2025-03-20",
             "fecha_fin": "2025-03-22",
-            "id_proyecto": "2",
+            "id_proyecto": 2,
             "dependencias": []
         },
         {
@@ -35,7 +15,7 @@
             "descripcion": "se hacen los cimientos del suelo",
             "fecha_inicio": "2025-03-23",
             "fecha_fin": "2025-03-25",
-            "id_proyecto": "2",
+            "id_proyecto": 2,
             "dependencias": [
                 "5"
             ]
@@ -57,29 +37,60 @@
             "descripcion": "se rebocan las tareas",
             "fecha_inicio": "2025-03-27",
             "fecha_fin": "2025-03-29",
-            "id_proyecto": "2",
+            "id_proyecto": 2,
             "dependencias": [
                 "7"
             ]
         },
         {
-            "id_tarea": 9,
-            "nombre": "papa3",
-            "descripcion": "es una papa",
-            "fecha_inicio": "2025-06-06",
-            "fecha_fin": "2025-06-10",
-            "id_proyecto": 3,
+            "id_tarea": 12,
+            "nombre": "cascaro1",
+            "descripcion": "es una tarea cascaron",
+            "fecha_inicio": "2025-10-18",
+            "fecha_fin": "2025-10-23",
+            "id_proyecto": 4,
+            "dependencias": []
+        },
+        {
+            "id_tarea": 13,
+            "nombre": "cascaron2",
+            "descripcion": "es otra tarea cascaron",
+            "fecha_inicio": "2025-10-22",
+            "fecha_fin": "2025-10-25",
+            "id_proyecto": "4",
             "dependencias": [
-                "4"
+                "12"
             ]
         },
         {
-            "id_tarea": 10,
-            "nombre": "papa4",
-            "descripcion": "es otra papa",
-            "fecha_inicio": "2025-06-09",
-            "fecha_fin": "2025-06-11",
-            "id_proyecto": "3",
+            "id_tarea": 14,
+            "nombre": "cascaron3",
+            "descripcion": "es una nueva tarea cascaron",
+            "fecha_inicio": "2025-10-26",
+            "fecha_fin": "2025-10-29",
+            "id_proyecto": "4",
+            "dependencias": [
+                "13"
+            ]
+        },
+        {
+            "id_tarea": 15,
+            "nombre": "cascaron4",
+            "descripcion": "es una tarea para cascaron",
+            "fecha_inicio": "2025-10-30",
+            "fecha_fin": "2025-11-04",
+            "id_proyecto": "4",
+            "dependencias": [
+                "14"
+            ]
+        },
+        {
+            "id_tarea": 16,
+            "nombre": "jota",
+            "descripcion": "es jota",
+            "fecha_inicio": "2025-11-05",
+            "fecha_fin": "2025-11-08",
+            "id_proyecto": "4",
             "dependencias": []
         }
     ]
