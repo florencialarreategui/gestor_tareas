@@ -92,6 +92,44 @@
             "fecha_fin": "2025-11-08",
             "id_proyecto": "4",
             "dependencias": []
+        },
+        {
+            "id_tarea": 17,
+            "nombre": "jota2",
+            "descripcion": "es una jota",
+            "fecha_inicio": "2025-11-08",
+            "fecha_fin": "2025-11-10",
+            "id_proyecto": "4",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 18,
+            "nombre": "jota3",
+            "descripcion": "es jota3",
+            "fecha_inicio": "2025-11-09",
+            "fecha_fin": "2025-11-11",
+            "id_proyecto": "2",
+            "dependencias": []
+        },
+        {
+            "id_tarea": 19,
+            "nombre": "jota 5",
+            "descripcion": "es jota5",
+            "fecha_inicio": "2025-11-11",
+            "fecha_fin": "2025-11-13",
+            "id_proyecto": "2",
+            "dependencias": [
+                "17"
+            ]
+        },
+        {
+            "id_tarea": 20,
+            "nombre": "prueba final",
+            "descripcion": "es uuuu",
+            "fecha_inicio": "2025-07-11",
+            "fecha_fin": "2025-07-15",
+            "id_proyecto": "4",
+            "dependencias": []
         }
     ]
 }
